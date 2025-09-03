@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Custom CSS Variables */
 :root {
   --primary: #1A1A1A;
@@ -16,155 +12,277 @@
 }
 
 /* Base Styles */
-@layer base {
-  body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: var(--black);
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    line-height: 1.2;
-  }
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--black);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 /* Component Styles */
-@layer components {
-  .btn {
-    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gold hover:bg-gold-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold transition-all duration-200;
-  }
-  
-  .btn-outline {
-    @apply inline-flex items-center px-6 py-3 border-2 border-gold text-base font-medium rounded-lg text-gold bg-transparent hover:bg-gold hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold transition-all duration-200;
-  }
-  
-  .card {
-    @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
-  }
-  
-  .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-200;
-  }
-  
-  .section-title {
-    @apply text-center mb-12;
-  }
-  
-  .section-title h2 {
-    @apply text-4xl font-bold text-black mb-4;
-  }
-  
-  .section-title p {
-    @apply text-lg text-gray-600 max-w-2xl mx-auto;
-  }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: var(--gold);
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--gold-dark);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--gold);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  color: var(--gold);
+  background-color: transparent;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  background-color: var(--gold);
+  color: white;
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.section-title p {
+  font-size: 1.125rem;
+  color: var(--gray);
+  max-width: 42rem;
+  margin: 0 auto;
 }
 
 /* Commission Dashboard Styles */
-@layer components {
-  .commission-dashboard {
-    @apply bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 border border-gray-100;
-  }
-  
-  .dashboard-header {
-    @apply text-center mb-8;
-  }
-  
-  .dashboard-title {
-    @apply text-3xl font-bold text-black mb-2 relative;
-  }
-  
-  .dashboard-title::after {
-    content: '';
-    @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-gold to-gold-dark rounded-full;
-  }
-  
-  .dashboard-subtitle {
-    @apply text-gray-600 text-lg;
-  }
-  
+.commission-dashboard {
+  background: linear-gradient(to bottom right, #F9FAFB, white);
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border: 1px solid #F3F4F6;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.dashboard-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4rem;
+  height: 0.25rem;
+  background: linear-gradient(to right, var(--gold), var(--gold-dark));
+  border-radius: 9999px;
+}
+
+.dashboard-subtitle {
+  color: var(--gray);
+  font-size: 1.125rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
   .metrics-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 gap-6 mb-8;
-  }
-  
-  .metric-card {
-    @apply bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300;
-  }
-  
-  .metric-header {
-    @apply flex items-center mb-4;
-  }
-  
-  .metric-icon {
-    @apply w-12 h-12 bg-gradient-to-br from-gold to-gold-dark rounded-lg flex items-center justify-center mr-4;
-  }
-  
-  .metric-icon i {
-    @apply text-white text-xl;
-  }
-  
-  .metric-title {
-    @apply text-lg font-semibold text-gray-700;
-  }
-  
-  .metric-value {
-    @apply text-3xl font-bold text-black mb-1;
-  }
-  
-  .metric-period {
-    @apply text-sm text-gray-500;
-  }
-  
-  .metric-trend {
-    @apply flex items-center mt-2;
-  }
-  
-  .trend-indicator {
-    @apply flex items-center text-sm font-medium;
-  }
-  
-  .trend-up {
-    @apply text-green-600;
-  }
-  
-  .trend-down {
-    @apply text-red-600;
-  }
-  
-  .commission-summary {
-    @apply bg-gradient-to-r from-gold to-gold-dark rounded-xl p-6 text-white text-center;
-  }
-  
-  .summary-title {
-    @apply text-xl font-semibold mb-2;
-  }
-  
-  .summary-rate {
-    @apply text-4xl font-bold mb-1;
-  }
-  
-  .summary-description {
-    @apply text-gold-light text-sm;
-  }
-  
-  .quick-actions {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-4 mt-6;
-  }
-  
-  .action-btn {
-    @apply bg-white text-gold font-medium py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors text-center;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Utility Classes */
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent;
+.metric-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #F3F4F6;
+  transition: all 0.3s;
+}
+
+.metric-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.metric-icon {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(to bottom right, var(--gold), var(--gold-dark));
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.metric-icon i {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.metric-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.metric-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.25rem;
+}
+
+.metric-period {
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+.metric-trend {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.trend-indicator {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.trend-up {
+  color: #059669;
+}
+
+.trend-down {
+  color: #DC2626;
+}
+
+.commission-summary {
+  background: linear-gradient(to right, var(--gold), var(--gold-dark));
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.summary-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.summary-rate {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.summary-description {
+  color: var(--gold-light);
+  font-size: 0.875rem;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .quick-actions {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .shadow-gold {
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-  }
+}
+
+.action-btn {
+  background-color: white;
+  color: var(--gold);
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #F9FAFB;
 }
 
 /* Additional Styles for Existing Elements */
@@ -208,19 +326,7 @@
   opacity: 0.9;
 }
 
-/* Ensure proper spacing and layout */
-.mr-1 { margin-right: 0.25rem; }
-.mr-2 { margin-right: 0.5rem; }
-.mr-4 { margin-right: 1rem; }
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-8 { margin-bottom: 2rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-6 { margin-top: 1.5rem; }
-.mt-8 { margin-top: 2rem; }
-
-/* Text utilities */
+/* Utility Classes */
 .text-gold { color: var(--gold); }
 .text-gold-light { color: var(--gold-light); }
 .text-gray-600 { color: #6B7280; }
@@ -231,35 +337,26 @@
 .text-green-600 { color: #059669; }
 .text-red-600 { color: #DC2626; }
 
-/* Background utilities */
 .bg-white { background-color: #FFFFFF; }
 .bg-gray-50 { background-color: #F9FAFB; }
 .bg-gray-100 { background-color: #F3F4F6; }
-.bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
-.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
 
-/* Border utilities */
 .border-gray-100 { border-color: #F3F4F6; }
 
-/* Shadow utilities */
 .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
 .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
 
-/* Rounded utilities */
 .rounded-lg { border-radius: 0.5rem; }
 .rounded-xl { border-radius: 0.75rem; }
 .rounded-2xl { border-radius: 1rem; }
 
-/* Padding utilities */
 .p-6 { padding: 1.5rem; }
 .p-8 { padding: 2rem; }
 
-/* Grid utilities */
 .grid { display: grid; }
 .gap-4 { gap: 1rem; }
 .gap-6 { gap: 1.5rem; }
 
-/* Flexbox utilities */
 .flex { display: flex; }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
@@ -316,3 +413,15 @@
 
 /* Z-index utilities */
 .z-50 { z-index: 50; }
+
+/* Margin utilities */
+.mr-1 { margin-right: 0.25rem; }
+.mr-2 { margin-right: 0.5rem; }
+.mr-4 { margin-right: 1rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
