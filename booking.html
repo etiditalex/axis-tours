@@ -56,11 +56,12 @@
         <!-- Quick Booking -->
         <section class="section">
             <div class="booking-form">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Quick Booking</h2>
+                <h2>Quick Booking</h2>
+                <p class="subtitle">Plan your dream vacation with our expert travel consultants</p>
                 <form id="bookingForm">
                     <div class="grid grid-2">
                         <div class="form-group">
-                            <label for="destination">Destination</label>
+                            <label for="destination"><i class="fas fa-map-marker-alt"></i> Destination</label>
                             <select id="destination" required>
                                 <option value="">Select Destination</option>
                                 <option value="diani">Diani Beach, Kenya</option>
@@ -75,7 +76,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="tripType">Trip Type</label>
+                            <label for="tripType"><i class="fas fa-route"></i> Trip Type</label>
                             <select id="tripType" required>
                                 <option value="">Select Trip Type</option>
                                 <option value="safari">Wildlife Safari</option>
@@ -88,15 +89,15 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="departureDate">Departure Date</label>
+                            <label for="departureDate"><i class="fas fa-plane-departure"></i> Departure Date</label>
                             <input type="date" id="departureDate" required>
                         </div>
                         <div class="form-group">
-                            <label for="returnDate">Return Date</label>
+                            <label for="returnDate"><i class="fas fa-plane-arrival"></i> Return Date</label>
                             <input type="date" id="returnDate" required>
                         </div>
                         <div class="form-group">
-                            <label for="travelers">Number of Travelers</label>
+                            <label for="travelers"><i class="fas fa-users"></i> Number of Travelers</label>
                             <select id="travelers" required>
                                 <option value="">Select Number</option>
                                 <option value="1">1 Traveler</option>
@@ -108,7 +109,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="budget">Budget Range</label>
+                            <label for="budget"><i class="fas fa-coins"></i> Budget Range</label>
                             <select id="budget" required>
                                 <option value="">Select Budget</option>
                                 <option value="50000-100000">KES 50,000 - KES 100,000</option>
@@ -122,7 +123,7 @@
                     
                     <div class="grid grid-2">
                         <div class="form-group">
-                            <label for="accommodationType">Accommodation Preference</label>
+                            <label for="accommodationType"><i class="fas fa-hotel"></i> Accommodation Preference</label>
                             <select id="accommodationType" required>
                                 <option value="">Select Type</option>
                                 <option value="budget">Budget (2-3 Star)</option>
@@ -133,7 +134,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="transportation">Transportation</label>
+                            <label for="transportation"><i class="fas fa-car"></i> Transportation</label>
                             <select id="transportation" required>
                                 <option value="">Select Transportation</option>
                                 <option value="flight">Flight</option>
@@ -146,12 +147,14 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="specialRequests">Special Requests</label>
+                        <label for="specialRequests"><i class="fas fa-comment-alt"></i> Special Requests</label>
                         <textarea id="specialRequests" rows="4" placeholder="Tell us about any special requirements, preferences, or requests..."></textarea>
                     </div>
                     
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <button type="submit" class="btn" style="padding: 15px 40px; font-size: 1.1rem;">Get Quote</button>
+                    <div class="submit-section">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-search"></i> Get Quote
+                        </button>
                     </div>
                 </form>
             </div>
