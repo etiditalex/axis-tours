@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Dashboard - Axis Tours and Travel</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .text-gold { color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; }
+        .border-gold { border-color: #D4AF37; }
+        .hover\:bg-gold-dark:hover { background-color: #B8941F; }
+        .focus\:ring-gold:focus { --tw-ring-color: #D4AF37; }
+        .from-gold { --tw-gradient-from: #D4AF37; }
+        .to-gold-dark { --tw-gradient-to: #B8941F; }
+        .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+        .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gold rounded-full flex items-center justify-center">
+                        <i class="fas fa-globe text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <div class="text-lg font-bold text-black">Axis</div>
+                        <div class="text-xs text-gray-600">Tours & Travel</div>
+                    </div>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-gold transition-colors">Home</a>
+                    <a href="destinations.html" class="text-gray-700 hover:text-gold transition-colors">Destinations</a>
+                    <a href="hotels-modern.html" class="text-gray-700 hover:text-gold transition-colors">Hotels</a>
+                    <a href="booking.html" class="text-gold font-medium">Book Now</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-gold transition-colors">Contact</a>
+                </div>
+                
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-700"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Commission Dashboard -->
+        <div class="commission-dashboard">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Commission Dashboard</h1>
+                <p class="dashboard-subtitle">Track your earnings and manage your affiliate business</p>
+            </div>
+
+            <!-- Metrics Grid -->
+            <div class="metrics-grid">
+                <!-- Total Earnings Card -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h3 class="metric-title">Total Earnings</h3>
+                        </div>
+                    </div>
+                    <div class="metric-value">KES 91,960</div>
+                    <div class="metric-period">This month</div>
+                    <div class="metric-trend">
+                        <div class="trend-indicator trend-up">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            +12.5% from last month
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Bookings Card -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="metric-title">Total Bookings</h3>
+                        </div>
+                    </div>
+                    <div class="metric-value">24</div>
+                    <div class="metric-period">This month</div>
+                    <div class="metric-trend">
+                        <div class="trend-indicator trend-up">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            +8.3% from last month
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commission Rate Card -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div>
+                            <h3 class="metric-title">Commission Rate</h3>
+                        </div>
+                    </div>
+                    <div class="metric-value text-gold">40%</div>
+                    <div class="metric-period">Standard rate</div>
+                    <div class="metric-trend">
+                        <div class="trend-indicator text-gray-600">
+                            <i class="fas fa-star mr-1"></i>
+                            Premium tier
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Average Booking Value Card -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div>
+                            <h3 class="metric-title">Avg. Booking Value</h3>
+                        </div>
+                    </div>
+                    <div class="metric-value">KES 3,832</div>
+                    <div class="metric-period">Per booking</div>
+                    <div class="metric-trend">
+                        <div class="trend-indicator trend-up">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            +5.2% from last month
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commission Summary -->
+            <div class="commission-summary">
+                <h2 class="summary-title">Your Commission Structure</h2>
+                <div class="summary-rate">40%</div>
+                <p class="summary-description">Earn 40% commission on every successful booking through your affiliate link</p>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-link mr-2"></i>
+                        Get Affiliate Link
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Report
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-cog mr-2"></i>
+                        Settings
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="mt-8">
+                <h3 class="text-xl font-semibold text-black mb-4">Recent Activity</h3>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Commission</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">#BK-2025-001</div>
+                                        <div class="text-sm text-gray-500">Diani Beach Resort</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">John Smith</div>
+                                        <div class="text-sm text-gray-500">john@email.com</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">KES 45,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gold">KES 18,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                            Confirmed
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Today</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">#BK-2025-002</div>
+                                        <div class="text-sm text-gray-500">Tiwi Beach Cottages</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">Sarah Johnson</div>
+                                        <div class="text-sm text-gray-500">sarah@email.com</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">KES 25,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gold">KES 10,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            Pending
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Yesterday</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">#BK-2025-003</div>
+                                        <div class="text-sm text-gray-500">Shanzu Beach Hotel</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">Mike Wilson</div>
+                                        <div class="text-sm text-gray-500">mike@email.com</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">KES 35,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gold">KES 14,000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                            Confirmed
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2 days ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Axis Tours & Travel</h3>
+                    <p class="text-gray-400">Your trusted partner for unforgettable East African adventures.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Destinations</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Hotels</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i>+254 700 000 000</li>
+                        <li><i class="fas fa-envelope mr-2"></i>info@axistours.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>Mombasa, Kenya</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Axis Tours & Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

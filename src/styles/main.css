@@ -60,6 +60,102 @@
   }
 }
 
+/* Commission Dashboard Styles */
+@layer components {
+  .commission-dashboard {
+    @apply bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 border border-gray-100;
+  }
+  
+  .dashboard-header {
+    @apply text-center mb-8;
+  }
+  
+  .dashboard-title {
+    @apply text-3xl font-bold text-black mb-2 relative;
+  }
+  
+  .dashboard-title::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-gold to-gold-dark rounded-full;
+  }
+  
+  .dashboard-subtitle {
+    @apply text-gray-600 text-lg;
+  }
+  
+  .metrics-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6 mb-8;
+  }
+  
+  .metric-card {
+    @apply bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300;
+  }
+  
+  .metric-header {
+    @apply flex items-center mb-4;
+  }
+  
+  .metric-icon {
+    @apply w-12 h-12 bg-gradient-to-br from-gold to-gold-dark rounded-lg flex items-center justify-center mr-4;
+  }
+  
+  .metric-icon i {
+    @apply text-white text-xl;
+  }
+  
+  .metric-title {
+    @apply text-lg font-semibold text-gray-700;
+  }
+  
+  .metric-value {
+    @apply text-3xl font-bold text-black mb-1;
+  }
+  
+  .metric-period {
+    @apply text-sm text-gray-500;
+  }
+  
+  .metric-trend {
+    @apply flex items-center mt-2;
+  }
+  
+  .trend-indicator {
+    @apply flex items-center text-sm font-medium;
+  }
+  
+  .trend-up {
+    @apply text-green-600;
+  }
+  
+  .trend-down {
+    @apply text-red-600;
+  }
+  
+  .commission-summary {
+    @apply bg-gradient-to-r from-gold to-gold-dark rounded-xl p-6 text-white text-center;
+  }
+  
+  .summary-title {
+    @apply text-xl font-semibold mb-2;
+  }
+  
+  .summary-rate {
+    @apply text-4xl font-bold mb-1;
+  }
+  
+  .summary-description {
+    @apply text-gold-light text-sm;
+  }
+  
+  .quick-actions {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4 mt-6;
+  }
+  
+  .action-btn {
+    @apply bg-white text-gold font-medium py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors text-center;
+  }
+}
+
 /* Utility Classes */
 @layer utilities {
   .text-gradient {
