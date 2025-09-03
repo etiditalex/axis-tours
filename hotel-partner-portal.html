@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module">
+        // Firebase will be imported dynamically when needed
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -319,16 +322,108 @@
         }
 
         // Form Handling
-        document.getElementById('partnerLoginForm').addEventListener('submit', function(e) {
+        document.getElementById('partnerLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            // Handle login logic here
-            alert('Login functionality will be implemented with backend integration');
+            
+            // Get form data
+            const formData = new FormData(this);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Import Firebase functions
+                const { signIn } = await import('./js/firebase.js');
+                
+                // Sign in with Firebase
+                const { user, error } = await signIn(email, password);
+                
+                if (error) {
+                    throw new Error(error);
+                }
+                
+                alert('Login successful! Redirecting to dashboard...');
+                
+                // Redirect to partner dashboard
+                window.location.href = 'partner-dashboard.html';
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed: ' + error.message);
+            } finally {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         });
 
-        document.getElementById('partnerRegistrationForm').addEventListener('submit', function(e) {
+        document.getElementById('partnerRegistrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            // Handle registration logic here
-            alert('Registration functionality will be implemented with backend integration');
+            
+            // Get form data
+            const formData = new FormData(this);
+            const partnerData = {
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                businessName: formData.get('businessName'),
+                businessType: formData.get('businessType'),
+                location: formData.get('location'),
+                website: formData.get('website'),
+                experience: formData.get('experience'),
+                rooms: formData.get('rooms'),
+                amenities: formData.get('amenities'),
+                targetMarket: formData.get('targetMarket'),
+                marketingChannels: formData.get('marketingChannels'),
+                commissionExpectation: formData.get('commissionExpectation'),
+                additionalInfo: formData.get('additionalInfo'),
+                termsAccepted: formData.get('termsAccepted')
+            };
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Import Firebase functions
+                const { signUp, db } = await import('./js/firebase.js');
+                const { collection, addDoc } = await import('firebase/firestore');
+                
+                // Create user account with Firebase
+                const { user, error } = await signUp(partnerData.email, 'tempPassword123', partnerData.fullName);
+                
+                if (error) {
+                    throw new Error(error);
+                }
+                
+                // Store additional partner data in Firestore
+                await addDoc(collection(db, 'partners'), {
+                    uid: user.uid,
+                    ...partnerData,
+                    createdAt: new Date(),
+                    status: 'pending'
+                });
+                
+                alert('Registration successful! Please check your email to verify your account.');
+                
+                // Redirect to login
+                showLogin();
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('Registration failed: ' + error.message);
+            } finally {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         });
 
         document.getElementById('forgotPasswordFormSubmit').addEventListener('submit', function(e) {
