@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coastal Hotels - Axis Tours and Travel</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="src/styles/main.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,15 +21,326 @@
     <link rel="stylesheet" href="https://unpkg.com/flatpickr@4.6.13/dist/flatpickr.min.css">
     
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .text-gold { color: #D4AF37; }
-        .bg-gold { background-color: #D4AF37; }
-        .border-gold { border-color: #D4AF37; }
-        .hover\:bg-gold-dark:hover { background-color: #B8941F; }
-        .focus\:ring-gold:focus { --tw-ring-color: #D4AF37; }
+        /* Additional hotel-specific styles */
+        .hotel-hero {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            position: relative;
+            padding: 5rem 0;
+            color: white;
+        }
+        
+        .hotel-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+        }
+        
+        .hotel-hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .search-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        
+        .search-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .search-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .search-btn {
+            background: var(--gold);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        
+        .search-btn:hover {
+            background: var(--gold-dark);
+        }
+        
+        .filters-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .filters-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            }
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .toggle-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            background: white;
+            color: #374151;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .toggle-btn.active {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+        
+        .toggle-btn:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+        
+        .results-count {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        .property-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .property-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .property-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+        
+        .property-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        
+        .property-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        
+        .property-location {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .property-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .star-rating {
+            color: var(--gold);
+        }
+        
+        .property-price {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-align: right;
+        }
+        
+        .property-description {
+            color: #374151;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .property-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .amenity-tag {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+        }
+        
+        .property-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .distance-info {
+            color: #6b7280;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .view-details-btn {
+            background: var(--gold);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .view-details-btn:hover {
+            background: var(--gold-dark);
+        }
+        
+        .commission-banner {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .commission-banner h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .commission-banner p {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .commission-btn {
+            background: white;
+            color: var(--gold);
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .commission-btn:hover {
+            background: #f9fafb;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container #property-map {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,20 +371,19 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
-        <div class="absolute inset-0 bg-black opacity-40"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section class="hotel-hero">
+        <div class="hotel-hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-5xl font-bold mb-6">Discover Coastal Kenya's Finest Hotels</h1>
             <p class="text-xl mb-8 max-w-3xl mx-auto">
                 From luxury beachfront resorts to charming boutique hotels, find your perfect coastal getaway
             </p>
             
             <!-- Quick Search Bar -->
-            <div class="max-w-4xl mx-auto bg-white rounded-lg p-6 shadow-lg">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="search-container max-w-4xl mx-auto">
+                <div class="search-grid">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
-                        <select id="location-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                        <label class="filter-label">Location</label>
+                        <select id="location-filter" class="search-input">
                             <option value="all">All Locations</option>
                             <option value="Diani Beach">Diani Beach</option>
                             <option value="Tiwi Beach">Tiwi Beach</option>
@@ -84,19 +394,17 @@
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Check-in</label>
-                        <input type="text" id="checkin-date" placeholder="Select date" 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                        <label class="filter-label">Check-in</label>
+                        <input type="text" id="checkin-date" placeholder="Select date" class="search-input">
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Check-out</label>
-                        <input type="text" id="checkout-date" placeholder="Select date" 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                        <label class="filter-label">Check-out</label>
+                        <input type="text" id="checkout-date" placeholder="Select date" class="search-input">
                     </div>
                     
                     <div class="flex items-end">
-                        <button class="w-full bg-gold hover:bg-gold-dark text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                        <button class="search-btn">
                             Search Hotels
                         </button>
                     </div>
@@ -108,22 +416,22 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <!-- Search and Filters -->
-        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div class="filters-section">
+            <div class="filters-grid">
                 <!-- Search Input -->
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Search Hotels</label>
+                <div class="filter-group">
+                    <label class="filter-label">Search Hotels</label>
                     <div class="relative">
                         <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                         <input type="text" id="property-search" placeholder="Search by name, location, or amenities..." 
-                               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                               class="search-input pl-10">
                     </div>
                 </div>
                 
                 <!-- Price Filter -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
-                    <select id="price-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                <div class="filter-group">
+                    <label class="filter-label">Price Range</label>
+                    <select id="price-filter" class="filter-select">
                         <option value="all">All Prices</option>
                         <option value="0-25000">Under KES 25,000</option>
                         <option value="25000-50000">KES 25,000 - 50,000</option>
@@ -133,9 +441,9 @@
                 </div>
                 
                 <!-- Category Filter -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                    <select id="category-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                <div class="filter-group">
+                    <label class="filter-label">Category</label>
+                    <select id="category-filter" class="filter-select">
                         <option value="all">All Categories</option>
                         <option value="Luxury">Luxury</option>
                         <option value="Mid-range">Mid-range</option>
@@ -144,9 +452,9 @@
                 </div>
                 
                 <!-- Distance Filter -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Distance from Beach</label>
-                    <select id="distance-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                <div class="filter-group">
+                    <label class="filter-label">Distance from Beach</label>
+                    <select id="distance-filter" class="filter-select">
                         <option value="all">Any Distance</option>
                         <option value="0.1">Under 100m</option>
                         <option value="0.5">Under 500m</option>
@@ -159,18 +467,18 @@
 
         <!-- View Toggle and Results Count -->
         <div class="flex justify-between items-center mb-6">
-            <div class="flex items-center space-x-4">
+            <div class="view-toggle">
                 <button id="list-view-btn" onclick="bookingSystem.toggleView()" 
-                        class="px-4 py-2 bg-gold text-white rounded-lg hover:bg-gold-dark transition-colors">
-                    <i class="fas fa-list mr-2"></i>List View
+                        class="toggle-btn active">
+                    <i class="fas fa-list"></i>List View
                 </button>
                 <button id="map-view-btn" onclick="bookingSystem.toggleView()" 
-                        class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                    <i class="fas fa-map mr-2"></i>Map View
+                        class="toggle-btn">
+                    <i class="fas fa-map"></i>Map View
                 </button>
             </div>
             
-            <div class="text-gray-600">
+            <div class="results-count">
                 <span id="results-count">0</span> hotels found
             </div>
         </div>
@@ -182,11 +490,11 @@
     </main>
 
     <!-- Commission Banner -->
-    <section class="bg-gradient-to-r from-gold to-gold-dark text-white py-16">
+    <section class="commission-banner">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-4">Earn Commission on Every Booking</h2>
-            <p class="text-xl mb-6">Join our affiliate program and earn up to 40% commission on hotel bookings</p>
-            <button class="bg-white text-gold font-medium px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+            <h2>Earn Commission on Every Booking</h2>
+            <p>Join our affiliate program and earn up to 40% commission on hotel bookings</p>
+            <button class="commission-btn">
                 Learn More
             </button>
         </div>
