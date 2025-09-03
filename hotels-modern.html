@@ -201,6 +201,47 @@
             }
         }
         
+        /* Hotels Grid Layout - 3 per row */
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hotels-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hotels-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Property Header Layout */
+        .property-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .property-header h3 {
+            margin-bottom: 0;
+            flex: 1;
+            margin-right: 1rem;
+        }
+        
+        .property-price {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-align: right;
+            white-space: nowrap;
+        }
+        
         .property-image img {
             width: 100%;
             height: 200px;
@@ -232,13 +273,6 @@
         
         .star-rating {
             color: var(--gold);
-        }
-        
-        .property-price {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-align: right;
         }
         
         .property-description {
@@ -485,7 +519,266 @@
 
         <!-- Properties Container -->
         <div id="properties-container" class="space-y-6">
-            <!-- Properties will be rendered here by JavaScript -->
+            <!-- Sample Hotel Properties -->
+            <div class="hotels-grid">
+                <!-- Hotel 1: Baobab Beach Resort -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" alt="Baobab Beach Resort">
+                    </div>
+                    <div class="property-info">
+                        <div class="property-header">
+                            <h3>Baobab Beach Resort</h3>
+                            <div class="property-price">KES 45,000</div>
+                        </div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                            Diani Beach, Kenya
+                        </div>
+                        <div class="property-rating">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span>4.8</span>
+                        </div>
+                        <p class="property-description">
+                            Luxury beachfront resort with stunning ocean views, private beach access, and world-class amenities.
+                        </p>
+                        <div class="property-amenities">
+                            <span class="amenity-tag">Beach Access</span>
+                            <span class="amenity-tag">Pool</span>
+                            <span class="amenity-tag">Spa</span>
+                            <span class="amenity-tag">Restaurant</span>
+                        </div>
+                        <div class="property-footer">
+                            <div class="distance-info">
+                                <i class="fas fa-ruler text-gold"></i>
+                                0.1km from beach
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel 2: Tiwi Beach Cottages -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Tiwi Beach Cottages">
+                    </div>
+                    <div class="property-info">
+                        <div class="property-header">
+                            <h3>Tiwi Beach Cottages</h3>
+                            <div class="property-price">KES 25,000</div>
+                        </div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                            Tiwi Beach, Kenya
+                        </div>
+                        <div class="property-rating">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>4.5</span>
+                        </div>
+                        <p class="property-description">
+                            Charming beachfront cottages perfect for families, with kitchen facilities and garden views.
+                        </p>
+                        <div class="property-amenities">
+                            <span class="amenity-tag">Beach Access</span>
+                            <span class="amenity-tag">Kitchen</span>
+                            <span class="amenity-tag">Garden</span>
+                            <span class="amenity-tag">Free WiFi</span>
+                        </div>
+                        <div class="property-footer">
+                            <div class="distance-info">
+                                <i class="fas fa-ruler text-gold"></i>
+                                0.05km from beach
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel 3: Shanzu Beach Hotel -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800" alt="Shanzu Beach Hotel">
+                    </div>
+                    <div class="property-info">
+                        <div class="property-header">
+                            <h3>Shanzu Beach Hotel</h3>
+                            <div class="property-price">KES 35,000</div>
+                        </div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                            Shanzu Beach, Kenya
+                        </div>
+                        <div class="property-rating">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>4.3</span>
+                        </div>
+                        <p class="property-description">
+                            Modern hotel with excellent beach access, featuring a pool, bar, and restaurant.
+                        </p>
+                        <div class="property-amenities">
+                            <span class="amenity-tag">Beach Access</span>
+                            <span class="amenity-tag">Pool</span>
+                            <span class="amenity-tag">Bar</span>
+                            <span class="amenity-tag">Restaurant</span>
+                        </div>
+                        <div class="property-footer">
+                            <div class="distance-info">
+                                <i class="fas fa-ruler text-gold"></i>
+                                0.08km from beach
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel 4: Mombasa Beach Resort -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800" alt="Mombasa Beach Resort">
+                    </div>
+                    <div class="property-info">
+                        <div class="property-header">
+                            <h3>Mombasa Beach Resort</h3>
+                            <div class="property-price">KES 55,000</div>
+                        </div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                            Mombasa, Kenya
+                        </div>
+                        <div class="property-rating">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span>4.9</span>
+                        </div>
+                        <p class="property-description">
+                            Premium beachfront resort with luxury amenities, spa services, and multiple dining options.
+                        </p>
+                        <div class="property-amenities">
+                            <span class="amenity-tag">Beach Access</span>
+                            <span class="amenity-tag">Spa</span>
+                            <span class="amenity-tag">Multiple Pools</span>
+                            <span class="amenity-tag">Fine Dining</span>
+                        </div>
+                        <div class="property-footer">
+                            <div class="distance-info">
+                                <i class="fas fa-ruler text-gold"></i>
+                                0.02km from beach
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel 5: Watamu Paradise Lodge -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800" alt="Watamu Paradise Lodge">
+                    </div>
+                    <div class="property-info">
+                        <div class="property-header">
+                            <h3>Watamu Paradise Lodge</h3>
+                            <div class="property-price">KES 30,000</div>
+                        </div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                            Watamu, Kenya
+                        </div>
+                        <div class="property-rating">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>4.6</span>
+                        </div>
+                        <p class="property-description">
+                            Cozy lodge with stunning ocean views, perfect for nature lovers and adventure seekers.
+                        </p>
+                        <div class="property-amenities">
+                            <span class="amenity-tag">Ocean View</span>
+                            <span class="amenity-tag">Adventure Tours</span>
+                            <span class="amenity-tag">Restaurant</span>
+                            <span class="amenity-tag">Garden</span>
+                        </div>
+                        <div class="property-footer">
+                            <div class="distance-info">
+                                <i class="fas fa-ruler text-gold"></i>
+                                0.3km from beach
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel 6: Malindi Coastal Villa -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4cb85b?w=800" alt="Malindi Coastal Villa">
+                    </div>
+                    <div class="property-info">
+                        <div class="property-header">
+                            <h3>Malindi Coastal Villa</h3>
+                            <div class="property-price">KES 40,000</div>
+                        </div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                            Malindi, Kenya
+                        </div>
+                        <div class="property-rating">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span>4.7</span>
+                        </div>
+                        <p class="property-description">
+                            Exclusive villa with private beach access, perfect for romantic getaways and family vacations.
+                        </p>
+                        <div class="property-amenities">
+                            <span class="amenity-tag">Private Beach</span>
+                            <span class="amenity-tag">Villa</span>
+                            <span class="amenity-tag">Kitchen</span>
+                            <span class="amenity-tag">Ocean View</span>
+                        </div>
+                        <div class="property-footer">
+                            <div class="distance-info">
+                                <i class="fas fa-ruler text-gold"></i>
+                                0.01km from beach
+                            </div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
