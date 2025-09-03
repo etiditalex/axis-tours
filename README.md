@@ -1,230 +1,243 @@
-# Axis Tours and Travel Website
+# Axis Tours & Travel - Modern Booking Website
 
-A professional, responsive luxury travel website built with HTML, CSS, and JavaScript. This website showcases premium East African travel destinations and services with a sophisticated gold/white/black theme, specializing in Kenya's coast, wildlife safaris, and East African adventures.
+A professional, modern travel booking website built with cutting-edge web technologies, specializing in East African coastal destinations and wildlife safaris.
 
-## 🌟 Features
+## 🚀 Modern Tech Stack
 
-### Design & User Experience
-- **Professional Luxury Theme**: Gold, white, and black color scheme
-- **Responsive Design**: Fully responsive across all devices with hamburger menu for mobile
-- **Modern UI/UX**: Clean, elegant design with smooth animations
-- **Interactive Elements**: Hover effects, smooth scrolling, and fade-in animations
+### Build Tools
+- **Vite** - Lightning-fast build tool and dev server
+- **PostCSS** - Advanced CSS processing
+- **Autoprefixer** - Automatic vendor prefixing
 
-### Pages & Content
-- **Home Page**: Hero section, featured East African destinations, testimonials, and call-to-action
-- **About Us**: Company story, founder profile (Alex Etidit), values, and achievements
-- **Destinations**: Comprehensive East African destination showcase with filtering options
-- **Blog**: Travel articles, tips, and destination guides focused on East Africa
-- **Booking Page**: Interactive booking form with East African package selection
-- **Contact Us**: Contact form, office information, and FAQ section
+### Styling & UI
+- **Tailwind CSS** - Utility-first CSS framework
+- **Headless UI** - Accessible UI components
+- **Custom CSS Variables** - Consistent theming system
 
-### Technical Features
-- **Cross-browser Compatible**: Works on all modern browsers
-- **SEO Optimized**: Proper meta tags and semantic HTML
-- **Fast Loading**: Optimized images and efficient CSS
-- **Accessibility**: WCAG compliant design elements
-- **Form Validation**: Client-side validation for all forms
-- **Mobile-First**: Responsive hamburger menu for mobile devices
+### Interactive Features
+- **Flatpickr** - Lightweight, reliable date picker
+- **Lucide Icons** - Beautiful, consistent iconography
+- **Font Awesome** - Comprehensive icon library
 
-## 🚀 Getting Started
+### Maps & Geolocation
+- **Leaflet** - Free, open-source mapping library
+- **OpenStreetMap** - Free map tiles
+- **Turf.js** - Advanced geospatial analysis
+
+### Search & Performance
+- **FlexSearch** - Fast client-side search engine
+- **Lunr.js** - Alternative search solution
+- **Algolia Ready** - For enterprise-level search
+
+## ✨ Key Features
+
+### 🏨 Advanced Hotel Booking System
+- **Real-time Search** - Instant property search with FlexSearch
+- **Smart Filtering** - Location, price, category, and distance filters
+- **Interactive Maps** - Leaflet integration with property markers
+- **Date Selection** - Flatpickr date pickers for check-in/out
+- **Responsive Design** - Mobile-first approach with Tailwind CSS
+
+### 🗺️ Geographic Features
+- **Map Integration** - Toggle between list and map views
+- **Distance Calculations** - Turf.js for proximity-based filtering
+- **Location Clustering** - Efficient marker management for large datasets
+- **Geolocation** - User location detection and nearby property suggestions
+
+### 💰 Commission System
+- **40% Commission Rate** - Built-in affiliate program
+- **Real-time Calculations** - Instant commission estimates
+- **Booking Dashboard** - Track earnings and bookings
+- **Payment Integration** - Ready for payment gateway integration
+
+### 📱 Modern User Experience
+- **Progressive Web App** - Fast, responsive, and reliable
+- **Accessibility** - WCAG compliant with Headless UI
+- **Performance** - Optimized with Vite and modern bundling
+- **SEO Ready** - Semantic HTML and meta tags
+
+## 🛠️ Development Setup
 
 ### Prerequisites
-- A modern web browser
-- A web server (for local development)
-- Text editor (VS Code, Sublime Text, etc.)
+- Node.js 16+ 
+- npm or yarn
 
 ### Installation
+```bash
+# Clone the repository
+git clone https://github.com/etiditalex/axis-tours.git
+cd axis-tours
 
-1. **Clone or Download the Repository**
-   ```bash
-   git clone https://github.com/yourusername/axis-tours-travel-website.git
-   cd axis-tours-travel-website
-   ```
+# Install dependencies
+npm install
 
-2. **Open the Project**
-   - Open the project folder in your preferred text editor
-   - Or simply double-click `index.html` to view in your browser
+# Start development server
+npm run dev
 
-3. **Local Development Server** (Optional)
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Using Node.js (if you have http-server installed)
-   npx http-server
-   
-   # Using PHP
-   php -S localhost:8000
-   ```
+# Build for production
+npm run build
 
-4. **View the Website**
-   - Open your browser and navigate to `http://localhost:8000`
-   - Or simply open `index.html` directly in your browser
+# Preview production build
+npm run preview
+```
+
+### Development Commands
+```bash
+npm run dev          # Start development server (http://localhost:3000)
+npm run build        # Build for production
+npm run preview      # Preview production build
+```
 
 ## 📁 Project Structure
 
 ```
-axis-tours-travel-website/
-├── index.html          # Home page
-├── about.html          # About us page
-├── destinations.html   # Destinations page
-├── blog.html          # Blog page
-├── booking.html       # Booking page
-├── contact.html       # Contact page
-├── style.css          # Main stylesheet
-└── README.md          # Project documentation
+axis-tours/
+├── src/
+│   ├── js/
+│   │   └── booking-system.js    # Modern booking system
+│   └── styles/
+│       └── main.css             # Tailwind + custom styles
+├── hotels-modern.html           # Modern hotels page
+├── index.html                   # Homepage
+├── destinations.html            # Destinations showcase
+├── booking.html                 # Booking form
+├── style.css                    # Legacy CSS (being migrated)
+├── vite.config.js              # Vite configuration
+├── tailwind.config.js          # Tailwind configuration
+├── postcss.config.js           # PostCSS configuration
+└── package.json                # Dependencies and scripts
 ```
 
-## 🎨 Customization
+## 🎨 Design System
 
-### Colors
-The website uses CSS custom properties for easy color customization. Edit the `:root` section in `style.css`:
+### Color Palette
+- **Primary**: #1A1A1A (Deep Black)
+- **Gold**: #D4AF37 (Luxury Gold)
+- **Gold Light**: #E6C866 (Light Gold)
+- **Gold Dark**: #B8941F (Dark Gold)
+- **White**: #FFFFFF (Pure White)
+- **Gray Scale**: Comprehensive gray palette
 
+### Typography
+- **Font Family**: Poppins (Google Fonts)
+- **Weights**: 300, 400, 500, 600, 700
+- **Responsive**: Fluid typography scaling
+
+### Components
+- **Buttons**: Primary, secondary, and outline variants
+- **Cards**: Property cards with hover effects
+- **Forms**: Accessible form components
+- **Navigation**: Sticky header with smooth transitions
+
+## 🌍 Destinations Covered
+
+### Coastal Kenya
+- **Diani Beach** - Luxury resorts and pristine beaches
+- **Tiwi Beach** - Hidden gems and tranquility
+- **Shanzu Beach** - Local favorites and serenity
+- **Mombasa** - Historic port city and culture
+- **Malindi** - Italian influence and marine parks
+
+### Wildlife & Safari
+- **Maasai Mara** - Great Migration and wildlife
+- **Tsavo National Park** - Diverse landscapes and animals
+- **Amboseli** - Mount Kilimanjaro views
+- **Lake Nakuru** - Flamingos and rhino sanctuary
+
+### Cultural Experiences
+- **Old Town Mombasa** - Swahili architecture and history
+- **Bombolulu Cultural Centre** - Inclusive cultural experiences
+- **Hindu Temples** - Spiritual heritage sites
+- **Kaya Forests** - UNESCO World Heritage sites
+
+## 🔧 Customization
+
+### Adding New Properties
+```javascript
+// In src/js/booking-system.js
+this.properties.push({
+  id: 4,
+  name: "New Hotel Name",
+  type: "Resort",
+  location: "Location Name",
+  coordinates: [latitude, longitude],
+  price: 50000,
+  rating: 4.7,
+  amenities: ["Pool", "Spa", "Restaurant"],
+  images: ["image-url"],
+  description: "Hotel description",
+  distance: 0.2,
+  category: "Luxury"
+});
+```
+
+### Styling Customization
 ```css
-:root {
-    --gold: #D4AF37;        /* Primary gold color */
-    --gold-light: #F4E4BC;  /* Light gold */
-    --gold-dark: #B8860B;   /* Dark gold */
-    --white: #FFFFFF;       /* White */
-    --black: #1A1A1A;       /* Black */
-    --gray-light: #F8F9FA;  /* Light gray */
-    --gray: #6C757D;        /* Medium gray */
-    --gray-dark: #495057;   /* Dark gray */
+/* In src/styles/main.css */
+@layer components {
+  .custom-button {
+    @apply px-6 py-3 bg-custom-color text-white rounded-lg;
+  }
 }
 ```
 
-### Content
-- **Images**: Replace image URLs with your own East African destination images
-- **Text**: Update all text content in the HTML files
-- **Contact Information**: Update phone numbers, emails, and addresses
-- **Social Media**: Update social media links
-
-### Fonts
-The website uses Google Fonts (Poppins). To change fonts:
-1. Update the Google Fonts link in the `<head>` section
-2. Modify the `font-family` property in the CSS
-
-## 🌍 Featured Destinations
-
-### Kenya Coast
-- **Diani Beach**: Pristine white sand beaches and crystal-clear waters
-- **Watamu**: Marine national park and turtle watching
-- **Mombasa**: Historic coastal city with rich culture
-- **Malindi**: Ancient trading port and marine reserves
-
-### Kenya Safari
-- **Maasai Mara**: World-famous wildlife reserve and wildebeest migration
-- **Tsavo**: Kenya's largest national park with diverse wildlife
-- **Amboseli**: Stunning views of Mount Kilimanjaro
-- **Lake Nakuru**: Flamingo paradise and rhino sanctuary
-
-### East Africa
-- **Zanzibar**: Spice island with pristine beaches and Stone Town
-- **Tanzania**: Serengeti and Ngorongoro Crater
-- **Uganda**: Bwindi Impenetrable Forest and Queen Elizabeth National Park
-
-## 🌐 Deployment
+## 🚀 Deployment
 
 ### GitHub Pages
-1. Push your code to a GitHub repository
-2. Go to repository Settings > Pages
-3. Select source branch (usually `main` or `master`)
-4. Your site will be available at `https://username.github.io/repository-name`
+```bash
+# Build the project
+npm run build
 
-### Netlify
-1. Drag and drop your project folder to [Netlify](https://netlify.com)
-2. Or connect your GitHub repository
-3. Your site will be deployed automatically
-
-### Vercel
-1. Install Vercel CLI: `npm i -g vercel`
-2. Run `vercel` in your project directory
-3. Follow the prompts to deploy
-
-### Traditional Web Hosting
-1. Upload all files to your web hosting provider
-2. Ensure `index.html` is in the root directory
-3. Configure your domain to point to the hosting
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Internet Explorer 11+
-
-## 🔧 Advanced Customization
-
-### Adding New Pages
-1. Create a new HTML file
-2. Copy the header and footer structure from existing pages
-3. Add your content in the main section
-4. Update navigation links
-
-### Adding Animations
-The website uses CSS animations and Intersection Observer API. To add new animations:
-
-```css
-/* Add to style.css */
-@keyframes yourAnimation {
-    from { /* initial state */ }
-    to { /* final state */ }
-}
-
-.your-element {
-    animation: yourAnimation 0.6s ease-out;
-}
+# Deploy to GitHub Pages
+# The dist/ folder contains the production build
 ```
 
-### Form Integration
-To make forms functional, you'll need to:
-1. Set up a backend service (Node.js, PHP, etc.)
-2. Configure form action URLs
-3. Handle form submissions and email notifications
+### Netlify/Vercel
+- Connect your repository
+- Set build command: `npm run build`
+- Set publish directory: `dist`
 
-## 📞 Contact Information
+## 📊 Performance Features
 
-**Axis Tours and Travel**
-- **Founder**: Alex Etidit
-- **Phone**: +254 796 988 686 / +254 780 460 617
-- **Email**: etiditalex@gmail.com
-- **Location**: Kenya, East Africa
+- **Lazy Loading** - Images and components load on demand
+- **Code Splitting** - Vite automatically optimizes bundle size
+- **Tree Shaking** - Unused code is automatically removed
+- **Minification** - Production builds are optimized
+- **Caching** - Efficient asset caching strategies
+
+## 🔒 Security Features
+
+- **XSS Protection** - Sanitized user inputs
+- **CSRF Protection** - Secure form submissions
+- **Content Security Policy** - Restrict resource loading
+- **HTTPS Ready** - Secure communication protocols
+
+## 📱 Mobile Optimization
+
+- **Responsive Design** - Mobile-first approach
+- **Touch Friendly** - Optimized for mobile interactions
+- **Progressive Web App** - Installable on mobile devices
+- **Offline Support** - Service worker ready
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the ISC License.
 
-## 🙏 Acknowledgments
+## 📞 Support
 
-- Images from [Unsplash](https://unsplash.com) featuring East African destinations
-- Icons from [Font Awesome](https://fontawesome.com)
-- Fonts from [Google Fonts](https://fonts.google.com)
-
-## 🔄 Updates
-
-### Version 2.0.0
-- Updated company branding to "Axis Tours and Travel"
-- Added founder information (Alex Etidit)
-- Updated contact details and location
-- Refocused content on East African destinations
-- Added comprehensive destination coverage (Kenya Coast, Safari, East Africa)
-- Enhanced mobile responsiveness with hamburger menu
-- Updated all pages with new content and imagery
-
-### Version 1.0.0
-- Initial release
-- Complete website with all pages
-- Responsive design
-- Interactive features
-- Professional styling
+For support and questions:
+- Email: info@axistours.com
+- Phone: +254 700 000 000
+- Website: https://axistours.com
 
 ---
 
-**Note**: This is a static website template. For production use, consider adding:
-- Backend functionality for forms
-- Database integration
-- Content Management System
-- Analytics tracking
-- SSL certificate
-- CDN for better performance
+**Built with ❤️ for the East African tourism industry**

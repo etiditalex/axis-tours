@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastal Hotels - Axis Tours and Travel</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flatpickr@4.6.13/dist/flatpickr.min.css">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .text-gold { color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; }
+        .border-gold { border-color: #D4AF37; }
+        .hover\:bg-gold-dark:hover { background-color: #B8941F; }
+        .focus\:ring-gold:focus { --tw-ring-color: #D4AF37; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gold rounded-full flex items-center justify-center">
+                        <i class="fas fa-globe text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <div class="text-lg font-bold text-black">Axis</div>
+                        <div class="text-xs text-gray-600">Tours & Travel</div>
+                    </div>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-gold transition-colors">Home</a>
+                    <a href="destinations.html" class="text-gray-700 hover:text-gold transition-colors">Destinations</a>
+                    <a href="hotels-modern.html" class="text-gold font-medium">Hotels</a>
+                    <a href="booking.html" class="text-gray-700 hover:text-gold transition-colors">Book Now</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-gold transition-colors">Contact</a>
+                </div>
+                
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-700"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-6">Discover Coastal Kenya's Finest Hotels</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                From luxury beachfront resorts to charming boutique hotels, find your perfect coastal getaway
+            </p>
+            
+            <!-- Quick Search Bar -->
+            <div class="max-w-4xl mx-auto bg-white rounded-lg p-6 shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <select id="location-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                            <option value="all">All Locations</option>
+                            <option value="Diani Beach">Diani Beach</option>
+                            <option value="Tiwi Beach">Tiwi Beach</option>
+                            <option value="Shanzu Beach">Shanzu Beach</option>
+                            <option value="Mombasa">Mombasa</option>
+                            <option value="Malindi">Malindi</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Check-in</label>
+                        <input type="text" id="checkin-date" placeholder="Select date" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Check-out</label>
+                        <input type="text" id="checkout-date" placeholder="Select date" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                    </div>
+                    
+                    <div class="flex items-end">
+                        <button class="w-full bg-gold hover:bg-gold-dark text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                            Search Hotels
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Search and Filters -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <!-- Search Input -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Search Hotels</label>
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="property-search" placeholder="Search by name, location, or amenities..." 
+                               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                    </div>
+                </div>
+                
+                <!-- Price Filter -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
+                    <select id="price-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                        <option value="all">All Prices</option>
+                        <option value="0-25000">Under KES 25,000</option>
+                        <option value="25000-50000">KES 25,000 - 50,000</option>
+                        <option value="50000-100000">KES 50,000 - 100,000</option>
+                        <option value="100000-999999">Over KES 100,000</option>
+                    </select>
+                </div>
+                
+                <!-- Category Filter -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="category-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                        <option value="all">All Categories</option>
+                        <option value="Luxury">Luxury</option>
+                        <option value="Mid-range">Mid-range</option>
+                        <option value="Budget">Budget</option>
+                    </select>
+                </div>
+                
+                <!-- Distance Filter -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Distance from Beach</label>
+                    <select id="distance-filter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent">
+                        <option value="all">Any Distance</option>
+                        <option value="0.1">Under 100m</option>
+                        <option value="0.5">Under 500m</option>
+                        <option value="1">Under 1km</option>
+                        <option value="3">Under 3km</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Toggle and Results Count -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center space-x-4">
+                <button id="list-view-btn" onclick="bookingSystem.toggleView()" 
+                        class="px-4 py-2 bg-gold text-white rounded-lg hover:bg-gold-dark transition-colors">
+                    <i class="fas fa-list mr-2"></i>List View
+                </button>
+                <button id="map-view-btn" onclick="bookingSystem.toggleView()" 
+                        class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-map mr-2"></i>Map View
+                </button>
+            </div>
+            
+            <div class="text-gray-600">
+                <span id="results-count">0</span> hotels found
+            </div>
+        </div>
+
+        <!-- Properties Container -->
+        <div id="properties-container" class="space-y-6">
+            <!-- Properties will be rendered here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Commission Banner -->
+    <section class="bg-gradient-to-r from-gold to-gold-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Earn Commission on Every Booking</h2>
+            <p class="text-xl mb-6">Join our affiliate program and earn up to 40% commission on hotel bookings</p>
+            <button class="bg-white text-gold font-medium px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                Learn More
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Axis Tours & Travel</h3>
+                    <p class="text-gray-400">Your trusted partner for unforgettable East African adventures.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Destinations</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Hotels</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i>+254 700 000 000</li>
+                        <li><i class="fas fa-envelope mr-2"></i>info@axistours.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>Mombasa, Kenya</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Axis Tours & Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="src/js/booking-system.js"></script>
+</body>
+</html>

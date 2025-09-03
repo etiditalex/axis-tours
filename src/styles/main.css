@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --primary: #1A1A1A;
+  --gold: #D4AF37;
+  --gold-light: #E6C866;
+  --gold-dark: #B8941F;
+  --white: #FFFFFF;
+  --black: #000000;
+  --gray-light: #F8F9FA;
+  --gray: #6C757D;
+  --gray-dark: #343A40;
+}
+
+/* Base Styles */
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--black);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}
+
+/* Component Styles */
+@layer components {
+  .btn {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gold hover:bg-gold-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold transition-all duration-200;
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center px-6 py-3 border-2 border-gold text-base font-medium rounded-lg text-gold bg-transparent hover:bg-gold hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-200;
+  }
+  
+  .section-title {
+    @apply text-center mb-12;
+  }
+  
+  .section-title h2 {
+    @apply text-4xl font-bold text-black mb-4;
+  }
+  
+  .section-title p {
+    @apply text-lg text-gray-600 max-w-2xl mx-auto;
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent;
+  }
+  
+  .shadow-gold {
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+  }
+}
