@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Management - Partner Dashboard - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-hero">
+        <div class="dashboard-hero-content">
+            <div class="partner-info">
+                <div class="partner-avatar">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <div class="partner-details">
+                    <h1>Pricing Management</h1>
+                    <p>Optimize your pricing strategy to maximize revenue and occupancy</p>
+                    <div class="partner-status">
+                        <span class="status-badge status-active">Baobab Beach Resort</span>
+                        <a href="partner-dashboard.html" class="back-to-dashboard">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="showPricingModal()">
+                    <i class="fas fa-plus"></i> Set New Price
+                </button>
+                <button class="btn-secondary" onclick="showBulkPricing()">
+                    <i class="fas fa-edit"></i> Bulk Update
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Pricing Statistics -->
+        <section class="dashboard-section">
+            <div class="pricing-stats">
+                <div class="stat-item">
+                    <div class="stat-number">KES 45,000</div>
+                    <div class="stat-label">Average Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">78%</div>
+                    <div class="stat-label">Occupancy Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+15%</div>
+                    <div class="stat-label">Revenue Growth</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Active Price Rules</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Management Tools -->
+        <div class="pricing-management-content">
+            <!-- Left Column - Pricing Overview -->
+            <div class="pricing-overview-section">
+                <div class="section-header">
+                    <h2>Current Pricing Overview</h2>
+                    <div class="pricing-filters">
+                        <select id="roomTypeFilter">
+                            <option value="">All Room Types</option>
+                            <option value="standard">Standard</option>
+                            <option value="deluxe">Deluxe</option>
+                            <option value="suite">Suite</option>
+                            <option value="villa">Villa</option>
+                        </select>
+                        <select id="seasonFilter">
+                            <option value="">All Seasons</option>
+                            <option value="low">Low Season</option>
+                            <option value="high">High Season</option>
+                            <option value="peak">Peak Season</option>
+                        </select>
+                        <button class="btn-secondary" onclick="showPricingModal()">
+                            <i class="fas fa-plus"></i> Add Price Rule
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pricing Table -->
+                <div class="pricing-table-container">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Room Type</th>
+                                <th>Base Price</th>
+                                <th>Seasonal Price</th>
+                                <th>Weekend Rate</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pricingTableBody">
+                            <!-- Pricing rows will be dynamically generated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Column - Quick Actions & Analytics -->
+            <div class="pricing-sidebar">
+                <section class="dashboard-section">
+                    <h2>Quick Actions</h2>
+                    <div class="quick-actions-list">
+                        <button class="action-btn-small" onclick="showPricingModal()">
+                            <i class="fas fa-plus"></i> Add Price Rule
+                        </button>
+                        <button class="action-btn-small" onclick="showSeasonalPricing()">
+                            <i class="fas fa-calendar-alt"></i> Seasonal Pricing
+                        </button>
+                        <button class="action-btn-small" onclick="showCompetitorAnalysis()">
+                            <i class="fas fa-chart-line"></i> Competitor Analysis
+                        </button>
+                        <button class="action-btn-small" onclick="showRevenueOptimization()">
+                            <i class="fas fa-lightbulb"></i> Revenue Tips
+                        </button>
+                    </div>
+                </section>
+
+                <section class="dashboard-section">
+                    <h2>Pricing Insights</h2>
+                    <div class="pricing-insights">
+                        <div class="insight-item">
+                            <div class="insight-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="insight-content">
+                                <div class="insight-title">High Demand Period</div>
+                                <div class="insight-value">Dec 20 - Jan 5</div>
+                                <div class="insight-description">Consider increasing rates by 20-30%</div>
+                            </div>
+                        </div>
+                        <div class="insight-item">
+                            <div class="insight-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="insight-content">
+                                <div class="insight-title">Low Occupancy</div>
+                                <div class="insight-value">Feb 1 - Mar 15</div>
+                                <div class="insight-description">Consider promotional rates</div>
+                            </div>
+                        </div>
+                        <div class="insight-item">
+                            <div class="insight-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="insight-content">
+                                <div class="insight-title">Optimal Pricing</div>
+                                <div class="insight-value">KES 45,000</div>
+                                <div class="insight-description">Your current average rate is competitive</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Pricing Modal -->
+    <div class="modal" id="pricingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="pricingModalTitle">Add New Price Rule</h2>
+                <button class="close-btn" onclick="closePricingModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="pricingForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="roomType"><i class="fas fa-bed"></i> Room Type</label>
+                        <select id="roomType" required>
+                            <option value="">Select Room Type</option>
+                            <option value="standard">Standard Room</option>
+                            <option value="deluxe">Deluxe Room</option>
+                            <option value="suite">Suite</option>
+                            <option value="villa">Villa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="basePrice"><i class="fas fa-coins"></i> Base Price (KES)</label>
+                        <input type="number" id="basePrice" required placeholder="e.g., 45000">
+                    </div>
+                    <div class="form-group">
+                        <label for="seasonalPrice"><i class="fas fa-calendar-alt"></i> Seasonal Price (KES)</label>
+                        <input type="number" id="seasonalPrice" placeholder="e.g., 65000">
+                    </div>
+                    <div class="form-group">
+                        <label for="weekendRate"><i class="fas fa-calendar-week"></i> Weekend Rate (KES)</label>
+                        <input type="number" id="weekendRate" placeholder="e.g., 55000">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="seasonalDates"><i class="fas fa-calendar"></i> Seasonal Dates</label>
+                    <div class="date-range-inputs">
+                        <input type="date" id="seasonStartDate" placeholder="Start Date">
+                        <span>to</span>
+                        <input type="date" id="seasonEndDate" placeholder="End Date">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pricingStrategy"><i class="fas fa-chart-line"></i> Pricing Strategy</label>
+                    <select id="pricingStrategy">
+                        <option value="competitive">Competitive Pricing</option>
+                        <option value="premium">Premium Pricing</option>
+                        <option value="dynamic">Dynamic Pricing</option>
+                        <option value="seasonal">Seasonal Pricing</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="priceNotes"><i class="fas fa-sticky-note"></i> Notes</label>
+                    <textarea id="priceNotes" rows="3" placeholder="Add any notes about this pricing rule..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closePricingModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save Price Rule
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours & Travel</h3>
+                <p>Your trusted partner for unforgettable East African adventures.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="hotels.html">Hotels</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@axistours.com</p>
+                <p>Phone: +254 700 000 000</p>
+                <p>Address: Nairobi, Kenya</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample pricing data
+        const samplePricing = [
+            {
+                id: 1,
+                roomType: "Standard Room",
+                basePrice: 32000,
+                seasonalPrice: 45000,
+                weekendRate: 38000,
+                lastUpdated: "2024-12-15",
+                strategy: "competitive"
+            },
+            {
+                id: 2,
+                roomType: "Deluxe Room",
+                basePrice: 45000,
+                seasonalPrice: 65000,
+                weekendRate: 52000,
+                lastUpdated: "2024-12-14",
+                strategy: "premium"
+            },
+            {
+                id: 3,
+                roomType: "Suite",
+                basePrice: 65000,
+                seasonalPrice: 85000,
+                weekendRate: 72000,
+                lastUpdated: "2024-12-13",
+                strategy: "premium"
+            },
+            {
+                id: 4,
+                roomType: "Villa",
+                basePrice: 120000,
+                seasonalPrice: 150000,
+                weekendRate: 135000,
+                lastUpdated: "2024-12-12",
+                strategy: "premium"
+            }
+        ];
+
+        // Initialize pricing management
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPricingTable();
+            setupEventListeners();
+        });
+
+        // Render pricing table
+        function renderPricingTable() {
+            const tableBody = document.getElementById('pricingTableBody');
+            tableBody.innerHTML = '';
+
+            samplePricing.forEach(pricing => {
+                const row = createPricingRow(pricing);
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Create pricing row
+        function createPricingRow(pricing) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${pricing.roomType}</td>
+                <td>KES ${pricing.basePrice.toLocaleString()}</td>
+                <td>KES ${pricing.seasonalPrice.toLocaleString()}</td>
+                <td>KES ${pricing.weekendRate.toLocaleString()}</td>
+                <td>${pricing.lastUpdated}</td>
+                <td>
+                    <button class="btn-edit-small" onclick="editPricing(${pricing.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-delete-small" onclick="deletePricing(${pricing.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            return row;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Room type filter
+            document.getElementById('roomTypeFilter').addEventListener('change', function(e) {
+                filterByRoomType(e.target.value);
+            });
+
+            // Pricing form submission
+            document.getElementById('pricingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                savePricing();
+            });
+        }
+
+        // Filter by room type
+        function filterByRoomType(roomType) {
+            const rows = document.querySelectorAll('#pricingTableBody tr');
+            rows.forEach(row => {
+                const typeCell = row.cells[0];
+                if (!roomType || typeCell.textContent.toLowerCase().includes(roomType.toLowerCase())) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Show pricing modal
+        function showPricingModal() {
+            document.getElementById('pricingModalTitle').textContent = 'Add New Price Rule';
+            document.getElementById('pricingForm').reset();
+            document.getElementById('pricingModal').style.display = 'flex';
+        }
+
+        // Close pricing modal
+        function closePricingModal() {
+            document.getElementById('pricingModal').style.display = 'none';
+        }
+
+        // Edit pricing
+        function editPricing(pricingId) {
+            const pricing = samplePricing.find(p => p.id === pricingId);
+            if (pricing) {
+                document.getElementById('pricingModalTitle').textContent = 'Edit Price Rule';
+                document.getElementById('roomType').value = pricing.roomType.toLowerCase().replace(' ', '');
+                document.getElementById('basePrice').value = pricing.basePrice;
+                document.getElementById('seasonalPrice').value = pricing.seasonalPrice;
+                document.getElementById('weekendRate').value = pricing.weekendRate;
+                document.getElementById('pricingStrategy').value = pricing.strategy;
+                document.getElementById('pricingModal').style.display = 'flex';
+            }
+        }
+
+        // Delete pricing
+        function deletePricing(pricingId) {
+            if (confirm('Are you sure you want to delete this pricing rule?')) {
+                const index = samplePricing.findIndex(p => p.id === pricingId);
+                if (index > -1) {
+                    samplePricing.splice(index, 1);
+                    renderPricingTable();
+                }
+            }
+        }
+
+        // Save pricing
+        function savePricing() {
+            const formData = {
+                roomType: document.getElementById('roomType').value,
+                basePrice: parseInt(document.getElementById('basePrice').value),
+                seasonalPrice: parseInt(document.getElementById('seasonalPrice').value) || 0,
+                weekendRate: parseInt(document.getElementById('weekendRate').value) || 0,
+                strategy: document.getElementById('pricingStrategy').value
+            };
+
+            // Validate required fields
+            if (!formData.roomType || !formData.basePrice) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Add new pricing or update existing
+            if (document.getElementById('pricingModalTitle').textContent === 'Add New Price Rule') {
+                const newPricing = {
+                    ...formData,
+                    id: Date.now(),
+                    lastUpdated: new Date().toISOString().split('T')[0]
+                };
+                samplePricing.push(newPricing);
+            }
+
+            renderPricingTable();
+            closePricingModal();
+            alert('Pricing rule saved successfully!');
+        }
+
+        // Other functions
+        function showBulkPricing() {
+            alert('Bulk pricing update functionality will be implemented');
+        }
+
+        function showSeasonalPricing() {
+            alert('Seasonal pricing management will be implemented');
+        }
+
+        function showCompetitorAnalysis() {
+            alert('Competitor analysis will be implemented');
+        }
+
+        function showRevenueOptimization() {
+            alert('Revenue optimization tips will be implemented');
+        }
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('pricingModal');
+            if (e.target === modal) {
+                closePricingModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery Management - Partner Dashboard - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-hero">
+        <div class="dashboard-hero-content">
+            <div class="partner-info">
+                <div class="partner-avatar">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="partner-details">
+                    <h1>Photo Gallery Management</h1>
+                    <p>Upload, organize, and manage your hotel photos to increase bookings</p>
+                    <div class="partner-status">
+                        <span class="status-badge status-active">Baobab Beach Resort</span>
+                        <a href="partner-dashboard.html" class="back-to-dashboard">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="showUploadModal()">
+                    <i class="fas fa-upload"></i> Upload Photos
+                </button>
+                    <button class="btn-secondary" onclick="showBulkUpload()">
+                    <i class="fas fa-images"></i> Bulk Upload
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Photo Statistics -->
+        <section class="dashboard-section">
+            <div class="photo-stats">
+                <div class="stat-item">
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Total Photos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Photo Albums</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2.4GB</div>
+                    <div class="stat-label">Storage Used</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.8★</div>
+                    <div class="stat-label">Photo Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Management Tools -->
+        <div class="photo-management-content">
+            <!-- Left Column - Photo Gallery -->
+            <div class="photo-gallery-section">
+                <div class="section-header">
+                    <h2>Your Photo Gallery</h2>
+                    <div class="photo-filters">
+                        <select id="albumFilter">
+                            <option value="">All Albums</option>
+                            <option value="rooms">Rooms</option>
+                            <option value="amenities">Amenities</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="pool">Pool & Beach</option>
+                            <option value="events">Events</option>
+                        </select>
+                        <select id="sortFilter">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="name">Name A-Z</option>
+                            <option value="size">File Size</option>
+                        </select>
+                        <input type="text" id="searchPhotos" placeholder="Search photos...">
+                    </div>
+                </div>
+
+                <!-- Photo Grid -->
+                <div class="photo-grid" id="photoGrid">
+                    <!-- Photos will be dynamically generated -->
+                </div>
+            </div>
+
+            <!-- Right Column - Quick Actions & Tips -->
+            <div class="photo-sidebar">
+                <section class="dashboard-section">
+                    <h2>Quick Actions</h2>
+                    <div class="quick-actions-list">
+                        <button class="action-btn-small" onclick="showUploadModal()">
+                            <i class="fas fa-upload"></i> Upload Photos
+                        </button>
+                        <button class="action-btn-small" onclick="createAlbum()">
+                            <i class="fas fa-folder-plus"></i> Create Album
+                        </button>
+                        <button class="action-btn-small" onclick="organizePhotos()">
+                            <i class="fas fa-sort"></i> Organize Photos
+                        </button>
+                        <button class="action-btn-small" onclick="editPhotos()">
+                            <i class="fas fa-edit"></i> Edit Photos
+                        </button>
+                    </div>
+                </section>
+
+                <section class="dashboard-section">
+                    <h2>Photo Management Tips</h2>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>High-quality photos increase booking rates by up to 40%</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Use natural lighting for better photo quality</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Include photos of all room types and amenities</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Update photos seasonally to show current conditions</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Upload Photo Modal -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload Photos</h2>
+                <button class="close-btn" onclick="closeUploadModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="uploadForm">
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="photoFiles" multiple accept="image/*" style="display: none;">
+                        <div class="upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Drag & Drop Photos Here</h3>
+                            <p>or click to browse files</p>
+                            <small>Supports: JPG, PNG, WebP (Max 10MB each)</small>
+                        </div>
+                    </div>
+                    <div class="upload-preview" id="uploadPreview"></div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="photoAlbum"><i class="fas fa-folder"></i> Album</label>
+                        <select id="photoAlbum" required>
+                            <option value="">Select Album</option>
+                            <option value="rooms">Rooms</option>
+                            <option value="amenities">Amenities</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="pool">Pool & Beach</option>
+                            <option value="events">Events</option>
+                            <option value="new">Create New Album</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="photoTags"><i class="fas fa-tags"></i> Tags</label>
+                        <input type="text" id="photoTags" placeholder="e.g., ocean-view, luxury, family-friendly">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="photoDescription"><i class="fas fa-info-circle"></i> Description</label>
+                    <textarea id="photoDescription" rows="3" placeholder="Describe what this photo shows..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeUploadModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-upload"></i> Upload Photos
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Photo Edit Modal -->
+    <div class="modal" id="editPhotoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Photo</h2>
+                <button class="close-btn" onclick="closeEditModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="photo-edit-content">
+                <div class="photo-preview">
+                    <img id="editPhotoPreview" src="" alt="Photo to edit">
+                </div>
+                <div class="edit-controls">
+                    <div class="form-group">
+                        <label for="editPhotoTitle">Photo Title</label>
+                        <input type="text" id="editPhotoTitle" placeholder="Enter photo title">
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhotoAlbum">Album</label>
+                        <select id="editPhotoAlbum">
+                            <option value="rooms">Rooms</option>
+                            <option value="amenities">Amenities</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="pool">Pool & Beach</option>
+                            <option value="events">Events</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhotoTags">Tags</label>
+                        <input type="text" id="editPhotoTags" placeholder="e.g., ocean-view, luxury">
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhotoDescription">Description</label>
+                        <textarea id="editPhotoDescription" rows="3" placeholder="Photo description..."></textarea>
+                    </div>
+                    <div class="edit-actions">
+                        <button class="btn-secondary" onclick="deletePhoto()">
+                            <i class="fas fa-trash"></i> Delete Photo
+                        </button>
+                        <button class="btn-primary" onclick="savePhotoEdit()">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours & Travel</h3>
+                <p>Your trusted partner for unforgettable East African adventures.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="hotels.html">Hotels</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@axistours.com</p>
+                <p>Phone: +254 700 000 000</p>
+                <p>Address: Nairobi, Kenya</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample photo data
+        const samplePhotos = [
+            {
+                id: 1,
+                title: "Deluxe Ocean View Suite",
+                album: "rooms",
+                url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                tags: ["ocean-view", "luxury", "suite"],
+                description: "Spacious suite with panoramic ocean views",
+                size: "2.4MB",
+                uploadDate: "2024-12-15"
+            },
+            {
+                id: 2,
+                title: "Infinity Pool",
+                album: "pool",
+                url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                tags: ["pool", "luxury", "outdoor"],
+                description: "Stunning infinity pool overlooking the ocean",
+                size: "1.8MB",
+                uploadDate: "2024-12-14"
+            },
+            {
+                id: 3,
+                title: "Beachfront Restaurant",
+                album: "restaurant",
+                url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                tags: ["restaurant", "beachfront", "dining"],
+                description: "Elegant beachfront dining experience",
+                size: "3.1MB",
+                uploadDate: "2024-12-13"
+            }
+        ];
+
+        // Initialize photo gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPhotos();
+            setupEventListeners();
+            setupDragAndDrop();
+        });
+
+        // Render photos
+        function renderPhotos() {
+            const photoGrid = document.getElementById('photoGrid');
+            photoGrid.innerHTML = '';
+
+            samplePhotos.forEach(photo => {
+                const photoCard = createPhotoCard(photo);
+                photoGrid.appendChild(photoCard);
+            });
+        }
+
+        // Create photo card
+        function createPhotoCard(photo) {
+            const card = document.createElement('div');
+            card.className = 'photo-card';
+            card.innerHTML = `
+                <div class="photo-image">
+                    <img src="${photo.url}" alt="${photo.title}">
+                    <div class="photo-overlay">
+                        <button class="btn-edit-photo" onclick="editPhoto(${photo.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-delete-photo" onclick="deletePhoto(${photo.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="photo-info">
+                    <h3>${photo.title}</h3>
+                    <div class="photo-meta">
+                        <span class="photo-album">${photo.album}</span>
+                        <span class="photo-size">${photo.size}</span>
+                    </div>
+                    <div class="photo-tags">
+                        ${photo.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search functionality
+            document.getElementById('searchPhotos').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                filterPhotos(searchTerm);
+            });
+
+            // Album filter
+            document.getElementById('albumFilter').addEventListener('change', function(e) {
+                filterByAlbum(e.target.value);
+            });
+
+            // Upload form submission
+            document.getElementById('uploadForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                uploadPhotos();
+            });
+        }
+
+        // Setup drag and drop
+        function setupDragAndDrop() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('photoFiles');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        }
+
+        // Handle selected files
+        function handleFiles(files) {
+            const preview = document.getElementById('uploadPreview');
+            preview.innerHTML = '';
+
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const previewItem = document.createElement('div');
+                        previewItem.className = 'preview-item';
+                        previewItem.innerHTML = `
+                            <img src="${e.target.result}" alt="${file.name}">
+                            <div class="preview-info">
+                                <span>${file.name}</span>
+                                <small>${(file.size / 1024 / 1024).toFixed(2)} MB</small>
+                            </div>
+                        `;
+                        preview.appendChild(previewItem);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Filter photos
+        function filterPhotos(searchTerm) {
+            const photoCards = document.querySelectorAll('.photo-card');
+            photoCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const tags = card.querySelector('.photo-tags').textContent.toLowerCase();
+                if (title.includes(searchTerm) || tags.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter by album
+        function filterByAlbum(album) {
+            const photoCards = document.querySelectorAll('.photo-card');
+            photoCards.forEach(card => {
+                if (!album || card.querySelector('.photo-album').textContent === album) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Show upload modal
+        function showUploadModal() {
+            document.getElementById('uploadModal').style.display = 'flex';
+        }
+
+        // Close upload modal
+        function closeUploadModal() {
+            document.getElementById('uploadModal').style.display = 'none';
+            document.getElementById('uploadPreview').innerHTML = '';
+            document.getElementById('uploadForm').reset();
+        }
+
+        // Upload photos
+        function uploadPhotos() {
+            const album = document.getElementById('photoAlbum').value;
+            const tags = document.getElementById('photoTags').value;
+            const description = document.getElementById('photoDescription').value;
+
+            if (!album) {
+                alert('Please select an album');
+                return;
+            }
+
+            // Simulate photo upload
+            alert('Photos uploaded successfully!');
+            closeUploadModal();
+        }
+
+        // Edit photo
+        function editPhoto(photoId) {
+            const photo = samplePhotos.find(p => p.id === photoId);
+            if (photo) {
+                document.getElementById('editPhotoPreview').src = photo.url;
+                document.getElementById('editPhotoTitle').value = photo.title;
+                document.getElementById('editPhotoAlbum').value = photo.album;
+                document.getElementById('editPhotoTags').value = photo.tags.join(', ');
+                document.getElementById('editPhotoDescription').value = photo.description;
+                document.getElementById('editPhotoModal').style.display = 'flex';
+            }
+        }
+
+        // Close edit modal
+        function closeEditModal() {
+            document.getElementById('editPhotoModal').style.display = 'none';
+        }
+
+        // Save photo edit
+        function savePhotoEdit() {
+            alert('Photo updated successfully!');
+            closeEditModal();
+        }
+
+        // Delete photo
+        function deletePhoto(photoId) {
+            if (confirm('Are you sure you want to delete this photo?')) {
+                const index = samplePhotos.findIndex(p => p.id === photoId);
+                if (index > -1) {
+                    samplePhotos.splice(index, 1);
+                    renderPhotos();
+                }
+                closeEditModal();
+            }
+        }
+
+        // Other functions
+        function showBulkUpload() {
+            alert('Bulk upload functionality will be implemented');
+        }
+
+        function createAlbum() {
+            const albumName = prompt('Enter album name:');
+            if (albumName) {
+                alert(`Album "${albumName}" created successfully!`);
+            }
+        }
+
+        function organizePhotos() {
+            alert('Photo organization functionality will be implemented');
+        }
+
+        function editPhotos() {
+            alert('Batch photo editing functionality will be implemented');
+        }
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            const uploadModal = document.getElementById('uploadModal');
+            const editModal = document.getElementById('editPhotoModal');
+            
+            if (e.target === uploadModal) {
+                closeUploadModal();
+            }
+            if (e.target === editModal) {
+                closeEditModal();
+            }
+        });
+    </script>
+</body>
+</html>

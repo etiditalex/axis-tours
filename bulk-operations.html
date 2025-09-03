@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Operations - Partner Dashboard - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-hero">
+        <div class="dashboard-hero-content">
+            <div class="partner-info">
+                <div class="partner-avatar">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="partner-details">
+                    <h1>Bulk Operations</h1>
+                    <p>Perform mass updates on rooms, pricing, and availability efficiently</p>
+                    <div class="partner-status">
+                        <span class="status-badge status-active">Baobab Beach Resort</span>
+                        <a href="partner-dashboard.html" class="back-to-dashboard">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="showBulkPricingModal()">
+                    <i class="fas fa-tags"></i> Bulk Pricing
+                </button>
+                <button class="btn-secondary" onclick="showBulkAvailabilityModal()">
+                    <i class="fas fa-calendar"></i> Bulk Availability
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Operation Types -->
+        <section class="dashboard-section">
+            <h2>Select Operation Type</h2>
+            <div class="operation-types">
+                <div class="operation-card" onclick="showBulkPricingModal()">
+                    <div class="operation-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Bulk Pricing Update</h3>
+                    <p>Update pricing for multiple rooms or date ranges</p>
+                    <div class="operation-stats">
+                        <span>Last used: 2 days ago</span>
+                        <span>12 rooms affected</span>
+                    </div>
+                </div>
+                <div class="operation-card" onclick="showBulkAvailabilityModal()">
+                    <div class="operation-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <h3>Bulk Availability</h3>
+                    <p>Block or unblock multiple dates for rooms</p>
+                    <div class="operation-stats">
+                        <span>Last used: 1 week ago</span>
+                        <span>15 dates affected</span>
+                    </div>
+                </div>
+                <div class="operation-card" onclick="showBulkRoomModal()">
+                    <div class="operation-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3>Bulk Room Updates</h3>
+                    <p>Update amenities, descriptions for multiple rooms</p>
+                    <div class="operation-stats">
+                        <span>Last used: 3 days ago</span>
+                        <span>8 rooms affected</span>
+                    </div>
+                </div>
+                <div class="operation-card" onclick="showBulkPhotoModal()">
+                    <div class="operation-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Bulk Photo Upload</h3>
+                    <p>Upload multiple photos for rooms or amenities</p>
+                    <div class="operation-stats">
+                        <span>Last used: 1 day ago</span>
+                        <span>24 photos uploaded</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Operations -->
+        <section class="dashboard-section">
+            <h2>Recent Bulk Operations</h2>
+            <div class="recent-operations">
+                <div class="operation-item">
+                    <div class="operation-info">
+                        <div class="operation-type">Pricing Update</div>
+                        <div class="operation-details">Updated pricing for 12 rooms</div>
+                        <div class="operation-date">Dec 15, 2024</div>
+                    </div>
+                    <div class="operation-status completed">Completed</div>
+                    <div class="operation-actions">
+                        <button class="btn-edit-small" onclick="viewOperationDetails(1)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-edit-small" onclick="repeatOperation(1)">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="operation-item">
+                    <div class="operation-info">
+                        <div class="operation-type">Availability Block</div>
+                        <div class="operation-details">Blocked 15 dates for maintenance</div>
+                        <div class="operation-date">Dec 12, 2024</div>
+                    </div>
+                    <div class="operation-status completed">Completed</div>
+                    <div class="operation-actions">
+                        <button class="btn-edit-small" onclick="viewOperationDetails(2)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-edit-small" onclick="repeatOperation(2)">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours & Travel</h3>
+                <p>Your trusted partner for unforgettable East African adventures.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="hotels.html">Hotels</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@axistours.com</p>
+                <p>Phone: +254 700 000 000</p>
+                <p>Address: Nairobi, Kenya</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize bulk operations
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Implementation for event listeners
+        }
+
+        // Show bulk pricing modal
+        function showBulkPricingModal() {
+            alert('Bulk pricing functionality will be implemented');
+        }
+
+        // Show bulk availability modal
+        function showBulkAvailabilityModal() {
+            alert('Bulk availability functionality will be implemented');
+        }
+
+        // Show bulk room modal
+        function showBulkRoomModal() {
+            alert('Bulk room updates functionality will be implemented');
+        }
+
+        // Show bulk photo modal
+        function showBulkPhotoModal() {
+            alert('Bulk photo upload functionality will be implemented');
+        }
+
+        // View operation details
+        function viewOperationDetails(operationId) {
+            alert(`Viewing details for operation ${operationId}`);
+        }
+
+        // Repeat operation
+        function repeatOperation(operationId) {
+            alert(`Repeating operation ${operationId}`);
+        }
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
