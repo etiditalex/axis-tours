@@ -175,32 +175,6 @@
             font-size: 0.875rem;
         }
         
-        .property-card {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
-            transition: all 0.3s;
-        }
-        
-        .property-card:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .property-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        
-        @media (min-width: 768px) {
-            .property-grid {
-                grid-template-columns: 1fr 2fr;
-            }
-        }
-        
         /* Hotels Grid Layout - 3 per row */
         .hotels-grid {
             display: grid;
@@ -220,26 +194,23 @@
             }
         }
         
-        /* Property Header Layout */
-        .property-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+        /* Property Card Styling */
+        .property-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f3f4f6;
+        }
+        
+        .property-card:hover {
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+        
+        .property-image {
             margin-bottom: 1rem;
-        }
-        
-        .property-header h3 {
-            margin-bottom: 0;
-            flex: 1;
-            margin-right: 1rem;
-        }
-        
-        .property-price {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-align: right;
-            white-space: nowrap;
         }
         
         .property-image img {
@@ -250,7 +221,7 @@
         }
         
         .property-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
             color: #111827;
             margin-bottom: 0.5rem;
@@ -258,27 +229,39 @@
         
         .property-location {
             color: #6b7280;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.875rem;
         }
         
         .property-rating {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
         
         .star-rating {
             color: var(--gold);
         }
         
+        .star-rating i {
+            font-size: 0.875rem;
+        }
+        
+        .property-rating span {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
         .property-description {
             color: #374151;
             margin-bottom: 1rem;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-size: 0.875rem;
         }
         
         .property-amenities {
@@ -294,6 +277,7 @@
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
             font-size: 0.75rem;
+            font-weight: 500;
         }
         
         .property-footer {
@@ -305,7 +289,7 @@
         
         .distance-info {
             color: #6b7280;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             gap: 0.25rem;
@@ -320,10 +304,36 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            font-size: 0.875rem;
         }
         
         .view-details-btn:hover {
             background: var(--gold-dark);
+        }
+        
+        /* Property Header Layout */
+        .property-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        
+        .property-header h3 {
+            margin-bottom: 0;
+            flex: 1;
+            margin-right: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-align: right;
+            white-space: nowrap;
         }
         
         .commission-banner {
