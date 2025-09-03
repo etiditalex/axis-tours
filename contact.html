@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="hero-content">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our East African travel experts</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Contact Information -->
+        <section class="section">
+            <div class="grid grid-3">
+                <div class="contact-info fade-in-up">
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p>+254 796 988 686</p>
+                    <p>+254 780 460 617</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #ccc;">Available 24/7 for urgent travel assistance</p>
+                </div>
+                <div class="contact-info fade-in-up">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>etiditalex@gmail.com</p>
+                    <p>bookings@axistours.com</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #ccc;">We respond within 2 hours during business hours</p>
+                </div>
+                <div class="contact-info fade-in-up">
+                    <h3><i class="fas fa-map-marker-alt"></i> Office</h3>
+                    <p>Kenya, East Africa</p>
+                    <p>Local and International Tours</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #ccc;">By appointment only</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form and Office Hours -->
+        <section class="section">
+            <div class="grid grid-2">
+                <!-- Contact Form -->
+                <div class="booking-form fade-in-up">
+                    <h2>Send Us a Message</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="booking">Booking Inquiry</option>
+                                <option value="custom-trip">Custom Trip Request</option>
+                                <option value="support">Travel Support</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" rows="6" required placeholder="Tell us about your travel plans, questions, or how we can help you..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="newsletter" style="width: auto; margin-right: 0.5rem;">
+                                Subscribe to our newsletter for travel updates and special offers
+                            </label>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; padding: 15px;">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Office Hours and Additional Info -->
+                <div class="fade-in-up">
+                    <div class="card" style="margin-bottom: 2rem;">
+                        <div class="card-body">
+                            <h3 class="card-title"><i class="fas fa-clock" style="color: var(--gold); margin-right: 0.5rem;"></i>Office Hours</h3>
+                            <div style="margin: 1rem 0;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Monday - Friday</span>
+                                    <span>8:00 AM - 6:00 PM EAT</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Saturday</span>
+                                    <span>9:00 AM - 4:00 PM EAT</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Sunday</span>
+                                    <span>10:00 AM - 2:00 PM EAT</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 0.9rem;">* Emergency support available 24/7 for existing bookings</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><i class="fas fa-globe" style="color: var(--gold); margin-right: 0.5rem;"></i>Global Offices</h3>
+                            <div style="margin: 1rem 0;">
+                                <div style="margin-bottom: 1rem;">
+                                    <h4 style="color: var(--gold); margin-bottom: 0.5rem;">Kenya (Headquarters)</h4>
+                                    <p style="margin-bottom: 0.5rem;">East Africa<br>Local and International Tours</p>
+                                    <p style="color: var(--gray); font-size: 0.9rem;">+254 796 988 686</p>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <h4 style="color: var(--gold); margin-bottom: 0.5rem;">Tanzania</h4>
+                                    <p style="margin-bottom: 0.5rem;">Zanzibar and Serengeti Tours<br>Tanzania, East Africa</p>
+                                    <p style="color: var(--gray); font-size: 0.9rem;">+254 780 460 617</p>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--gold); margin-bottom: 0.5rem;">Uganda</h4>
+                                    <p style="margin-bottom: 0.5rem;">Gorilla Trekking and Wildlife<br>Uganda, East Africa</p>
+                                    <p style="color: var(--gray); font-size: 0.9rem;">+254 796 988 686</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="grid grid-2">
+                <div class="card fade-in-up">
+                    <div class="card-body">
+                        <h3 class="card-title">How far in advance should I book?</h3>
+                        <p class="card-text">For East African safaris and beach holidays, we recommend booking 3-6 months in advance, especially for peak seasons and popular destinations. However, we can accommodate last-minute requests for select properties.</p>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <div class="card-body">
+                        <h3 class="card-title">What is included in your packages?</h3>
+                        <p class="card-text">Our packages typically include accommodations, airport transfers, daily meals, guided tours, and 24/7 support. Additional services like luxury upgrades and special experiences can be customized based on your preferences.</p>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <div class="card-body">
+                        <h3 class="card-title">Do you offer travel insurance?</h3>
+                        <p class="card-text">Yes, we provide comprehensive travel insurance options tailored for East African travel, including coverage for safari equipment, medical emergencies, and trip cancellation.</p>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <div class="card-body">
+                        <h3 class="card-title">Can you arrange custom itineraries?</h3>
+                        <p class="card-text">Absolutely! We specialize in creating bespoke East African travel experiences. Our travel experts work closely with you to design the perfect itinerary for your specific needs and preferences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media and Newsletter -->
+        <section class="section">
+            <div class="grid grid-2">
+                <div style="text-align: center; background: var(--gray-light); padding: 2rem; border-radius: 15px;">
+                    <h3>Follow Us</h3>
+                    <p>Stay connected for travel inspiration and exclusive offers</p>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#" style="font-size: 2rem; color: var(--gold); margin: 0 0.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="font-size: 2rem; color: var(--gold); margin: 0 0.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="font-size: 2rem; color: var(--gold); margin: 0 0.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="font-size: 2rem; color: var(--gold); margin: 0 0.5rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div style="text-align: center; background: var(--black); color: var(--white); padding: 2rem; border-radius: 15px;">
+                    <h3>Newsletter</h3>
+                    <p>Get exclusive travel deals and destination guides</p>
+                    <div style="margin-top: 1.5rem;">
+                        <input type="email" placeholder="Enter your email" style="padding: 10px; border: none; border-radius: 5px; margin-right: 0.5rem; min-width: 200px;">
+                        <button class="btn">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="section">
+            <div style="text-align: center;">
+                <h2>Visit Our Office</h2>
+                <p>Schedule a consultation at our Kenya headquarters</p>
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 15px; margin-top: 2rem;">
+                    <div style="background: #ddd; height: 300px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <p style="color: var(--gray);">Interactive Map Would Be Embedded Here</p>
+                    </div>
+                    <p><strong>Kenya, East Africa</strong></p>
+                    <p style="color: var(--gray);">Local and International Tours Available</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours and Travel</h3>
+                <p>Creating unforgettable East African travel experiences. Your journey to extraordinary destinations starts here.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="blog.html">Blog</a>
+                <a href="booking.html">Book Now</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Popular Destinations</h3>
+                <a href="#">Diani Beach, Kenya</a>
+                <a href="#">Maasai Mara, Kenya</a>
+                <a href="#">Zanzibar, Tanzania</a>
+                <a href="#">Watamu, Kenya</a>
+                <a href="#">Mombasa, Kenya</a>
+                <a href="#">Tsavo, Kenya</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-phone"></i> +254 796 988 686</p>
+                <p><i class="fas fa-phone"></i> +254 780 460 617</p>
+                <p><i class="fas fa-envelope"></i> etiditalex@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Kenya, East Africa</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours and Travel. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Contact form validation and submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const newsletter = document.getElementById('newsletter').checked;
+            
+            // Validate form
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Show success message
+            alert('Thank you for your message! We will get back to you within 2 hours during business hours.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Newsletter signup
+        document.querySelector('input[type="email"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                alert('Thank you for subscribing to our newsletter!');
+            }
+        });
+
+        document.querySelector('.btn').addEventListener('click', function() {
+            if (this.textContent === 'Subscribe') {
+                alert('Thank you for subscribing to our newsletter!');
+            }
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

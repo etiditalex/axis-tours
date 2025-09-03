@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Trip - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="hero-content">
+            <h1>Book Your Dream Vacation</h1>
+            <p>Let us create your perfect East African travel experience</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Commission Info Banner -->
+        <section class="section">
+            <div class="commission-banner">
+                <div class="commission-info">
+                    <h3><i class="fas fa-percentage"></i> Commission-Based Booking</h3>
+                    <p>Book through our website and we'll handle everything while earning a commission. Your satisfaction is our priority!</p>
+                </div>
+                <div class="commission-rate">
+                    <span class="rate">40%</span>
+                    <span class="label">Commission Rate</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Booking -->
+        <section class="section">
+            <div class="booking-form">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Quick Booking</h2>
+                <form id="bookingForm">
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <select id="destination" required>
+                                <option value="">Select Destination</option>
+                                <option value="diani">Diani Beach, Kenya</option>
+                                <option value="maasai-mara">Maasai Mara, Kenya</option>
+                                <option value="zanzibar">Zanzibar, Tanzania</option>
+                                <option value="watamu">Watamu, Kenya</option>
+                                <option value="mombasa">Mombasa, Kenya</option>
+                                <option value="tsavo">Tsavo, Kenya</option>
+                                <option value="serengeti">Serengeti, Tanzania</option>
+                                <option value="uganda">Uganda Gorilla Trekking</option>
+                                <option value="custom">Custom Destination</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tripType">Trip Type</label>
+                            <select id="tripType" required>
+                                <option value="">Select Trip Type</option>
+                                <option value="safari">Wildlife Safari</option>
+                                <option value="beach">Beach Holiday</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="cultural">Cultural Experience</option>
+                                <option value="honeymoon">Honeymoon</option>
+                                <option value="family">Family Vacation</option>
+                                <option value="business">Business Travel</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="departureDate">Departure Date</label>
+                            <input type="date" id="departureDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="returnDate">Return Date</label>
+                            <input type="date" id="returnDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="travelers">Number of Travelers</label>
+                            <select id="travelers" required>
+                                <option value="">Select Number</option>
+                                <option value="1">1 Traveler</option>
+                                <option value="2">2 Travelers</option>
+                                <option value="3">3 Travelers</option>
+                                <option value="4">4 Travelers</option>
+                                <option value="5">5 Travelers</option>
+                                <option value="6+">6+ Travelers</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" required>
+                                <option value="">Select Budget</option>
+                                <option value="50000-100000">KES 50,000 - KES 100,000</option>
+                                <option value="100000-200000">KES 100,000 - KES 200,000</option>
+                                <option value="200000-500000">KES 200,000 - KES 500,000</option>
+                                <option value="500000-1000000">KES 500,000 - KES 1,000,000</option>
+                                <option value="1000000+">KES 1,000,000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label for="accommodationType">Accommodation Preference</label>
+                            <select id="accommodationType" required>
+                                <option value="">Select Type</option>
+                                <option value="budget">Budget (2-3 Star)</option>
+                                <option value="mid-range">Mid-Range (3-4 Star)</option>
+                                <option value="luxury">Luxury (4-5 Star)</option>
+                                <option value="boutique">Boutique Hotels</option>
+                                <option value="eco-lodge">Eco-Lodges</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transportation">Transportation</label>
+                            <select id="transportation" required>
+                                <option value="">Select Transportation</option>
+                                <option value="flight">Flight</option>
+                                <option value="bus">Bus</option>
+                                <option value="train">Train</option>
+                                <option value="private-transfer">Private Transfer</option>
+                                <option value="self-drive">Self-Drive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialRequests">Special Requests</label>
+                        <textarea id="specialRequests" rows="4" placeholder="Tell us about any special requirements, preferences, or requests..."></textarea>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="btn" style="padding: 15px 40px; font-size: 1.1rem;">Get Quote</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Commission Calculator -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Commission Calculator</h2>
+                <p>See how our commission system works for your booking</p>
+            </div>
+            <div class="commission-calculator">
+                <div class="calculator-inputs">
+                    <div class="form-group">
+                        <label for="packagePrice">Package Price (KES)</label>
+                        <input type="number" id="packagePrice" placeholder="Enter package price" min="10000" step="1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="commissionRate">Commission Rate (%)</label>
+                        <input type="number" id="commissionRate" value="40" readonly>
+                    </div>
+                </div>
+                <div class="calculator-results">
+                    <div class="result-item">
+                        <span class="label">Your Commission:</span>
+                        <span class="value" id="commissionAmount">KES 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Client Pays:</span>
+                        <span class="value" id="clientPays">KES 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Service Fee:</span>
+                        <span class="value" id="serviceFee">KES 0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Packages -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Popular Packages</h2>
+            </div>
+            <div class="grid grid-3">
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Diani Beach Holiday" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Diani Beach Holiday Package</h3>
+                        <p class="card-text">7 days of beach paradise with luxury accommodations and water sports activities.</p>
+                        <div class="card-price">From KES 129,900</div>
+                        <div class="commission-info">
+                            <small>Your Commission: KES 51,960</small>
+                        </div>
+                        <ul style="margin: 1rem 0; color: var(--gray-dark);">
+                            <li>Beachfront resort with ocean view</li>
+                            <li>Snorkeling and diving trips</li>
+                            <li>Sunset dhow cruise</li>
+                            <li>Beach spa treatments</li>
+                        </ul>
+                        <a href="#" class="btn" onclick="selectPackage('diani-beach')">Select Package</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Maasai Mara Safari" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Maasai Mara Safari Adventure</h3>
+                        <p class="card-text">5 days of wildlife viewing with luxury tented camps and expert guides.</p>
+                        <div class="card-price">From KES 219,900</div>
+                        <div class="commission-info">
+                            <small>Your Commission: KES 87,960</small>
+                        </div>
+                        <ul style="margin: 1rem 0; color: var(--gray-dark);">
+                            <li>Luxury tented camp accommodation</li>
+                            <li>Daily game drives with expert guides</li>
+                            <li>Maasai village cultural visit</li>
+                            <li>Bush dinner under the stars</li>
+                        </ul>
+                        <a href="#" class="btn" onclick="selectPackage('maasai-mara-safari')">Select Package</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Zanzibar Island" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Zanzibar Island Escape</h3>
+                        <p class="card-text">6 days exploring Stone Town and pristine beaches with cultural experiences.</p>
+                        <div class="card-price">From KES 159,900</div>
+                        <div class="commission-info">
+                            <small>Your Commission: KES 63,960</small>
+                        </div>
+                        <ul style="margin: 1rem 0; color: var(--gray-dark);">
+                            <li>Historic Stone Town tour</li>
+                            <li>Spice plantation visit</li>
+                            <li>Beach resort accommodation</li>
+                            <li>Traditional dhow sailing</li>
+                        </ul>
+                        <a href="#" class="btn" onclick="selectPackage('zanzibar-escape')">Select Package</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commission Dashboard -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Commission Dashboard</h2>
+                <p>Track your earnings and bookings</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="dashboard-content">
+                        <h3>Total Earnings</h3>
+                        <div class="dashboard-value" id="totalEarnings">KES 0</div>
+                        <small>This month</small>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="dashboard-content">
+                        <h3>Total Bookings</h3>
+                        <div class="dashboard-value" id="totalBookings">0</div>
+                        <small>This month</small>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="dashboard-content">
+                        <h3>Commission Rate</h3>
+                        <div class="dashboard-value">40%</div>
+                        <small>Fixed rate</small>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="dashboard-content">
+                        <h3>Pending Payouts</h3>
+                        <div class="dashboard-value" id="pendingPayouts">KES 0</div>
+                        <small>Next payout: 15th</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Bookings -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Recent Bookings</h2>
+                <p>Track your latest bookings and commissions</p>
+            </div>
+            <div class="bookings-table">
+                <table id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Client</th>
+                            <th>Destination</th>
+                            <th>Amount</th>
+                            <th>Commission</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- Bookings will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Booking Process -->
+        <section class="section">
+            <div class="section-title">
+                <h2>How It Works</h2>
+            </div>
+            <div class="grid grid-4">
+                <div style="text-align: center;">
+                    <div style="background: var(--gold); color: var(--black); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: bold;">1</div>
+                    <h3>Submit Request</h3>
+                    <p>Fill out our booking form with your preferences and requirements.</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: var(--gold); color: var(--black); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: bold;">2</div>
+                    <h3>Get Quote</h3>
+                    <p>Receive a personalized quote within 24 hours from our travel experts.</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: var(--gold); color: var(--black); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: bold;">3</div>
+                    <h3>Confirm & Pay</h3>
+                    <p>Confirm your booking and make secure payment through our platform.</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: var(--gold); color: var(--black); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: bold;">4</div>
+                    <h3>Commission Earned</h3>
+                    <p>We earn our commission while you enjoy your perfect vacation!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours & Travel</h3>
+                <p>Your trusted partner for unforgettable East African adventures.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@axistours.com</p>
+                <p>Phone: +254 700 000 000</p>
+                <p>Address: Nairobi, Kenya</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Commission and Booking System
+        class CommissionSystem {
+            constructor() {
+                this.bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+                this.commissionRate = 0.40; // 40%
+                this.init();
+            }
+
+            init() {
+                this.updateDashboard();
+                this.populateBookingsTable();
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Commission calculator
+                document.getElementById('packagePrice').addEventListener('input', (e) => {
+                    this.calculateCommission(e.target.value);
+                });
+
+                // Form submission
+                document.getElementById('bookingForm').addEventListener('submit', (e) => {
+                    this.handleBookingSubmission(e);
+                });
+            }
+
+            calculateCommission(price) {
+                if (!price || price <= 0) {
+                    document.getElementById('commissionAmount').textContent = 'KES 0';
+                    document.getElementById('clientPays').textContent = 'KES 0';
+                    document.getElementById('serviceFee').textContent = 'KES 0';
+                    return;
+                }
+
+                const packagePrice = parseFloat(price);
+                const commission = packagePrice * this.commissionRate;
+                const clientPays = packagePrice;
+                const serviceFee = packagePrice * 0.05; // 5% service fee
+
+                document.getElementById('commissionAmount').textContent = `KES ${commission.toLocaleString()}`;
+                document.getElementById('clientPays').textContent = `KES ${clientPays.toLocaleString()}`;
+                document.getElementById('serviceFee').textContent = `KES ${serviceFee.toLocaleString()}`;
+            }
+
+            handleBookingSubmission(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const formData = {
+                    id: this.generateBookingId(),
+                    destination: document.getElementById('destination').value,
+                    tripType: document.getElementById('tripType').value,
+                    departureDate: document.getElementById('departureDate').value,
+                    returnDate: document.getElementById('returnDate').value,
+                    travelers: document.getElementById('travelers').value,
+                    budget: document.getElementById('budget').value,
+                    accommodationType: document.getElementById('accommodationType').value,
+                    transportation: document.getElementById('transportation').value,
+                    specialRequests: document.getElementById('specialRequests').value,
+                    status: 'Pending',
+                    date: new Date().toISOString(),
+                    amount: this.estimatePackagePrice(document.getElementById('destination').value, document.getElementById('tripType').value),
+                    commission: 0
+                };
+
+                // Calculate commission
+                formData.commission = formData.amount * this.commissionRate;
+
+                // Validate form
+                if (!this.validateForm(formData)) {
+                    return;
+                }
+
+                // Add booking
+                this.addBooking(formData);
+
+                // Show success message
+                this.showSuccessMessage(formData);
+
+                // Reset form
+                e.target.reset();
+
+                // Update dashboard
+                this.updateDashboard();
+                this.populateBookingsTable();
+            }
+
+            validateForm(data) {
+                if (!data.destination || !data.tripType || !data.departureDate || !data.returnDate || !data.travelers || !data.budget || !data.accommodationType || !data.transportation) {
+                    alert('Please fill in all required fields.');
+                    return false;
+                }
+                
+                if (new Date(data.departureDate) >= new Date(data.returnDate)) {
+                    alert('Return date must be after departure date.');
+                    return false;
+                }
+                
+                return true;
+            }
+
+            estimatePackagePrice(destination, tripType) {
+                const basePrices = {
+                    'diani': { 'beach': 129900, 'default': 150000 },
+                    'maasai-mara': { 'safari': 219900, 'default': 250000 },
+                    'zanzibar': { 'cultural': 159900, 'default': 180000 },
+                    'watamu': { 'beach': 89900, 'default': 120000 },
+                    'mombasa': { 'cultural': 79900, 'default': 100000 },
+                    'tsavo': { 'safari': 189900, 'default': 220000 },
+                    'serengeti': { 'safari': 299900, 'default': 350000 },
+                    'uganda': { 'adventure': 259900, 'default': 300000 }
+                };
+
+                const destinationData = basePrices[destination] || { 'default': 150000 };
+                return destinationData[tripType] || destinationData['default'];
+            }
+
+            generateBookingId() {
+                return 'BK' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+            }
+
+            addBooking(booking) {
+                this.bookings.unshift(booking);
+                localStorage.setItem('bookings', JSON.stringify(this.bookings));
+            }
+
+            updateDashboard() {
+                const currentMonth = new Date().getMonth();
+                const currentYear = new Date().getFullYear();
+                
+                const monthBookings = this.bookings.filter(booking => {
+                    const bookingDate = new Date(booking.date);
+                    return bookingDate.getMonth() === currentMonth && bookingDate.getFullYear() === currentYear;
+                });
+
+                const totalEarnings = monthBookings.reduce((sum, booking) => sum + booking.commission, 0);
+                const totalBookings = monthBookings.length;
+                const pendingPayouts = totalEarnings * 0.8; // 80% of earnings are pending
+
+                document.getElementById('totalEarnings').textContent = `KES ${totalEarnings.toLocaleString()}`;
+                document.getElementById('totalBookings').textContent = totalBookings;
+                document.getElementById('pendingPayouts').textContent = `KES ${pendingPayouts.toLocaleString()}`;
+            }
+
+            populateBookingsTable() {
+                const tbody = document.getElementById('bookingsTableBody');
+                tbody.innerHTML = '';
+
+                this.bookings.slice(0, 10).forEach(booking => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${booking.id}</td>
+                        <td>Client ${booking.id.slice(-5)}</td>
+                        <td>${this.getDestinationName(booking.destination)}</td>
+                        <td>KES ${booking.amount.toLocaleString()}</td>
+                        <td>KES ${booking.commission.toLocaleString()}</td>
+                        <td><span class="status-${booking.status.toLowerCase()}">${booking.status}</span></td>
+                        <td>${new Date(booking.date).toLocaleDateString()}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            getDestinationName(destination) {
+                const names = {
+                    'diani': 'Diani Beach',
+                    'maasai-mara': 'Maasai Mara',
+                    'zanzibar': 'Zanzibar',
+                    'watamu': 'Watamu',
+                    'mombasa': 'Mombasa',
+                    'tsavo': 'Tsavo',
+                    'serengeti': 'Serengeti',
+                    'uganda': 'Uganda'
+                };
+                return names[destination] || destination;
+            }
+
+            showSuccessMessage(booking) {
+                const message = `
+                    🎉 Booking Submitted Successfully!
+                    
+                    Booking ID: ${booking.id}
+                    Destination: ${this.getDestinationName(booking.destination)}
+                    Estimated Amount: KES ${booking.amount.toLocaleString()}
+                    Your Commission: KES ${booking.commission.toLocaleString()}
+                    
+                    Our travel expert will contact you within 24 hours with a detailed quote and itinerary.
+                `;
+                
+                alert(message);
+            }
+        }
+
+        // Initialize commission system
+        const commissionSystem = new CommissionSystem();
+
+        // Hamburger Menu Functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Package selection
+        function selectPackage(packageName) {
+            const packages = {
+                'diani-beach': {
+                    destination: 'diani',
+                    tripType: 'beach',
+                    price: 'KES 129,900'
+                },
+                'maasai-mara-safari': {
+                    destination: 'maasai-mara',
+                    tripType: 'safari',
+                    price: 'KES 219,900'
+                },
+                'zanzibar-escape': {
+                    destination: 'zanzibar',
+                    tripType: 'cultural',
+                    price: 'KES 159,900'
+                }
+            };
+            
+            const selectedPackage = packages[packageName];
+            if (selectedPackage) {
+                document.getElementById('destination').value = selectedPackage.destination;
+                document.getElementById('tripType').value = selectedPackage.tripType;
+                
+                // Update commission calculator
+                const price = selectedPackage.price.replace(/[^\d]/g, '');
+                document.getElementById('packagePrice').value = price;
+                commissionSystem.calculateCommission(price);
+                
+                alert(`Package selected: ${selectedPackage.destination} - ${selectedPackage.tripType}\nStarting from ${selectedPackage.price}`);
+            }
+        }
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Set minimum date for departure and return
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('departureDate').min = today;
+        document.getElementById('returnDate').min = today;
+
+        // Update return date minimum when departure date changes
+        document.getElementById('departureDate').addEventListener('change', function() {
+            document.getElementById('returnDate').min = this.value;
+        });
+    </script>
+</body>
+</html>

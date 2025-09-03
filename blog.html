@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="hero-content">
+            <h1>Travel Blog</h1>
+            <p>Insights, tips, and stories from our East African travel experts</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Featured Article -->
+        <section class="section">
+            <div class="card fade-in-up" style="max-width: 800px; margin: 0 auto;">
+                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Maasai Mara Safari" class="card-img" style="height: 400px;">
+                <div class="card-body">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> December 15, 2024</span>
+                        <span style="margin-left: 1rem;"><i class="fas fa-user"></i> Alex Etidit</span>
+                        <span style="margin-left: 1rem;"><i class="fas fa-tag"></i> Safari</span>
+                    </div>
+                    <h2 class="card-title">The Ultimate Guide to Maasai Mara: Beyond the Great Migration</h2>
+                    <p class="card-text">Discover the hidden gems and authentic experiences that make Maasai Mara more than just a wildlife destination. From cultural experiences to luxury tented camps, we reveal the reserve's best-kept secrets for the discerning traveler.</p>
+                    <a href="maasai-mara-safari-guide.html" class="btn">Read More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Categories -->
+        <section class="section">
+            <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin-bottom: 3rem;">
+                <h3 style="margin-bottom: 1rem;">Browse by Category</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn" style="background: var(--gold);">All Posts</button>
+                    <button class="btn btn-outline">Safari</button>
+                    <button class="btn btn-outline">Beach Holidays</button>
+                    <button class="btn btn-outline">Travel Tips</button>
+                    <button class="btn btn-outline">Culture</button>
+                    <button class="btn btn-outline">Adventure</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Articles -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Recent Articles</h2>
+            </div>
+            <div class="grid grid-3">
+                <article class="blog-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Diani Beach" class="card-img">
+                    <div class="card-body">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> December 12, 2024</span>
+                            <span style="margin-left: 1rem;"><i class="fas fa-tag"></i> Beach Holidays</span>
+                        </div>
+                        <h3 class="card-title">Top 10 Beach Resorts in Diani, Kenya</h3>
+                        <p class="card-text">Experience ultimate beach luxury with our curated selection of the most exclusive beachfront accommodations in Diani.</p>
+                        <a href="diani-beach-resorts-guide.html" class="btn">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Tsavo Safari" class="card-img">
+                    <div class="card-body">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> December 10, 2024</span>
+                            <span style="margin-left: 1rem;"><i class="fas fa-tag"></i> Safari</span>
+                        </div>
+                        <h3 class="card-title">Wildlife Wonderland: Luxury Safari Camps in Tsavo</h3>
+                        <p class="card-text">Discover the most prestigious safari camps offering world-class amenities and breathtaking wildlife views.</p>
+                        <a href="tsavo-safari-camps.html" class="btn">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Zanzibar" class="card-img">
+                    <div class="card-body">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> December 8, 2024</span>
+                            <span style="margin-left: 1rem;"><i class="fas fa-tag"></i> Culture</span>
+                        </div>
+                        <h3 class="card-title">Cultural Journey Through Stone Town, Zanzibar</h3>
+                        <p class="card-text">Explore the region's finest historical sites and authentic Swahili cuisine in the heart of Stone Town.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Mombasa" class="card-img">
+                    <div class="card-body">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> December 5, 2024</span>
+                            <span style="margin-left: 1rem;"><i class="fas fa-tag"></i> Travel Tips</span>
+                        </div>
+                        <h3 class="card-title">Mombasa Like a Local: Insider Tips for Travelers</h3>
+                        <p class="card-text">Skip the tourist traps and experience the authentic Mombasa that locals love, with exclusive access to hidden gems.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Watamu" class="card-img">
+                    <div class="card-body">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> December 3, 2024</span>
+                            <span style="margin-left: 1rem;"><i class="fas fa-tag"></i> Beach Holidays</span>
+                        </div>
+                        <h3 class="card-title">Marine Paradise: Diving and Snorkeling in Watamu</h3>
+                        <p class="card-text">Discover the most beautiful coral reefs and marine life in the Watamu Marine National Park.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Uganda" class="card-img">
+                    <div class="card-body">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> December 1, 2024</span>
+                            <span style="margin-left: 1rem;"><i class="fas fa-tag"></i> Adventure</span>
+                        </div>
+                        <h3 class="card-title">Gorilla Trekking in Uganda: A Once-in-a-Lifetime Experience</h3>
+                        <p class="card-text">Experience the thrill of mountain gorilla trekking with our guide to the most exclusive experiences in Bwindi.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Travel Tips Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Travel Tips & Advice</h2>
+            </div>
+            <div class="grid grid-2">
+                <div class="card fade-in-up">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fas fa-suitcase" style="color: var(--gold); margin-right: 0.5rem;"></i>Packing for Safari Travel</h3>
+                        <p class="card-text">Essential items and packing strategies for East African travel, from safari gear to beach essentials.</p>
+                        <ul style="margin-top: 1rem; color: var(--gray-dark);">
+                            <li>Versatile clothing for different occasions</li>
+                            <li>Quality luggage and travel accessories</li>
+                            <li>Essential documents and backup copies</li>
+                            <li>Technology and entertainment essentials</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fas fa-credit-card" style="color: var(--gold); margin-right: 0.5rem;"></i>Travel Insurance Guide</h3>
+                        <p class="card-text">Understanding the importance of comprehensive travel insurance for luxury trips and high-value experiences.</p>
+                        <ul style="margin-top: 1rem; color: var(--gray-dark);">
+                            <li>Coverage for luxury accommodations</li>
+                            <li>Protection for expensive equipment</li>
+                            <li>Medical evacuation and assistance</li>
+                            <li>Trip cancellation and interruption</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section class="section">
+            <div style="text-align: center; background: var(--black); color: var(--white); padding: 3rem; border-radius: 15px;">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for exclusive travel insights, special offers, and destination guides.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                    <input type="email" placeholder="Enter your email" style="padding: 12px; border: none; border-radius: 5px; min-width: 300px;">
+                    <button class="btn">Subscribe</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Tags -->
+        <section class="section">
+            <div style="text-align: center;">
+                <h3 style="margin-bottom: 1rem;">Popular Tags</h3>
+                <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                    <span style="background: var(--gold); color: var(--black); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#LuxuryTravel</span>
+                    <span style="background: var(--gray-light); color: var(--black); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#TravelTips</span>
+                    <span style="background: var(--gray-light); color: var(--black); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Destinations</span>
+                    <span style="background: var(--gray-light); color: var(--black); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#LuxuryHotels</span>
+                    <span style="background: var(--gray-light); color: var(--black); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Adventure</span>
+                    <span style="background: var(--gray-light); color: var(--black); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#FoodTravel</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours and Travel</h3>
+                <p>Creating unforgettable East African travel experiences. Your journey to extraordinary destinations starts here.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="blog.html">Blog</a>
+                <a href="booking.html">Book Now</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Popular Destinations</h3>
+                <a href="#">Diani Beach, Kenya</a>
+                <a href="#">Maasai Mara, Kenya</a>
+                <a href="#">Zanzibar, Tanzania</a>
+                <a href="#">Watamu, Kenya</a>
+                <a href="#">Mombasa, Kenya</a>
+                <a href="#">Tsavo, Kenya</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-phone"></i> +254 796 988 686</p>
+                <p><i class="fas fa-phone"></i> +254 780 460 617</p>
+                <p><i class="fas fa-envelope"></i> etiditalex@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Kenya, East Africa</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours and Travel. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Category filter functionality
+        document.querySelectorAll('.btn-outline').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.btn-outline').forEach(b => b.classList.remove('btn'));
+                document.querySelectorAll('.btn-outline').forEach(b => b.classList.add('btn-outline'));
+                
+                // Add active class to clicked button
+                this.classList.remove('btn-outline');
+                this.classList.add('btn');
+                this.style.background = 'var(--gold)';
+                
+                // Add filter logic here
+                alert('Filter applied! This would filter the blog posts by category.');
+            });
+        });
+
+        // Newsletter signup
+        document.querySelector('input[type="email"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                alert('Thank you for subscribing to our newsletter!');
+            }
+        });
+
+        document.querySelector('.btn').addEventListener('click', function() {
+            if (this.textContent === 'Subscribe') {
+                alert('Thank you for subscribing to our newsletter!');
+            }
+        });
+    </script>
+</body>
+</html>

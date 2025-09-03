@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastal Kenya Hotels & Resorts - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="hero-content">
+            <h1>Coastal Kenya Hotels & Resorts</h1>
+            <p>Discover the finest accommodations along Kenya's stunning Indian Ocean coastline</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Filter Section -->
+        <section class="section">
+            <div class="hotel-filters">
+                <h2>Find Your Perfect Stay</h2>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="location">Location</label>
+                        <select id="location" onchange="filterHotels()">
+                            <option value="">All Locations</option>
+                            <option value="diani">Diani Beach</option>
+                            <option value="mombasa">Mombasa</option>
+                            <option value="watamu">Watamu</option>
+                            <option value="lamu">Lamu</option>
+                            <option value="malindi">Malindi</option>
+                            <option value="chale">Chale Island</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="category">Category</label>
+                        <select id="category" onchange="filterHotels()">
+                            <option value="">All Categories</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="boutique">Boutique</option>
+                            <option value="eco">Eco-Lodge</option>
+                            <option value="resort">Resort</option>
+                            <option value="hotel">Hotel</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="price">Price Range</label>
+                        <select id="price" onchange="filterHotels()">
+                            <option value="">All Prices</option>
+                            <option value="budget">Budget (Under KES 15,000)</option>
+                            <option value="mid">Mid-Range (KES 15,000 - 35,000)</option>
+                            <option value="luxury">Luxury (KES 35,000+)</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="rating">Rating</label>
+                        <select id="rating" onchange="filterHotels()">
+                            <option value="">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4+ Stars</option>
+                            <option value="3">3+ Stars</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Hotels -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Featured Hotels & Resorts</h2>
+                <p>Handpicked luxury accommodations for unforgettable coastal experiences</p>
+            </div>
+            <div class="hotels-grid" id="hotelsGrid">
+                <!-- Hotels will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Commission Info -->
+        <section class="section">
+            <div class="commission-banner">
+                <div class="commission-info">
+                    <h3><i class="fas fa-percentage"></i> Book Through Us & Save</h3>
+                    <p>Get exclusive rates and earn loyalty rewards when booking through Axis Tours & Travel</p>
+                </div>
+                <div class="commission-rate">
+                    <span class="rate">40%</span>
+                    <span class="label">Commission Rate</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours & Travel</h3>
+                <p>Your trusted partner for unforgettable East African adventures.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="hotels.html">Hotels</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@axistours.com</p>
+                <p>Phone: +254 700 000 000</p>
+                <p>Address: Nairobi, Kenya</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hotel data
+        const hotels = [
+            {
+                id: 'baobab-beach',
+                name: 'Baobab Beach Resort',
+                location: 'diani',
+                category: 'resort',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 45,000 - 85,000',
+                description: 'Luxurious beachfront resort with stunning ocean views and world-class amenities.',
+                features: ['Beachfront', 'Spa', 'Multiple Restaurants', 'Water Sports', 'Kids Club'],
+                commission: 'KES 18,000 - 34,000'
+            },
+            {
+                id: 'leopard-beach',
+                name: 'Leopard Beach Resort & Spa',
+                location: 'diani',
+                category: 'resort',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 35,000 - 65,000',
+                description: 'Elegant resort offering luxury accommodations and exceptional spa experiences.',
+                features: ['Beachfront', 'Spa & Wellness', 'Fine Dining', 'Swimming Pools', 'Golf Course'],
+                commission: 'KES 14,000 - 26,000'
+            },
+            {
+                id: 'serena-beach',
+                name: 'Serena Beach Resort & Spa',
+                location: 'mombasa',
+                category: 'resort',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 40,000 - 75,000',
+                description: 'Historic luxury resort combining Swahili architecture with modern comforts.',
+                features: ['Historic Architecture', 'Private Beach', 'Spa', 'Cultural Tours', 'Water Sports'],
+                commission: 'KES 16,000 - 30,000'
+            },
+            {
+                id: 'almanara-boutique',
+                name: 'Almanara Boutique Hotel',
+                location: 'diani',
+                category: 'boutique',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 50,000 - 90,000',
+                description: 'Exclusive boutique hotel offering personalized luxury experiences.',
+                features: ['Private Villas', 'Personal Chef', 'Butler Service', 'Private Pool', 'Beach Access'],
+                commission: 'KES 20,000 - 36,000'
+            },
+            {
+                id: 'msambweni-beach-house',
+                name: 'Msambweni Beach House',
+                location: 'diani',
+                category: 'boutique',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1582719478250-c89cae4cb85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 60,000 - 100,000',
+                description: 'Private beach house offering ultimate exclusivity and luxury.',
+                features: ['Private Beach House', 'Personal Staff', 'Exclusive Location', 'Luxury Amenities', 'Privacy'],
+                commission: 'KES 24,000 - 40,000'
+            },
+            {
+                id: 'elewana-afrochic',
+                name: 'Elewana AfroChic Diani Beach',
+                location: 'diani',
+                category: 'boutique',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 45,000 - 80,000',
+                description: 'Contemporary boutique hotel with African-inspired luxury design.',
+                features: ['Boutique Design', 'Rooftop Bar', 'Infinity Pool', 'Spa Services', 'Beachfront'],
+                commission: 'KES 18,000 - 32,000'
+            },
+            {
+                id: 'maji-beach-boutique',
+                name: 'The Maji Beach Boutique Hotel',
+                location: 'diani',
+                category: 'boutique',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 35,000 - 70,000',
+                description: 'Intimate boutique hotel with personalized service and stunning ocean views.',
+                features: ['Boutique Rooms', 'Ocean Views', 'Personal Service', 'Beach Access', 'Fine Dining'],
+                commission: 'KES 14,000 - 28,000'
+            },
+            {
+                id: 'lion-in-sun',
+                name: 'Lion in the Sun Boutique Hotel & Spa',
+                location: 'malindi',
+                category: 'boutique',
+                price: 'mid',
+                rating: 4,
+                image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 20,000 - 40,000',
+                description: 'Charming boutique hotel with spa services and tropical gardens.',
+                features: ['Spa & Wellness', 'Tropical Gardens', 'Swimming Pool', 'Restaurant', 'Beach Access'],
+                commission: 'KES 8,000 - 16,000'
+            },
+            {
+                id: 'hemingways-watamu',
+                name: 'Hemingways Watamu',
+                location: 'watamu',
+                category: 'hotel',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 40,000 - 75,000',
+                description: 'Luxury hotel offering world-class fishing and marine experiences.',
+                features: ['Deep Sea Fishing', 'Marine Activities', 'Luxury Rooms', 'Spa', 'Fine Dining'],
+                commission: 'KES 16,000 - 30,000'
+            },
+            {
+                id: 'peponi-hotel',
+                name: 'Peponi Hotel',
+                location: 'lamu',
+                category: 'boutique',
+                price: 'luxury',
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1582719478250-c89cae4cb85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                priceRange: 'KES 50,000 - 85,000',
+                description: 'Historic boutique hotel with Swahili charm and eco-conscious design.',
+                features: ['Swahili Architecture', 'Eco-Friendly', 'Historic Location', 'Cultural Tours', 'Beachfront'],
+                commission: 'KES 20,000 - 34,000'
+            }
+        ];
+
+        // Initialize hotels display
+        function initializeHotels() {
+            displayHotels(hotels);
+        }
+
+        // Filter hotels based on selected criteria
+        function filterHotels() {
+            const location = document.getElementById('location').value;
+            const category = document.getElementById('category').value;
+            const price = document.getElementById('price').value;
+            const rating = document.getElementById('rating').value;
+
+            let filteredHotels = hotels;
+
+            if (location) {
+                filteredHotels = filteredHotels.filter(hotel => hotel.location === location);
+            }
+            if (category) {
+                filteredHotels = filteredHotels.filter(hotel => hotel.category === category);
+            }
+            if (price) {
+                filteredHotels = filteredHotels.filter(hotel => hotel.price === price);
+            }
+            if (rating) {
+                filteredHotels = filteredHotels.filter(hotel => hotel.rating >= parseInt(rating));
+            }
+
+            displayHotels(filteredHotels);
+        }
+
+        // Display hotels in the grid
+        function displayHotels(hotelsToShow) {
+            const grid = document.getElementById('hotelsGrid');
+            grid.innerHTML = '';
+
+            hotelsToShow.forEach(hotel => {
+                const hotelCard = createHotelCard(hotel);
+                grid.appendChild(hotelCard);
+            });
+        }
+
+        // Create individual hotel card
+        function createHotelCard(hotel) {
+            const card = document.createElement('div');
+            card.className = 'hotel-card';
+            card.innerHTML = `
+                <div class="hotel-image">
+                    <img src="${hotel.image}" alt="${hotel.name}">
+                    <div class="hotel-rating">
+                        ${'★'.repeat(hotel.rating)}${'☆'.repeat(5-hotel.rating)}
+                    </div>
+                </div>
+                <div class="hotel-content">
+                    <h3>${hotel.name}</h3>
+                    <p class="hotel-location">
+                        <i class="fas fa-map-marker-alt"></i> ${getLocationName(hotel.location)}
+                    </p>
+                    <p class="hotel-description">${hotel.description}</p>
+                    <div class="hotel-features">
+                        ${hotel.features.slice(0, 3).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+                    <div class="hotel-price">
+                        <span class="price-range">${hotel.priceRange}</span>
+                        <span class="commission-info">Your Commission: ${hotel.commission}</span>
+                    </div>
+                    <div class="hotel-actions">
+                        <a href="hotel-${hotel.id}.html" class="btn">View Details</a>
+                        <a href="booking.html" class="btn btn-outline">Book Now</a>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Get location display name
+        function getLocationName(location) {
+            const names = {
+                'diani': 'Diani Beach',
+                'mombasa': 'Mombasa',
+                'watamu': 'Watamu',
+                'lamu': 'Lamu',
+                'malindi': 'Malindi',
+                'chale': 'Chale Island'
+            };
+            return names[location] || location;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeHotels);
+
+        // Hamburger Menu Functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

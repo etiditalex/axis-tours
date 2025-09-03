@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="hero-content">
+            <h1>Explore East Africa</h1>
+            <p>Discover Kenya's stunning coastline, wildlife safaris, and East African adventures</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Filter Section -->
+        <section class="section">
+            <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin-bottom: 3rem;">
+                <h3 style="margin-bottom: 1rem;">Filter Destinations</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <select style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option>All Regions</option>
+                        <option>Kenya Coast</option>
+                        <option>Kenya Safari</option>
+                        <option>Tanzania</option>
+                        <option>Uganda</option>
+                        <option>East Africa</option>
+                    </select>
+                    <select style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option>All Types</option>
+                        <option>Beach & Island</option>
+                        <option>Safari & Wildlife</option>
+                        <option>City & Culture</option>
+                        <option>Adventure</option>
+                        <option>Luxury</option>
+                    </select>
+                    <select style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option>All Prices</option>
+                        <option>KES 50,000 - KES 100,000</option>
+                        <option>KES 100,000 - KES 200,000</option>
+                        <option>KES 200,000 - KES 500,000</option>
+                        <option>KES 500,000+</option>
+                    </select>
+                    <button class="btn" style="padding: 8px 16px;">Apply Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hidden Gems of Coastal Kenya -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Hidden Gems of Coastal Kenya</h2>
+                <p>Discover the authentic, off-the-beaten-path experiences that make coastal Kenya truly special</p>
+            </div>
+            <div class="grid grid-2">
+                <div class="hidden-gem-card">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Secret Beaches">
+                    <div class="hidden-gem-content">
+                        <h3>Secret Beaches</h3>
+                        <p>Escape the crowds at Tiwi, Shanzu, and Shelly beaches - hidden coastal treasures perfect for tranquility and romance.</p>
+                        <a href="secret-beaches.html" class="btn">Explore Secret Beaches</a>
+                    </div>
+                </div>
+                <div class="hidden-gem-card">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Historical & Cultural Treasures">
+                    <div class="hidden-gem-content">
+                        <h3>Historical & Cultural Treasures</h3>
+                        <p>Journey through Mombasa's Old Town, ancient mosques, and centuries-old ruins that tell stories of coastal heritage.</p>
+                        <a href="historical-cultural.html" class="btn">Discover Heritage</a>
+                    </div>
+                </div>
+                <div class="hidden-gem-card">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Nature & Wildlife Escapes">
+                    <div class="hidden-gem-content">
+                        <h3>Nature & Wildlife Escapes</h3>
+                        <p>From rehabilitated quarries to wildlife sanctuaries, experience Kenya's coastal biodiversity and conservation success stories.</p>
+                        <a href="nature-wildlife.html" class="btn">Connect with Nature</a>
+                    </div>
+                </div>
+                <div class="hidden-gem-card">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Local Flavors & Markets">
+                    <div class="hidden-gem-content">
+                        <h3>Local Flavors & Markets</h3>
+                        <p>Dive into authentic coastal cuisine through vibrant markets, street food adventures, and elegant dhow dining experiences.</p>
+                        <a href="local-flavors.html" class="btn">Taste Local Flavors</a>
+                    </div>
+                </div>
+                <div class="hidden-gem-card">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Spiritual & Cultural Centers">
+                    <div class="hidden-gem-content">
+                        <h3>Spiritual & Cultural Centers</h3>
+                        <p>Experience inclusive cultural experiences, sacred Hindu temples, and UNESCO-designated Kaya forests.</p>
+                        <a href="spiritual-cultural.html" class="btn">Explore Culture</a>
+                    </div>
+                </div>
+                <div class="hidden-gem-card">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Nearby Explorations">
+                    <div class="hidden-gem-content">
+                        <h3>Nearby Explorations</h3>
+                        <p>Venture beyond Mombasa to Kilifi's kite-surfing paradise and Wasini Island's pristine marine sanctuary.</p>
+                        <a href="nearby-explorations.html" class="btn">Explore Beyond</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Destinations -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Featured Destinations</h2>
+            </div>
+            <div class="grid grid-3">
+                <div class="destination-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Diani Beach">
+                    <div class="destination-overlay">
+                        <h3>Diani Beach, Kenya</h3>
+                        <p>Pristine white sand beaches and crystal-clear waters</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="color: var(--gold); font-weight: 600;">From KES 89,900</span>
+                            <a href="booking.html" class="btn" style="margin-left: 1rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Maasai Mara">
+                    <div class="destination-overlay">
+                        <h3>Maasai Mara, Kenya</h3>
+                        <p>Incredible wildlife and the Great Migration</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="color: var(--gold); font-weight: 600;">From KES 129,900</span>
+                            <a href="booking.html" class="btn" style="margin-left: 1rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Zanzibar">
+                    <div class="destination-overlay">
+                        <h3>Zanzibar, Tanzania</h3>
+                        <p>Historic Stone Town and pristine beaches</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="color: var(--gold); font-weight: 600;">From KES 119,900</span>
+                            <a href="booking.html" class="btn" style="margin-left: 1rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Destinations -->
+        <section class="section">
+            <div class="section-title">
+                <h2>All Destinations</h2>
+            </div>
+            <div class="grid grid-3">
+                <!-- Kenya Coast -->
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Watamu" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Watamu, Kenya</h3>
+                        <p class="card-text">Crystal-clear waters, coral reefs, and pristine beaches perfect for diving and relaxation.</p>
+                        <div class="card-price">From KES 79,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Mombasa" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Mombasa, Kenya</h3>
+                        <p class="card-text">Historic port city with beautiful beaches, rich culture, and Swahili architecture.</p>
+                        <div class="card-price">From KES 69,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Malindi" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Malindi, Kenya</h3>
+                        <p class="card-text">Charming coastal town with Italian influence, beautiful beaches, and marine parks.</p>
+                        <div class="card-price">From KES 74,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Kenya Safari -->
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Tsavo" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Tsavo, Kenya</h3>
+                        <p class="card-text">One of Kenya's largest national parks with diverse wildlife and stunning landscapes.</p>
+                        <div class="card-price">From KES 109,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Amboseli" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Amboseli, Kenya</h3>
+                        <p class="card-text">Iconic views of Mount Kilimanjaro and large elephant herds in their natural habitat.</p>
+                        <div class="card-price">From KES 119,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Lake Nakuru" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Lake Nakuru, Kenya</h3>
+                        <p class="card-text">Famous for its flamingos and rhino sanctuary, a birdwatcher's paradise.</p>
+                        <div class="card-price">From KES 89,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Tanzania -->
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Stone Town" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Stone Town, Zanzibar</h3>
+                        <p class="card-text">UNESCO World Heritage site with rich history, spice tours, and cultural experiences.</p>
+                        <div class="card-price">From KES 129,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Serengeti" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Serengeti, Tanzania</h3>
+                        <p class="card-text">World-famous wildlife sanctuary and the spectacular Great Migration.</p>
+                        <div class="card-price">From KES 249,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Ngorongoro" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Ngorongoro Crater, Tanzania</h3>
+                        <p class="card-text">Natural wonder with the highest concentration of wildlife in Africa.</p>
+                        <div class="card-price">From KES 189,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Uganda -->
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Bwindi" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Bwindi, Uganda</h3>
+                        <p class="card-text">Mountain gorilla trekking in the misty forests of the Impenetrable National Park.</p>
+                        <div class="card-price">From KES 299,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Queen Elizabeth" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Queen Elizabeth NP, Uganda</h3>
+                        <p class="card-text">Diverse wildlife including tree-climbing lions and boat safaris on the Kazinga Channel.</p>
+                        <div class="card-price">From KES 159,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Kampala" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Kampala, Uganda</h3>
+                        <p class="card-text">Vibrant capital city with rich culture, markets, and historical sites.</p>
+                        <div class="card-price">From KES 89,900</div>
+                        <a href="booking.html" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offers -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Special Offers</h2>
+            </div>
+            <div class="grid grid-2">
+                <div class="card fade-in-up" style="border: 2px solid var(--gold);">
+                    <div class="card-body">
+                        <h3 class="card-title" style="color: var(--gold);">Early Bird Special</h3>
+                        <p class="card-text">Book 6 months in advance and save up to 25% on select destinations.</p>
+                        <div class="card-price">Save up to 25%</div>
+                        <a href="booking.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="card fade-in-up" style="border: 2px solid var(--gold);">
+                    <div class="card-body">
+                        <h3 class="card-title" style="color: var(--gold);">Honeymoon Package</h3>
+                        <p class="card-text">Special romantic packages with complimentary upgrades and experiences.</p>
+                        <div class="card-price">From KES 499,900</div>
+                        <a href="booking.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section">
+            <div style="text-align: center; background: var(--gray-light); padding: 3rem; border-radius: 15px;">
+                <h2>Can't Find What You're Looking For?</h2>
+                <p>Our travel experts can create a custom itinerary for any destination you have in mind.</p>
+                <a href="contact.html" class="btn">Contact Us</a>
+                <a href="booking.html" class="btn btn-outline">Custom Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours and Travel</h3>
+                <p>Creating unforgettable East African travel experiences. Your journey to extraordinary destinations starts here.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="blog.html">Blog</a>
+                <a href="booking.html">Book Now</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Popular Destinations</h3>
+                <a href="#">Diani Beach, Kenya</a>
+                <a href="#">Maasai Mara, Kenya</a>
+                <a href="#">Zanzibar, Tanzania</a>
+                <a href="#">Watamu, Kenya</a>
+                <a href="#">Mombasa, Kenya</a>
+                <a href="#">Tsavo, Kenya</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-phone"></i> +254 796 988 686</p>
+                <p><i class="fas fa-phone"></i> +254 780 460 617</p>
+                <p><i class="fas fa-envelope"></i> etiditalex@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Kenya, East Africa</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours and Travel. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Filter functionality
+        document.querySelector('.btn').addEventListener('click', function() {
+            // Add filter logic here
+            alert('Filters applied! This would filter the destinations based on selected criteria.');
+        });
+    </script>
+</body>
+</html>
