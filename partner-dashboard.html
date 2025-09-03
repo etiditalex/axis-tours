@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Dashboard - Axis Tours and Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-globe"></div>
+                    <div class="logo-airplane"></div>
+                    <div class="logo-arc"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Axis</div>
+                    <div class="logo-text-sub">Tours & Travel</div>
+                </div>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-hero">
+        <div class="dashboard-hero-content">
+            <div class="partner-info">
+                <div class="partner-avatar">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <div class="partner-details">
+                    <h1>Welcome back, <span class="partner-name">Baobab Beach Resort</span></h1>
+                    <p>Manage your listings, track bookings, and monitor your earnings</p>
+                    <div class="partner-status">
+                        <span class="status-badge status-active">Active Partner</span>
+                        <span class="partner-since">Partner since: January 2024</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="showAddListing()">
+                    <i class="fas fa-plus"></i> Add New Listing
+                </button>
+                <button class="btn-secondary" onclick="showSupport()">
+                    <i class="fas fa-headset"></i> Get Support
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard-main">
+        <!-- Stats Overview -->
+        <section class="dashboard-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Active Bookings</div>
+                        <div class="stat-change positive">+12% from last month</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">KES 156,800</div>
+                        <div class="stat-label">Total Earnings</div>
+                        <div class="stat-change positive">+8% from last month</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">4.7</div>
+                        <div class="stat-label">Average Rating</div>
+                        <div class="stat-change positive">+0.2 from last month</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">1,247</div>
+                        <div class="stat-label">Profile Views</div>
+                        <div class="stat-change positive">+15% from last month</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Left Column -->
+            <div class="dashboard-left">
+                <!-- Recent Bookings -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Recent Bookings</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="bookings-list">
+                        <div class="booking-item">
+                            <div class="booking-info">
+                                <div class="booking-guest">John Smith</div>
+                                <div class="booking-dates">Dec 15-18, 2024</div>
+                                <div class="booking-room">Deluxe Ocean View</div>
+                            </div>
+                            <div class="booking-status">
+                                <span class="status-badge status-confirmed">Confirmed</span>
+                                <div class="booking-amount">KES 45,000</div>
+                            </div>
+                        </div>
+                        <div class="booking-item">
+                            <div class="booking-info">
+                                <div class="booking-guest">Sarah Johnson</div>
+                                <div class="booking-dates">Dec 20-25, 2024</div>
+                                <div class="booking-room">Suite with Pool</div>
+                            </div>
+                            <div class="booking-status">
+                                <span class="status-badge status-pending">Pending</span>
+                                <div class="booking-amount">KES 78,000</div>
+                            </div>
+                        </div>
+                        <div class="booking-item">
+                            <div class="booking-info">
+                                <div class="booking-guest">Mike Wilson</div>
+                                <div class="booking-dates">Dec 28-30, 2024</div>
+                                <div class="booking-room">Standard Room</div>
+                            </div>
+                            <div class="booking-status">
+                                <span class="status-badge status-completed">Completed</span>
+                                <div class="booking-amount">KES 32,000</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Earnings Overview -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Earnings Overview</h2>
+                        <div class="period-selector">
+                            <select id="earningsPeriod">
+                                <option value="7">Last 7 days</option>
+                                <option value="30" selected>Last 30 days</option>
+                                <option value="90">Last 90 days</option>
+                                <option value="365">Last year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="earnings-chart">
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                            <p>Earnings chart will be displayed here</p>
+                            <small>Chart integration coming soon</small>
+                        </div>
+                    </div>
+                    <div class="earnings-summary">
+                        <div class="earnings-item">
+                            <span class="earnings-label">Total Bookings</span>
+                            <span class="earnings-value">24</span>
+                        </div>
+                        <div class="earnings-item">
+                            <span class="earnings-label">Commission Rate</span>
+                            <span class="earnings-value">20%</span>
+                        </div>
+                        <div class="earnings-item">
+                            <span class="earnings-label">Total Revenue</span>
+                            <span class="earnings-value">KES 784,000</span>
+                        </div>
+                        <div class="earnings-item">
+                            <span class="earnings-label">Your Commission</span>
+                            <span class="earnings-value highlight">KES 156,800</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="dashboard-right">
+                <!-- Quick Actions -->
+                <section class="dashboard-section">
+                    <h2>Quick Actions</h2>
+                    <div class="quick-actions-grid">
+                        <button class="action-btn" onclick="showEditProfile()">
+                            <i class="fas fa-edit"></i>
+                            <span>Edit Profile</span>
+                        </button>
+                        <button class="action-btn" onclick="showAddRoom()">
+                            <i class="fas fa-bed"></i>
+                            <span>Add Room</span>
+                        </button>
+                        <button class="action-btn" onclick="showUpdatePricing()">
+                            <i class="fas fa-tags"></i>
+                            <span>Update Pricing</span>
+                        </button>
+                        <button class="action-btn" onclick="showUploadPhotos()">
+                            <i class="fas fa-camera"></i>
+                            <span>Upload Photos</span>
+                        </button>
+                        <button class="action-btn" onclick="showViewAnalytics()">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>View Analytics</span>
+                        </button>
+                        <button class="action-btn" onclick="showDownloadReport()">
+                            <i class="fas fa-download"></i>
+                            <span>Download Report</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Notifications -->
+                <section class="dashboard-section">
+                    <h2>Recent Notifications</h2>
+                    <div class="notifications-list">
+                        <div class="notification-item">
+                            <div class="notification-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">New Booking Confirmed</div>
+                                <div class="notification-message">John Smith booked Deluxe Ocean View for Dec 15-18</div>
+                                <div class="notification-time">2 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon info">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">Profile Update Required</div>
+                                <div class="notification-message">Please update your hotel photos for better visibility</div>
+                                <div class="notification-time">1 day ago</div>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">Low Availability Alert</div>
+                                <div class="notification-message">Only 2 rooms available for Dec 24-26</div>
+                                <div class="notification-time">2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Performance Tips -->
+                <section class="dashboard-section">
+                    <h2>Performance Tips</h2>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Add high-quality photos to increase booking rates by up to 40%</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Respond to guest reviews within 24 hours to improve ratings</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Update your availability calendar regularly for better visibility</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Axis Tours & Travel</h3>
+                <p>Your trusted partner for unforgettable East African adventures.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="hotels.html">Hotels</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@axistours.com</p>
+                <p>Phone: +254 700 000 000</p>
+                <p>Address: Nairobi, Kenya</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dashboard functionality
+        function showAddListing() {
+            alert('Add New Listing functionality will be implemented');
+        }
+
+        function showSupport() {
+            alert('Support functionality will be implemented');
+        }
+
+        function showEditProfile() {
+            alert('Edit Profile functionality will be implemented');
+        }
+
+        function showAddRoom() {
+            alert('Add Room functionality will be implemented');
+        }
+
+        function showUpdatePricing() {
+            alert('Update Pricing functionality will be implemented');
+        }
+
+        function showUploadPhotos() {
+            alert('Upload Photos functionality will be implemented');
+        }
+
+        function showViewAnalytics() {
+            alert('View Analytics functionality will be implemented');
+        }
+
+        function showDownloadReport() {
+            alert('Download Report functionality will be implemented');
+        }
+
+        // Period selector change
+        document.getElementById('earningsPeriod').addEventListener('change', function() {
+            // Update earnings data based on selected period
+            console.log('Period changed to:', this.value);
+        });
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
