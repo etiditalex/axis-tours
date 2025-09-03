@@ -51,19 +51,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Commission Info Banner -->
-        <section class="section">
-            <div class="commission-banner">
-                <div class="commission-info">
-                    <h3><i class="fas fa-percentage"></i> Commission-Based Booking</h3>
-                    <p>Book through our website and we'll handle everything while earning a commission. Your satisfaction is our priority!</p>
-                </div>
-                <div class="commission-rate">
-                    <span class="rate">40%</span>
-                    <span class="label">Commission Rate</span>
-                </div>
-            </div>
-        </section>
+
 
         <!-- Quick Booking -->
         <section class="section">
@@ -169,39 +157,7 @@
             </div>
         </section>
 
-        <!-- Commission Calculator -->
-        <section class="section">
-            <div class="section-title">
-                <h2>Commission Calculator</h2>
-                <p>See how our commission system works for your booking</p>
-            </div>
-            <div class="commission-calculator">
-                <div class="calculator-inputs">
-                    <div class="form-group">
-                        <label for="packagePrice">Package Price (KES)</label>
-                        <input type="number" id="packagePrice" placeholder="Enter package price" min="10000" step="1000">
-                    </div>
-                    <div class="form-group">
-                        <label for="commissionRate">Commission Rate (%)</label>
-                        <input type="number" id="commissionRate" value="40" readonly>
-                    </div>
-                </div>
-                <div class="calculator-results">
-                    <div class="result-item">
-                        <span class="label">Your Commission:</span>
-                        <span class="value" id="commissionAmount">KES 0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="label">Client Pays:</span>
-                        <span class="value" id="clientPays">KES 0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="label">Service Fee:</span>
-                        <span class="value" id="serviceFee">KES 0</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- Popular Packages -->
         <section class="section">
@@ -215,9 +171,6 @@
                         <h3 class="card-title">Diani Beach Holiday Package</h3>
                         <p class="card-text">7 days of beach paradise with luxury accommodations and water sports activities.</p>
                         <div class="card-price">From KES 129,900</div>
-                        <div class="commission-info">
-                            <small>Your Commission: KES 51,960</small>
-                        </div>
                         <ul style="margin: 1rem 0; color: var(--gray-dark);">
                             <li>Beachfront resort with ocean view</li>
                             <li>Snorkeling and diving trips</li>
@@ -233,9 +186,6 @@
                         <h3 class="card-title">Maasai Mara Safari Adventure</h3>
                         <p class="card-text">5 days of wildlife viewing with luxury tented camps and expert guides.</p>
                         <div class="card-price">From KES 219,900</div>
-                        <div class="commission-info">
-                            <small>Your Commission: KES 87,960</small>
-                        </div>
                         <ul style="margin: 1rem 0; color: var(--gray-dark);">
                             <li>Luxury tented camp accommodation</li>
                             <li>Daily game drives with expert guides</li>
@@ -251,9 +201,6 @@
                         <h3 class="card-title">Zanzibar Island Escape</h3>
                         <p class="card-text">6 days exploring Stone Town and pristine beaches with cultural experiences.</p>
                         <div class="card-price">From KES 159,900</div>
-                        <div class="commission-info">
-                            <small>Your Commission: KES 63,960</small>
-                        </div>
                         <ul style="margin: 1rem 0; color: var(--gray-dark);">
                             <li>Historic Stone Town tour</li>
                             <li>Spice plantation visit</li>
@@ -397,7 +344,7 @@
                             <th>Client</th>
                             <th>Destination</th>
                             <th>Amount</th>
-                            <th>Commission</th>
+
                             <th>Status</th>
                             <th>Date</th>
                         </tr>
@@ -432,8 +379,8 @@
                 </div>
                 <div style="text-align: center;">
                     <div style="background: var(--gold); color: var(--black); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: bold;">4</div>
-                    <h3>Commission Earned</h3>
-                    <p>We earn our commission while you enjoy your perfect vacation!</p>
+                                            <h3>Booking Complete</h3>
+                        <p>Your perfect vacation is booked and ready to go!</p>
                 </div>
             </div>
         </section>
@@ -632,7 +579,7 @@
                         <td>Client ${booking.id.slice(-5)}</td>
                         <td>${this.getDestinationName(booking.destination)}</td>
                         <td>KES ${booking.amount.toLocaleString()}</td>
-                        <td>KES ${booking.commission.toLocaleString()}</td>
+
                         <td><span class="status-${booking.status.toLowerCase()}">${booking.status}</span></td>
                         <td>${new Date(booking.date).toLocaleDateString()}</td>
                     `;
