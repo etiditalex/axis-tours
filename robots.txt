@@ -1,0 +1,44 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://axis-tours-backend.web.app/sitemap.xml
+
+# Disallow admin/partner areas
+Disallow: /partner-dashboard.html
+Disallow: /room-management.html
+Disallow: /photo-gallery-management.html
+Disallow: /pricing-management.html
+Disallow: /analytics-dashboard.html
+Disallow: /availability-calendar.html
+Disallow: /bulk-operations.html
+Disallow: /commission-dashboard.html
+Disallow: /hotel-partner-portal.html
+
+# Allow main content
+Allow: /index.html
+Allow: /about.html
+Allow: /destinations.html
+Allow: /hotels.html
+Allow: /tours.html
+Allow: /booking.html
+Allow: /contact.html
+Allow: /blog.html
+
+# Allow destination pages
+Allow: /diani-beach-resorts-guide.html
+Allow: /maasai-mara-safari-guide.html
+Allow: /tsavo-safari-camps.html
+Allow: /secret-beaches.html
+Allow: /nature-wildlife.html
+Allow: /historical-cultural.html
+Allow: /spiritual-cultural.html
+Allow: /local-flavors.html
+Allow: /nearby-explorations.html
+
+# Allow hotel pages
+Allow: /hotel-baobab-beach.html
+Allow: /hotels-modern.html
+
+# Crawl delay
+Crawl-delay: 1
