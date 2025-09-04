@@ -573,11 +573,13 @@
         }
 
         function organizePhotos() {
-            alert('Photo organization functionality will be implemented');
+            // Redirect to photo gallery management page
+            window.location.href = 'photo-gallery-management.html';
         }
 
         function editPhotos() {
-            alert('Batch photo editing functionality will be implemented');
+            // Redirect to photo gallery management page
+            window.location.href = 'photo-gallery-management.html';
         }
 
         // Hamburger Menu
@@ -609,6 +611,182 @@
                 closeEditModal();
             }
         });
+    </script>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { 
+            uploadImage, 
+            getCurrentUser,
+            auth,
+            db,
+            collection,
+            addDoc,
+            getDocs,
+            query,
+            where,
+            orderBy
+        } from './js/firebase.js';
+        
+        // Make functions available globally
+        window.uploadImage = uploadImage;
+        window.getCurrentUser = getCurrentUser;
+        window.auth = auth;
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.getDocs = getDocs;
+        window.query = query;
+        window.where = where;
+        window.orderBy = orderBy;
+        
+        // Initialize photo gallery when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePhotoGallery();
+        });
+        
+        // Initialize photo gallery with real data
+        async function initializePhotoGallery() {
+            try {
+                const user = await getCurrentUser();
+                if (!user) {
+                    window.location.href = 'hotel-partner-portal.html';
+                    return;
+                }
+                
+                console.log('User authenticated for photo gallery:', user.email);
+                await loadPartnerPhotos(user.uid);
+                
+            } catch (error) {
+                console.error('Error initializing photo gallery:', error);
+            }
+        }
+        
+        // Load partner's photos
+        async function loadPartnerPhotos(partnerId) {
+            try {
+                const q = query(
+                    collection(db, "photos"),
+                    where("partner_id", "==", partnerId),
+                    orderBy("created_at", "desc")
+                );
+                
+                const querySnapshot = await getDocs(q);
+                const photos = [];
+                querySnapshot.forEach((doc) => {
+                    photos.push({ id: doc.id, ...doc.data() });
+                });
+                
+                console.log('Loaded photos:', photos);
+                renderPhotos(photos);
+                updatePhotoStats(photos);
+                
+            } catch (error) {
+                console.error('Error loading photos:', error);
+            }
+        }
+        
+        // Render photos in gallery
+        function renderPhotos(photos) {
+            const galleryContainer = document.getElementById('photoGallery');
+            if (!galleryContainer) return;
+            
+            galleryContainer.innerHTML = photos.map(photo => `
+                <div class="photo-item" data-photo-id="${photo.id}">
+                    <img src="${photo.url}" alt="${photo.caption || 'Hotel photo'}">
+                    <div class="photo-overlay">
+                        <div class="photo-actions">
+                            <button onclick="editPhoto('${photo.id}')" class="btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="deletePhoto('${photo.id}')" class="btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="photo-info">
+                            <p>${photo.caption || 'No caption'}</p>
+                            <span>${photo.album || 'Uncategorized'}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Update photo statistics
+        function updatePhotoStats(photos) {
+            const totalPhotos = photos.length;
+            const albums = [...new Set(photos.map(p => p.album).filter(Boolean))];
+            const totalAlbums = albums.length;
+            
+            // Update stats display
+            const totalPhotosEl = document.querySelector('.photo-stats .stat-item:nth-child(1) .stat-number');
+            const totalAlbumsEl = document.querySelector('.photo-stats .stat-item:nth-child(2) .stat-number');
+            
+            if (totalPhotosEl) totalPhotosEl.textContent = totalPhotos;
+            if (totalAlbumsEl) totalAlbumsEl.textContent = totalAlbums;
+        }
+        
+        // Real photo upload function
+        async function uploadPhotos() {
+            const fileInput = document.getElementById('photoFiles');
+            const albumSelect = document.getElementById('albumSelect');
+            const captionInput = document.getElementById('photoCaption');
+            
+            if (!fileInput.files.length) {
+                alert('Please select photos to upload');
+                return;
+            }
+            
+            if (!albumSelect.value) {
+                alert('Please select an album');
+                return;
+            }
+            
+            try {
+                const user = await getCurrentUser();
+                if (!user) throw new Error('User not authenticated');
+                
+                const uploadPromises = Array.from(fileInput.files).map(async (file) => {
+                    // Upload file to Firebase Storage
+                    const path = `hotels/${user.uid}/photos/${Date.now()}_${file.name}`;
+                    const { url, error } = await uploadImage(file, path);
+                    
+                    if (error) throw new Error(error);
+                    
+                    // Save photo metadata to Firestore
+                    const photoData = {
+                        partner_id: user.uid,
+                        url: url,
+                        caption: captionInput.value || '',
+                        album: albumSelect.value,
+                        filename: file.name,
+                        size: file.size,
+                        type: file.type,
+                        created_at: new Date()
+                    };
+                    
+                    const docRef = await addDoc(collection(db, "photos"), photoData);
+                    return { id: docRef.id, ...photoData };
+                });
+                
+                const uploadedPhotos = await Promise.all(uploadPromises);
+                console.log('Photos uploaded successfully:', uploadedPhotos);
+                
+                alert(`Successfully uploaded ${uploadedPhotos.length} photos!`);
+                closeUploadModal();
+                
+                // Refresh photo gallery
+                await loadPartnerPhotos(user.uid);
+                
+            } catch (error) {
+                console.error('Error uploading photos:', error);
+                alert('Error uploading photos: ' + error.message);
+            }
+        }
+        
+        // Make uploadPhotos available globally
+        window.uploadPhotos = uploadPhotos;
+        window.loadPartnerPhotos = loadPartnerPhotos;
     </script>
 </body>
 </html>
