@@ -272,22 +272,22 @@
         </div>
     </section>
 
-    <!-- Language Selection Modal -->
-    <div id="languageModal" class="language-modal">
-        <div class="language-modal-content">
-            <div class="language-modal-header">
-                <h3>Select Language</h3>
-                <button class="language-modal-close" id="closeLanguageModal">
+    <!-- Countries Selection Modal -->
+    <div id="countriesModal" class="countries-modal">
+        <div class="countries-modal-content">
+            <div class="countries-modal-header">
+                <h3>Select Country</h3>
+                <button class="countries-modal-close" id="closeCountriesModal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="language-modal-body">
-                <div class="language-search">
-                    <input type="text" id="languageSearch" placeholder="Search languages...">
+            <div class="countries-modal-body">
+                <div class="country-search">
+                    <input type="text" id="countrySearch" placeholder="Search countries...">
                     <i class="fas fa-search"></i>
                 </div>
-                <div class="language-grid" id="languageGrid">
-                    <!-- Languages will be populated by JavaScript -->
+                <div class="countries-grid" id="countriesGrid">
+                    <!-- Countries will be populated by JavaScript -->
                 </div>
             </div>
         </div>
@@ -613,89 +613,90 @@
             // In a real implementation, you'd show a dropdown with filtered suggestions
         });
 
-        // Language Selection Functionality
-        const languageModal = document.getElementById('languageModal');
+        // Countries Selection Functionality
+        const countriesModal = document.getElementById('countriesModal');
         const languageSelector = document.getElementById('languageSelector');
-        const closeLanguageModal = document.getElementById('closeLanguageModal');
-        const languageSearch = document.getElementById('languageSearch');
-        const languageGrid = document.getElementById('languageGrid');
+        const closeCountriesModal = document.getElementById('closeCountriesModal');
+        const countrySearch = document.getElementById('countrySearch');
+        const countriesGrid = document.getElementById('countriesGrid');
 
-        // Language data with flags and native names
-        const languages = [
-            { code: 'en', name: 'English', native: 'English', flag: '🇺🇸', popular: true },
-            { code: 'sw', name: 'Swahili', native: 'Kiswahili', flag: '🇰🇪', popular: true },
-            { code: 'fr', name: 'French', native: 'Français', flag: '🇫🇷', popular: true },
-            { code: 'de', name: 'German', native: 'Deutsch', flag: '🇩🇪', popular: true },
-            { code: 'es', name: 'Spanish', native: 'Español', flag: '🇪🇸', popular: true },
-            { code: 'it', name: 'Italian', native: 'Italiano', flag: '🇮🇹', popular: true },
-            { code: 'pt', name: 'Portuguese', native: 'Português', flag: '🇵🇹', popular: true },
-            { code: 'ru', name: 'Russian', native: 'Русский', flag: '🇷🇺', popular: true },
-            { code: 'ja', name: 'Japanese', native: '日本語', flag: '🇯🇵', popular: true },
-            { code: 'ko', name: 'Korean', native: '한국어', flag: '🇰🇷', popular: true },
-            { code: 'zh', name: 'Chinese', native: '中文', flag: '🇨🇳', popular: true },
-            { code: 'ar', name: 'Arabic', native: 'العربية', flag: '🇸🇦', popular: true },
-            { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳', popular: true },
-            { code: 'nl', name: 'Dutch', native: 'Nederlands', flag: '🇳🇱', popular: false },
-            { code: 'sv', name: 'Swedish', native: 'Svenska', flag: '🇸🇪', popular: false },
-            { code: 'no', name: 'Norwegian', native: 'Norsk', flag: '🇳🇴', popular: false },
-            { code: 'da', name: 'Danish', native: 'Dansk', flag: '🇩🇰', popular: false },
-            { code: 'fi', name: 'Finnish', native: 'Suomi', flag: '🇫🇮', popular: false },
-            { code: 'pl', name: 'Polish', native: 'Polski', flag: '🇵🇱', popular: false },
-            { code: 'tr', name: 'Turkish', native: 'Türkçe', flag: '🇹🇷', popular: false },
-            { code: 'he', name: 'Hebrew', native: 'עברית', flag: '🇮🇱', popular: false },
-            { code: 'th', name: 'Thai', native: 'ไทย', flag: '🇹🇭', popular: false },
-            { code: 'vi', name: 'Vietnamese', native: 'Tiếng Việt', flag: '🇻🇳', popular: false },
-            { code: 'id', name: 'Indonesian', native: 'Bahasa Indonesia', flag: '🇮🇩', popular: false },
-            { code: 'ms', name: 'Malay', native: 'Bahasa Melayu', flag: '🇲🇾', popular: false },
-            { code: 'tl', name: 'Filipino', native: 'Filipino', flag: '🇵🇭', popular: false },
-            { code: 'uk', name: 'Ukrainian', native: 'Українська', flag: '🇺🇦', popular: false },
-            { code: 'cs', name: 'Czech', native: 'Čeština', flag: '🇨🇿', popular: false },
-            { code: 'hu', name: 'Hungarian', native: 'Magyar', flag: '🇭🇺', popular: false },
-            { code: 'ro', name: 'Romanian', native: 'Română', flag: '🇷🇴', popular: false },
-            { code: 'bg', name: 'Bulgarian', native: 'Български', flag: '🇧🇬', popular: false },
-            { code: 'hr', name: 'Croatian', native: 'Hrvatski', flag: '🇭🇷', popular: false },
-            { code: 'sk', name: 'Slovak', native: 'Slovenčina', flag: '🇸🇰', popular: false },
-            { code: 'sl', name: 'Slovenian', native: 'Slovenščina', flag: '🇸🇮', popular: false },
-            { code: 'et', name: 'Estonian', native: 'Eesti', flag: '🇪🇪', popular: false },
-            { code: 'lv', name: 'Latvian', native: 'Latviešu', flag: '🇱🇻', popular: false },
-            { code: 'lt', name: 'Lithuanian', native: 'Lietuvių', flag: '🇱🇹', popular: false },
-            { code: 'el', name: 'Greek', native: 'Ελληνικά', flag: '🇬🇷', popular: false },
-            { code: 'is', name: 'Icelandic', native: 'Íslenska', flag: '🇮🇸', popular: false },
-            { code: 'mt', name: 'Maltese', native: 'Malti', flag: '🇲🇹', popular: false },
-            { code: 'cy', name: 'Welsh', native: 'Cymraeg', flag: '🇬🇧', popular: false },
-            { code: 'ga', name: 'Irish', native: 'Gaeilge', flag: '🇮🇪', popular: false },
-            { code: 'eu', name: 'Basque', native: 'Euskera', flag: '🇪🇸', popular: false },
-            { code: 'ca', name: 'Catalan', native: 'Català', flag: '🇪🇸', popular: false },
-            { code: 'gl', name: 'Galician', native: 'Galego', flag: '🇪🇸', popular: false }
+        // Countries data with flags and languages
+        const countries = [
+            { code: 'US', name: 'United States', flag: '🇺🇸', language: 'English', popular: true },
+            { code: 'KE', name: 'Kenya', flag: '🇰🇪', language: 'English, Swahili', popular: true },
+            { code: 'GB', name: 'United Kingdom', flag: '🇬🇧', language: 'English', popular: true },
+            { code: 'FR', name: 'France', flag: '🇫🇷', language: 'French', popular: true },
+            { code: 'DE', name: 'Germany', flag: '🇩🇪', language: 'German', popular: true },
+            { code: 'ES', name: 'Spain', flag: '🇪🇸', language: 'Spanish', popular: true },
+            { code: 'IT', name: 'Italy', flag: '🇮🇹', language: 'Italian', popular: true },
+            { code: 'PT', name: 'Portugal', flag: '🇵🇹', language: 'Portuguese', popular: true },
+            { code: 'RU', name: 'Russia', flag: '🇷🇺', language: 'Russian', popular: true },
+            { code: 'JP', name: 'Japan', flag: '🇯🇵', language: 'Japanese', popular: true },
+            { code: 'KR', name: 'South Korea', flag: '🇰🇷', language: 'Korean', popular: true },
+            { code: 'CN', name: 'China', flag: '🇨🇳', language: 'Chinese', popular: true },
+            { code: 'SA', name: 'Saudi Arabia', flag: '🇸🇦', language: 'Arabic', popular: true },
+            { code: 'IN', name: 'India', flag: '🇮🇳', language: 'Hindi, English', popular: true },
+            { code: 'NL', name: 'Netherlands', flag: '🇳🇱', language: 'Dutch', popular: false },
+            { code: 'SE', name: 'Sweden', flag: '🇸🇪', language: 'Swedish', popular: false },
+            { code: 'NO', name: 'Norway', flag: '🇳🇴', language: 'Norwegian', popular: false },
+            { code: 'DK', name: 'Denmark', flag: '🇩🇰', language: 'Danish', popular: false },
+            { code: 'FI', name: 'Finland', flag: '🇫🇮', language: 'Finnish', popular: false },
+            { code: 'PL', name: 'Poland', flag: '🇵🇱', language: 'Polish', popular: false },
+            { code: 'TR', name: 'Turkey', flag: '🇹🇷', language: 'Turkish', popular: false },
+            { code: 'IL', name: 'Israel', flag: '🇮🇱', language: 'Hebrew', popular: false },
+            { code: 'TH', name: 'Thailand', flag: '🇹🇭', language: 'Thai', popular: false },
+            { code: 'VN', name: 'Vietnam', flag: '🇻🇳', language: 'Vietnamese', popular: false },
+            { code: 'ID', name: 'Indonesia', flag: '🇮🇩', language: 'Indonesian', popular: false },
+            { code: 'MY', name: 'Malaysia', flag: '🇲🇾', language: 'Malay', popular: false },
+            { code: 'PH', name: 'Philippines', flag: '🇵🇭', language: 'Filipino', popular: false },
+            { code: 'UA', name: 'Ukraine', flag: '🇺🇦', language: 'Ukrainian', popular: false },
+            { code: 'CZ', name: 'Czech Republic', flag: '🇨🇿', language: 'Czech', popular: false },
+            { code: 'HU', name: 'Hungary', flag: '🇭🇺', language: 'Hungarian', popular: false },
+            { code: 'RO', name: 'Romania', flag: '🇷🇴', language: 'Romanian', popular: false },
+            { code: 'BG', name: 'Bulgaria', flag: '🇧🇬', language: 'Bulgarian', popular: false },
+            { code: 'HR', name: 'Croatia', flag: '🇭🇷', language: 'Croatian', popular: false },
+            { code: 'SK', name: 'Slovakia', flag: '🇸🇰', language: 'Slovak', popular: false },
+            { code: 'SI', name: 'Slovenia', flag: '🇸🇮', language: 'Slovenian', popular: false },
+            { code: 'EE', name: 'Estonia', flag: '🇪🇪', language: 'Estonian', popular: false },
+            { code: 'LV', name: 'Latvia', flag: '🇱🇻', language: 'Latvian', popular: false },
+            { code: 'LT', name: 'Lithuania', flag: '🇱🇹', language: 'Lithuanian', popular: false },
+            { code: 'GR', name: 'Greece', flag: '🇬🇷', language: 'Greek', popular: false },
+            { code: 'IS', name: 'Iceland', flag: '🇮🇸', language: 'Icelandic', popular: false },
+            { code: 'MT', name: 'Malta', flag: '🇲🇹', language: 'Maltese', popular: false },
+            { code: 'IE', name: 'Ireland', flag: '🇮🇪', language: 'English, Irish', popular: false },
+            { code: 'AU', name: 'Australia', flag: '🇦🇺', language: 'English', popular: false },
+            { code: 'CA', name: 'Canada', flag: '🇨🇦', language: 'English, French', popular: false },
+            { code: 'NZ', name: 'New Zealand', flag: '🇳🇿', language: 'English', popular: false },
+            { code: 'ZA', name: 'South Africa', flag: '🇿🇦', language: 'English, Afrikaans', popular: false }
         ];
 
-        let currentLanguage = 'en';
+        let currentCountry = 'US';
 
-        // Open language modal
+        // Open countries modal
         languageSelector.addEventListener('click', () => {
-            languageModal.style.display = 'block';
+            countriesModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
-            renderLanguages();
+            renderCountries();
         });
 
-        // Close language modal
-        closeLanguageModal.addEventListener('click', () => {
-            languageModal.style.display = 'none';
+        // Close countries modal
+        closeCountriesModal.addEventListener('click', () => {
+            countriesModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
 
         // Close modal when clicking outside
-        languageModal.addEventListener('click', (e) => {
-            if (e.target === languageModal) {
-                languageModal.style.display = 'none';
+        countriesModal.addEventListener('click', (e) => {
+            if (e.target === countriesModal) {
+                countriesModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
 
-        // Language search functionality
-        languageSearch.addEventListener('input', (e) => {
+        // Country search functionality
+        countrySearch.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
-            renderLanguages(searchTerm);
+            renderCountries(searchTerm);
         });
 
         // Render languages

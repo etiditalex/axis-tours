@@ -682,8 +682,8 @@ p {
     font-size: 1.1rem;
 }
 
-/* Language Selection Modal */
-.language-modal {
+/* Countries Selection Modal */
+.countries-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -695,7 +695,7 @@ p {
     backdrop-filter: blur(5px);
 }
 
-.language-modal-content {
+.countries-modal-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -710,7 +710,7 @@ p {
     border: 3px solid var(--gold);
 }
 
-.language-modal-header {
+.countries-modal-header {
     background: linear-gradient(135deg, var(--gold), var(--gold-dark));
     color: var(--black);
     padding: 1.5rem 2rem;
@@ -719,13 +719,13 @@ p {
     align-items: center;
 }
 
-.language-modal-header h3 {
+.countries-modal-header h3 {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 700;
 }
 
-.language-modal-close {
+.countries-modal-close {
     background: none;
     border: none;
     color: var(--black);
@@ -736,23 +736,23 @@ p {
     transition: all 0.3s ease;
 }
 
-.language-modal-close:hover {
+.countries-modal-close:hover {
     background: rgba(0, 0, 0, 0.1);
     transform: scale(1.1);
 }
 
-.language-modal-body {
+.countries-modal-body {
     padding: 2rem;
     max-height: 60vh;
     overflow-y: auto;
 }
 
-.language-search {
+.country-search {
     position: relative;
     margin-bottom: 2rem;
 }
 
-.language-search input {
+.country-search input {
     width: 100%;
     padding: 1rem 1rem 1rem 3rem;
     border: 2px solid var(--gray-light);
@@ -762,12 +762,12 @@ p {
     transition: all 0.3s ease;
 }
 
-.language-search input:focus {
+.country-search input:focus {
     border-color: var(--gold);
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
-.language-search i {
+.country-search i {
     position: absolute;
     left: 1rem;
     top: 50%;
@@ -776,13 +776,13 @@ p {
     font-size: 1.1rem;
 }
 
-.language-grid {
+.countries-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
 }
 
-.language-item {
+.country-item {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -794,19 +794,19 @@ p {
     background: var(--white);
 }
 
-.language-item:hover {
+.country-item:hover {
     border-color: var(--gold);
     background: var(--gray-light);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
 }
 
-.language-item.selected {
+.country-item.selected {
     border-color: var(--gold);
     background: rgba(212, 175, 55, 0.1);
 }
 
-.language-flag {
+.country-flag {
     width: 32px;
     height: 24px;
     border-radius: 4px;
@@ -816,17 +816,17 @@ p {
     flex-shrink: 0;
 }
 
-.language-info {
+.country-info {
     flex: 1;
 }
 
-.language-name {
+.country-name {
     font-weight: 600;
     color: var(--black);
     margin-bottom: 0.2rem;
 }
 
-.language-native {
+.country-language {
     font-size: 0.9rem;
     color: var(--gray);
 }
@@ -838,7 +838,7 @@ p {
     transition: opacity 0.3s ease;
 }
 
-.language-item.selected .language-check {
+.country-item.selected .language-check {
     opacity: 1;
 }
 
