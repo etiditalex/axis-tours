@@ -239,13 +239,14 @@ p {
 /* Modern Hero Section */
 .hero {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     margin-top: 80px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     color: var(--white);
     overflow: hidden;
+    padding-top: 100px;
 }
 
 .hero-background {
@@ -436,11 +437,9 @@ p {
 
 /* Service Categories */
 .service-categories {
-    position: absolute;
-    top: 120px;
-    left: 0;
-    right: 0;
+    position: relative;
     z-index: 10;
+    margin-bottom: 2rem;
 }
 
 .service-nav {
@@ -544,13 +543,12 @@ p {
 
 /* Hero Content */
 .hero-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 2rem 0 6rem 0;
+    padding: 2rem 0 4rem 0;
     z-index: 5;
 }
 
@@ -572,11 +570,10 @@ p {
 
 /* Search Container */
 .search-container {
-    position: absolute;
-    bottom: -40px;
-    left: 0;
-    right: 0;
+    position: relative;
     z-index: 20;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .search-bar {
@@ -1148,7 +1145,7 @@ p {
 .main-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 8rem 2rem 4rem 2rem;
+    padding: 4rem 2rem 4rem 2rem;
 }
 
 .section {
@@ -1570,7 +1567,7 @@ p {
     }
     
     .service-categories {
-        top: 160px;
+        margin-bottom: 1.5rem;
     }
     
     .service-nav {
