@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Verification - Axis Tours and Travel</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .status {
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .checklist {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .checklist li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            list-style: none;
+        }
+        .checklist li:before {
+            content: "✅ ";
+            margin-right: 10px;
+        }
+        .domain-info {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        .current-url {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .target-url {
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Domain Setup Verification</h1>
+        
+        <div class="status">
+            <h2>🎯 Setup Status</h2>
+            <p>Your custom domain setup is in progress...</p>
+        </div>
+
+        <div class="current-url">
+            <h3>📍 Current URL</h3>
+            <p><strong>https://axis-tours-backend.web.app</strong></p>
+            <p>This is your current Firebase hosting URL</p>
+        </div>
+
+        <div class="target-url">
+            <h3>🎯 Target URL</h3>
+            <p><strong>https://axistoursandtravel.co.ke</strong></p>
+            <p>This will be your professional domain</p>
+        </div>
+
+        <div class="domain-info">
+            <h3>🔧 DNS Records to Add</h3>
+            <p>Add these records in your domain registrar's DNS settings:</p>
+            <ul style="text-align: left; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                <li><strong>TXT Record:</strong> firebase=axis-tours-backend</li>
+                <li><strong>A Record:</strong> 151.101.1.195</li>
+                <li><strong>A Record:</strong> 151.101.65.195</li>
+                <li><strong>AAAA Record:</strong> 2a04:4e42::645</li>
+            </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>📋 Setup Checklist</h3>
+            <ul>
+                <li>Add custom domain in Firebase Console</li>
+                <li>Add TXT verification record</li>
+                <li>Add A records (IPv4)</li>
+                <li>Add AAAA record (IPv6)</li>
+                <li>Wait for DNS propagation (24-48 hours)</li>
+                <li>Verify domain in Firebase Console</li>
+                <li>Test website accessibility</li>
+                <li>Confirm Alexa Bot is working</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="https://console.firebase.google.com/project/axis-tours-backend/hosting/main" class="btn" target="_blank">
+                🔧 Firebase Console
+            </a>
+            <a href="https://axis-tours-backend.web.app" class="btn" target="_blank">
+                🌐 Current Website
+            </a>
+        </div>
+
+        <div style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+            <p>Once setup is complete, your website with Alexa Bot will be available at:</p>
+            <p><strong>https://axistoursandtravel.co.ke</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh every 30 seconds to check domain status
+        setInterval(() => {
+            // Check if custom domain is accessible
+            fetch('https://axistoursandtravel.co.ke', { mode: 'no-cors' })
+                .then(() => {
+                    document.querySelector('.status').innerHTML = `
+                        <h2>🎉 Domain Setup Complete!</h2>
+                        <p>Your custom domain is now live and accessible!</p>
+                        <a href="https://axistoursandtravel.co.ke" class="btn" target="_blank">
+                            🚀 Visit Your Website
+                        </a>
+                    `;
+                    document.querySelector('.status').style.background = 'rgba(16, 185, 129, 0.3)';
+                    document.querySelector('.status').style.borderColor = '#10b981';
+                })
+                .catch(() => {
+                    // Domain not ready yet, keep checking
+                });
+        }, 30000);
+    </script>
+</body>
+</html>
