@@ -437,7 +437,7 @@ p {
 /* Service Categories */
 .service-categories {
     position: absolute;
-    top: 100px;
+    top: 120px;
     left: 0;
     right: 0;
     z-index: 10;
@@ -461,9 +461,9 @@ p {
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--white);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     min-width: 140px;
     position: relative;
     overflow: hidden;
@@ -487,20 +487,21 @@ p {
 }
 
 .service-item:hover {
-    background: rgba(212, 175, 55, 0.15);
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
-    border-color: rgba(212, 175, 55, 0.3);
+    background: rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .service-item.active {
-    background: rgba(212, 175, 55, 0.25);
+    background: linear-gradient(135deg, var(--gold), #e6b800);
     border-color: var(--gold);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    color: var(--black);
 }
 
 .service-item.active::before {
-    opacity: 1;
+    opacity: 0;
 }
 
 .service-item i {
@@ -512,11 +513,13 @@ p {
 }
 
 .service-item:hover i {
-    transform: scale(1.15);
+    transform: scale(1.1);
+    color: var(--gold);
 }
 
 .service-item.active i {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    color: var(--black);
 }
 
 .service-item span {
@@ -527,14 +530,16 @@ p {
     z-index: 2;
     position: relative;
     letter-spacing: 0.5px;
+    color: var(--white);
 }
 
 .service-item:hover span {
-    color: var(--gold);
+    color: var(--white);
 }
 
 .service-item.active span {
-    color: var(--gold);
+    color: var(--black);
+    font-weight: 700;
 }
 
 /* Hero Content */
@@ -1565,7 +1570,7 @@ p {
     }
     
     .service-categories {
-        top: 140px;
+        top: 160px;
     }
     
     .service-nav {
