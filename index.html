@@ -185,7 +185,10 @@
                     
                     <!-- Right side - User actions -->
                     <div class="hero-user-actions">
-                        <span class="currency">KES</span>
+                        <div class="currency-selector" id="currencySelector">
+                            <span class="currency">KES</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                         <div class="flag-icon" id="languageSelector">
                             <i class="fas fa-flag-usa"></i>
                         </div>
@@ -284,6 +287,27 @@
                 </div>
                 <div class="language-grid" id="languageGrid">
                     <!-- Languages will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Currency Selection Modal -->
+    <div id="currencyModal" class="currency-modal">
+        <div class="currency-modal-content">
+            <div class="currency-modal-header">
+                <h3>Select Currency</h3>
+                <button class="currency-modal-close" id="closeCurrencyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="currency-modal-body">
+                <div class="currency-search">
+                    <input type="text" id="currencySearch" placeholder="Search currencies...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="currency-grid" id="currencyGrid">
+                    <!-- Currencies will be populated by JavaScript -->
                 </div>
             </div>
         </div>
@@ -814,6 +838,219 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Currency Selection Functionality
+        const currencyModal = document.getElementById('currencyModal');
+        const currencySelector = document.getElementById('currencySelector');
+        const closeCurrencyModal = document.getElementById('closeCurrencyModal');
+        const currencySearch = document.getElementById('currencySearch');
+        const currencyGrid = document.getElementById('currencyGrid');
+
+        // Currency data with codes, names, and symbols
+        const currencies = [
+            { code: 'KES', name: 'Kenyan Shilling', symbol: 'KSh', popular: true },
+            { code: 'USD', name: 'US Dollar', symbol: '$', popular: true },
+            { code: 'EUR', name: 'Euro', symbol: '€', popular: true },
+            { code: 'GBP', name: 'British Pound', symbol: '£', popular: true },
+            { code: 'JPY', name: 'Japanese Yen', symbol: '¥', popular: true },
+            { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$', popular: true },
+            { code: 'AUD', name: 'Australian Dollar', symbol: 'A$', popular: true },
+            { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF', popular: true },
+            { code: 'CNY', name: 'Chinese Yuan', symbol: '¥', popular: true },
+            { code: 'INR', name: 'Indian Rupee', symbol: '₹', popular: true },
+            { code: 'ZAR', name: 'South African Rand', symbol: 'R', popular: true },
+            { code: 'AED', name: 'UAE Dirham', symbol: 'د.إ', popular: true },
+            { code: 'SGD', name: 'Singapore Dollar', symbol: 'S$', popular: true },
+            { code: 'HKD', name: 'Hong Kong Dollar', symbol: 'HK$', popular: true },
+            { code: 'NZD', name: 'New Zealand Dollar', symbol: 'NZ$', popular: false },
+            { code: 'SEK', name: 'Swedish Krona', symbol: 'kr', popular: false },
+            { code: 'NOK', name: 'Norwegian Krone', symbol: 'kr', popular: false },
+            { code: 'DKK', name: 'Danish Krone', symbol: 'kr', popular: false },
+            { code: 'PLN', name: 'Polish Zloty', symbol: 'zł', popular: false },
+            { code: 'CZK', name: 'Czech Koruna', symbol: 'Kč', popular: false },
+            { code: 'HUF', name: 'Hungarian Forint', symbol: 'Ft', popular: false },
+            { code: 'RUB', name: 'Russian Ruble', symbol: '₽', popular: false },
+            { code: 'BRL', name: 'Brazilian Real', symbol: 'R$', popular: false },
+            { code: 'MXN', name: 'Mexican Peso', symbol: '$', popular: false },
+            { code: 'ARS', name: 'Argentine Peso', symbol: '$', popular: false },
+            { code: 'CLP', name: 'Chilean Peso', symbol: '$', popular: false },
+            { code: 'COP', name: 'Colombian Peso', symbol: '$', popular: false },
+            { code: 'PEN', name: 'Peruvian Sol', symbol: 'S/', popular: false },
+            { code: 'KRW', name: 'South Korean Won', symbol: '₩', popular: false },
+            { code: 'THB', name: 'Thai Baht', symbol: '฿', popular: false },
+            { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'RM', popular: false },
+            { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'Rp', popular: false },
+            { code: 'PHP', name: 'Philippine Peso', symbol: '₱', popular: false },
+            { code: 'VND', name: 'Vietnamese Dong', symbol: '₫', popular: false },
+            { code: 'TRY', name: 'Turkish Lira', symbol: '₺', popular: false },
+            { code: 'ILS', name: 'Israeli Shekel', symbol: '₪', popular: false },
+            { code: 'EGP', name: 'Egyptian Pound', symbol: '£', popular: false },
+            { code: 'MAD', name: 'Moroccan Dirham', symbol: 'د.م.', popular: false },
+            { code: 'TND', name: 'Tunisian Dinar', symbol: 'د.ت', popular: false },
+            { code: 'NGN', name: 'Nigerian Naira', symbol: '₦', popular: false },
+            { code: 'GHS', name: 'Ghanaian Cedi', symbol: '₵', popular: false },
+            { code: 'ETB', name: 'Ethiopian Birr', symbol: 'Br', popular: false },
+            { code: 'UGX', name: 'Ugandan Shilling', symbol: 'USh', popular: false },
+            { code: 'TZS', name: 'Tanzanian Shilling', symbol: 'TSh', popular: false },
+            { code: 'RWF', name: 'Rwandan Franc', symbol: 'RF', popular: false },
+            { code: 'BIF', name: 'Burundian Franc', symbol: 'FBu', popular: false },
+            { code: 'MWK', name: 'Malawian Kwacha', symbol: 'MK', popular: false },
+            { code: 'ZMW', name: 'Zambian Kwacha', symbol: 'ZK', popular: false },
+            { code: 'BWP', name: 'Botswana Pula', symbol: 'P', popular: false },
+            { code: 'SZL', name: 'Swazi Lilangeni', symbol: 'L', popular: false },
+            { code: 'LSL', name: 'Lesotho Loti', symbol: 'L', popular: false },
+            { code: 'NAD', name: 'Namibian Dollar', symbol: 'N$', popular: false },
+            { code: 'MUR', name: 'Mauritian Rupee', symbol: '₨', popular: false },
+            { code: 'SCR', name: 'Seychellois Rupee', symbol: '₨', popular: false },
+            { code: 'KMF', name: 'Comorian Franc', symbol: 'CF', popular: false },
+            { code: 'DJF', name: 'Djiboutian Franc', symbol: 'Fdj', popular: false },
+            { code: 'SOS', name: 'Somali Shilling', symbol: 'S', popular: false },
+            { code: 'ERN', name: 'Eritrean Nakfa', symbol: 'Nfk', popular: false },
+            { code: 'SDG', name: 'Sudanese Pound', symbol: 'ج.س.', popular: false },
+            { code: 'SSP', name: 'South Sudanese Pound', symbol: '£', popular: false },
+            { code: 'CDF', name: 'Congolese Franc', symbol: 'FC', popular: false },
+            { code: 'AOA', name: 'Angolan Kwanza', symbol: 'Kz', popular: false },
+            { code: 'MZN', name: 'Mozambican Metical', symbol: 'MT', popular: false },
+            { code: 'ZWL', name: 'Zimbabwean Dollar', symbol: 'Z$', popular: false }
+        ];
+
+        let currentCurrency = 'KES';
+
+        // Open currency modal
+        currencySelector.addEventListener('click', () => {
+            currencyModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            renderCurrencies();
+        });
+
+        // Close currency modal
+        closeCurrencyModal.addEventListener('click', () => {
+            currencyModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        currencyModal.addEventListener('click', (e) => {
+            if (e.target === currencyModal) {
+                currencyModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Currency search functionality
+        currencySearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            renderCurrencies(searchTerm);
+        });
+
+        // Render currencies
+        function renderCurrencies(searchTerm = '') {
+            const filteredCurrencies = currencies.filter(currency => 
+                currency.code.toLowerCase().includes(searchTerm) ||
+                currency.name.toLowerCase().includes(searchTerm) ||
+                currency.symbol.toLowerCase().includes(searchTerm)
+            );
+
+            const popularCurrencies = filteredCurrencies.filter(currency => currency.popular);
+            const otherCurrencies = filteredCurrencies.filter(currency => !currency.popular);
+
+            let html = '';
+
+            // Popular currencies section
+            if (popularCurrencies.length > 0) {
+                html += `
+                    <div class="popular-currencies">
+                        <h4>Popular Currencies</h4>
+                        <div class="popular-currency-grid">
+                            ${popularCurrencies.map(currency => `
+                                <div class="popular-currency" data-code="${currency.code}">
+                                    <div class="popular-currency-symbol">${currency.symbol}</div>
+                                    <div class="popular-currency-code">${currency.code}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Other currencies section
+            if (otherCurrencies.length > 0) {
+                html += `
+                    <div class="all-currencies">
+                        <h4>All Currencies</h4>
+                        <div class="currency-grid">
+                            ${otherCurrencies.map(currency => `
+                                <div class="currency-item ${currency.code === currentCurrency ? 'selected' : ''}" data-code="${currency.code}">
+                                    <div class="currency-symbol">${currency.symbol}</div>
+                                    <div class="currency-info">
+                                        <div class="currency-code">${currency.code}</div>
+                                        <div class="currency-name">${currency.name}</div>
+                                    </div>
+                                    <div class="currency-check">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            currencyGrid.innerHTML = html;
+
+            // Add event listeners to currency items
+            document.querySelectorAll('.currency-item, .popular-currency').forEach(item => {
+                item.addEventListener('click', () => {
+                    const selectedCode = item.dataset.code;
+                    selectCurrency(selectedCode);
+                });
+            });
+        }
+
+        // Select currency
+        function selectCurrency(code) {
+            currentCurrency = code;
+            const selectedCurrency = currencies.find(currency => currency.code === code);
+            
+            // Update currency display
+            const currencySpan = currencySelector.querySelector('.currency');
+            currencySpan.textContent = code;
+            
+            // Close modal
+            currencyModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Show success message
+            showCurrencyChangeNotification(selectedCurrency.code, selectedCurrency.name);
+        }
+
+        // Show currency change notification
+        function showCurrencyChangeNotification(currencyCode, currencyName) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+                color: var(--black);
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+                z-index: 10001;
+                font-weight: 600;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.textContent = `Currency changed to ${currencyCode} (${currencyName})`;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
     </script>
 
     <!-- Alexa Bot Integration -->
