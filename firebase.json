@@ -7,9 +7,7 @@
       ".github/**",
       "**/.*",
       "**/node_modules/**",
-      "*.md",
-      "js/firebase.js",
-      "js/firebase-integration.js"
+      "*.md"
     ],
     "rewrites": [
       {
