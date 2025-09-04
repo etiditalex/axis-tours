@@ -8,7 +8,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="module">
-        // Firebase will be imported dynamically when needed
+        import { 
+            signUp, 
+            signIn, 
+            signOutUser, 
+            getCurrentUser,
+            auth,
+            db,
+            collection,
+            addDoc
+        } from './js/firebase.js';
+        
+        // Make functions available globally
+        window.signUp = signUp;
+        window.signIn = signIn;
+        window.signOutUser = signOutUser;
+        window.getCurrentUser = getCurrentUser;
+        window.auth = auth;
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
     </script>
 </head>
 <body>

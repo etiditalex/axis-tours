@@ -395,5 +395,15 @@
             });
         });
     </script>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { initializeDashboard } from './js/firebase-integration.js';
+        
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+        });
+    </script>
 </body>
 </html>
