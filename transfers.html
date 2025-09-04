@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfers - Airport & Ground Transportation | Axis Tours & Travel</title>
+    <meta name="description" content="Reliable airport transfers and ground transportation services in Kenya. Professional drivers, comfortable vehicles, and seamless travel with Axis Tours & Travel.">
+    <meta name="keywords" content="transfers, airport transfers, ground transportation, car rental, chauffeur service, Kenya transfers">
+    <meta name="author" content="Axis Tours & Travel">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="geo.region" content="KE">
+    <meta name="geo.placename" content="Kenya">
+    <meta name="theme-color" content="#D4AF37">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Transfers - Airport & Ground Transportation | Axis Tours & Travel">
+    <meta property="og:description" content="Reliable airport transfers and ground transportation services in Kenya. Professional drivers and comfortable vehicles.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://axis-tours-backend.web.app/transfers.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Axis Tours & Travel">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Transfers - Airport & Ground Transportation | Axis Tours & Travel">
+    <meta name="twitter:description" content="Reliable airport transfers and ground transportation services in Kenya. Professional drivers and comfortable vehicles.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://axis-tours-backend.web.app/transfers.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Transportation Services in Kenya",
+        "description": "Reliable airport transfers and ground transportation services",
+        "itemListElement": [
+            {
+                "@type": "Service",
+                "name": "Airport Transfer Service",
+                "description": "Professional airport transfer service with comfortable vehicles",
+                "provider": {
+                    "@type": "Organization",
+                    "name": "Axis Tours & Travel"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "50",
+                    "priceCurrency": "USD"
+                }
+            },
+            {
+                "@type": "Service",
+                "name": "City Transfer Service",
+                "description": "Reliable city-to-city transfer service",
+                "provider": {
+                    "@type": "Organization",
+                    "name": "Axis Tours & Travel"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "100",
+                    "priceCurrency": "USD"
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-icon">
+                            <div class="logo-globe"></div>
+                            <div class="logo-airplane"></div>
+                            <div class="logo-arc"></div>
+                        </div>
+                        <div class="logo-text">
+                            <div class="logo-text-main">Axis</div>
+                            <div class="logo-text-sub">Tours & Travel</div>
+                        </div>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="stays.html">Stays</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="transfers.html" class="active">Transfers</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transportation Services</h1>
+                <p>Reliable transfers and ground transportation across Kenya</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Transfer Booking Form -->
+        <section class="section">
+            <div class="container">
+                <div class="transfer-booking-form">
+                    <h2>Book Your Transfer</h2>
+                    <form id="transferForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pickupLocation">Pickup Location</label>
+                                <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Enter pickup location" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dropoffLocation">Drop-off Location</label>
+                                <input type="text" id="dropoffLocation" name="dropoffLocation" placeholder="Enter drop-off location" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pickupDate">Pickup Date</label>
+                                <input type="date" id="pickupDate" name="pickupDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pickupTime">Pickup Time</label>
+                                <input type="time" id="pickupTime" name="pickupTime" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="passengers">Number of Passengers</label>
+                                <select id="passengers" name="passengers" required>
+                                    <option value="">Select passengers</option>
+                                    <option value="1">1 Passenger</option>
+                                    <option value="2">2 Passengers</option>
+                                    <option value="3">3 Passengers</option>
+                                    <option value="4">4 Passengers</option>
+                                    <option value="5">5+ Passengers</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicleType">Vehicle Type</label>
+                                <select id="vehicleType" name="vehicleType" required>
+                                    <option value="">Select vehicle type</option>
+                                    <option value="sedan">Sedan (1-3 passengers)</option>
+                                    <option value="suv">SUV (1-6 passengers)</option>
+                                    <option value="minivan">Minivan (1-8 passengers)</option>
+                                    <option value="bus">Bus (9+ passengers)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests</label>
+                            <textarea id="specialRequests" name="specialRequests" placeholder="Any special requests or requirements"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Get Quote</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transfer Services -->
+        <section class="section">
+            <div class="container">
+                <h2>Our Transfer Services</h2>
+                <div class="transfers-grid" id="transfersGrid">
+                    <!-- Transfer services will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Routes -->
+        <section class="section">
+            <div class="container">
+                <h2>Popular Transfer Routes</h2>
+                <div class="routes-grid" id="routesGrid">
+                    <!-- Popular routes will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Axis Tours & Travel</h3>
+                    <p>Your gateway to unforgettable experiences in Kenya and beyond.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="stays.html">Stays</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="transfers.html">Transfers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+                    <p><i class="fas fa-envelope"></i> info@axistoursandtravel.co.ke</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alexa Bot Integration -->
+    <script src="js/alexa-bot.js"></script>
+
+    <script>
+        // Transfer services data
+        const transferServices = [
+            {
+                id: 1,
+                name: "Airport Transfer",
+                type: "airport",
+                price: 50,
+                duration: "30-60 minutes",
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Professional airport transfer service with meet and greet at the airport.",
+                features: ["Meet & Greet", "Flight Tracking", "Luggage Assistance", "Professional Driver"],
+                vehicles: ["Sedan", "SUV", "Minivan"]
+            },
+            {
+                id: 2,
+                name: "City Transfer",
+                type: "city",
+                price: 30,
+                duration: "15-45 minutes",
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Reliable city-to-city transfer service within Nairobi and surrounding areas.",
+                features: ["Professional Driver", "Comfortable Vehicles", "GPS Navigation", "24/7 Service"],
+                vehicles: ["Sedan", "SUV"]
+            },
+            {
+                id: 3,
+                name: "Intercity Transfer",
+                type: "intercity",
+                price: 150,
+                duration: "2-6 hours",
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Long-distance transfers between major cities in Kenya.",
+                features: ["Comfortable Vehicles", "Rest Stops", "Professional Driver", "Refreshments"],
+                vehicles: ["SUV", "Minivan", "Bus"]
+            },
+            {
+                id: 4,
+                name: "Safari Transfer",
+                type: "safari",
+                price: 200,
+                duration: "3-8 hours",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Specialized transfers to national parks and safari destinations.",
+                features: ["4WD Vehicles", "Safari Guide", "Game Viewing", "Park Entry"],
+                vehicles: ["4WD SUV", "Safari Van"]
+            },
+            {
+                id: 5,
+                name: "Beach Transfer",
+                type: "beach",
+                price: 120,
+                duration: "1-3 hours",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Comfortable transfers to coastal destinations and beach resorts.",
+                features: ["Air Conditioning", "Comfortable Seating", "Luggage Space", "Scenic Route"],
+                vehicles: ["SUV", "Minivan"]
+            },
+            {
+                id: 6,
+                name: "Luxury Transfer",
+                type: "luxury",
+                price: 100,
+                duration: "30-60 minutes",
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Premium transfer service with luxury vehicles and personalized service.",
+                features: ["Luxury Vehicles", "Chauffeur Service", "Refreshments", "WiFi"],
+                vehicles: ["Luxury Sedan", "Luxury SUV"]
+            }
+        ];
+
+        // Popular routes data
+        const popularRoutes = [
+            {
+                from: "Nairobi Airport",
+                to: "Nairobi City Center",
+                distance: "18 km",
+                duration: "30-45 minutes",
+                price: 50,
+                frequency: "Every 30 minutes"
+            },
+            {
+                from: "Nairobi",
+                to: "Maasai Mara",
+                distance: "280 km",
+                duration: "5-6 hours",
+                price: 200,
+                frequency: "Daily"
+            },
+            {
+                from: "Nairobi",
+                to: "Amboseli",
+                distance: "240 km",
+                duration: "4-5 hours",
+                price: 180,
+                frequency: "Daily"
+            },
+            {
+                from: "Nairobi",
+                to: "Mombasa",
+                distance: "480 km",
+                duration: "6-8 hours",
+                price: 150,
+                frequency: "Daily"
+            },
+            {
+                from: "Mombasa Airport",
+                to: "Diani Beach",
+                distance: "35 km",
+                duration: "45-60 minutes",
+                price: 60,
+                frequency: "Every hour"
+            },
+            {
+                from: "Nairobi",
+                to: "Lake Nakuru",
+                distance: "160 km",
+                duration: "2-3 hours",
+                price: 120,
+                frequency: "Daily"
+            }
+        ];
+
+        // Render transfer services
+        function renderTransferServices() {
+            const grid = document.getElementById('transfersGrid');
+            grid.innerHTML = '';
+
+            transferServices.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'transfer-service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-image">
+                        <img src="${service.image}" alt="${service.name}">
+                        <div class="service-type">
+                            <i class="fas fa-car"></i> ${service.type.toUpperCase()}
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>${service.name}</h3>
+                        <p class="service-description">${service.description}</p>
+                        <div class="service-details">
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>${service.duration}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>From $${service.price}</span>
+                            </div>
+                        </div>
+                        <div class="service-features">
+                            <h4>Features:</h4>
+                            <ul>
+                                ${service.features.map(feature => `<li>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="service-vehicles">
+                            <h4>Available Vehicles:</h4>
+                            <div class="vehicle-tags">
+                                ${service.vehicles.map(vehicle => `<span class="vehicle-tag">${vehicle}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="service-footer">
+                            <a href="booking.html?transfer=${service.id}" class="btn btn-primary">Book Transfer</a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(serviceCard);
+            });
+        }
+
+        // Render popular routes
+        function renderPopularRoutes() {
+            const grid = document.getElementById('routesGrid');
+            grid.innerHTML = '';
+
+            popularRoutes.forEach(route => {
+                const routeCard = document.createElement('div');
+                routeCard.className = 'route-card';
+                routeCard.innerHTML = `
+                    <div class="route-content">
+                        <div class="route-info">
+                            <h4>${route.from} → ${route.to}</h4>
+                            <div class="route-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-road"></i>
+                                    <span>${route.distance}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>${route.duration}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>${route.frequency}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="route-price">
+                            <span class="price">$${route.price}</span>
+                            <a href="booking.html?route=${encodeURIComponent(route.from + ' to ' + route.to)}" class="btn btn-secondary">Book Now</a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(routeCard);
+            });
+        }
+
+        // Transfer form handling
+        document.getElementById('transferForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const transferData = {
+                pickupLocation: formData.get('pickupLocation'),
+                dropoffLocation: formData.get('dropoffLocation'),
+                pickupDate: formData.get('pickupDate'),
+                pickupTime: formData.get('pickupTime'),
+                passengers: formData.get('passengers'),
+                vehicleType: formData.get('vehicleType'),
+                specialRequests: formData.get('specialRequests')
+            };
+
+            // Calculate estimated price based on distance and vehicle type
+            let basePrice = 50;
+            if (transferData.vehicleType === 'suv') basePrice = 70;
+            else if (transferData.vehicleType === 'minivan') basePrice = 90;
+            else if (transferData.vehicleType === 'bus') basePrice = 150;
+
+            // Add passenger surcharge
+            if (parseInt(transferData.passengers) > 4) {
+                basePrice += 20;
+            }
+
+            // Show quote
+            alert(`Transfer Quote:\n\nFrom: ${transferData.pickupLocation}\nTo: ${transferData.dropoffLocation}\nDate: ${transferData.pickupDate}\nTime: ${transferData.pickupTime}\nPassengers: ${transferData.passengers}\nVehicle: ${transferData.vehicleType}\n\nEstimated Price: $${basePrice}\n\nProceed to booking?`);
+            
+            // Redirect to booking page with transfer data
+            const bookingUrl = `booking.html?transfer=quote&pickup=${encodeURIComponent(transferData.pickupLocation)}&dropoff=${encodeURIComponent(transferData.dropoffLocation)}&date=${transferData.pickupDate}&time=${transferData.pickupTime}&passengers=${transferData.passengers}&vehicle=${transferData.vehicleType}`;
+            window.location.href = bookingUrl;
+        });
+
+        // Initialize page
+        renderTransferServices();
+        renderPopularRoutes();
+    </script>
+</body>
+</html>
