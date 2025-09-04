@@ -160,11 +160,75 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <!-- Service Categories -->
+        <div class="service-categories">
+            <div class="container">
+                <div class="service-nav">
+                    <div class="service-item active" data-service="stays">
+                        <i class="fas fa-bed"></i>
+                        <span>Stays</span>
+                    </div>
+                    <div class="service-item" data-service="tours">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Tours</span>
+                    </div>
+                    <div class="service-item" data-service="safaris">
+                        <i class="fas fa-camera"></i>
+                        <span>Safaris</span>
+                    </div>
+                    <div class="service-item" data-service="experiences">
+                        <i class="fas fa-star"></i>
+                        <span>Experiences</span>
+                    </div>
+                    <div class="service-item" data-service="transfers">
+                        <i class="fas fa-car"></i>
+                        <span>Transfers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Content -->
         <div class="hero-content">
-            <h1>Discover East Africa's Hidden Gems</h1>
-            <p>Experience the beauty of Kenya's coast, wildlife safaris, and East African adventures with personalized service</p>
-            <a href="booking.html" class="btn">Start Your Journey</a>
-            <a href="destinations.html" class="btn btn-outline">Explore Destinations</a>
+            <div class="container">
+                <h1>Find your next adventure</h1>
+                <p>Search deals on hotels, safaris, tours, and much more...</p>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="container">
+                <div class="search-bar">
+                    <div class="search-field destination-field">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Where are you going?" id="destination">
+                        <div class="field-label">Destination</div>
+                    </div>
+                    
+                    <div class="search-field date-field">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" placeholder="Check-in — Check-out" id="dates" readonly>
+                        <div class="field-label">Dates</div>
+                    </div>
+                    
+                    <div class="search-field guests-field">
+                        <i class="fas fa-users"></i>
+                        <input type="text" value="2 adults · 0 children · 1 room" id="guests" readonly>
+                        <i class="fas fa-chevron-down"></i>
+                        <div class="field-label">Guests & Rooms</div>
+                    </div>
+                    
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -371,6 +435,100 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Hero Section Functionality
+        // Service Categories
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                document.querySelectorAll('.service-item').forEach(i => i.classList.remove('active'));
+                // Add active class to clicked item
+                item.classList.add('active');
+                
+                // Update search placeholder based on service
+                const service = item.dataset.service;
+                const destinationInput = document.getElementById('destination');
+                
+                const placeholders = {
+                    'stays': 'Where are you going?',
+                    'tours': 'Which tour interests you?',
+                    'safaris': 'Which safari destination?',
+                    'experiences': 'What experience are you looking for?',
+                    'transfers': 'Where do you need transport?'
+                };
+                
+                destinationInput.placeholder = placeholders[service] || 'Where are you going?';
+            });
+        });
+
+        // Date Picker Functionality
+        const datesInput = document.getElementById('dates');
+        datesInput.addEventListener('click', () => {
+            // Simple date picker - in a real implementation, you'd use a proper date picker library
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const checkIn = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            const checkOut = tomorrow.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            
+            datesInput.value = `${checkIn} — ${checkOut}`;
+        });
+
+        // Guests Picker Functionality
+        const guestsInput = document.getElementById('guests');
+        guestsInput.addEventListener('click', () => {
+            // Simple guests picker - in a real implementation, you'd show a modal
+            const adults = prompt('Number of adults:', '2');
+            const children = prompt('Number of children:', '0');
+            const rooms = prompt('Number of rooms:', '1');
+            
+            if (adults !== null && children !== null && rooms !== null) {
+                guestsInput.value = `${adults} adults · ${children} children · ${rooms} room${rooms > 1 ? 's' : ''}`;
+            }
+        });
+
+        // Search Functionality
+        document.querySelector('.search-btn').addEventListener('click', () => {
+            const destination = document.getElementById('destination').value;
+            const dates = document.getElementById('dates').value;
+            const guests = document.getElementById('guests').value;
+            
+            if (destination.trim()) {
+                // Redirect to booking page with search parameters
+                const params = new URLSearchParams({
+                    destination: destination,
+                    dates: dates,
+                    guests: guests
+                });
+                window.location.href = `booking.html?${params.toString()}`;
+            } else {
+                alert('Please enter a destination to search.');
+            }
+        });
+
+        // Destination Input with Suggestions
+        const destinationInput = document.getElementById('destination');
+        const destinations = [
+            'Diani Beach, Kenya',
+            'Maasai Mara, Kenya',
+            'Mombasa, Kenya',
+            'Watamu, Kenya',
+            'Malindi, Kenya',
+            'Lamu, Kenya',
+            'Nairobi, Kenya',
+            'Amboseli, Kenya',
+            'Tsavo, Kenya',
+            'Samburu, Kenya',
+            'Zanzibar, Tanzania',
+            'Serengeti, Tanzania',
+            'Kilimanjaro, Tanzania'
+        ];
+
+        destinationInput.addEventListener('input', (e) => {
+            const value = e.target.value.toLowerCase();
+            // In a real implementation, you'd show a dropdown with filtered suggestions
         });
     </script>
 
