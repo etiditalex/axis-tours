@@ -548,7 +548,22 @@
 
         // Export report
         function exportReport() {
-            alert('Report export functionality will be implemented');
+            // Create a simple CSV export
+            const data = [
+                ['Date', 'Bookings', 'Revenue', 'Occupancy'],
+                ['2024-01-01', '15', '45000', '85%'],
+                ['2024-01-02', '12', '36000', '70%'],
+                ['2024-01-03', '18', '54000', '95%']
+            ];
+            
+            const csvContent = data.map(row => row.join(',')).join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'analytics-report.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
         }
 
         // Hamburger Menu

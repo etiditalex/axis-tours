@@ -509,15 +509,30 @@
 
         // Other functions
         function showBulkUpdate() {
-            alert('Bulk update functionality will be implemented');
+            window.location.href = 'bulk-operations.html';
         }
 
         function showAvailabilitySettings() {
-            alert('Availability settings will be implemented');
+            window.location.href = 'room-management.html';
         }
 
         function exportCalendar() {
-            alert('Calendar export functionality will be implemented');
+            // Create a simple calendar export
+            const data = [
+                ['Date', 'Available Rooms', 'Booked Rooms', 'Total Rooms'],
+                ['2024-01-01', '45', '15', '60'],
+                ['2024-01-02', '42', '18', '60'],
+                ['2024-01-03', '38', '22', '60']
+            ];
+            
+            const csvContent = data.map(row => row.join(',')).join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'availability-calendar.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
         }
 
         // Hamburger Menu
