@@ -2422,26 +2422,13 @@ p {
     }
     
     .service-categories {
-        margin-bottom: 1.5rem;
+        display: none;
     }
     
     .service-nav {
-        gap: 1rem;
-        padding: 1rem 1rem;
+        display: none;
     }
     
-    .service-item {
-        padding: 1rem 1.5rem;
-        min-width: 120px;
-    }
-    
-    .service-item i {
-        font-size: 1.4rem;
-    }
-    
-    .service-item span {
-        font-size: 0.9rem;
-    }
     
     .search-bar {
         flex-direction: column;
