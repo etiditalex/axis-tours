@@ -3,585 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics Dashboard - Partner Dashboard - Axis Tours and Travel</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Analytics Dashboard - Axis Tours & Travel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .analytics-dashboard {
+            padding: 2rem 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+        }
+        
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-title {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .metric-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-size: 1.2rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .metric-change.positive {
+            color: #28a745;
+        }
+        
+        .chart-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-placeholder {
+            height: 300px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+            flex-direction: column;
+        }
+        
+        .chart-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <div class="logo-globe"></div>
-                    <div class="logo-airplane"></div>
-                    <div class="logo-arc"></div>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
                 </div>
-                <div class="logo-text">
-                    <div class="logo-text-main">Axis</div>
-                    <div class="logo-text-sub">Tours & Travel</div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="list-your-property.html" class="btn-primary">List Property</a>
+                    <a href="#" class="btn-secondary">Sign In</a>
                 </div>
-            </a>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="hotels.html">Hotels</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="booking.html">Book Now</a></li>
-                <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
-            </ul>
-        </nav>
+        </div>
     </header>
 
-    <!-- Dashboard Header -->
-    <section class="dashboard-hero">
-        <div class="dashboard-hero-content">
-            <div class="partner-info">
-                <div class="partner-avatar">
-                    <i class="fas fa-chart-line"></i>
+    <!-- Analytics Dashboard Section -->
+    <section class="analytics-dashboard">
+        <div class="dashboard-header">
+            <div class="container">
+                <h1>Analytics Dashboard</h1>
+                <p>Comprehensive insights into your business performance</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Total Revenue</div>
+                        <div class="metric-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div class="metric-value">KES 2,450,000</div>
+                    <div class="metric-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        +12.5% from last month
+                    </div>
                 </div>
-                <div class="partner-details">
-                    <h1>Analytics Dashboard</h1>
-                    <p>Track performance, analyze trends, and optimize your business</p>
-                    <div class="partner-status">
-                        <span class="status-badge status-active">Baobab Beach Resort</span>
-                        <a href="partner-dashboard.html" class="back-to-dashboard">
-                            <i class="fas fa-arrow-left"></i> Back to Dashboard
-                        </a>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Total Bookings</div>
+                        <div class="metric-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+                    <div class="metric-value">1,247</div>
+                    <div class="metric-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        +8.3% from last month
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Average Rating</div>
+                        <div class="metric-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="metric-value">4.7</div>
+                    <div class="metric-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        +0.2 from last month
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Occupancy Rate</div>
+                        <div class="metric-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                    </div>
+                    <div class="metric-value">78.5%</div>
+                    <div class="metric-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        +5.2% from last month
                     </div>
                 </div>
             </div>
-            <div class="quick-actions">
-                <select id="timeRange" class="time-selector">
-                    <option value="7">Last 7 days</option>
-                    <option value="30" selected>Last 30 days</option>
-                    <option value="90">Last 90 days</option>
-                    <option value="365">Last year</option>
-                </select>
-                <button class="btn-secondary" onclick="exportReport()">
-                    <i class="fas fa-download"></i> Export Report
-                </button>
+
+            <!-- Charts Section -->
+            <div class="chart-card">
+                <div class="chart-title">Revenue Trends</div>
+                <div class="chart-placeholder">
+                    <i class="fas fa-chart-line"></i>
+                    Revenue trends chart will be displayed here
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-title">Booking Sources</div>
+                <div class="chart-placeholder">
+                    <i class="fas fa-chart-pie"></i>
+                    Booking sources pie chart will be displayed here
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Main Content -->
-    <main class="dashboard-main">
-        <!-- Key Performance Indicators -->
-        <section class="dashboard-section">
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        <div class="kpi-trend positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+12%</span>
-                        </div>
-                    </div>
-                    <div class="kpi-value">156</div>
-                    <div class="kpi-label">Total Bookings</div>
-                    <div class="kpi-subtitle">vs 139 last period</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                        <div class="kpi-trend positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+8%</span>
-                        </div>
-                    </div>
-                    <div class="kpi-value">KES 7.2M</div>
-                    <div class="kpi-label">Total Revenue</div>
-                    <div class="kpi-subtitle">vs KES 6.7M last period</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon">
-                            <i class="fas fa-percentage"></i>
-                        </div>
-                        <div class="kpi-trend positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+5%</span>
-                        </div>
-                    </div>
-                    <div class="kpi-value">78%</div>
-                    <div class="kpi-label">Occupancy Rate</div>
-                    <div class="kpi-subtitle">vs 73% last period</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-header">
-                        <div class="kpi-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="kpi-trend positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+0.3</span>
-                        </div>
-                    </div>
-                    <div class="kpi-value">4.7★</div>
-                    <div class="kpi-label">Guest Rating</div>
-                    <div class="kpi-subtitle">vs 4.4★ last period</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Charts and Analytics -->
-        <div class="analytics-content">
-            <!-- Left Column - Main Charts -->
-            <div class="charts-section">
-                <!-- Revenue Chart -->
-                <section class="dashboard-section">
-                    <div class="section-header">
-                        <h2>Revenue Trends</h2>
-                        <div class="chart-controls">
-                            <button class="chart-btn active" data-period="daily">Daily</button>
-                            <button class="chart-btn" data-period="weekly">Weekly</button>
-                            <button class="chart-btn" data-period="monthly">Monthly</button>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                </section>
-
-                <!-- Booking Trends Chart -->
-                <section class="dashboard-section">
-                    <div class="section-header">
-                        <h2>Booking Trends</h2>
-                        <div class="chart-controls">
-                            <button class="chart-btn active" data-type="bookings">Bookings</button>
-                            <button class="chart-btn" data-type="cancellations">Cancellations</button>
-                            <button class="chart-btn" data-type="conversions">Conversions</button>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="bookingChart"></canvas>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Right Column - Sidebar Analytics -->
-            <div class="analytics-sidebar">
-                <!-- Room Performance -->
-                <section class="dashboard-section">
-                    <h2>Room Performance</h2>
-                    <div class="room-performance">
-                        <div class="room-item">
-                            <div class="room-info">
-                                <span class="room-name">Deluxe Suite</span>
-                                <span class="room-occupancy">85%</span>
-                            </div>
-                            <div class="room-bar">
-                                <div class="room-bar-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="room-item">
-                            <div class="room-info">
-                                <span class="room-name">Standard Room</span>
-                                <span class="room-occupancy">72%</span>
-                            </div>
-                            <div class="room-bar">
-                                <div class="room-bar-fill" style="width: 72%"></div>
-                            </div>
-                        </div>
-                        <div class="room-item">
-                            <div class="room-info">
-                                <span class="room-name">Villa</span>
-                                <span class="room-occupancy">68%</span>
-                            </div>
-                            <div class="room-bar">
-                                <div class="room-bar-fill" style="width: 68%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Top Performing Sources -->
-                <section class="dashboard-section">
-                    <h2>Top Booking Sources</h2>
-                    <div class="source-list">
-                        <div class="source-item">
-                            <div class="source-info">
-                                <span class="source-name">Direct Website</span>
-                                <span class="source-percentage">45%</span>
-                            </div>
-                            <div class="source-bar">
-                                <div class="source-bar-fill" style="width: 45%"></div>
-                            </div>
-                        </div>
-                        <div class="source-item">
-                            <div class="source-info">
-                                <span class="source-name">Axis Tours</span>
-                                <span class="source-percentage">32%</span>
-                            </div>
-                            <div class="source-bar">
-                                <div class="source-bar-fill" style="width: 32%"></div>
-                            </div>
-                        </div>
-                        <div class="source-item">
-                            <div class="source-info">
-                                <span class="source-name">Online Travel Agents</span>
-                                <span class="source-percentage">23%</span>
-                            </div>
-                            <div class="source-bar">
-                                <div class="source-bar-fill" style="width: 23%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Guest Demographics -->
-                <section class="dashboard-section">
-                    <h2>Guest Demographics</h2>
-                    <div class="demographics-chart">
-                        <canvas id="demographicsChart"></canvas>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <!-- Additional Analytics -->
-        <div class="additional-analytics">
-            <!-- Geographic Distribution -->
-            <section class="dashboard-section">
-                <h2>Geographic Distribution</h2>
-                <div class="geo-stats">
-                    <div class="geo-item">
-                        <div class="geo-flag">🇰🇪</div>
-                        <div class="geo-info">
-                            <span class="geo-country">Kenya</span>
-                            <span class="geo-percentage">65%</span>
-                        </div>
-                    </div>
-                    <div class="geo-item">
-                        <div class="geo-flag">🇺🇸</div>
-                        <div class="geo-info">
-                            <span class="geo-country">United States</span>
-                            <span class="geo-percentage">18%</span>
-                        </div>
-                    </div>
-                    <div class="geo-item">
-                        <div class="geo-flag">🇬🇧</div>
-                        <div class="geo-info">
-                            <span class="geo-country">United Kingdom</span>
-                            <span class="geo-percentage">12%</span>
-                        </div>
-                    </div>
-                    <div class="geo-item">
-                        <div class="geo-flag">🌍</div>
-                        <div class="geo-info">
-                            <span class="geo-country">Other</span>
-                            <span class="geo-percentage">5%</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seasonal Analysis -->
-            <section class="dashboard-section">
-                <h2>Seasonal Performance Analysis</h2>
-                <div class="seasonal-grid">
-                    <div class="season-card high-season">
-                        <div class="season-header">
-                            <h3>High Season</h3>
-                            <span class="season-period">Dec - Mar</span>
-                        </div>
-                        <div class="season-stats">
-                            <div class="season-stat">
-                                <span class="stat-label">Occupancy</span>
-                                <span class="stat-value">92%</span>
-                            </div>
-                            <div class="season-stat">
-                                <span class="stat-label">Avg. Rate</span>
-                                <span class="stat-value">KES 65,000</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="season-card low-season">
-                        <div class="season-header">
-                            <h3>Low Season</h3>
-                            <span class="season-period">Apr - Nov</span>
-                        </div>
-                        <div class="season-stats">
-                            <div class="season-stat">
-                                <span class="stat-label">Occupancy</span>
-                                <span class="stat-value">58%</span>
-                            </div>
-                            <div class="season-stat">
-                                <span class="stat-label">Avg. Rate</span>
-                                <span class="stat-value">KES 38,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Axis Tours & Travel</h3>
-                <p>Your trusted partner for unforgettable East African adventures.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="destinations.html">Destinations</a></li>
-                    <li><a href="hotels.html">Hotels</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p>Email: info@axistours.com</p>
-                <p>Phone: +254 700 000 000</p>
-                <p>Address: Nairobi, Kenya</p>
-            </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Axis Tours & Travel. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Initialize analytics dashboard
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCharts();
-            setupEventListeners();
-        });
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Time range selector
-            document.getElementById('timeRange').addEventListener('change', function(e) {
-                updateCharts(e.target.value);
-            });
-
-            // Chart control buttons
-            document.querySelectorAll('.chart-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all buttons in the same group
-                    const parent = this.closest('.chart-controls');
-                    parent.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Update chart based on button data
-                    const period = this.dataset.period;
-                    const type = this.dataset.type;
-                    if (period) updateRevenueChart(period);
-                    if (type) updateBookingChart(type);
-                });
-            });
-        }
-
-        // Initialize all charts
-        function initializeCharts() {
-            initializeRevenueChart();
-            initializeBookingChart();
-            initializeDemographicsChart();
-        }
-
-        // Revenue Chart
-        function initializeRevenueChart() {
-            const ctx = document.getElementById('revenueChart').getContext('2d');
-            const revenueChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Revenue (KES)',
-                        data: [2.1, 2.3, 2.8, 3.2, 3.5, 3.8, 4.1, 4.5, 4.2, 3.9, 3.6, 3.2],
-                        borderColor: '#d4af37',
-                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) {
-                                    return 'KES ' + value + 'M';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-            window.revenueChart = revenueChart;
-        }
-
-        // Booking Chart
-        function initializeBookingChart() {
-            const ctx = document.getElementById('bookingChart').getContext('2d');
-            const bookingChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Bookings',
-                        data: [45, 52, 48, 61, 55, 67, 72, 78, 65, 58, 49, 42],
-                        backgroundColor: 'rgba(212, 175, 55, 0.8)',
-                        borderColor: '#d4af37',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            window.bookingChart = bookingChart;
-        }
-
-        // Demographics Chart
-        function initializeDemographicsChart() {
-            const ctx = document.getElementById('demographicsChart').getContext('2d');
-            const demographicsChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Couples', 'Families', 'Business', 'Solo', 'Groups'],
-                    datasets: [{
-                        data: [35, 28, 20, 12, 5],
-                        backgroundColor: [
-                            '#d4af37',
-                            '#10b981',
-                            '#3b82f6',
-                            '#f59e0b',
-                            '#ef4444'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                usePointStyle: true
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Update charts based on time range
-        function updateCharts(timeRange) {
-            // This would typically fetch new data from the server
-            console.log('Updating charts for time range:', timeRange);
-            
-            // Simulate data update
-            if (window.revenueChart) {
-                const newData = generateRandomData(12);
-                window.revenueChart.data.datasets[0].data = newData;
-                window.revenueChart.update();
-            }
-        }
-
-        // Update revenue chart based on period
-        function updateRevenueChart(period) {
-            console.log('Updating revenue chart for period:', period);
-            // Implementation would update chart data based on selected period
-        }
-
-        // Update booking chart based on type
-        function updateBookingChart(type) {
-            console.log('Updating booking chart for type:', type);
-            // Implementation would update chart data based on selected type
-        }
-
-        // Generate random data for demo
-        function generateRandomData(count) {
-            return Array.from({length: count}, () => Math.floor(Math.random() * 5) + 1);
-        }
-
-        // Export report
-        function exportReport() {
-            // Create a simple CSV export
-            const data = [
-                ['Date', 'Bookings', 'Revenue', 'Occupancy'],
-                ['2024-01-01', '15', '45000', '85%'],
-                ['2024-01-02', '12', '36000', '70%'],
-                ['2024-01-03', '18', '54000', '95%']
-            ];
-            
-            const csvContent = data.map(row => row.join(',')).join('\n');
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'analytics-report.csv';
-            a.click();
-            window.URL.revokeObjectURL(url);
-        }
-
-        // Hamburger Menu
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>

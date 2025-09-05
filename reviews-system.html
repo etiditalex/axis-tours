@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews & Ratings - Axis Tours & Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reviews-system {
+            padding: 2rem 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .reviews-header {
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .reviews-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        .reviews-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .reviews-tabs {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .tab-nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-btn.active {
+            color: var(--gold);
+            background: white;
+            border-bottom-color: var(--gold);
+        }
+        
+        .tab-btn:hover {
+            color: var(--gold);
+            background: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .reviews-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .overview-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+        }
+        
+        .overview-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+        
+        .overview-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .overview-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .rating-breakdown {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .rating-summary {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .rating-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-right: 1rem;
+        }
+        
+        .rating-stars {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-right: 1rem;
+        }
+        
+        .rating-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .rating-bars {
+            display: grid;
+            gap: 0.5rem;
+        }
+        
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .rating-label {
+            width: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .rating-progress {
+            flex: 1;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .rating-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            transition: width 0.3s ease;
+        }
+        
+        .rating-count {
+            width: 40px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: right;
+        }
+        
+        .reviews-list {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .reviews-header-bar {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .reviews-count {
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .reviews-filter {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+        
+        .filter-btn:hover {
+            background: #f8f9fa;
+        }
+        
+        .review-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .reviewer-details h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--black);
+        }
+        
+        .reviewer-details p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .review-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .review-stars {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+        
+        .review-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .review-content {
+            margin-bottom: 1rem;
+        }
+        
+        .review-text {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .review-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .review-tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .review-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            color: var(--gold);
+        }
+        
+        .action-btn.liked {
+            color: #dc3545;
+        }
+        
+        .write-review {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .write-review h3 {
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+        
+        .review-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .rating-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .star-input {
+            font-size: 2rem;
+            color: #e9ecef;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .star-input.active {
+            color: var(--gold);
+        }
+        
+        .star-input:hover {
+            color: var(--gold);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            color: var(--black);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        @media (max-width: 768px) {
+            .reviews-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .rating-summary {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .review-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .reviews-filter {
+                flex-wrap: wrap;
+            }
+            
+            .tab-nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="list-your-property.html" class="btn-primary">List Property</a>
+                    <a href="#" class="btn-secondary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Reviews System Section -->
+    <section class="reviews-system">
+        <div class="reviews-header">
+            <div class="container">
+                <h1>Reviews & Ratings</h1>
+                <p>See what our guests say about their experiences</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Reviews Overview -->
+            <div class="reviews-overview">
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="overview-value" id="averageRating">4.7</div>
+                    <div class="overview-label">Average Rating</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="overview-value" id="totalReviews">1,247</div>
+                    <div class="overview-label">Total Reviews</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <div class="overview-value" id="positiveReviews">89%</div>
+                    <div class="overview-label">Positive Reviews</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="overview-value" id="excellentReviews">67%</div>
+                    <div class="overview-label">Excellent (5-star)</div>
+                </div>
+            </div>
+
+            <!-- Reviews Tabs -->
+            <div class="reviews-tabs">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="reviews">All Reviews</button>
+                    <button class="tab-btn" data-tab="write">Write Review</button>
+                    <button class="tab-btn" data-tab="manage">Manage Reviews</button>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-content active" id="reviews">
+                    <div class="rating-breakdown">
+                        <div class="rating-summary">
+                            <div class="rating-number">4.7</div>
+                            <div class="rating-stars">★★★★☆</div>
+                            <div class="rating-text">Based on 1,247 reviews</div>
+                        </div>
+                        <div class="rating-bars">
+                            <div class="rating-bar">
+                                <span class="rating-label">5</span>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 67%"></div>
+                                </div>
+                                <span class="rating-count">835</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">4</span>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 22%"></div>
+                                </div>
+                                <span class="rating-count">274</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">3</span>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 7%"></div>
+                                </div>
+                                <span class="rating-count">87</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">2</span>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 3%"></div>
+                                </div>
+                                <span class="rating-count">37</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">1</span>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 1%"></div>
+                                </div>
+                                <span class="rating-count">14</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reviews-list">
+                        <div class="reviews-header-bar">
+                            <div class="reviews-count">1,247 Reviews</div>
+                            <div class="reviews-filter">
+                                <button class="filter-btn active" data-filter="all">All</button>
+                                <button class="filter-btn" data-filter="5">5 Stars</button>
+                                <button class="filter-btn" data-filter="4">4 Stars</button>
+                                <button class="filter-btn" data-filter="3">3 Stars</button>
+                                <button class="filter-btn" data-filter="2">2 Stars</button>
+                                <button class="filter-btn" data-filter="1">1 Star</button>
+                            </div>
+                        </div>
+                        <div id="reviewsList">
+                            <!-- Reviews will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Write Review Tab -->
+                <div class="tab-content" id="write">
+                    <div class="write-review">
+                        <h3>Write a Review</h3>
+                        <form id="reviewForm" class="review-form">
+                            <div class="form-group">
+                                <label for="propertySelect">Select Property</label>
+                                <select id="propertySelect" name="property" required>
+                                    <option value="">Choose a property...</option>
+                                    <option value="diani-beach-resort">Diani Beach Resort</option>
+                                    <option value="maasai-mara-lodge">Maasai Mara Safari Lodge</option>
+                                    <option value="nairobi-city-hotel">Nairobi City Hotel</option>
+                                    <option value="kilifi-bay-villa">Kilifi Bay Villa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Overall Rating</label>
+                                <div class="rating-input">
+                                    <span class="star-input" data-rating="1">★</span>
+                                    <span class="star-input" data-rating="2">★</span>
+                                    <span class="star-input" data-rating="3">★</span>
+                                    <span class="star-input" data-rating="4">★</span>
+                                    <span class="star-input" data-rating="5">★</span>
+                                </div>
+                                <input type="hidden" id="rating" name="rating" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewTitle">Review Title</label>
+                                <input type="text" id="reviewTitle" name="title" placeholder="Summarize your experience" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewText">Your Review</label>
+                                <textarea id="reviewText" name="text" rows="5" placeholder="Tell us about your experience..." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="guestName">Your Name</label>
+                                <input type="text" id="guestName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guestEmail">Email</label>
+                                <input type="email" id="guestEmail" name="email" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary">Cancel</button>
+                                <button type="submit" class="btn-primary">Submit Review</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Manage Reviews Tab -->
+                <div class="tab-content" id="manage">
+                    <h3>Manage Reviews</h3>
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 8px; text-align: center; color: #666;">
+                        <i class="fas fa-cog" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <p>Review management tools will be available here for property owners.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sample reviews data
+        const reviews = [
+            {
+                id: 1,
+                property: "Diani Beach Resort",
+                reviewer: "John Smith",
+                rating: 5,
+                title: "Absolutely Amazing Experience!",
+                text: "The resort exceeded all our expectations. The beachfront location is stunning, the staff is incredibly friendly and helpful, and the food is outstanding. We'll definitely be back!",
+                date: "2024-01-15",
+                tags: ["Beach", "Luxury", "Friendly Staff", "Great Food"],
+                likes: 12,
+                verified: true
+            },
+            {
+                id: 2,
+                property: "Maasai Mara Safari Lodge",
+                reviewer: "Sarah Johnson",
+                rating: 5,
+                title: "Unforgettable Safari Experience",
+                text: "The safari lodge provided an authentic and comfortable experience. We saw the Big Five and the guides were knowledgeable and passionate about wildlife conservation.",
+                date: "2024-01-12",
+                tags: ["Safari", "Wildlife", "Authentic", "Knowledgeable Guides"],
+                likes: 8,
+                verified: true
+            },
+            {
+                id: 3,
+                property: "Nairobi City Hotel",
+                reviewer: "Mike Brown",
+                rating: 4,
+                title: "Great Business Hotel",
+                text: "Perfect location for business travelers. Clean rooms, good WiFi, and excellent service. The breakfast buffet has great variety. Would recommend for business stays.",
+                date: "2024-01-10",
+                tags: ["Business", "Clean", "Good WiFi", "Great Breakfast"],
+                likes: 5,
+                verified: false
+            },
+            {
+                id: 4,
+                property: "Kilifi Bay Villa",
+                reviewer: "Emma Wilson",
+                rating: 5,
+                title: "Perfect Family Getaway",
+                text: "The villa was perfect for our family vacation. Private pool, spacious rooms, and stunning ocean views. The kids loved it and we had a relaxing time.",
+                date: "2024-01-08",
+                tags: ["Family", "Private Pool", "Ocean Views", "Spacious"],
+                likes: 15,
+                verified: true
+            },
+            {
+                id: 5,
+                property: "Amboseli Safari Camp",
+                reviewer: "David Lee",
+                rating: 4,
+                title: "Great Views of Kilimanjaro",
+                text: "The camp offers amazing views of Mount Kilimanjaro. The tents are comfortable and the food is good. The game drives were excellent with lots of wildlife sightings.",
+                date: "2024-01-05",
+                tags: ["Mountain Views", "Comfortable", "Game Drives", "Wildlife"],
+                likes: 7,
+                verified: true
+            }
+        ];
+
+        let currentFilter = 'all';
+        let selectedRating = 0;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadReviews();
+            setupTabNavigation();
+            setupRatingInput();
+            setupReviewForm();
+            setupFilterButtons();
+        });
+
+        // Tab navigation
+        function setupTabNavigation() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.dataset.tab;
+                    
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+        }
+
+        // Setup rating input
+        function setupRatingInput() {
+            const starInputs = document.querySelectorAll('.star-input');
+            
+            starInputs.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    selectedRating = index + 1;
+                    updateStarDisplay();
+                    document.getElementById('rating').value = selectedRating;
+                });
+                
+                star.addEventListener('mouseenter', () => {
+                    highlightStars(index + 1);
+                });
+            });
+            
+            document.querySelector('.rating-input').addEventListener('mouseleave', () => {
+                updateStarDisplay();
+            });
+        }
+
+        // Highlight stars on hover
+        function highlightStars(rating) {
+            const starInputs = document.querySelectorAll('.star-input');
+            starInputs.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Update star display
+        function updateStarDisplay() {
+            const starInputs = document.querySelectorAll('.star-input');
+            starInputs.forEach((star, index) => {
+                if (index < selectedRating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Setup review form
+        function setupReviewForm() {
+            document.getElementById('reviewForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitReview();
+            });
+        }
+
+        // Setup filter buttons
+        function setupFilterButtons() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    loadReviews();
+                });
+            });
+        }
+
+        // Load reviews
+        function loadReviews() {
+            const reviewsList = document.getElementById('reviewsList');
+            let filteredReviews = reviews;
+
+            if (currentFilter !== 'all') {
+                filteredReviews = reviews.filter(review => review.rating === parseInt(currentFilter));
+            }
+
+            reviewsList.innerHTML = '';
+            filteredReviews.forEach(review => {
+                const reviewElement = createReviewElement(review);
+                reviewsList.appendChild(reviewElement);
+            });
+        }
+
+        // Create review element
+        function createReviewElement(review) {
+            const reviewDiv = document.createElement('div');
+            reviewDiv.className = 'review-item';
+            reviewDiv.innerHTML = `
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">${review.reviewer.charAt(0)}</div>
+                        <div class="reviewer-details">
+                            <h4>${review.reviewer} ${review.verified ? '<i class="fas fa-check-circle" style="color: var(--gold); font-size: 0.8rem;"></i>' : ''}</h4>
+                            <p>${review.property}</p>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <div class="review-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                        <div class="review-date">${review.date}</div>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <h5 style="margin: 0 0 0.5rem 0; color: var(--black);">${review.title}</h5>
+                    <div class="review-text">${review.text}</div>
+                    <div class="review-tags">
+                        ${review.tags.map(tag => `<span class="review-tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="review-actions">
+                    <button class="action-btn" onclick="toggleLike(${review.id})">
+                        <i class="fas fa-thumbs-up"></i> Helpful (${review.likes})
+                    </button>
+                    <button class="action-btn" onclick="reportReview(${review.id})">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+            `;
+            return reviewDiv;
+        }
+
+        // Submit review
+        function submitReview() {
+            const formData = new FormData(document.getElementById('reviewForm'));
+            const newReview = {
+                id: reviews.length + 1,
+                property: formData.get('property'),
+                reviewer: formData.get('name'),
+                rating: parseInt(formData.get('rating')),
+                title: formData.get('title'),
+                text: formData.get('text'),
+                date: new Date().toISOString().split('T')[0],
+                tags: [],
+                likes: 0,
+                verified: false
+            };
+
+            reviews.unshift(newReview);
+            loadReviews();
+            updateOverviewStats();
+            document.getElementById('reviewForm').reset();
+            selectedRating = 0;
+            updateStarDisplay();
+            
+            alert('Thank you for your review! It will be published after moderation.');
+        }
+
+        // Toggle like
+        function toggleLike(reviewId) {
+            const review = reviews.find(r => r.id === reviewId);
+            if (review) {
+                review.likes += 1;
+                loadReviews();
+            }
+        }
+
+        // Report review
+        function reportReview(reviewId) {
+            if (confirm('Are you sure you want to report this review?')) {
+                alert('Review reported. Our team will review it shortly.');
+            }
+        }
+
+        // Update overview stats
+        function updateOverviewStats() {
+            const totalReviews = reviews.length;
+            const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews;
+            const positiveReviews = reviews.filter(review => review.rating >= 4).length;
+            const excellentReviews = reviews.filter(review => review.rating === 5).length;
+
+            document.getElementById('averageRating').textContent = averageRating.toFixed(1);
+            document.getElementById('totalReviews').textContent = totalReviews.toLocaleString();
+            document.getElementById('positiveReviews').textContent = Math.round((positiveReviews / totalReviews) * 100) + '%';
+            document.getElementById('excellentReviews').textContent = Math.round((excellentReviews / totalReviews) * 100) + '%';
+        }
+    </script>
+</body>
+</html>
