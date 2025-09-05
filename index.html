@@ -940,6 +940,7 @@
 
         // Open currency modal
         currencySelector.addEventListener('click', () => {
+            console.log('Currency selector clicked!');
             currencyModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             renderCurrencies();
@@ -967,6 +968,7 @@
 
         // Render currencies
         function renderCurrencies(searchTerm = '') {
+            console.log('Rendering currencies...');
             const filteredCurrencies = currencies.filter(currency => 
                 currency.code.toLowerCase().includes(searchTerm) ||
                 currency.name.toLowerCase().includes(searchTerm) ||
@@ -1031,6 +1033,7 @@
 
         // Select currency
         function selectCurrency(code) {
+            console.log('Selecting currency:', code);
             currentCurrency = code;
             const selectedCurrency = currencies.find(currency => currency.code === code);
             
@@ -1073,6 +1076,8 @@
                 }, 300);
             }, 3000);
         }
+
+        console.log('Currency modal script loaded successfully!');
 
         // Mobile Navigation Toggle
         const hamburger = document.getElementById('hamburger');
