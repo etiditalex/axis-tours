@@ -2398,6 +2398,10 @@ p {
         height: auto;
     }
     
+    .hero-logo {
+        display: none;
+    }
+    
     .hero-user-actions {
         gap: 0.8rem;
         flex-wrap: wrap;
