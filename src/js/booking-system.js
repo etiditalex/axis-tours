@@ -351,10 +351,204 @@ export class BookingSystem {
   viewProperty(propertyId) {
     const property = this.properties.find(p => p.id === propertyId);
     if (property) {
-      // Navigate to property detail page or show modal
-      console.log('Viewing property:', property);
-      // In a real app, this would navigate to a detail page
+      // Show property details modal with booking option
+      this.showPropertyModal(property);
     }
+  }
+
+  showPropertyModal(property) {
+    // Create modal HTML
+    const modalHTML = `
+      <div id="property-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <h2 class="text-3xl font-bold text-black">${property.name}</h2>
+              <button onclick="this.closest('#property-modal').remove()" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-2xl"></i>
+              </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <img src="${property.images[0]}" alt="${property.name}" class="w-full h-64 object-cover rounded-lg">
+              </div>
+              <div>
+                <div class="flex items-center mb-3">
+                  <div class="flex text-gold">
+                    ${this.generateStarRating(property.rating)}
+                  </div>
+                  <span class="ml-2 text-gray-600">${property.rating}</span>
+                </div>
+                <p class="text-gray-700 mb-4">${property.description}</p>
+                <div class="text-3xl font-bold text-gold mb-2">KES ${property.price.toLocaleString()}</div>
+                <div class="text-gray-500 mb-4">per night</div>
+                <div class="flex flex-wrap gap-2">
+                  ${property.amenities.map(amenity => 
+                    `<span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">${amenity}</span>`
+                  ).join('')}
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-t pt-6">
+              <h3 class="text-xl font-bold text-black mb-4">Book This Property</h3>
+              <form id="booking-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Check-in Date</label>
+                    <input type="date" id="modal-checkin" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Check-out Date</label>
+                    <input type="date" id="modal-checkout" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Adults</label>
+                    <select id="modal-adults" class="w-full p-3 border border-gray-300 rounded-lg">
+                      <option value="1">1 Adult</option>
+                      <option value="2" selected>2 Adults</option>
+                      <option value="3">3 Adults</option>
+                      <option value="4">4 Adults</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Children</label>
+                    <select id="modal-children" class="w-full p-3 border border-gray-300 rounded-lg">
+                      <option value="0" selected>No Children</option>
+                      <option value="1">1 Child</option>
+                      <option value="2">2 Children</option>
+                      <option value="3">3 Children</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-700">Price per night:</span>
+                    <span class="font-semibold">KES ${property.price.toLocaleString()}</span>
+                  </div>
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-700">Nights:</span>
+                    <span class="font-semibold" id="nights-count">0</span>
+                  </div>
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-700">Taxes & fees:</span>
+                    <span class="font-semibold" id="taxes-amount">KES 0</span>
+                  </div>
+                  <div class="border-t pt-2">
+                    <div class="flex justify-between items-center">
+                      <span class="text-lg font-bold text-black">Total:</span>
+                      <span class="text-lg font-bold text-gold" id="total-amount">KES 0</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex gap-4">
+                  <button type="button" onclick="this.closest('#property-modal').remove()" 
+                          class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                    Cancel
+                  </button>
+                  <button type="submit" 
+                          class="flex-1 px-6 py-3 bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold rounded-lg hover:from-yellow-500 hover:to-gold">
+                    Proceed to Payment
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    // Add modal to page
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Setup form handlers
+    this.setupBookingForm(property);
+  }
+
+  setupBookingForm(property) {
+    const form = document.getElementById('booking-form');
+    const checkinInput = document.getElementById('modal-checkin');
+    const checkoutInput = document.getElementById('modal-checkout');
+    const nightsCount = document.getElementById('nights-count');
+    const taxesAmount = document.getElementById('taxes-amount');
+    const totalAmount = document.getElementById('total-amount');
+    
+    // Set minimum dates
+    const today = new Date().toISOString().split('T')[0];
+    checkinInput.min = today;
+    checkoutInput.min = today;
+    
+    // Calculate total when dates change
+    const calculateTotal = () => {
+      const checkin = new Date(checkinInput.value);
+      const checkout = new Date(checkoutInput.value);
+      
+      if (checkin && checkout && checkout > checkin) {
+        const nights = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+        const subtotal = nights * property.price;
+        const taxes = Math.round(subtotal * 0.15); // 15% taxes
+        const total = subtotal + taxes;
+        
+        nightsCount.textContent = nights;
+        taxesAmount.textContent = `KES ${taxes.toLocaleString()}`;
+        totalAmount.textContent = `KES ${total.toLocaleString()}`;
+      } else {
+        nightsCount.textContent = '0';
+        taxesAmount.textContent = 'KES 0';
+        totalAmount.textContent = 'KES 0';
+      }
+    };
+    
+    checkinInput.addEventListener('change', calculateTotal);
+    checkoutInput.addEventListener('change', calculateTotal);
+    
+    // Handle form submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const checkin = checkinInput.value;
+      const checkout = checkoutInput.value;
+      const adults = document.getElementById('modal-adults').value;
+      const children = document.getElementById('modal-children').value;
+      
+      if (!checkin || !checkout) {
+        alert('Please select check-in and check-out dates');
+        return;
+      }
+      
+      const nights = Math.ceil((new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24));
+      const subtotal = nights * property.price;
+      const taxes = Math.round(subtotal * 0.15);
+      const total = subtotal + taxes;
+      
+      // Store booking data
+      const bookingData = {
+        propertyId: property.id,
+        propertyName: property.name,
+        checkin: checkin,
+        checkout: checkout,
+        adults: parseInt(adults),
+        children: parseInt(children),
+        nights: nights,
+        pricePerNight: property.price,
+        subtotal: subtotal,
+        taxes: taxes,
+        total: total,
+        bookingId: 'BK' + Date.now().toString().slice(-6)
+      };
+      
+      localStorage.setItem('bookingData', JSON.stringify(bookingData));
+      
+      // Close modal and redirect to payment
+      document.getElementById('property-modal').remove();
+      window.location.href = 'payment-integration.html';
+    });
   }
 
   updateAvailability(checkinDate, checkoutDate) {

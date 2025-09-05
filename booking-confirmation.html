@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - Axis Tours & Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .confirmation-page {
+            padding: 2rem 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .confirmation-header {
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .confirmation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .success-banner {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .confirmation-content {
+            padding: 2rem;
+        }
+        
+        .booking-details {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .booking-id {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+        
+        .booking-status {
+            background: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .detail-section h4 {
+            color: var(--black);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .detail-value {
+            color: var(--black);
+            font-weight: 600;
+        }
+        
+        .payment-info {
+            background: #e8f5e8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #28a745;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+        
+        .next-steps {
+            background: #fff8e1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--gold);
+            margin-bottom: 2rem;
+        }
+        
+        .steps-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+            font-weight: 600;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 6px;
+        }
+        
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background: var(--gold);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .step-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            color: var(--black);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        .contact-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .contact-info h4 {
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+        
+        .contact-item i {
+            color: var(--gold);
+        }
+        
+        @media (max-width: 768px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .contact-details {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="list-your-property.html" class="btn-primary">List Property</a>
+                    <a href="#" class="btn-secondary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Confirmation Page -->
+    <section class="confirmation-page">
+        <div class="confirmation-header">
+            <div class="container">
+                <h1>Booking Confirmed!</h1>
+                <p>Your travel experience is just around the corner</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="confirmation-container">
+                <!-- Success Banner -->
+                <div class="success-banner">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="success-title">Payment Successful!</div>
+                    <div class="success-subtitle">Your booking has been confirmed and payment processed</div>
+                </div>
+
+                <!-- Confirmation Content -->
+                <div class="confirmation-content">
+                    <!-- Booking Details -->
+                    <div class="booking-details">
+                        <div class="booking-header">
+                            <div class="booking-id">Booking #BK001234</div>
+                            <div class="booking-status">Confirmed</div>
+                        </div>
+                        
+                        <div class="details-grid">
+                            <div class="detail-section">
+                                <h4>Accommodation Details</h4>
+                                <div class="detail-item">
+                                    <span class="detail-label">Property:</span>
+                                    <span class="detail-value">Diani Beach Resort</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Room Type:</span>
+                                    <span class="detail-value">Deluxe Ocean View</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Check-in:</span>
+                                    <span class="detail-value">Jan 15, 2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Check-out:</span>
+                                    <span class="detail-value">Jan 18, 2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Nights:</span>
+                                    <span class="detail-value">3 nights</span>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>Guest Information</h4>
+                                <div class="detail-item">
+                                    <span class="detail-label">Guests:</span>
+                                    <span class="detail-value">2 Adults</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Primary Guest:</span>
+                                    <span class="detail-value">John Doe</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Email:</span>
+                                    <span class="detail-value">john@example.com</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Phone:</span>
+                                    <span class="detail-value">+254 700 000 000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Information -->
+                    <div class="payment-info">
+                        <div class="payment-header">
+                            <i class="fas fa-credit-card"></i>
+                            Payment Information
+                        </div>
+                        <div class="payment-method">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>M-Pesa Payment</span>
+                        </div>
+                        <div class="payment-amount">KES 47,250</div>
+                        <div style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">
+                            Transaction ID: MPESA-20240115-001234
+                        </div>
+                    </div>
+
+                    <!-- Next Steps -->
+                    <div class="next-steps">
+                        <div class="steps-header">
+                            <i class="fas fa-list-check"></i>
+                            What Happens Next?
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">You'll receive a confirmation email with all booking details</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Property will send you check-in instructions 24 hours before arrival</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Present your booking confirmation at check-in</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Enjoy your stay and create unforgettable memories!</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <a href="index.html" class="btn-primary">
+                            <i class="fas fa-home"></i>
+                            Back to Home
+                        </a>
+                        <a href="booking.html" class="btn-secondary">
+                            <i class="fas fa-calendar"></i>
+                            View My Bookings
+                        </a>
+                        <a href="#" class="btn-secondary" onclick="downloadConfirmation()">
+                            <i class="fas fa-download"></i>
+                            Download Confirmation
+                        </a>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <h4>Need Help?</h4>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+254 700 000 000</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>support@axistoursandtravel.co.ke</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <span>24/7 Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Download confirmation function
+        function downloadConfirmation() {
+            // Create a simple confirmation document
+            const confirmationContent = `
+                BOOKING CONFIRMATION
+                ===================
+                
+                Booking ID: BK001234
+                Status: Confirmed
+                
+                Property: Diani Beach Resort
+                Room: Deluxe Ocean View
+                Check-in: Jan 15, 2024
+                Check-out: Jan 18, 2024
+                Guests: 2 Adults
+                
+                Payment: M-Pesa - KES 47,250
+                Transaction ID: MPESA-20240115-001234
+                
+                Guest: John Doe
+                Email: john@example.com
+                Phone: +254 700 000 000
+                
+                Thank you for choosing Axis Tours & Travel!
+            `;
+            
+            const blob = new Blob([confirmationContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'booking-confirmation-BK001234.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Auto-populate booking details from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookingData = JSON.parse(localStorage.getItem('bookingData') || '{}');
+            const paymentResult = JSON.parse(localStorage.getItem('paymentResult') || '{}');
+            
+            // Update booking details if available
+            if (bookingData.bookingId) {
+                document.querySelector('.booking-id').textContent = `Booking #${bookingData.bookingId}`;
+            }
+            
+            if (bookingData.propertyName) {
+                const propertyElements = document.querySelectorAll('.detail-value');
+                if (propertyElements[0]) {
+                    propertyElements[0].textContent = bookingData.propertyName;
+                }
+            }
+            
+            if (bookingData.checkin) {
+                const checkinElements = document.querySelectorAll('.detail-value');
+                if (checkinElements[1]) {
+                    checkinElements[1].textContent = new Date(bookingData.checkin).toLocaleDateString();
+                }
+            }
+            
+            if (bookingData.checkout) {
+                const checkoutElements = document.querySelectorAll('.detail-value');
+                if (checkoutElements[2]) {
+                    checkoutElements[2].textContent = new Date(bookingData.checkout).toLocaleDateString();
+                }
+            }
+            
+            if (bookingData.adults) {
+                const guestElements = document.querySelectorAll('.detail-value');
+                if (guestElements[3]) {
+                    guestElements[3].textContent = `${bookingData.adults} Adults`;
+                }
+            }
+            
+            if (bookingData.total) {
+                document.querySelector('.payment-amount').textContent = `KES ${bookingData.total.toLocaleString()}`;
+            }
+            
+            // Update payment method if available
+            if (paymentResult.method) {
+                const paymentMethodElement = document.querySelector('.payment-method');
+                if (paymentMethodElement) {
+                    const methodNames = {
+                        'mpesa': 'M-Pesa Payment',
+                        'stripe': 'Credit/Debit Card',
+                        'paypal': 'PayPal Payment',
+                        'bank': 'Bank Transfer'
+                    };
+                    paymentMethodElement.innerHTML = `<i class="fas fa-${getPaymentIcon(paymentResult.method)}"></i> <span>${methodNames[paymentResult.method] || 'Payment'}</span>`;
+                }
+            }
+            
+            // Update transaction ID if available
+            if (paymentResult.transactionId) {
+                const transactionElement = document.querySelector('.payment-amount').parentElement;
+                if (transactionElement) {
+                    const transactionInfo = transactionElement.querySelector('div:last-child');
+                    if (transactionInfo) {
+                        transactionInfo.textContent = `Transaction ID: ${paymentResult.transactionId}`;
+                    }
+                }
+            }
+        });
+
+        // Get payment icon based on method
+        function getPaymentIcon(method) {
+            const icons = {
+                'mpesa': 'mobile-alt',
+                'stripe': 'credit-card',
+                'paypal': 'paypal',
+                'bank': 'university'
+            };
+            return icons[method] || 'credit-card';
+        }
+    </script>
+</body>
+</html>

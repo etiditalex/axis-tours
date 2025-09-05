@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Integration - Axis Tours & Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/payment-gateway.js"></script>
+    <style>
+        .payment-integration {
+            padding: 2rem 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .payment-header {
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        .payment-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .payment-steps {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .step {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            position: relative;
+        }
+        
+        .step.active {
+            color: var(--gold);
+            background: white;
+        }
+        
+        .step.completed {
+            color: #28a745;
+        }
+        
+        .step::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e9ecef;
+        }
+        
+        .step:last-child::after {
+            display: none;
+        }
+        
+        .payment-content {
+            padding: 2rem;
+        }
+        
+        .booking-summary {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+        
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--black);
+            padding-top: 1rem;
+            border-top: 2px solid #e9ecef;
+        }
+        
+        .payment-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-methods h3 {
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .payment-option {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--gold);
+            background: #fff8e1;
+        }
+        
+        .payment-option.selected {
+            border-color: var(--gold);
+            background: #fff8e1;
+        }
+        
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-name {
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.25rem;
+        }
+        
+        .payment-description {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .payment-form {
+            display: none;
+        }
+        
+        .payment-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .mpesa-form {
+            background: #e8f5e8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #28a745;
+        }
+        
+        .mpesa-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .mpesa-steps {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        
+        .mpesa-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .mpesa-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            width: 20px;
+            height: 20px;
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .stripe-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #635bff;
+        }
+        
+        .stripe-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: #635bff;
+            font-weight: 600;
+        }
+        
+        .paypal-form {
+            background: #fff8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #0070ba;
+        }
+        
+        .paypal-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: #0070ba;
+            font-weight: 600;
+        }
+        
+        .bank-form {
+            background: #f0f8ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #0066cc;
+        }
+        
+        .bank-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .payment-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            color: var(--black);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .security-badges {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .security-badge i {
+            color: #28a745;
+        }
+        
+        .payment-status {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+        
+        .payment-status.success {
+            color: #28a745;
+        }
+        
+        .payment-status.error {
+            color: #dc3545;
+        }
+        
+        .status-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-actions {
+                flex-direction: column;
+            }
+            
+            .payment-steps {
+                flex-direction: column;
+            }
+            
+            .step::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="list-your-property.html" class="btn-primary">List Property</a>
+                    <a href="#" class="btn-secondary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Payment Integration Section -->
+    <section class="payment-integration">
+        <div class="payment-header">
+            <div class="container">
+                <h1>Complete Your Payment</h1>
+                <p>Secure payment processing with multiple options</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="payment-container">
+                <!-- Payment Steps -->
+                <div class="payment-steps">
+                    <div class="step active" id="step1">1. Choose Payment Method</div>
+                    <div class="step" id="step2">2. Enter Details</div>
+                    <div class="step" id="step3">3. Confirm Payment</div>
+                </div>
+
+                <!-- Payment Content -->
+                <div class="payment-content">
+                    <!-- Booking Summary -->
+                    <div class="booking-summary">
+                        <div class="summary-header">Booking Summary</div>
+                        <div class="summary-item">
+                            <span>Diani Beach Resort</span>
+                            <span>3 nights</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Check-in:</span>
+                            <span>Jan 15, 2024</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Check-out:</span>
+                            <span>Jan 18, 2024</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Guests:</span>
+                            <span>2 Adults</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Room rate:</span>
+                            <span>KES 15,000/night</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Taxes & fees:</span>
+                            <span>KES 2,250</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total Amount:</span>
+                            <span>KES 47,250</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="payment-methods">
+                        <h3>Select Payment Method</h3>
+                        <div class="payment-options">
+                            <div class="payment-option" data-method="mpesa">
+                                <div class="payment-icon" style="color: #28a745;">📱</div>
+                                <div class="payment-name">M-Pesa</div>
+                                <div class="payment-description">Mobile Money (Kenya)</div>
+                            </div>
+                            <div class="payment-option" data-method="stripe">
+                                <div class="payment-icon" style="color: #635bff;">💳</div>
+                                <div class="payment-name">Credit/Debit Card</div>
+                                <div class="payment-description">Visa, Mastercard, Amex</div>
+                            </div>
+                            <div class="payment-option" data-method="paypal">
+                                <div class="payment-icon" style="color: #0070ba;">🅿️</div>
+                                <div class="payment-name">PayPal</div>
+                                <div class="payment-description">Pay with PayPal account</div>
+                            </div>
+                            <div class="payment-option" data-method="bank">
+                                <div class="payment-icon" style="color: #0066cc;">🏦</div>
+                                <div class="payment-name">Bank Transfer</div>
+                                <div class="payment-description">Direct bank transfer</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- M-Pesa Form -->
+                    <div class="payment-form" id="mpesa-form">
+                        <div class="mpesa-form">
+                            <div class="mpesa-logo">
+                                <i class="fas fa-mobile-alt"></i>
+                                M-Pesa Payment
+                            </div>
+                            <div class="form-group">
+                                <label for="mpesa-phone">Phone Number</label>
+                                <input type="tel" id="mpesa-phone" placeholder="07XXXXXXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mpesa-amount">Amount (KES)</label>
+                                <input type="number" id="mpesa-amount" value="47250" readonly>
+                            </div>
+                            <div class="mpesa-steps">
+                                <div class="mpesa-step">
+                                    <div class="step-number">1</div>
+                                    <span>Enter your M-Pesa PIN when prompted</span>
+                                </div>
+                                <div class="mpesa-step">
+                                    <div class="step-number">2</div>
+                                    <span>Confirm the payment on your phone</span>
+                                </div>
+                                <div class="mpesa-step">
+                                    <div class="step-number">3</div>
+                                    <span>Wait for confirmation SMS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stripe Form -->
+                    <div class="payment-form" id="stripe-form">
+                        <div class="stripe-form">
+                            <div class="stripe-logo">
+                                <i class="fas fa-credit-card"></i>
+                                Secure Card Payment
+                            </div>
+                            <div class="form-group">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry-date">Expiry Date</label>
+                                    <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" placeholder="123" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="card-name">Cardholder Name</label>
+                                <input type="text" id="card-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="billing-address">Billing Address</label>
+                                <input type="text" id="billing-address" placeholder="123 Main Street, Nairobi" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PayPal Form -->
+                    <div class="payment-form" id="paypal-form">
+                        <div class="paypal-form">
+                            <div class="paypal-logo">
+                                <i class="fab fa-paypal"></i>
+                                PayPal Payment
+                            </div>
+                            <div class="form-group">
+                                <label for="paypal-email">PayPal Email</label>
+                                <input type="email" id="paypal-email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paypal-password">PayPal Password</label>
+                                <input type="password" id="paypal-password" placeholder="Enter your PayPal password" required>
+                            </div>
+                            <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">
+                                You will be redirected to PayPal to complete your payment securely.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer Form -->
+                    <div class="payment-form" id="bank-form">
+                        <div class="bank-form">
+                            <div class="bank-logo">
+                                <i class="fas fa-university"></i>
+                                Bank Transfer
+                            </div>
+                            <div class="form-group">
+                                <label for="bank-name">Bank Name</label>
+                                <select id="bank-name" required>
+                                    <option value="">Select your bank</option>
+                                    <option value="kcb">Kenya Commercial Bank (KCB)</option>
+                                    <option value="equity">Equity Bank</option>
+                                    <option value="coop">Co-operative Bank</option>
+                                    <option value="absa">Absa Bank Kenya</option>
+                                    <option value="ncba">NCBA Bank</option>
+                                    <option value="diamond">Diamond Trust Bank</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="account-number">Account Number</label>
+                                <input type="text" id="account-number" placeholder="Enter your account number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="account-name">Account Holder Name</label>
+                                <input type="text" id="account-name" placeholder="Enter account holder name" required>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: var(--black);">Payment Instructions:</h4>
+                                <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                                    Transfer KES 47,250 to:<br>
+                                    <strong>Account:</strong> Axis Tours & Travel<br>
+                                    <strong>Bank:</strong> Kenya Commercial Bank<br>
+                                    <strong>Account Number:</strong> 1234567890<br>
+                                    <strong>Reference:</strong> Booking #BK001234
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Badges -->
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>SSL Encrypted</span>
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-lock"></i>
+                            <span>Secure Payment</span>
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span>PCI Compliant</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Actions -->
+                    <div class="payment-actions">
+                        <button class="btn-secondary" onclick="goBack()">Back to Booking</button>
+                        <button class="btn-primary" id="pay-button" onclick="processPayment()" disabled>
+                            <i class="fas fa-lock"></i> Process Payment - KES 47,250
+                        </button>
+                    </div>
+
+                    <!-- Payment Status -->
+                    <div class="payment-status" id="payment-status">
+                        <div class="status-icon" id="status-icon"></div>
+                        <div id="status-message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let selectedPaymentMethod = null;
+        let currentStep = 1;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupPaymentOptions();
+            setupFormValidation();
+            loadBookingData();
+        });
+
+        // Load booking data from localStorage
+        function loadBookingData() {
+            const bookingData = JSON.parse(localStorage.getItem('bookingData') || '{}');
+            
+            if (Object.keys(bookingData).length === 0) {
+                // No booking data, redirect to hotels page
+                window.location.href = 'hotels.html';
+                return;
+            }
+            
+            // Update booking summary
+            updateBookingSummary(bookingData);
+        }
+
+        // Update booking summary with real data
+        function updateBookingSummary(data) {
+            // Update property name
+            const propertyElement = document.querySelector('.summary-item span:first-child');
+            if (propertyElement) {
+                propertyElement.textContent = data.propertyName || 'Diani Beach Resort';
+            }
+            
+            // Update nights
+            const nightsElement = document.querySelector('.summary-item span:last-child');
+            if (nightsElement) {
+                nightsElement.textContent = `${data.nights || 3} nights`;
+            }
+            
+            // Update check-in date
+            const checkinElements = document.querySelectorAll('.summary-item span:last-child');
+            if (checkinElements[1]) {
+                checkinElements[1].textContent = data.checkin ? new Date(data.checkin).toLocaleDateString() : 'Jan 15, 2024';
+            }
+            
+            // Update check-out date
+            if (checkinElements[2]) {
+                checkinElements[2].textContent = data.checkout ? new Date(data.checkout).toLocaleDateString() : 'Jan 18, 2024';
+            }
+            
+            // Update guests
+            if (checkinElements[3]) {
+                checkinElements[3].textContent = `${data.adults || 2} Adults`;
+            }
+            
+            // Update room rate
+            if (checkinElements[4]) {
+                checkinElements[4].textContent = `KES ${(data.pricePerNight || 15000).toLocaleString()}/night`;
+            }
+            
+            // Update taxes
+            if (checkinElements[5]) {
+                checkinElements[5].textContent = `KES ${(data.taxes || 2250).toLocaleString()}`;
+            }
+            
+            // Update total amount
+            const totalElement = document.querySelector('.summary-total span:last-child');
+            if (totalElement) {
+                totalElement.textContent = `KES ${(data.total || 47250).toLocaleString()}`;
+            }
+            
+            // Update payment amount in forms
+            const mpesaAmount = document.getElementById('mpesa-amount');
+            if (mpesaAmount) {
+                mpesaAmount.value = data.total || 47250;
+            }
+            
+            // Update payment button
+            const payButton = document.getElementById('pay-button');
+            if (payButton) {
+                payButton.innerHTML = `<i class="fas fa-lock"></i> Process Payment - KES ${(data.total || 47250).toLocaleString()}`;
+            }
+        }
+
+        // Setup payment options
+        function setupPaymentOptions() {
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Get selected method
+                    selectedPaymentMethod = this.dataset.method;
+                    
+                    // Show corresponding form
+                    showPaymentForm(selectedPaymentMethod);
+                    
+                    // Enable pay button
+                    document.getElementById('pay-button').disabled = false;
+                    
+                    // Update step
+                    updateStep(2);
+                });
+            });
+        }
+
+        // Show payment form
+        function showPaymentForm(method) {
+            // Hide all forms
+            document.querySelectorAll('.payment-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            // Show selected form
+            document.getElementById(method + '-form').classList.add('active');
+        }
+
+        // Update step
+        function updateStep(step) {
+            // Update step indicators
+            for (let i = 1; i <= 3; i++) {
+                const stepElement = document.getElementById('step' + i);
+                if (i < step) {
+                    stepElement.classList.add('completed');
+                    stepElement.classList.remove('active');
+                } else if (i === step) {
+                    stepElement.classList.add('active');
+                    stepElement.classList.remove('completed');
+                } else {
+                    stepElement.classList.remove('active', 'completed');
+                }
+            }
+            
+            currentStep = step;
+        }
+
+        // Setup form validation
+        function setupFormValidation() {
+            const forms = document.querySelectorAll('.payment-form');
+            forms.forEach(form => {
+                const inputs = form.querySelectorAll('input, select');
+                inputs.forEach(input => {
+                    input.addEventListener('input', validateForm);
+                });
+            });
+        }
+
+        // Validate form
+        function validateForm() {
+            const activeForm = document.querySelector('.payment-form.active');
+            if (!activeForm) return;
+            
+            const requiredInputs = activeForm.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+            
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                }
+            });
+            
+            // Enable/disable pay button based on validation
+            document.getElementById('pay-button').disabled = !isValid;
+        }
+
+        // Process payment
+        async function processPayment() {
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            // Get booking data
+            const bookingData = JSON.parse(localStorage.getItem('bookingData') || '{}');
+            
+            // Disable pay button
+            const payButton = document.getElementById('pay-button');
+            payButton.disabled = true;
+            payButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            
+            try {
+                // Collect payment details based on selected method
+                const paymentDetails = collectPaymentDetails(selectedPaymentMethod);
+                
+                // Prepare payment data
+                const paymentData = {
+                    method: selectedPaymentMethod,
+                    amount: bookingData.total || 47250,
+                    currency: 'KES',
+                    bookingId: bookingData.bookingId || 'BK001234',
+                    customerInfo: {
+                        name: 'John Doe',
+                        email: 'john@example.com',
+                        phone: '+254700000000'
+                    },
+                    ...paymentDetails
+                };
+                
+                // Process payment using PaymentGateway
+                if (window.PaymentGateway) {
+                    const result = await window.PaymentGateway.processPayment(paymentData);
+                    
+                    if (result.success) {
+                        showPaymentStatus('success', result.message);
+                        updateStep(3);
+                        
+                        // Store payment result
+                        localStorage.setItem('paymentResult', JSON.stringify(result));
+                        
+                        // Redirect after 3 seconds
+                        setTimeout(() => {
+                            window.location.href = 'booking-confirmation.html';
+                        }, 3000);
+                    } else {
+                        throw new Error(result.message || 'Payment failed');
+                    }
+                } else {
+                    // Fallback simulation if PaymentGateway not loaded
+                    await simulatePayment();
+                }
+                
+            } catch (error) {
+                console.error('Payment error:', error);
+                showPaymentStatus('error', error.message || 'Payment failed. Please try again.');
+                
+                // Reset button
+                payButton.disabled = false;
+                payButton.innerHTML = `<i class="fas fa-lock"></i> Process Payment - KES ${(bookingData.total || 47250).toLocaleString()}`;
+            }
+        }
+
+        // Collect payment details based on method
+        function collectPaymentDetails(method) {
+            switch (method) {
+                case 'mpesa':
+                    return {
+                        phone: document.getElementById('mpesa-phone').value
+                    };
+                case 'stripe':
+                    return {
+                        cardNumber: document.getElementById('card-number').value,
+                        expiryDate: document.getElementById('expiry-date').value,
+                        cvv: document.getElementById('cvv').value,
+                        cardName: document.getElementById('card-name').value,
+                        billingAddress: document.getElementById('billing-address').value
+                    };
+                case 'paypal':
+                    return {
+                        email: document.getElementById('paypal-email').value,
+                        password: document.getElementById('paypal-password').value
+                    };
+                case 'bank':
+                    return {
+                        bankName: document.getElementById('bank-name').value,
+                        accountNumber: document.getElementById('account-number').value,
+                        accountName: document.getElementById('account-name').value
+                    };
+                default:
+                    return {};
+            }
+        }
+
+        // Simulate payment processing (fallback)
+        async function simulatePayment() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        success: true,
+                        message: 'Payment completed successfully!',
+                        transactionId: `${selectedPaymentMethod.toUpperCase()}-${Date.now()}`,
+                        method: selectedPaymentMethod
+                    });
+                }, 2000);
+            });
+        }
+
+        // Show payment status
+        function showPaymentStatus(type, message) {
+            const statusDiv = document.getElementById('payment-status');
+            const iconDiv = document.getElementById('status-icon');
+            const messageDiv = document.getElementById('status-message');
+            
+            statusDiv.className = `payment-status ${type}`;
+            statusDiv.style.display = 'block';
+            
+            if (type === 'success') {
+                iconDiv.innerHTML = '<i class="fas fa-check-circle"></i>';
+            } else {
+                iconDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+            }
+            
+            messageDiv.textContent = message;
+        }
+
+        // Go back
+        function goBack() {
+            if (currentStep > 1) {
+                updateStep(currentStep - 1);
+            } else {
+                window.history.back();
+            }
+        }
+
+        // Format card number
+        document.getElementById('card-number').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date
+        document.getElementById('expiry-date').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Format CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
+        });
+
+        // Format phone number
+        document.getElementById('mpesa-phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('0')) {
+                value = '254' + value.substring(1);
+            } else if (!value.startsWith('254')) {
+                value = '254' + value;
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
