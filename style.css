@@ -7078,7 +7078,7 @@ p {
 
 /* List Your Property Page Styles */
 .list-property-hero {
-    background: linear-gradient(135deg, #003580 0%, #0047AB 100%);
+    background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
     color: white;
     padding: 8rem 0 6rem;
     min-height: 100vh;
@@ -7127,7 +7127,7 @@ p {
 }
 
 .animated-text {
-    color: #50BFFC;
+    color: var(--gold);
     font-weight: 700;
     display: inline-block;
     transition: all 0.3s ease;
@@ -7145,8 +7145,8 @@ p {
     border-radius: 12px;
     padding: 2.5rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    border-top: 4px solid #FFB700;
-    border-left: 4px solid #FFB700;
+    border-top: 4px solid var(--gold);
+    border-left: 4px solid var(--gold);
     position: relative;
 }
 
@@ -7182,8 +7182,8 @@ p {
 }
 
 .cta-button {
-    background: #0065FF;
-    color: white;
+    background: linear-gradient(135deg, var(--gold), #e6b800);
+    color: var(--black);
     border: none;
     padding: 1rem 2rem;
     border-radius: 8px;
@@ -7200,9 +7200,9 @@ p {
 }
 
 .cta-button:hover {
-    background: #0052CC;
+    background: linear-gradient(135deg, #e6b800, var(--gold));
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 101, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
 .cta-button i {
@@ -7226,7 +7226,7 @@ p {
 }
 
 .continue-link {
-    color: #0065FF;
+    color: var(--gold);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.9rem;
@@ -7333,7 +7333,7 @@ p {
 }
 
 .cta-section {
-    background: #003580;
+    background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
     padding: 6rem 0;
     text-align: center;
     color: white;
