@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Graph Image Generator - Axis Tours & Travel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .og-canvas {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%);
+            position: relative;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .og-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        .og-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #D4AF37, #e6b800);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1A1A1A;
+        }
+        .og-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+        .og-subtitle {
+            font-size: 24px;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+        .og-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .og-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #D4AF37, #e6b800);
+            color: #1A1A1A;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        .preview-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .preview-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .social-preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .facebook-preview, .twitter-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 400px;
+        }
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .preview-content {
+            font-size: 14px;
+        }
+        .preview-title-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .preview-description {
+            color: #666;
+            font-size: 12px;
+        }
+        .preview-url {
+            color: #999;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Open Graph Image Generator</h1>
+        <p>Generate social media sharing images for Axis Tours & Travel</p>
+        
+        <!-- Main OG Image Canvas -->
+        <div class="og-canvas" id="ogCanvas">
+            <div class="og-pattern"></div>
+            <div class="og-content">
+                <div class="og-logo">A</div>
+                <div class="og-title">Axis Tours & Travel</div>
+                <div class="og-subtitle">Your Premier Travel Partner in Kenya</div>
+                <div class="og-description">
+                    Discover amazing destinations, luxury accommodations, and unforgettable experiences across Kenya and beyond.
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <button class="download-btn" onclick="downloadImage('homepage')">Download Homepage OG Image</button>
+            <button class="download-btn" onclick="generateCustomImage()">Generate Custom Image</button>
+        </div>
+        
+        <!-- Social Media Previews -->
+        <div class="preview-section">
+            <div class="preview-title">Social Media Preview</div>
+            <div class="social-preview">
+                <div class="facebook-preview">
+                    <div class="preview-image" id="previewImage"></div>
+                    <div class="preview-content">
+                        <div class="preview-title-text">Axis Tours & Travel</div>
+                        <div class="preview-description">Your Premier Travel Partner in Kenya - Discover amazing destinations, luxury accommodations, and unforgettable experiences.</div>
+                        <div class="preview-url">axistoursandtravel.co.ke</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to download the OG image
+        function downloadImage(type) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to OG image dimensions
+            canvas.width = 1200;
+            canvas.height = 630;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1A1A1A');
+            gradient.addColorStop(0.5, '#2D2D2D');
+            gradient.addColorStop(1, '#1A1A1A');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add pattern overlay
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.2, canvas.height * 0.8, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo circle
+            ctx.fillStyle = '#D4AF37';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2 - 50, 40, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo text
+            ctx.fillStyle = '#1A1A1A';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('A', canvas.width / 2, canvas.height / 2 - 40);
+            
+            // Add main title
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 48px Arial';
+            ctx.fillText('Axis Tours & Travel', canvas.width / 2, canvas.height / 2 + 20);
+            
+            // Add subtitle
+            ctx.fillStyle = '#D4AF37';
+            ctx.font = '24px Arial';
+            ctx.fillText('Your Premier Travel Partner in Kenya', canvas.width / 2, canvas.height / 2 + 60);
+            
+            // Add description
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '18px Arial';
+            const description = 'Discover amazing destinations, luxury accommodations, and unforgettable experiences across Kenya and beyond.';
+            const words = description.split(' ');
+            let line = '';
+            let y = canvas.height / 2 + 100;
+            
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > 600 && i > 0) {
+                    ctx.fillText(line, canvas.width / 2, y);
+                    line = words[i] + ' ';
+                    y += 25;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, canvas.width / 2, y);
+            
+            // Download the image
+            const link = document.createElement('a');
+            link.download = `axis-tours-${type}-og-image.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function generateCustomImage() {
+            const title = prompt('Enter title for the image:') || 'Axis Tours & Travel';
+            const subtitle = prompt('Enter subtitle:') || 'Your Premier Travel Partner in Kenya';
+            const description = prompt('Enter description:') || 'Discover amazing destinations, luxury accommodations, and unforgettable experiences.';
+            
+            // Update the canvas with custom content
+            const titleElement = document.querySelector('.og-title');
+            const subtitleElement = document.querySelector('.og-subtitle');
+            const descriptionElement = document.querySelector('.og-description');
+            
+            titleElement.textContent = title;
+            subtitleElement.textContent = subtitle;
+            descriptionElement.textContent = description;
+            
+            // Download the custom image
+            setTimeout(() => {
+                downloadImage('custom');
+            }, 100);
+        }
+        
+        // Update preview image
+        function updatePreview() {
+            const previewImage = document.getElementById('previewImage');
+            previewImage.style.background = 'linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%)';
+        }
+        
+        // Initialize preview
+        updatePreview();
+    </script>
+</body>
+</html>
