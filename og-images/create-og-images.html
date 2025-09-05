@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Open Graph Images - Axis Tours & Travel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .canvas-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .og-canvas {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #D4AF37, #e6b800);
+            color: #1A1A1A;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        .instructions {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .instructions h3 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+        .instructions ol {
+            color: #0c5460;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Open Graph Images</h1>
+        <p>Generate actual PNG image files for social media sharing.</p>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Click "Generate Homepage Image" to create the main OG image</li>
+                <li>Click "Download" to save the image as a PNG file</li>
+                <li>Upload the downloaded image to your website</li>
+                <li>Update the meta tags to point to the image file</li>
+            </ol>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="ogCanvas" class="og-canvas" width="1200" height="630"></canvas>
+            <br>
+            <button class="download-btn" onclick="generateHomepageImage()">Generate Homepage Image</button>
+            <button class="download-btn" onclick="generateHotelsImage()">Generate Hotels Image</button>
+            <button class="download-btn" onclick="generateListPropertyImage()">Generate List Property Image</button>
+            <button class="download-btn" onclick="downloadImage()">Download Image</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('ogCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function generateHomepageImage() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1A1A1A');
+            gradient.addColorStop(0.5, '#2D2D2D');
+            gradient.addColorStop(1, '#1A1A1A');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add pattern overlay
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.2, canvas.height * 0.8, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo circle
+            ctx.fillStyle = '#D4AF37';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2 - 50, 40, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo text
+            ctx.fillStyle = '#1A1A1A';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('A', canvas.width / 2, canvas.height / 2 - 40);
+            
+            // Add main title
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 48px Arial';
+            ctx.fillText('Axis Tours & Travel', canvas.width / 2, canvas.height / 2 + 20);
+            
+            // Add subtitle
+            ctx.fillStyle = '#D4AF37';
+            ctx.font = '24px Arial';
+            ctx.fillText('Your Premier Travel Partner in Kenya', canvas.width / 2, canvas.height / 2 + 60);
+            
+            // Add description
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '18px Arial';
+            const description = 'Discover amazing destinations, luxury accommodations, and unforgettable experiences across Kenya and beyond.';
+            const words = description.split(' ');
+            let line = '';
+            let y = canvas.height / 2 + 100;
+            
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > 600 && i > 0) {
+                    ctx.fillText(line, canvas.width / 2, y);
+                    line = words[i] + ' ';
+                    y += 25;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, canvas.width / 2, y);
+        }
+        
+        function generateHotelsImage() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1A1A1A');
+            gradient.addColorStop(0.5, '#2D2D2D');
+            gradient.addColorStop(1, '#1A1A1A');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add pattern overlay
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.2, canvas.height * 0.8, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo circle
+            ctx.fillStyle = '#D4AF37';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2 - 50, 40, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo text
+            ctx.fillStyle = '#1A1A1A';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('A', canvas.width / 2, canvas.height / 2 - 40);
+            
+            // Add main title
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 48px Arial';
+            ctx.fillText('Luxury Hotels & Resorts', canvas.width / 2, canvas.height / 2 + 20);
+            
+            // Add subtitle
+            ctx.fillStyle = '#D4AF37';
+            ctx.font = '24px Arial';
+            ctx.fillText('Premium Accommodations in Kenya', canvas.width / 2, canvas.height / 2 + 60);
+            
+            // Add description
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '18px Arial';
+            const description = 'Experience world-class hospitality at Kenya\'s finest hotels and beach resorts with Axis Tours & Travel.';
+            const words = description.split(' ');
+            let line = '';
+            let y = canvas.height / 2 + 100;
+            
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > 600 && i > 0) {
+                    ctx.fillText(line, canvas.width / 2, y);
+                    line = words[i] + ' ';
+                    y += 25;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, canvas.width / 2, y);
+        }
+        
+        function generateListPropertyImage() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1A1A1A');
+            gradient.addColorStop(0.5, '#2D2D2D');
+            gradient.addColorStop(1, '#1A1A1A');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add pattern overlay
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.2, canvas.height * 0.8, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo circle
+            ctx.fillStyle = '#D4AF37';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2 - 50, 40, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add logo text
+            ctx.fillStyle = '#1A1A1A';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('A', canvas.width / 2, canvas.height / 2 - 40);
+            
+            // Add main title
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 48px Arial';
+            ctx.fillText('List Your Property', canvas.width / 2, canvas.height / 2 + 20);
+            
+            // Add subtitle
+            ctx.fillStyle = '#D4AF37';
+            ctx.font = '24px Arial';
+            ctx.fillText('Join Our Network of Partners', canvas.width / 2, canvas.height / 2 + 60);
+            
+            // Add description
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '18px Arial';
+            const description = 'List your hotel, bed & breakfast, apartment, or vacation rental on Axis Tours & Travel. Join thousands of hosts earning more with our platform.';
+            const words = description.split(' ');
+            let line = '';
+            let y = canvas.height / 2 + 100;
+            
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > 600 && i > 0) {
+                    ctx.fillText(line, canvas.width / 2, y);
+                    line = words[i] + ' ';
+                    y += 25;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, canvas.width / 2, y);
+        }
+        
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'axis-tours-og-image.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate homepage image on load
+        window.onload = function() {
+            generateHomepageImage();
+        };
+    </script>
+</body>
+</html>
