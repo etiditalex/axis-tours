@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Management - Axis Tours & Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .property-management {
+            padding: 2rem 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .management-header {
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .management-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        .management-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .management-tabs {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .tab-nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-btn.active {
+            color: var(--gold);
+            background: white;
+            border-bottom-color: var(--gold);
+        }
+        
+        .tab-btn:hover {
+            color: var(--gold);
+            background: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .property-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .property-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .property-info {
+            padding: 1.5rem;
+        }
+        
+        .property-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .property-location {
+            color: #666;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .property-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .property-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-action {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .btn-edit:hover {
+            background: #e6b800;
+        }
+        
+        .btn-view {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+        
+        .btn-view:hover {
+            background: #e9ecef;
+        }
+        
+        .add-property {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .add-property:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .analytics-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .analytics-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+        
+        .analytics-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .analytics-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .recent-bookings {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .bookings-header {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .booking-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .booking-item:last-child {
+            border-bottom: none;
+        }
+        
+        .booking-info h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--black);
+        }
+        
+        .booking-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .booking-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        @media (max-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .analytics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tab-nav {
+                flex-direction: column;
+            }
+            
+            .booking-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="list-your-property.html" class="btn-primary">List Property</a>
+                    <a href="#" class="btn-secondary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Property Management Section -->
+    <section class="property-management">
+        <div class="management-header">
+            <div class="container">
+                <h1>Property Management Dashboard</h1>
+                <p>Manage your properties, bookings, and analytics all in one place</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Management Tabs -->
+            <div class="management-tabs">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="properties">Properties</button>
+                    <button class="tab-btn" data-tab="bookings">Bookings</button>
+                    <button class="tab-btn" data-tab="analytics">Analytics</button>
+                    <button class="tab-btn" data-tab="settings">Settings</button>
+                </div>
+
+                <!-- Properties Tab -->
+                <div class="tab-content active" id="properties">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2>Your Properties</h2>
+                        <button class="add-property" onclick="openAddPropertyModal()">
+                            <i class="fas fa-plus"></i> Add New Property
+                        </button>
+                    </div>
+
+                    <div class="property-grid" id="propertyGrid">
+                        <!-- Properties will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Bookings Tab -->
+                <div class="tab-content" id="bookings">
+                    <h2>Recent Bookings</h2>
+                    <div class="recent-bookings">
+                        <div class="bookings-header">Booking History</div>
+                        <div id="bookingsList">
+                            <!-- Bookings will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Tab -->
+                <div class="tab-content" id="analytics">
+                    <h2>Property Analytics</h2>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="analytics-icon">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div class="analytics-value" id="totalProperties">0</div>
+                            <div class="analytics-label">Total Properties</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="analytics-value" id="totalBookings">0</div>
+                            <div class="analytics-label">Total Bookings</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="analytics-value" id="totalRevenue">$0</div>
+                            <div class="analytics-label">Total Revenue</div>
+                        </div>
+                        <div class="analytics-card">
+                            <div class="analytics-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="analytics-value" id="avgRating">0.0</div>
+                            <div class="analytics-label">Average Rating</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-content" id="settings">
+                    <h2>Account Settings</h2>
+                    <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <p>Settings and configuration options will be available here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Property Modal -->
+    <div id="addPropertyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Property</h3>
+                <button class="modal-close" onclick="closeAddPropertyModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addPropertyForm">
+                    <div class="form-group">
+                        <label for="propertyName">Property Name</label>
+                        <input type="text" id="propertyName" name="propertyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyType">Property Type</label>
+                        <select id="propertyType" name="propertyType" required>
+                            <option value="">Select Type</option>
+                            <option value="hotel">Hotel</option>
+                            <option value="resort">Resort</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="villa">Villa</option>
+                            <option value="lodge">Lodge</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyLocation">Location</label>
+                        <input type="text" id="propertyLocation" name="propertyLocation" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyDescription">Description</label>
+                        <textarea id="propertyDescription" name="propertyDescription" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyPrice">Price per Night (KES)</label>
+                        <input type="number" id="propertyPrice" name="propertyPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyRooms">Number of Rooms</label>
+                        <input type="number" id="propertyRooms" name="propertyRooms" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeAddPropertyModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Property</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data
+        let properties = [
+            {
+                id: 1,
+                name: "Diani Beach Resort",
+                type: "Resort",
+                location: "Diani Beach, Mombasa",
+                price: 15000,
+                rooms: 50,
+                rating: 4.8,
+                bookings: 120,
+                revenue: 1800000,
+                image: "https://via.placeholder.com/400x200?text=Diani+Beach+Resort"
+            },
+            {
+                id: 2,
+                name: "Maasai Mara Safari Lodge",
+                type: "Lodge",
+                location: "Maasai Mara, Narok",
+                price: 25000,
+                rooms: 20,
+                rating: 4.9,
+                bookings: 85,
+                revenue: 2125000,
+                image: "https://via.placeholder.com/400x200?text=Maasai+Mara+Lodge"
+            },
+            {
+                id: 3,
+                name: "Nairobi City Hotel",
+                type: "Hotel",
+                location: "Nairobi CBD",
+                price: 8000,
+                rooms: 100,
+                rating: 4.5,
+                bookings: 200,
+                revenue: 1600000,
+                image: "https://via.placeholder.com/400x200?text=Nairobi+Hotel"
+            }
+        ];
+
+        let bookings = [
+            {
+                id: 1,
+                property: "Diani Beach Resort",
+                guest: "John Smith",
+                checkIn: "2024-01-15",
+                checkOut: "2024-01-18",
+                status: "confirmed",
+                amount: 45000
+            },
+            {
+                id: 2,
+                property: "Maasai Mara Safari Lodge",
+                guest: "Sarah Johnson",
+                checkIn: "2024-01-20",
+                checkOut: "2024-01-22",
+                status: "pending",
+                amount: 50000
+            },
+            {
+                id: 3,
+                property: "Nairobi City Hotel",
+                guest: "Mike Brown",
+                checkIn: "2024-01-10",
+                checkOut: "2024-01-12",
+                status: "confirmed",
+                amount: 16000
+            }
+        ];
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProperties();
+            loadBookings();
+            updateAnalytics();
+            setupTabNavigation();
+        });
+
+        // Tab navigation
+        function setupTabNavigation() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.dataset.tab;
+                    
+                    // Remove active class from all tabs and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    btn.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+        }
+
+        // Load properties
+        function loadProperties() {
+            const propertyGrid = document.getElementById('propertyGrid');
+            propertyGrid.innerHTML = '';
+
+            properties.forEach(property => {
+                const propertyCard = createPropertyCard(property);
+                propertyGrid.appendChild(propertyCard);
+            });
+        }
+
+        // Create property card
+        function createPropertyCard(property) {
+            const card = document.createElement('div');
+            card.className = 'property-card';
+            card.innerHTML = `
+                <div class="property-image">
+                    <i class="fas fa-image" style="font-size: 2rem; color: #ccc;"></i>
+                </div>
+                <div class="property-info">
+                    <div class="property-name">${property.name}</div>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ${property.location}
+                    </div>
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">${property.rooms}</div>
+                            <div class="stat-label">Rooms</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">${property.rating}</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">${property.bookings}</div>
+                            <div class="stat-label">Bookings</div>
+                        </div>
+                    </div>
+                    <div class="property-actions">
+                        <button class="btn-action btn-edit" onclick="editProperty(${property.id})">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn-action btn-view" onclick="viewProperty(${property.id})">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Load bookings
+        function loadBookings() {
+            const bookingsList = document.getElementById('bookingsList');
+            bookingsList.innerHTML = '';
+
+            bookings.forEach(booking => {
+                const bookingItem = document.createElement('div');
+                bookingItem.className = 'booking-item';
+                bookingItem.innerHTML = `
+                    <div class="booking-info">
+                        <h4>${booking.property}</h4>
+                        <p>Guest: ${booking.guest} • ${booking.checkIn} to ${booking.checkOut}</p>
+                    </div>
+                    <div>
+                        <span class="booking-status status-${booking.status}">${booking.status}</span>
+                        <div style="margin-top: 0.5rem; font-weight: 600; color: var(--gold);">KES ${booking.amount.toLocaleString()}</div>
+                    </div>
+                `;
+                bookingsList.appendChild(bookingItem);
+            });
+        }
+
+        // Update analytics
+        function updateAnalytics() {
+            const totalProperties = properties.length;
+            const totalBookings = bookings.length;
+            const totalRevenue = properties.reduce((sum, prop) => sum + prop.revenue, 0);
+            const avgRating = properties.reduce((sum, prop) => sum + prop.rating, 0) / properties.length;
+
+            document.getElementById('totalProperties').textContent = totalProperties;
+            document.getElementById('totalBookings').textContent = totalBookings;
+            document.getElementById('totalRevenue').textContent = `$${totalRevenue.toLocaleString()}`;
+            document.getElementById('avgRating').textContent = avgRating.toFixed(1);
+        }
+
+        // Modal functions
+        function openAddPropertyModal() {
+            document.getElementById('addPropertyModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddPropertyModal() {
+            document.getElementById('addPropertyModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Add property form
+        document.getElementById('addPropertyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const newProperty = {
+                id: properties.length + 1,
+                name: formData.get('propertyName'),
+                type: formData.get('propertyType'),
+                location: formData.get('propertyLocation'),
+                price: parseInt(formData.get('propertyPrice')),
+                rooms: parseInt(formData.get('propertyRooms')),
+                rating: 0,
+                bookings: 0,
+                revenue: 0
+            };
+
+            properties.push(newProperty);
+            loadProperties();
+            updateAnalytics();
+            closeAddPropertyModal();
+            this.reset();
+        });
+
+        // Property actions
+        function editProperty(id) {
+            const property = properties.find(p => p.id === id);
+            alert(`Edit property: ${property.name}`);
+        }
+
+        function viewProperty(id) {
+            const property = properties.find(p => p.id === id);
+            alert(`View property: ${property.name}`);
+        }
+    </script>
+
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--black), #1a1a1a);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            color: var(--black);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+    </style>
+</body>
+</html>
