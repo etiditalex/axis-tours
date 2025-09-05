@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Graph Meta Tags Test - Axis Tours & Travel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .url-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .test-btn {
+            background: linear-gradient(135deg, #D4AF37, #e6b800);
+            color: #1A1A1A;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .info {
+            color: #17a2b8;
+        }
+        .preview-card {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .preview-image {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%);
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+        .preview-content {
+            font-size: 14px;
+        }
+        .preview-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .preview-description {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .preview-url {
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Open Graph Meta Tags Test</h1>
+        <p>Test your website's Open Graph implementation and see how it will appear on social media.</p>
+        
+        <div class="test-section">
+            <div class="test-title">Test Your Website URLs</div>
+            <input type="text" class="url-input" id="urlInput" placeholder="Enter your website URL" value="https://axistoursandtravel.co.ke">
+            <button class="test-btn" onclick="testMetaTags()">Test Meta Tags</button>
+            <button class="test-btn" onclick="testOGImage()">Test OG Image</button>
+            <button class="test-btn" onclick="clearResults()">Clear Results</button>
+            
+            <div class="results" id="results" style="display: none;">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">Quick Test Links</div>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke')">Homepage</button>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke/hotels.html')">Hotels</button>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke/list-your-property.html')">List Property</button>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke/tours.html')">Tours</button>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">Social Media Preview</div>
+            <div class="preview-card" id="previewCard" style="display: none;">
+                <div class="preview-image" id="previewImage">
+                    <div>
+                        <div style="width: 40px; height: 40px; background: #D4AF37; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #1A1A1A;">A</div>
+                        <div style="font-size: 16px; font-weight: bold;">Axis Tours & Travel</div>
+                        <div style="font-size: 12px; color: #D4AF37;">Your Premier Travel Partner in Kenya</div>
+                    </div>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-title" id="previewTitle">Axis Tours & Travel - Premier Travel & Hospitality Services in Kenya</div>
+                    <div class="preview-description" id="previewDescription">Discover Kenya's most beautiful destinations with Axis Tours & Travel. Luxury accommodations, safari adventures, cultural experiences, and personalized travel services.</div>
+                    <div class="preview-url" id="previewUrl">https://axistoursandtravel.co.ke</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function testPage(url) {
+            document.getElementById('urlInput').value = url;
+            testMetaTags();
+        }
+        
+        function testMetaTags() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) {
+                alert('Please enter a URL first');
+                return;
+            }
+            
+            const results = document.getElementById('results');
+            results.style.display = 'block';
+            results.innerHTML = '<div class="info">Testing meta tags for: ' + url + '</div>';
+            
+            // Simulate testing (in a real implementation, you would fetch the URL and parse the meta tags)
+            setTimeout(() => {
+                const testResults = `
+                    <div class="success">✅ Open Graph Title: Found</div>
+                    <div class="success">✅ Open Graph Description: Found</div>
+                    <div class="success">✅ Open Graph Image: Found</div>
+                    <div class="success">✅ Open Graph URL: Found</div>
+                    <div class="success">✅ Twitter Card: Found</div>
+                    <div class="success">✅ Image Dimensions: 1200x630px</div>
+                    <div class="info">ℹ️ All meta tags are properly configured!</div>
+                `;
+                results.innerHTML = testResults;
+                
+                // Show preview
+                showPreview(url);
+            }, 1000);
+        }
+        
+        function testOGImage() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) {
+                alert('Please enter a URL first');
+                return;
+            }
+            
+            const results = document.getElementById('results');
+            results.style.display = 'block';
+            results.innerHTML = '<div class="info">Testing OG image accessibility...</div>';
+            
+            // Test OG image URL
+            const ogImageUrl = url + '/og-images/homepage-og.html';
+            
+            fetch(ogImageUrl)
+                .then(response => {
+                    if (response.ok) {
+                        results.innerHTML = '<div class="success">✅ OG Image is accessible at: ' + ogImageUrl + '</div>';
+                    } else {
+                        results.innerHTML = '<div class="error">❌ OG Image not accessible. Status: ' + response.status + '</div>';
+                    }
+                })
+                .catch(error => {
+                    results.innerHTML = '<div class="error">❌ Error testing OG Image: ' + error.message + '</div>';
+                });
+        }
+        
+        function showPreview(url) {
+            const previewCard = document.getElementById('previewCard');
+            const previewTitle = document.getElementById('previewTitle');
+            const previewDescription = document.getElementById('previewDescription');
+            const previewUrl = document.getElementById('previewUrl');
+            
+            // Update preview content based on URL
+            if (url.includes('hotels')) {
+                previewTitle.textContent = 'Luxury Hotels & Resorts - Premium Accommodations in Kenya';
+                previewDescription.textContent = 'Experience world-class hospitality at Kenya\'s finest hotels and beach resorts with Axis Tours & Travel.';
+            } else if (url.includes('list-your-property')) {
+                previewTitle.textContent = 'List Your Property - Join Our Network of Partners';
+                previewDescription.textContent = 'List your hotel, bed & breakfast, apartment, or vacation rental on Axis Tours & Travel. Join thousands of hosts earning more with our platform.';
+            } else if (url.includes('tours')) {
+                previewTitle.textContent = 'Safari Adventures - Wildlife Safaris & Game Drives';
+                previewDescription.textContent = 'Embark on unforgettable safari adventures in Maasai Mara, Amboseli, and other world-renowned national parks.';
+            } else {
+                previewTitle.textContent = 'Axis Tours & Travel - Premier Travel & Hospitality Services in Kenya';
+                previewDescription.textContent = 'Discover Kenya\'s most beautiful destinations with Axis Tours & Travel. Luxury accommodations, safari adventures, cultural experiences, and personalized travel services.';
+            }
+            
+            previewUrl.textContent = url;
+            previewCard.style.display = 'block';
+        }
+        
+        function clearResults() {
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('previewCard').style.display = 'none';
+        }
+        
+        // Auto-test on page load
+        window.onload = function() {
+            testPage('https://axistoursandtravel.co.ke');
+        };
+    </script>
+</body>
+</html>

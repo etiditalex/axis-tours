@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Sharing Test - Axis Tours & Travel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .url-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .test-btn {
+            background: linear-gradient(135deg, #D4AF37, #e6b800);
+            color: #1A1A1A;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        .preview-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .social-preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .facebook-preview, .twitter-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 400px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        .preview-content {
+            font-size: 14px;
+        }
+        .preview-title-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .preview-description {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .preview-url {
+            color: #999;
+            font-size: 11px;
+        }
+        .instructions {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .instructions h3 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+        .instructions ol {
+            color: #0c5460;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Social Media Sharing Test</h1>
+        <p>Test how your website links will appear when shared on social media platforms.</p>
+        
+        <div class="instructions">
+            <h3>How to Test Social Media Sharing:</h3>
+            <ol>
+                <li>Copy your website URL and paste it in the input field below</li>
+                <li>Click "Test Facebook Preview" to see how it will look on Facebook</li>
+                <li>Click "Test Twitter Preview" to see how it will look on Twitter</li>
+                <li>Use the actual social media platforms to test real sharing</li>
+            </ol>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">Test Your Website URLs</div>
+            <input type="text" class="url-input" id="urlInput" placeholder="Enter your website URL (e.g., https://axistoursandtravel.co.ke)" value="https://axistoursandtravel.co.ke">
+            <button class="test-btn" onclick="testFacebook()">Test Facebook Preview</button>
+            <button class="test-btn" onclick="testTwitter()">Test Twitter Preview</button>
+            <button class="test-btn" onclick="testLinkedIn()">Test LinkedIn Preview</button>
+            
+            <div class="preview-container" id="previewContainer" style="display: none;">
+                <div class="preview-title">Social Media Preview</div>
+                <div class="social-preview" id="socialPreview">
+                    <!-- Preview will be generated here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">Quick Test Links</div>
+            <p>Click these links to quickly test different pages:</p>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke')">Homepage</button>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke/hotels.html')">Hotels</button>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke/list-your-property.html')">List Property</button>
+            <button class="test-btn" onclick="testPage('https://axistoursandtravel.co.ke/tours.html')">Tours</button>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">External Testing Tools</div>
+            <p>Use these external tools to test your Open Graph implementation:</p>
+            <a href="https://developers.facebook.com/tools/debug/" target="_blank" class="test-btn" style="text-decoration: none; display: inline-block;">Facebook Debugger</a>
+            <a href="https://cards-dev.twitter.com/validator" target="_blank" class="test-btn" style="text-decoration: none; display: inline-block;">Twitter Card Validator</a>
+            <a href="https://www.linkedin.com/post-inspector/" target="_blank" class="test-btn" style="text-decoration: none; display: inline-block;">LinkedIn Inspector</a>
+        </div>
+    </div>
+
+    <script>
+        function testPage(url) {
+            document.getElementById('urlInput').value = url;
+            testFacebook();
+        }
+        
+        function testFacebook() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) {
+                alert('Please enter a URL first');
+                return;
+            }
+            
+            showPreview('Facebook', url);
+        }
+        
+        function testTwitter() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) {
+                alert('Please enter a URL first');
+                return;
+            }
+            
+            showPreview('Twitter', url);
+        }
+        
+        function testLinkedIn() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) {
+                alert('Please enter a URL first');
+                return;
+            }
+            
+            showPreview('LinkedIn', url);
+        }
+        
+        function showPreview(platform, url) {
+            const previewContainer = document.getElementById('previewContainer');
+            const socialPreview = document.getElementById('socialPreview');
+            
+            // Create preview HTML based on platform
+            let previewHTML = '';
+            
+            if (platform === 'Facebook') {
+                previewHTML = `
+                    <div class="facebook-preview">
+                        <div class="preview-image">
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: #D4AF37; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #1A1A1A;">A</div>
+                                <div style="font-size: 16px; font-weight: bold;">Axis Tours & Travel</div>
+                                <div style="font-size: 12px; color: #D4AF37;">Your Premier Travel Partner in Kenya</div>
+                            </div>
+                        </div>
+                        <div class="preview-content">
+                            <div class="preview-title-text">Axis Tours & Travel - Premier Travel & Hospitality Services in Kenya</div>
+                            <div class="preview-description">Discover Kenya's most beautiful destinations with Axis Tours & Travel. Luxury accommodations, safari adventures, cultural experiences, and personalized travel services.</div>
+                            <div class="preview-url">${url}</div>
+                        </div>
+                    </div>
+                `;
+            } else if (platform === 'Twitter') {
+                previewHTML = `
+                    <div class="twitter-preview">
+                        <div class="preview-image">
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: #D4AF37; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #1A1A1A;">A</div>
+                                <div style="font-size: 16px; font-weight: bold;">Axis Tours & Travel</div>
+                                <div style="font-size: 12px; color: #D4AF37;">Your Premier Travel Partner in Kenya</div>
+                            </div>
+                        </div>
+                        <div class="preview-content">
+                            <div class="preview-title-text">Axis Tours & Travel - Premier Travel & Hospitality Services in Kenya</div>
+                            <div class="preview-description">Discover Kenya's most beautiful destinations with Axis Tours & Travel. Luxury accommodations, safari adventures, cultural experiences, and personalized travel services.</div>
+                            <div class="preview-url">${url}</div>
+                        </div>
+                    </div>
+                `;
+            } else if (platform === 'LinkedIn') {
+                previewHTML = `
+                    <div class="facebook-preview">
+                        <div class="preview-image">
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: #D4AF37; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #1A1A1A;">A</div>
+                                <div style="font-size: 16px; font-weight: bold;">Axis Tours & Travel</div>
+                                <div style="font-size: 12px; color: #D4AF37;">Your Premier Travel Partner in Kenya</div>
+                            </div>
+                        </div>
+                        <div class="preview-content">
+                            <div class="preview-title-text">Axis Tours & Travel - Premier Travel & Hospitality Services in Kenya</div>
+                            <div class="preview-description">Discover Kenya's most beautiful destinations with Axis Tours & Travel. Luxury accommodations, safari adventures, cultural experiences, and personalized travel services.</div>
+                            <div class="preview-url">${url}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            socialPreview.innerHTML = previewHTML;
+            previewContainer.style.display = 'block';
+        }
+        
+        // Auto-test on page load
+        window.onload = function() {
+            testPage('https://axistoursandtravel.co.ke');
+        };
+    </script>
+</body>
+</html>
