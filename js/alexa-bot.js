@@ -31,6 +31,19 @@ class AlexaBot {
 
             // Destinations
             destinations: {
+                "nairobi": {
+                    name: "Nairobi",
+                    description: "Kenya's vibrant capital city, perfect for urban adventures and staycations",
+                    activities: ["City tours", "Nairobi National Park", "Shopping", "Restaurants", "Nightlife", "Museums", "Cultural experiences"],
+                    bestTime: "Year-round, best from June to October",
+                    highlights: ["Nairobi National Park", "Giraffe Centre", "Karen Blixen Museum", "Maasai Market", "KICC", "Westlands", "Karen", "Runda"],
+                    staycation: {
+                        description: "Perfect for locals and visitors seeking urban luxury and convenience",
+                        hotels: ["Safari Park Hotel", "Hilton Nairobi", "Radisson Blu", "Tribe Hotel", "Villa Rosa Kempinski"],
+                        activities: ["Spa treatments", "Fine dining", "Shopping malls", "Art galleries", "Coffee tours", "City safaris"],
+                        neighborhoods: ["Westlands", "Karen", "Runda", "Kilimani", "Lavington", "Kileleshwa"]
+                    }
+                },
                 "diani beach": {
                     name: "Diani Beach",
                     description: "One of Kenya's most beautiful beaches with pristine white sand and crystal clear waters",
@@ -58,34 +71,162 @@ class AlexaBot {
                     activities: ["Game drives", "Bird watching", "Photography", "Camping"],
                     bestTime: "Year-round, best from June to October",
                     highlights: ["Red elephants", "Mudanda Rock", "Lugard Falls", "Diverse wildlife"]
+                },
+                "nakuru": {
+                    name: "Lake Nakuru",
+                    description: "Famous for its flamingos and diverse birdlife",
+                    activities: ["Bird watching", "Game drives", "Photography", "Nature walks"],
+                    bestTime: "Year-round, best from June to October",
+                    highlights: ["Flamingo spectacle", "Rhino sanctuary", "Baboon cliff", "Makalia Falls"]
+                },
+                "amboseli": {
+                    name: "Amboseli National Park",
+                    description: "Iconic park with stunning views of Mount Kilimanjaro",
+                    activities: ["Game drives", "Photography", "Cultural visits", "Elephant watching"],
+                    bestTime: "Year-round, best from June to October",
+                    highlights: ["Mount Kilimanjaro views", "Elephant herds", "Maasai culture", "Observation Hill"]
+                },
+                "samburu": {
+                    name: "Samburu National Reserve",
+                    description: "Unique wildlife and dramatic landscapes in northern Kenya",
+                    activities: ["Game drives", "Cultural visits", "Photography", "Bird watching"],
+                    bestTime: "Year-round, best from June to October",
+                    highlights: ["Special Five", "Ewaso Nyiro River", "Samburu culture", "Unique wildlife"]
+                },
+                "malindi": {
+                    name: "Malindi",
+                    description: "Historic coastal town with beautiful beaches and marine parks",
+                    activities: ["Beach activities", "Marine parks", "Historical sites", "Water sports"],
+                    bestTime: "Year-round, best from December to March",
+                    highlights: ["Malindi Marine Park", "Vasco da Gama Pillar", "Gede Ruins", "Watamu"]
+                },
+                "watamu": {
+                    name: "Watamu",
+                    description: "Pristine beach destination with excellent diving and marine life",
+                    activities: ["Diving", "Snorkeling", "Beach relaxation", "Marine conservation"],
+                    bestTime: "Year-round, best from December to March",
+                    highlights: ["Watamu Marine Park", "Turtle Bay", "Mida Creek", "Arabuko-Sokoke Forest"]
                 }
             },
 
             // Hotels and Accommodations
             hotels: {
+                // Nairobi Hotels
+                "safari park hotel": {
+                    name: "Safari Park Hotel",
+                    location: "Nairobi",
+                    rating: "5 stars",
+                    description: "Luxury city hotel with extensive grounds and conference facilities",
+                    features: ["Spa & wellness", "Multiple restaurants", "Conference facilities", "Swimming pool", "Golf course"],
+                    priceRange: "$$$",
+                    category: "Business & Leisure"
+                },
+                "hilton nairobi": {
+                    name: "Hilton Nairobi",
+                    location: "Nairobi CBD",
+                    rating: "5 stars",
+                    description: "Modern luxury hotel in the heart of Nairobi",
+                    features: ["City views", "Business center", "Fitness center", "Multiple dining options", "Concierge service"],
+                    priceRange: "$$$",
+                    category: "Business"
+                },
+                "tribe hotel": {
+                    name: "Tribe Hotel",
+                    location: "Gigiri, Nairobi",
+                    rating: "5 stars",
+                    description: "Contemporary luxury hotel with African-inspired design",
+                    features: ["Modern design", "Art gallery", "Rooftop bar", "Spa services", "Fine dining"],
+                    priceRange: "$$$",
+                    category: "Luxury"
+                },
+                "villa rosa kempinski": {
+                    name: "Villa Rosa Kempinski",
+                    location: "Westlands, Nairobi",
+                    rating: "5 stars",
+                    description: "Ultra-luxury hotel with European elegance",
+                    features: ["Luxury suites", "Michelin-starred dining", "Spa & wellness", "Butler service", "Helipad"],
+                    priceRange: "$$$$",
+                    category: "Ultra Luxury"
+                },
+                "radisson blu nairobi": {
+                    name: "Radisson Blu Nairobi",
+                    location: "Upper Hill, Nairobi",
+                    rating: "4 stars",
+                    description: "Modern hotel with excellent city views",
+                    features: ["City views", "Fitness center", "Business facilities", "Multiple restaurants", "Rooftop pool"],
+                    priceRange: "$$",
+                    category: "Business"
+                },
+                
+                // Coast Hotels
                 "baobab beach resort": {
                     name: "Baobab Beach Resort",
                     location: "Diani Beach",
                     rating: "5 stars",
                     description: "Luxury beachfront resort with world-class amenities",
                     features: ["Beachfront location", "Multiple restaurants", "Spa services", "Water sports", "Kids club"],
-                    priceRange: "$$$"
+                    priceRange: "$$$",
+                    category: "Beach Resort"
                 },
                 "diani beach resorts": {
                     name: "Diani Beach Resorts",
                     location: "Diani Beach",
                     description: "Various luxury and mid-range beach resorts",
-                    types: ["Luxury resorts", "Boutique hotels", "All-inclusive properties", "Family-friendly resorts"]
+                    types: ["Luxury resorts", "Boutique hotels", "All-inclusive properties", "Family-friendly resorts"],
+                    category: "Beach Resort"
+                },
+                
+                // Safari Lodges
+                "mara serena lodge": {
+                    name: "Mara Serena Safari Lodge",
+                    location: "Maasai Mara",
+                    rating: "5 stars",
+                    description: "Luxury safari lodge with stunning Mara views",
+                    features: ["Game viewing", "Cultural experiences", "Swimming pool", "Spa services", "Fine dining"],
+                    priceRange: "$$$",
+                    category: "Safari Lodge"
+                },
+                "amboseli serena lodge": {
+                    name: "Amboseli Serena Safari Lodge",
+                    location: "Amboseli National Park",
+                    rating: "5 stars",
+                    description: "Luxury lodge with Mount Kilimanjaro views",
+                    features: ["Kilimanjaro views", "Game drives", "Cultural visits", "Swimming pool", "Spa"],
+                    priceRange: "$$$",
+                    category: "Safari Lodge"
+                },
+                
+                // Budget Options
+                "nairobi budget hotels": {
+                    name: "Nairobi Budget Hotels",
+                    location: "Various Nairobi areas",
+                    description: "Comfortable budget accommodations in Nairobi",
+                    types: ["3-star hotels", "Guesthouses", "Serviced apartments", "Hostels"],
+                    priceRange: "$",
+                    category: "Budget"
                 }
             },
 
             // Tours and Packages
             tours: {
+                "nairobi staycation": {
+                    name: "Nairobi Staycation Packages",
+                    description: "Perfect urban getaways for locals and visitors in Kenya's capital",
+                    duration: ["1 day", "2 days", "3 days", "Weekend packages"],
+                    destinations: ["Nairobi National Park", "Giraffe Centre", "Karen Blixen Museum", "Maasai Market", "Westlands", "Karen"],
+                    includes: ["Luxury hotel accommodation", "City tours", "Spa treatments", "Fine dining", "Shopping", "Cultural experiences"],
+                    packages: {
+                        "luxury staycation": "5-star hotels with spa treatments and fine dining",
+                        "family staycation": "Family-friendly activities and accommodations",
+                        "romantic getaway": "Couples packages with romantic dinners and spa treatments",
+                        "business staycation": "Business-friendly hotels with meeting facilities"
+                    }
+                },
                 "safari tours": {
                     name: "Safari Tours",
                     description: "Wildlife safari experiences in Kenya's national parks",
                     duration: ["3 days", "5 days", "7 days", "10 days"],
-                    destinations: ["Maasai Mara", "Tsavo", "Amboseli", "Samburu"],
+                    destinations: ["Maasai Mara", "Tsavo", "Amboseli", "Samburu", "Nakuru", "Nairobi National Park"],
                     includes: ["Game drives", "Accommodation", "Meals", "Professional guide", "Transport"]
                 },
                 "beach holidays": {
@@ -98,8 +239,23 @@ class AlexaBot {
                 "cultural tours": {
                     name: "Cultural Tours",
                     description: "Authentic cultural experiences and historical sites",
-                    highlights: ["Maasai villages", "Swahili culture", "Historical sites", "Local markets"],
-                    duration: ["Half day", "Full day", "Multi-day"]
+                    highlights: ["Maasai villages", "Swahili culture", "Historical sites", "Local markets", "Nairobi cultural sites"],
+                    duration: ["Half day", "Full day", "Multi-day"],
+                    destinations: ["Nairobi", "Mombasa", "Maasai Mara", "Coastal towns"]
+                },
+                "city tours": {
+                    name: "Nairobi City Tours",
+                    description: "Comprehensive tours of Kenya's capital city",
+                    highlights: ["Nairobi National Park", "Giraffe Centre", "Elephant Orphanage", "Karen Blixen Museum", "Maasai Market", "KICC", "Westlands"],
+                    duration: ["Half day", "Full day", "Multi-day"],
+                    includes: ["Professional guide", "Transport", "Entrance fees", "Lunch"]
+                },
+                "day trips": {
+                    name: "Day Trips from Nairobi",
+                    description: "Exciting day excursions from Nairobi",
+                    destinations: ["Nairobi National Park", "Lake Nakuru", "Hell's Gate", "Mount Kenya", "Ol Pejeta Conservancy"],
+                    duration: ["Full day"],
+                    includes: ["Transport", "Guide", "Lunch", "Entrance fees"]
                 }
             },
 
@@ -649,6 +805,30 @@ class AlexaBot {
             };
         }
 
+        // Nairobi Staycation queries
+        if (lowerMessage.includes('nairobi') || lowerMessage.includes('staycation') || lowerMessage.includes('city')) {
+            const nairobi = this.knowledgeBase.destinations['nairobi'];
+            return {
+                text: `🏙️ <strong>${nairobi.name} Staycation</strong><br><br>
+                ${nairobi.description}<br><br>
+                <strong>Perfect for:</strong> Urban adventures, luxury getaways, business trips, family fun<br><br>
+                <strong>Top Activities:</strong><br>
+                ${nairobi.activities.join(', ')}<br><br>
+                <strong>Must-Visit Places:</strong><br>
+                ${nairobi.highlights.join(', ')}<br><br>
+                <strong>Best Neighborhoods:</strong><br>
+                ${nairobi.staycation.neighborhoods.join(', ')}<br><br>
+                <strong>Luxury Hotels:</strong><br>
+                ${nairobi.staycation.hotels.join(', ')}`,
+                actions: [
+                    { text: "🏨 Nairobi hotels" },
+                    { text: "📅 Book staycation" },
+                    { text: "🏛️ City tours" },
+                    { text: "💰 Staycation prices" }
+                ]
+            };
+        }
+
         // Destination queries
         if (lowerMessage.includes('diani') || lowerMessage.includes('beach')) {
             const diani = this.knowledgeBase.destinations['diani beach'];
@@ -686,19 +866,126 @@ class AlexaBot {
             };
         }
 
+        // Other destination queries
+        if (lowerMessage.includes('nakuru') || lowerMessage.includes('lake nakuru')) {
+            const nakuru = this.knowledgeBase.destinations['nakuru'];
+            return {
+                text: `🦩 <strong>${nakuru.name}</strong><br><br>
+                ${nakuru.description}<br><br>
+                <strong>Activities:</strong><br>
+                ${nakuru.activities.join(', ')}<br><br>
+                <strong>Best Time:</strong> ${nakuru.bestTime}<br><br>
+                <strong>Highlights:</strong><br>
+                ${nakuru.highlights.join(', ')}`,
+                actions: [
+                    { text: "📅 Book Nakuru trip" },
+                    { text: "🏨 Nakuru hotels" },
+                    { text: "💰 Nakuru prices" }
+                ]
+            };
+        }
+
+        if (lowerMessage.includes('amboseli') || lowerMessage.includes('kilimanjaro')) {
+            const amboseli = this.knowledgeBase.destinations['amboseli'];
+            return {
+                text: `🏔️ <strong>${amboseli.name}</strong><br><br>
+                ${amboseli.description}<br><br>
+                <strong>Activities:</strong><br>
+                ${amboseli.activities.join(', ')}<br><br>
+                <strong>Best Time:</strong> ${amboseli.bestTime}<br><br>
+                <strong>Highlights:</strong><br>
+                ${amboseli.highlights.join(', ')}`,
+                actions: [
+                    { text: "📅 Book Amboseli trip" },
+                    { text: "🏨 Amboseli lodges" },
+                    { text: "💰 Amboseli prices" }
+                ]
+            };
+        }
+
+        if (lowerMessage.includes('samburu') || lowerMessage.includes('northern kenya')) {
+            const samburu = this.knowledgeBase.destinations['samburu'];
+            return {
+                text: `🐘 <strong>${samburu.name}</strong><br><br>
+                ${samburu.description}<br><br>
+                <strong>Activities:</strong><br>
+                ${samburu.activities.join(', ')}<br><br>
+                <strong>Best Time:</strong> ${samburu.bestTime}<br><br>
+                <strong>Highlights:</strong><br>
+                ${samburu.highlights.join(', ')}`,
+                actions: [
+                    { text: "📅 Book Samburu trip" },
+                    { text: "🏨 Samburu lodges" },
+                    { text: "💰 Samburu prices" }
+                ]
+            };
+        }
+
+        if (lowerMessage.includes('malindi') || lowerMessage.includes('watamu')) {
+            const malindi = this.knowledgeBase.destinations['malindi'];
+            const watamu = this.knowledgeBase.destinations['watamu'];
+            return {
+                text: `🏖️ <strong>Coastal Paradise</strong><br><br>
+                <strong>${malindi.name}:</strong> ${malindi.description}<br>
+                <strong>${watamu.name}:</strong> ${watamu.description}<br><br>
+                <strong>Malindi Activities:</strong> ${malindi.activities.join(', ')}<br><br>
+                <strong>Watamu Activities:</strong> ${watamu.activities.join(', ')}<br><br>
+                <strong>Best Time:</strong> ${malindi.bestTime}`,
+                actions: [
+                    { text: "📅 Book coastal trip" },
+                    { text: "🏨 Beach resorts" },
+                    { text: "💰 Coastal prices" }
+                ]
+            };
+        }
+
         // Hotel queries
         if (lowerMessage.includes('hotel') || lowerMessage.includes('resort') || lowerMessage.includes('accommodation')) {
             return {
                 text: `🏨 <strong>Hotel & Resort Information</strong><br><br>
                 We partner with the finest hotels and resorts across Kenya:<br><br>
+                <strong>Nairobi:</strong> Luxury city hotels, business hotels, ultra-luxury properties<br>
                 <strong>Diani Beach:</strong> Luxury beachfront resorts<br>
                 <strong>Maasai Mara:</strong> Safari lodges and tented camps<br>
-                <strong>Mombasa:</strong> City hotels and beach resorts<br><br>
+                <strong>Mombasa:</strong> City hotels and beach resorts<br>
+                <strong>Amboseli:</strong> Safari lodges with Kilimanjaro views<br><br>
                 All accommodations include modern amenities, excellent service, and prime locations.`,
                 actions: [
+                    { text: "🏙️ Nairobi hotels" },
                     { text: "🏖️ Beach resorts" },
                     { text: "🦁 Safari lodges" },
                     { text: "📅 Check availability" }
+                ]
+            };
+        }
+
+        // Nairobi Hotel specific queries
+        if (lowerMessage.includes('nairobi hotel') || lowerMessage.includes('nairobi accommodation')) {
+            const nairobiHotels = [
+                this.knowledgeBase.hotels['safari park hotel'],
+                this.knowledgeBase.hotels['hilton nairobi'],
+                this.knowledgeBase.hotels['tribe hotel'],
+                this.knowledgeBase.hotels['villa rosa kempinski'],
+                this.knowledgeBase.hotels['radisson blu nairobi']
+            ];
+            
+            let hotelList = nairobiHotels.map(hotel => 
+                `<strong>${hotel.name}</strong> (${hotel.rating}) - ${hotel.description}`
+            ).join('<br><br>');
+            
+            return {
+                text: `🏙️ <strong>Nairobi Luxury Hotels</strong><br><br>
+                ${hotelList}<br><br>
+                <strong>Categories:</strong><br>
+                • Ultra Luxury: Villa Rosa Kempinski<br>
+                • Business: Hilton Nairobi, Radisson Blu<br>
+                • Leisure: Safari Park Hotel, Tribe Hotel<br><br>
+                All hotels offer world-class amenities and excellent locations!`,
+                actions: [
+                    { text: "📅 Book Nairobi hotel" },
+                    { text: "💰 Hotel prices" },
+                    { text: "🏛️ City tours" },
+                    { text: "📞 Contact us" }
                 ]
             };
         }
@@ -771,16 +1058,122 @@ class AlexaBot {
             };
         }
 
+        // Enhanced search for multiple keywords
+        const searchResults = this.performAdvancedSearch(lowerMessage);
+        if (searchResults) {
+            return searchResults;
+        }
+
         // Default response
         return {
             text: "I'd be happy to help you with that! Could you be more specific about what you'd like to know? I can help with destinations, hotels, tours, pricing, or booking information.",
             actions: [
+                { text: "🏙️ Nairobi staycation" },
                 { text: "🏖️ Beach destinations" },
                 { text: "🦁 Safari tours" },
                 { text: "🏨 Hotels" },
                 { text: "📞 Contact info" }
             ]
         };
+    }
+
+    performAdvancedSearch(message) {
+        // Search for destinations
+        const destinationKeywords = {
+            'nairobi': 'nairobi',
+            'mombasa': 'mombasa',
+            'diani': 'diani beach',
+            'mara': 'maasai mara',
+            'tsavo': 'tsavo',
+            'nakuru': 'nakuru',
+            'amboseli': 'amboseli',
+            'samburu': 'samburu',
+            'malindi': 'malindi',
+            'watamu': 'watamu'
+        };
+
+        for (const [keyword, destination] of Object.entries(destinationKeywords)) {
+            if (message.includes(keyword)) {
+                const dest = this.knowledgeBase.destinations[destination];
+                if (dest) {
+                    return {
+                        text: `🔍 <strong>Search Results for "${keyword.toUpperCase()}"</strong><br><br>
+                        <strong>${dest.name}</strong><br><br>
+                        ${dest.description}<br><br>
+                        <strong>Activities:</strong> ${dest.activities.join(', ')}<br><br>
+                        <strong>Best Time:</strong> ${dest.bestTime}<br><br>
+                        <strong>Highlights:</strong> ${dest.highlights.join(', ')}`,
+                        actions: [
+                            { text: `📅 Book ${dest.name}` },
+                            { text: `🏨 ${dest.name} hotels` },
+                            { text: `💰 ${dest.name} prices` }
+                        ]
+                    };
+                }
+            }
+        }
+
+        // Search for hotels
+        const hotelKeywords = {
+            'safari park': 'safari park hotel',
+            'hilton': 'hilton nairobi',
+            'tribe': 'tribe hotel',
+            'kempinski': 'villa rosa kempinski',
+            'radisson': 'radisson blu nairobi',
+            'baobab': 'baobab beach resort'
+        };
+
+        for (const [keyword, hotel] of Object.entries(hotelKeywords)) {
+            if (message.includes(keyword)) {
+                const hotelData = this.knowledgeBase.hotels[hotel];
+                if (hotelData) {
+                    return {
+                        text: `🏨 <strong>${hotelData.name}</strong><br><br>
+                        <strong>Location:</strong> ${hotelData.location}<br>
+                        <strong>Rating:</strong> ${hotelData.rating}<br>
+                        <strong>Description:</strong> ${hotelData.description}<br><br>
+                        <strong>Features:</strong> ${hotelData.features.join(', ')}<br><br>
+                        <strong>Price Range:</strong> ${hotelData.priceRange}`,
+                        actions: [
+                            { text: "📅 Book this hotel" },
+                            { text: "💰 Check prices" },
+                            { text: "📞 Contact us" }
+                        ]
+                    };
+                }
+            }
+        }
+
+        // Search for tour types
+        const tourKeywords = {
+            'staycation': 'nairobi staycation',
+            'city tour': 'city tours',
+            'day trip': 'day trips',
+            'cultural': 'cultural tours',
+            'beach holiday': 'beach holidays'
+        };
+
+        for (const [keyword, tour] of Object.entries(tourKeywords)) {
+            if (message.includes(keyword)) {
+                const tourData = this.knowledgeBase.tours[tour];
+                if (tourData) {
+                    return {
+                        text: `🎯 <strong>${tourData.name}</strong><br><br>
+                        ${tourData.description}<br><br>
+                        <strong>Duration:</strong> ${tourData.duration.join(', ')}<br><br>
+                        <strong>Destinations:</strong> ${tourData.destinations ? tourData.destinations.join(', ') : 'Various locations'}<br><br>
+                        <strong>Includes:</strong> ${tourData.includes.join(', ')}`,
+                        actions: [
+                            { text: "📅 Book this tour" },
+                            { text: "💰 Check prices" },
+                            { text: "📞 Contact us" }
+                        ]
+                    };
+                }
+            }
+        }
+
+        return null;
     }
 
     isGreeting(message) {
