@@ -4,7 +4,8 @@
 class PaymentGateway {
     constructor() {
         this.apiKey = 'your-api-key-here';
-        this.baseUrl = 'https://api.axistoursandtravel.co.ke/payments';
+        this.baseUrl = 'http://localhost:3000/api/payments'; // Local development
+        // this.baseUrl = 'https://api.axistoursandtravel.co.ke/api/payments'; // Production
         this.supportedMethods = ['mpesa', 'stripe', 'paypal', 'bank'];
     }
 
@@ -140,26 +141,34 @@ class PaymentGateway {
 
     // Process Stripe payment
     async processStripePayment(paymentData) {
-        const { cardNumber, expiryDate, cvv, cardName, amount, currency } = paymentData;
+        const { cardNumber, expiryDate, cvv, cardName, amount, currency, bookingId, customerInfo } = paymentData;
         
         try {
-            // Simulate Stripe API call
-            const response = await fetch(`${this.baseUrl}/stripe/charge`, {
+            // First, create a Stripe token (in production, use Stripe Elements)
+            const tokenResponse = await this.createStripeToken({
+                number: cardNumber,
+                exp_month: expiryDate.split('/')[0],
+                exp_year: '20' + expiryDate.split('/')[1],
+                cvc: cvv,
+                name: cardName
+            });
+            
+            if (!tokenResponse.success) {
+                throw new Error(tokenResponse.error);
+            }
+            
+            // Send to backend server
+            const response = await fetch(`${this.baseUrl}/stripe`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.apiKey}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    amount: amount * 100, // Convert to cents
+                    amount: amount,
                     currency: currency.toLowerCase(),
-                    source: {
-                        number: cardNumber,
-                        exp_month: expiryDate.split('/')[0],
-                        exp_year: '20' + expiryDate.split('/')[1],
-                        cvc: cvv,
-                        name: cardName
-                    }
+                    cardToken: tokenResponse.token,
+                    bookingId: bookingId,
+                    customerInfo: customerInfo
                 })
             });
 
@@ -168,8 +177,8 @@ class PaymentGateway {
             if (result.success) {
                 return {
                     success: true,
-                    transactionId: result.id,
-                    message: 'Card payment processed successfully',
+                    transactionId: result.transactionId,
+                    message: result.message,
                     method: 'stripe'
                 };
             } else {
@@ -177,6 +186,24 @@ class PaymentGateway {
             }
         } catch (error) {
             throw new Error(`Card payment failed: ${error.message}`);
+        }
+    }
+
+    // Create Stripe token (simplified version)
+    async createStripeToken(cardData) {
+        try {
+            // In production, use Stripe.js library
+            // For now, simulate token creation
+            const token = `tok_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            
+            // Basic validation
+            if (!cardData.number || !cardData.exp_month || !cardData.exp_year || !cardData.cvc) {
+                return { success: false, error: 'Invalid card data' };
+            }
+            
+            return { success: true, token: token };
+        } catch (error) {
+            return { success: false, error: error.message };
         }
     }
 
