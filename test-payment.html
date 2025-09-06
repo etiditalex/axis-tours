@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Payment System - Axis Tours & Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .test-section h3 {
+            color: var(--black);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .test-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+        }
+        
+        .form-group input, .form-group select {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .btn-test {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            color: var(--black);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-test:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .server-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dc3545;
+        }
+        
+        .status-indicator.online {
+            background: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="payment-integration.html">Payment System</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="test-container">
+            <h1>🧪 Payment System Test Page</h1>
+            <p>Test your payment endpoints and integration</p>
+            
+            <!-- Server Status -->
+            <div class="test-section">
+                <h3><i class="fas fa-server"></i> Server Status</h3>
+                <div class="server-status">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">Checking server status...</span>
+                </div>
+                <button class="btn-test" onclick="checkServerStatus()">Check Status</button>
+                <div id="serverResult" class="result" style="display: none;"></div>
+            </div>
+
+            <!-- Stripe Payment Test -->
+            <div class="test-section">
+                <h3><i class="fas fa-credit-card"></i> Test Stripe Payment</h3>
+                <form class="test-form" onsubmit="testStripePayment(event)">
+                    <div class="form-group">
+                        <label>Amount (KES)</label>
+                        <input type="number" id="stripeAmount" value="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Currency</label>
+                        <select id="stripeCurrency">
+                            <option value="KES">KES</option>
+                            <option value="USD">USD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Card Token (Test)</label>
+                        <input type="text" id="stripeToken" value="tok_test_123456789" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking ID</label>
+                        <input type="text" id="stripeBookingId" value="BK123456" required>
+                    </div>
+                    <button type="submit" class="btn-test">Test Stripe Payment</button>
+                </form>
+                <div id="stripeResult" class="result" style="display: none;"></div>
+            </div>
+
+            <!-- M-Pesa Payment Test -->
+            <div class="test-section">
+                <h3><i class="fas fa-mobile-alt"></i> Test M-Pesa Payment</h3>
+                <form class="test-form" onsubmit="testMpesaPayment(event)">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="mpesaPhone" value="254700000000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (KES)</label>
+                        <input type="number" id="mpesaAmount" value="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking ID</label>
+                        <input type="text" id="mpesaBookingId" value="BK123456" required>
+                    </div>
+                    <button type="submit" class="btn-test">Test M-Pesa Payment</button>
+                </form>
+                <div id="mpesaResult" class="result" style="display: none;"></div>
+            </div>
+
+            <!-- Bank Transfer Test -->
+            <div class="test-section">
+                <h3><i class="fas fa-university"></i> Test Bank Transfer</h3>
+                <form class="test-form" onsubmit="testBankTransfer(event)">
+                    <div class="form-group">
+                        <label>Bank Name</label>
+                        <select id="bankName">
+                            <option value="kcb">Kenya Commercial Bank</option>
+                            <option value="equity">Equity Bank</option>
+                            <option value="coop">Co-operative Bank</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Number</label>
+                        <input type="text" id="bankAccount" value="1234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Name</label>
+                        <input type="text" id="bankAccountName" value="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (KES)</label>
+                        <input type="number" id="bankAmount" value="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking ID</label>
+                        <input type="text" id="bankBookingId" value="BK123456" required>
+                    </div>
+                    <button type="submit" class="btn-test">Test Bank Transfer</button>
+                </form>
+                <div id="bankResult" class="result" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SERVER_URL = 'http://localhost:3000';
+        
+        // Check server status
+        async function checkServerStatus() {
+            const statusIndicator = document.getElementById('statusIndicator');
+            const statusText = document.getElementById('statusText');
+            const resultDiv = document.getElementById('serverResult');
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/health`);
+                const data = await response.json();
+                
+                statusIndicator.classList.add('online');
+                statusText.textContent = 'Server is online and running';
+                resultDiv.className = 'result success';
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                statusIndicator.classList.remove('online');
+                statusText.textContent = 'Server is offline or unreachable';
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}\n\nMake sure the server is running:\n1. Open terminal\n2. cd server\n3. node server.js`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Test Stripe payment
+        async function testStripePayment(event) {
+            event.preventDefault();
+            const resultDiv = document.getElementById('stripeResult');
+            
+            const data = {
+                amount: parseFloat(document.getElementById('stripeAmount').value),
+                currency: document.getElementById('stripeCurrency').value,
+                cardToken: document.getElementById('stripeToken').value,
+                bookingId: document.getElementById('stripeBookingId').value,
+                customerInfo: {
+                    email: 'test@example.com',
+                    phone: '+254700000000'
+                }
+            };
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/payments/stripe`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                resultDiv.className = response.ok ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Test M-Pesa payment
+        async function testMpesaPayment(event) {
+            event.preventDefault();
+            const resultDiv = document.getElementById('mpesaResult');
+            
+            const data = {
+                phone: document.getElementById('mpesaPhone').value,
+                amount: parseFloat(document.getElementById('mpesaAmount').value),
+                bookingId: document.getElementById('mpesaBookingId').value
+            };
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/payments/mpesa`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                resultDiv.className = response.ok ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Test Bank transfer
+        async function testBankTransfer(event) {
+            event.preventDefault();
+            const resultDiv = document.getElementById('bankResult');
+            
+            const data = {
+                bankName: document.getElementById('bankName').value,
+                accountNumber: document.getElementById('bankAccount').value,
+                accountName: document.getElementById('bankAccountName').value,
+                amount: parseFloat(document.getElementById('bankAmount').value),
+                bookingId: document.getElementById('bankBookingId').value
+            };
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/payments/bank`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                resultDiv.className = response.ok ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Check server status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServerStatus();
+        });
+    </script>
+</body>
+</html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Payment System - Axis Tours & Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .test-section h3 {
+            color: var(--black);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .test-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+        }
+        
+        .form-group input, .form-group select {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .btn-test {
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            color: var(--black);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-test:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .server-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dc3545;
+        }
+        
+        .status-indicator.online {
+            background: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="payment-integration.html">Payment System</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="test-container">
+            <h1>🧪 Payment System Test Page</h1>
+            <p>Test your payment endpoints and integration</p>
+            
+            <!-- Server Status -->
+            <div class="test-section">
+                <h3><i class="fas fa-server"></i> Server Status</h3>
+                <div class="server-status">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">Checking server status...</span>
+                </div>
+                <button class="btn-test" onclick="checkServerStatus()">Check Status</button>
+                <div id="serverResult" class="result" style="display: none;"></div>
+            </div>
+
+            <!-- Stripe Payment Test -->
+            <div class="test-section">
+                <h3><i class="fas fa-credit-card"></i> Test Stripe Payment</h3>
+                <form class="test-form" onsubmit="testStripePayment(event)">
+                    <div class="form-group">
+                        <label>Amount (KES)</label>
+                        <input type="number" id="stripeAmount" value="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Currency</label>
+                        <select id="stripeCurrency">
+                            <option value="KES">KES</option>
+                            <option value="USD">USD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Card Token (Test)</label>
+                        <input type="text" id="stripeToken" value="tok_test_123456789" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking ID</label>
+                        <input type="text" id="stripeBookingId" value="BK123456" required>
+                    </div>
+                    <button type="submit" class="btn-test">Test Stripe Payment</button>
+                </form>
+                <div id="stripeResult" class="result" style="display: none;"></div>
+            </div>
+
+            <!-- M-Pesa Payment Test -->
+            <div class="test-section">
+                <h3><i class="fas fa-mobile-alt"></i> Test M-Pesa Payment</h3>
+                <form class="test-form" onsubmit="testMpesaPayment(event)">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="mpesaPhone" value="254700000000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (KES)</label>
+                        <input type="number" id="mpesaAmount" value="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking ID</label>
+                        <input type="text" id="mpesaBookingId" value="BK123456" required>
+                    </div>
+                    <button type="submit" class="btn-test">Test M-Pesa Payment</button>
+                </form>
+                <div id="mpesaResult" class="result" style="display: none;"></div>
+            </div>
+
+            <!-- Bank Transfer Test -->
+            <div class="test-section">
+                <h3><i class="fas fa-university"></i> Test Bank Transfer</h3>
+                <form class="test-form" onsubmit="testBankTransfer(event)">
+                    <div class="form-group">
+                        <label>Bank Name</label>
+                        <select id="bankName">
+                            <option value="kcb">Kenya Commercial Bank</option>
+                            <option value="equity">Equity Bank</option>
+                            <option value="coop">Co-operative Bank</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Number</label>
+                        <input type="text" id="bankAccount" value="1234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Name</label>
+                        <input type="text" id="bankAccountName" value="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (KES)</label>
+                        <input type="number" id="bankAmount" value="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking ID</label>
+                        <input type="text" id="bankBookingId" value="BK123456" required>
+                    </div>
+                    <button type="submit" class="btn-test">Test Bank Transfer</button>
+                </form>
+                <div id="bankResult" class="result" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SERVER_URL = 'http://localhost:3000';
+        
+        // Check server status
+        async function checkServerStatus() {
+            const statusIndicator = document.getElementById('statusIndicator');
+            const statusText = document.getElementById('statusText');
+            const resultDiv = document.getElementById('serverResult');
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/health`);
+                const data = await response.json();
+                
+                statusIndicator.classList.add('online');
+                statusText.textContent = 'Server is online and running';
+                resultDiv.className = 'result success';
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                statusIndicator.classList.remove('online');
+                statusText.textContent = 'Server is offline or unreachable';
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}\n\nMake sure the server is running:\n1. Open terminal\n2. cd server\n3. node server.js`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Test Stripe payment
+        async function testStripePayment(event) {
+            event.preventDefault();
+            const resultDiv = document.getElementById('stripeResult');
+            
+            const data = {
+                amount: parseFloat(document.getElementById('stripeAmount').value),
+                currency: document.getElementById('stripeCurrency').value,
+                cardToken: document.getElementById('stripeToken').value,
+                bookingId: document.getElementById('stripeBookingId').value,
+                customerInfo: {
+                    email: 'test@example.com',
+                    phone: '+254700000000'
+                }
+            };
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/payments/stripe`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                resultDiv.className = response.ok ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Test M-Pesa payment
+        async function testMpesaPayment(event) {
+            event.preventDefault();
+            const resultDiv = document.getElementById('mpesaResult');
+            
+            const data = {
+                phone: document.getElementById('mpesaPhone').value,
+                amount: parseFloat(document.getElementById('mpesaAmount').value),
+                bookingId: document.getElementById('mpesaBookingId').value
+            };
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/payments/mpesa`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                resultDiv.className = response.ok ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Test Bank transfer
+        async function testBankTransfer(event) {
+            event.preventDefault();
+            const resultDiv = document.getElementById('bankResult');
+            
+            const data = {
+                bankName: document.getElementById('bankName').value,
+                accountNumber: document.getElementById('bankAccount').value,
+                accountName: document.getElementById('bankAccountName').value,
+                amount: parseFloat(document.getElementById('bankAmount').value),
+                bookingId: document.getElementById('bankBookingId').value
+            };
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/payments/bank`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                resultDiv.className = response.ok ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        // Check server status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServerStatus();
+        });
+    </script>
+</body>
+</html>

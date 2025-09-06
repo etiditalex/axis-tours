@@ -205,12 +205,17 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="destinations.html">Destinations</a></li>
                 <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="tours.html">Tours</a></li>
+                <li><a href="safaris.html">Safaris</a></li>
+                <li><a href="experiences.html">Experiences</a></li>
+                <li><a href="transfers.html">Transfers</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="booking.html">Book Now</a></li>
                 <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="booking.html" class="btn-quote">Book Now</a></li>
                 <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
             </ul>
+            <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
         </nav>
     </header>
 
@@ -552,25 +557,36 @@
         // Hamburger Menu Functionality
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
+        const overlay = document.getElementById('mobile-menu-overlay');
 
-        hamburger.addEventListener('click', () => {
+        function toggleMobileMenu() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
-        });
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        }
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+
+        hamburger.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking on overlay
+        overlay.addEventListener('click', closeMobileMenu);
 
         // Close menu when clicking on a link
         document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
+            link.addEventListener('click', closeMobileMenu);
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target) && !overlay.contains(e.target)) {
+                closeMobileMenu();
             }
         });
 
@@ -1166,24 +1182,6 @@
 
         console.log('Currency modal script loaded successfully!');
 
-        // Mobile Navigation Toggle
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
-
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-
-            // Close menu when clicking on a link
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                });
-            });
-        }
     </script>
 
     <!-- Alexa Bot Integration -->
