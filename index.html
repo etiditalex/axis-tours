@@ -69,6 +69,73 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .dropdown-toggle i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--black);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .dropdown-menu a:hover {
+            background: var(--gold);
+            color: var(--black);
+            padding-left: 2rem;
+        }
+        
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+        
         .payment-icon {
             width: 60px;
             height: 60px;
@@ -203,15 +270,19 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="transfers.html">Transfers</a></li>
+                        <li><a href="staycations.html">Staycations</a></li>
+                    </ul>
+                </li>
                 <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="hotels.html">Hotels</a></li>
-                <li><a href="tours.html">Tours</a></li>
-                <li><a href="safaris.html">Safaris</a></li>
-                <li><a href="experiences.html">Experiences</a></li>
-                <li><a href="transfers.html">Transfers</a></li>
-                <li><a href="staycations.html">Staycations</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li class="mobile-quote-btn"><a href="booking.html" class="btn-quote">Book Now</a></li>
                 <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
@@ -569,13 +640,28 @@
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Quick Links</h3>
+                <h3>Services</h3>
+                <a href="hotels.html">Hotels</a>
+                <a href="tours.html">Tours</a>
+                <a href="safaris.html">Safaris</a>
+                <a href="experiences.html">Experiences</a>
+                <a href="transfers.html">Transfers</a>
+                <a href="staycations.html">Staycations</a>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
                 <a href="destinations.html">Destinations</a>
                 <a href="blog.html">Blog</a>
-                <a href="booking.html">Book Now</a>
                 <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Partners</h3>
+                <a href="hotel-partner-portal.html">Partner Portal</a>
+                <a href="list-your-property.html">List Your Property</a>
+                <a href="property-management.html">Property Management</a>
+                <a href="booking-engine.html">Booking Engine</a>
             </div>
             <div class="footer-section">
                 <h3>Popular Destinations</h3>
