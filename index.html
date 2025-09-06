@@ -54,6 +54,58 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css?v=3.0">
+    <style>
+        .payment-option-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .payment-option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .payment-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), #e6b800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+        
+        .payment-option-card h3 {
+            color: var(--black);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .payment-option-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -401,6 +453,43 @@
                     <p>"As a frequent traveler to East Africa, I appreciate the local knowledge and authentic experiences that Axis Tours provides. They understand the region and deliver exceptional experiences every time."</p>
                     <div class="testimonial-author">- David Chen, CEO</div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Payment System -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Secure Payment System</h2>
+                <p>Multiple payment options for your convenience</p>
+            </div>
+            <div class="grid grid-3">
+                <div class="payment-option-card">
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>M-Pesa</h3>
+                    <p>Mobile money payment for Kenya</p>
+                    <a href="payment-integration.html" class="btn btn-outline">Pay with M-Pesa</a>
+                </div>
+                <div class="payment-option-card">
+                    <div class="payment-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Credit/Debit Cards</h3>
+                    <p>Visa, Mastercard, Amex accepted</p>
+                    <a href="payment-integration.html" class="btn btn-outline">Pay with Card</a>
+                </div>
+                <div class="payment-option-card">
+                    <div class="payment-icon">
+                        <i class="fab fa-paypal"></i>
+                    </div>
+                    <h3>PayPal</h3>
+                    <p>Secure PayPal payment</p>
+                    <a href="payment-integration.html" class="btn btn-outline">Pay with PayPal</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="payment-integration.html" class="btn">View All Payment Options</a>
             </div>
         </section>
 
