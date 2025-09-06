@@ -42,7 +42,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- JSON-LD Structured Data -->
@@ -81,38 +81,33 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <div class="logo-globe"></div>
-                    <div class="logo-airplane"></div>
-                    <div class="logo-arc"></div>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
+                        <span class="logo-text">Axis Tours & Travel</span>
+                    </a>
                 </div>
-                <div class="logo-text">
-                    <div class="logo-text-main">Axis</div>
-                    <div class="logo-text-sub">Tours & Travel</div>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="partner-dashboard.html" class="btn-primary">Partner Portal</a>
+                    <a href="contact.html" class="btn-secondary">Request Quote</a>
                 </div>
-            </a>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="hotels.html">Hotels</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="booking.html">Book Now</a></li>
-                <li><a href="partner-dashboard.html">Partner Portal</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="contact.html" class="btn btn-primary">Request A Quote</a></li>
-            </ul>
-            
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
             </div>
-        </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
