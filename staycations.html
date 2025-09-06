@@ -223,15 +223,73 @@
             color: var(--black) !important;
         }
         
-        .logo-img {
-            height: 40px !important;
-            margin-right: 10px !important;
+        /* Logo Styling */
+        .logo {
+            display: flex !important;
+            align-items: center !important;
+            text-decoration: none !important;
+            color: var(--black) !important;
+        }
+        
+        .logo-icon {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+        
+        .logo-globe {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+        }
+        
+        .logo-airplane {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 12px solid var(--gold);
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            transform: rotate(45deg);
+        }
+        
+        .logo-arc {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            border-top: none;
+            border-right: none;
         }
         
         .logo-text {
-            font-size: 1.5rem !important;
-            font-weight: 700 !important;
-            color: var(--gold) !important;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1;
+        }
+        
+        .logo-text-sub {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gold);
+            line-height: 1;
+            margin-top: -2px;
         }
         
         .main-nav {
@@ -487,8 +545,15 @@
             <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="logo.png" alt="Axis Tours & Travel" class="logo-img">
-                        <span class="logo-text">Axis Tours & Travel</span>
+                        <div class="logo-icon">
+                            <div class="logo-globe"></div>
+                            <div class="logo-airplane"></div>
+                            <div class="logo-arc"></div>
+                        </div>
+                        <div class="logo-text">
+                            <div class="logo-text-main">Axis</div>
+                            <div class="logo-text-sub">Tours & Travel</div>
+                        </div>
                     </a>
                 </div>
                 
