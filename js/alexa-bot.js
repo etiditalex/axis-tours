@@ -147,15 +147,16 @@ class AlexaBot {
                                 <i class="fas fa-robot"></i>
                             </div>
                             <div class="message-content">
-                                <p>Hello! I'm Alexa Bot, your personal travel assistant. I can help you with:</p>
+                                <p>🌟 <strong>Hey there!</strong> I'm Alexa Bot, your vibrant travel companion! ✨</p>
+                                <p>I'm here to make your Kenya adventure absolutely amazing! I can help you with:</p>
                                 <ul>
-                                    <li>🏖️ Beach destinations and resorts</li>
-                                    <li>🦁 Safari tours and wildlife</li>
-                                    <li>🏨 Hotel bookings and information</li>
-                                    <li>📅 Travel planning and tips</li>
-                                    <li>💰 Pricing and packages</li>
+                                    <li>🏖️ <strong>Beach destinations</strong> - Diani, Mombasa & more!</li>
+                                    <li>🦁 <strong>Safari adventures</strong> - Maasai Mara & wildlife!</li>
+                                    <li>🏨 <strong>Luxury hotels</strong> - Beach resorts & safari lodges!</li>
+                                    <li>📅 <strong>Travel planning</strong> - Custom itineraries!</li>
+                                    <li>💰 <strong>Best deals</strong> - Exclusive packages!</li>
                                 </ul>
-                                <p>What would you like to know about Kenya travel?</p>
+                                <p>🎯 <strong>What's your dream Kenya experience?</strong> Let's make it happen! 🚀</p>
                             </div>
                         </div>
                     </div>
@@ -196,13 +197,14 @@ class AlexaBot {
             .alexa-bot-widget {
                 width: 350px;
                 height: 500px;
-                background: white;
-                border-radius: 15px;
-                box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+                background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+                border-radius: 20px;
+                box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
                 display: none;
                 flex-direction: column;
                 overflow: hidden;
-                border: 3px solid #D4AF37;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
             }
 
             .alexa-bot-widget.open {
@@ -222,59 +224,78 @@ class AlexaBot {
             }
 
             .alexa-bot-header {
-                background: linear-gradient(135deg, #1A1A1A, #D4AF37);
+                background: linear-gradient(135deg, #ff6b6b, #ee5a24);
                 color: white;
-                padding: 15px;
+                padding: 20px;
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 12px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             }
 
             .alexa-bot-avatar {
-                width: 40px;
-                height: 40px;
-                background: rgba(212, 175, 55, 0.3);
+                width: 45px;
+                height: 45px;
+                background: linear-gradient(135deg, #ffd700, #ffed4e);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 18px;
-                border: 2px solid #D4AF37;
+                font-size: 20px;
+                border: 3px solid rgba(255, 255, 255, 0.8);
+                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
             }
 
             .alexa-bot-info h3 {
                 margin: 0;
-                font-size: 16px;
-                font-weight: 600;
+                font-size: 18px;
+                font-weight: 700;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             }
 
             .alexa-bot-info p {
                 margin: 0;
-                font-size: 12px;
-                opacity: 0.9;
+                font-size: 13px;
+                opacity: 0.95;
+                font-weight: 500;
             }
 
             .alexa-bot-close {
-                background: none;
-                border: none;
+                background: rgba(255, 255, 255, 0.2);
+                border: 2px solid rgba(255, 255, 255, 0.3);
                 color: white;
                 font-size: 16px;
                 cursor: pointer;
                 margin-left: auto;
-                padding: 5px;
+                padding: 8px;
                 border-radius: 50%;
-                transition: background 0.2s;
+                transition: all 0.3s ease;
+                width: 35px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .alexa-bot-close:hover {
-                background: rgba(255,255,255,0.2);
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(1.1);
+                box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
             }
 
             .alexa-bot-messages {
                 flex: 1;
-                padding: 15px;
+                padding: 20px;
                 overflow-y: auto;
-                background: #f8fafc;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+                backdrop-filter: blur(5px);
             }
 
             .alexa-bot-message {
@@ -307,30 +328,35 @@ class AlexaBot {
             }
 
             .bot-message .message-avatar {
-                background: #D4AF37;
-                color: #1A1A1A;
-                border: 2px solid #B8860B;
+                background: linear-gradient(135deg, #ffd700, #ffed4e);
+                color: #333;
+                border: 2px solid rgba(255, 255, 255, 0.8);
+                box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
             }
 
             .user-message .message-avatar {
-                background: #1A1A1A;
-                color: #D4AF37;
-                border: 2px solid #D4AF37;
+                background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+                color: white;
+                border: 2px solid rgba(255, 255, 255, 0.8);
+                box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
             }
 
             .message-content {
-                background: white;
-                padding: 10px 15px;
-                border-radius: 15px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                background: rgba(255, 255, 255, 0.95);
+                padding: 12px 16px;
+                border-radius: 18px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 max-width: 80%;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
             }
 
             .user-message .message-content {
-                background: #1A1A1A;
-                color: #D4AF37;
+                background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+                color: white;
                 margin-left: auto;
-                border: 2px solid #D4AF37;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
             }
 
             .message-content p {
@@ -349,88 +375,110 @@ class AlexaBot {
             }
 
             .alexa-bot-input-container {
-                padding: 15px;
-                background: white;
-                border-top: 1px solid #e5e7eb;
+                padding: 20px;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
                 display: flex;
-                gap: 10px;
+                gap: 12px;
+                backdrop-filter: blur(10px);
             }
 
             #alexa-bot-input {
                 flex: 1;
-                padding: 10px 15px;
-                border: 1px solid #d1d5db;
+                padding: 12px 18px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
                 border-radius: 25px;
                 outline: none;
                 font-size: 14px;
-                transition: border-color 0.2s;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.9);
+                backdrop-filter: blur(10px);
+                color: #333;
+                font-weight: 500;
             }
 
             #alexa-bot-input:focus {
-                border-color: #D4AF37;
-                box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+                border-color: #ffd700;
+                box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+                background: rgba(255, 255, 255, 1);
+                transform: scale(1.02);
+            }
+
+            #alexa-bot-input::placeholder {
+                color: #666;
+                font-weight: 400;
             }
 
             #alexa-bot-send {
-                background: #D4AF37;
-                color: #1A1A1A;
-                border: 2px solid #B8860B;
+                background: linear-gradient(135deg, #ffd700, #ffed4e);
+                color: #333;
+                border: 2px solid rgba(255, 255, 255, 0.8);
                 border-radius: 50%;
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: all 0.2s;
-                font-weight: 600;
+                transition: all 0.3s ease;
+                font-weight: 700;
+                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
             }
 
             #alexa-bot-send:hover {
-                background: #B8860B;
-                color: white;
-                transform: scale(1.05);
+                background: linear-gradient(135deg, #ffed4e, #ffd700);
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
             }
 
             .alexa-bot-toggle {
-                background: linear-gradient(135deg, #D4AF37, #B8860B);
-                color: #1A1A1A;
-                border: 3px solid #1A1A1A;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border: 3px solid rgba(255, 255, 255, 0.3);
                 border-radius: 50%;
-                width: 60px;
-                height: 60px;
+                width: 65px;
+                height: 65px;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 24px;
-                box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-                transition: all 0.3s;
+                font-size: 26px;
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
                 position: relative;
                 font-weight: bold;
+                backdrop-filter: blur(10px);
+                animation: float 3s ease-in-out infinite;
+            }
+
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
             }
 
             .alexa-bot-toggle:hover {
-                background: linear-gradient(135deg, #B8860B, #D4AF37);
-                transform: scale(1.1);
-                box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+                background: linear-gradient(135deg, #764ba2, #667eea);
+                transform: scale(1.15) rotate(5deg);
+                box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.2);
             }
 
             .alexa-bot-badge {
                 position: absolute;
-                top: -5px;
-                right: -5px;
-                background: #1A1A1A;
-                color: #D4AF37;
-                border: 2px solid #D4AF37;
+                top: -8px;
+                right: -8px;
+                background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+                color: white;
+                border: 3px solid rgba(255, 255, 255, 0.9);
                 border-radius: 50%;
-                width: 20px;
-                height: 20px;
+                width: 24px;
+                height: 24px;
                 font-size: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 font-weight: bold;
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+                animation: pulse 2s infinite;
             }
 
             .quick-actions {
@@ -441,23 +489,25 @@ class AlexaBot {
             }
 
             .quick-action-btn {
-                background: #F4E4BC;
-                border: 2px solid #D4AF37;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+                border: 2px solid rgba(255, 255, 255, 0.5);
                 border-radius: 20px;
-                padding: 6px 12px;
+                padding: 8px 14px;
                 font-size: 12px;
                 cursor: pointer;
-                transition: all 0.2s;
-                color: #1A1A1A;
-                font-weight: 500;
+                transition: all 0.3s ease;
+                color: #333;
+                font-weight: 600;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
 
             .quick-action-btn:hover {
-                background: #D4AF37;
-                color: #1A1A1A;
-                border-color: #B8860B;
-                transform: translateY(-1px);
-                box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+                background: linear-gradient(135deg, #ffd700, #ffed4e);
+                color: #333;
+                border-color: rgba(255, 255, 255, 0.8);
+                transform: translateY(-2px) scale(1.05);
+                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
             }
 
             @media (max-width: 768px) {
