@@ -23,6 +23,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+        :root {
+            --gold: #D4AF37;
+            --white: #FFFFFF;
+            --black: #000000;
+            --gray: #666666;
+            --gray-light: #F8F9FA;
+        }
+        
         .staycation-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -30,6 +38,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            margin-top: 80px;
         }
         
         .staycation-hero::before {
@@ -176,6 +185,225 @@
             color: white;
             font-size: 3rem;
         }
+        
+        /* Header Styling Override */
+        .main-header {
+            background: var(--white) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 1000 !important;
+            padding: 1rem 0 !important;
+        }
+        
+        .header-content {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        
+        .logo {
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        .logo a {
+            display: flex !important;
+            align-items: center !important;
+            text-decoration: none !important;
+            color: var(--black) !important;
+        }
+        
+        .logo-img {
+            height: 40px !important;
+            margin-right: 10px !important;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            color: var(--gold) !important;
+        }
+        
+        .main-nav {
+            display: flex !important;
+        }
+        
+        .nav-menu {
+            display: flex !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            gap: 2rem !important;
+        }
+        
+        .nav-menu li {
+            margin: 0 !important;
+        }
+        
+        .nav-menu a {
+            color: var(--black) !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+            transition: color 0.3s ease !important;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--gold) !important;
+        }
+        
+        .header-actions {
+            display: flex !important;
+            gap: 1rem !important;
+        }
+        
+        .btn-primary, .btn-secondary {
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 25px !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            cursor: pointer !important;
+        }
+        
+        .btn-primary {
+            background: var(--gold) !important;
+            color: var(--black) !important;
+        }
+        
+        .btn-secondary {
+            background: transparent !important;
+            color: var(--gold) !important;
+            border: 2px solid var(--gold) !important;
+        }
+        
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none !important;
+            flex-direction: column !important;
+            cursor: pointer !important;
+            padding: 5px !important;
+        }
+        
+        .hamburger span {
+            width: 25px !important;
+            height: 3px !important;
+            background: var(--gold) !important;
+            margin: 3px 0 !important;
+            transition: all 0.3s ease !important;
+            border-radius: 2px !important;
+            display: block !important;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px) !important;
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0 !important;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px) !important;
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0, 0, 0, 0.5) !important;
+            z-index: 999 !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        body.menu-open {
+            overflow: hidden !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex !important;
+            }
+            
+            .nav-menu {
+                position: fixed !important;
+                left: -100% !important;
+                top: 80px !important;
+                flex-direction: column !important;
+                background: var(--white) !important;
+                width: 100% !important;
+                text-align: left !important;
+                transition: left 0.3s ease !important;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.1) !important;
+                padding: 0.5rem 0 !important;
+                gap: 0 !important;
+                z-index: 1000 !important;
+                height: calc(100vh - 80px) !important;
+                overflow-y: auto !important;
+                display: block !important;
+            }
+            
+            .nav-menu.active {
+                left: 0 !important;
+            }
+            
+            .nav-menu li {
+                margin: 0 !important;
+                border-bottom: 1px solid #f0f0f0 !important;
+            }
+            
+            .nav-menu a {
+                font-size: 1rem !important;
+                padding: 1rem 2rem !important;
+                display: block !important;
+                color: var(--black) !important;
+                font-weight: 500 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.5px !important;
+                border-bottom: 1px solid #f0f0f0 !important;
+            }
+            
+            .nav-menu a:hover {
+                background-color: #f8f9fa !important;
+                color: var(--gold) !important;
+            }
+            
+            .mobile-quote-btn {
+                border-bottom: none !important;
+                margin-top: 1rem !important;
+            }
+            
+            .btn-quote {
+                background: var(--gold) !important;
+                color: var(--black) !important;
+                margin: 0.5rem 2rem !important;
+                text-align: center !important;
+                display: block !important;
+            }
+            
+            .header-actions {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -189,8 +417,16 @@
                         <span class="logo-text">Axis Tours & Travel</span>
                     </a>
                 </div>
+                
+                <!-- Hamburger Menu -->
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
                 <nav class="main-nav">
-                    <ul class="nav-list">
+                    <ul class="nav-menu" id="nav-menu">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="destinations.html">Destinations</a></li>
@@ -199,11 +435,15 @@
                         <li><a href="safaris.html">Safaris</a></li>
                         <li><a href="experiences.html">Experiences</a></li>
                         <li><a href="transfers.html">Transfers</a></li>
+                        <li><a href="staycations.html">Staycations</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="hotel-partner-portal.html">Partner Portal</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li class="mobile-quote-btn"><a href="booking.html" class="btn-quote">Book Now</a></li>
+                        <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
                     </ul>
                 </nav>
+                
                 <div class="header-actions">
                     <a href="booking.html" class="btn-primary">Book Now</a>
                     <a href="contact.html" class="btn-secondary">Request Quote</a>
@@ -211,6 +451,9 @@
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
 
     <!-- Staycation Hero Section -->
     <section class="staycation-hero">
@@ -380,6 +623,42 @@
         // Load cards when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadStaycationCards();
+            
+            // Hamburger Menu Functionality
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+
+            function toggleMobileMenu() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            }
+
+            function closeMobileMenu() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+
+            hamburger.addEventListener('click', toggleMobileMenu);
+
+            // Close menu when clicking on overlay
+            overlay.addEventListener('click', closeMobileMenu);
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target) && !overlay.contains(e.target)) {
+                    closeMobileMenu();
+                }
+            });
         });
     </script>
 </body>
