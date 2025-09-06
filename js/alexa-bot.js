@@ -25,7 +25,7 @@ class AlexaBot {
                 contact: {
                     phone: "+254-XXX-XXXXXX",
                     email: "info@axistours.co.ke",
-                    website: "https://axis-tours-backend.web.app"
+                    website: "https://axistoursandtravel.co.ke"
                 }
             },
 

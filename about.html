@@ -16,19 +16,19 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://axis-tours-backend.web.app/about.html">
+    <meta property="og:url" content="https://axistoursandtravel.co.ke/about.html">
     <meta property="og:title" content="About Axis Tours and Travel | Kenya's Premier Travel Agency">
     <meta property="og:description" content="Learn about Axis Tours and Travel, Kenya's premier travel agency specializing in East Africa tours, Kenya coast holidays, and wildlife safaris. Over 10 years of excellence in travel.">
-    <meta property="og:image" content="https://axis-tours-backend.web.app/images/axis-tours-team.jpg">
+    <meta property="og:image" content="https://axistoursandtravel.co.ke/logo.png">
     <meta property="og:site_name" content="Axis Tours and Travel">
     <meta property="og:locale" content="en_KE">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://axis-tours-backend.web.app/about.html">
+    <meta property="twitter:url" content="https://axistoursandtravel.co.ke/about.html">
     <meta property="twitter:title" content="About Axis Tours and Travel | Kenya's Premier Travel Agency">
     <meta property="twitter:description" content="Learn about Axis Tours and Travel, Kenya's premier travel agency specializing in East Africa tours, Kenya coast holidays, and wildlife safaris. Over 10 years of excellence in travel.">
-    <meta property="twitter:image" content="https://axis-tours-backend.web.app/images/axis-tours-team.jpg">
+    <meta property="twitter:image" content="https://axistoursandtravel.co.ke/logo.png">
     
     <!-- Additional SEO Meta Tags -->
     <meta name="geo.region" content="KE">
@@ -51,6 +51,75 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .dropdown-toggle i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .dropdown-menu a:hover {
+            background: #D4AF37;
+            color: white;
+            padding-left: 2rem;
+        }
+        
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+    </style>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -104,10 +173,21 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                        <li><a href="transfers.html">Transfers</a></li>
+                        <li><a href="staycations.html">Staycations</a></li>
+                    </ul>
+                </li>
                 <li><a href="destinations.html">Destinations</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="booking.html">Book Now</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-quote-btn"><a href="booking.html" class="btn-quote">Book Now</a></li>
                 <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
             </ul>
     </nav>
