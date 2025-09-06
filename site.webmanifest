@@ -1,40 +1,22 @@
 {
-    "name": "Axis Tours and Travel",
+    "name": "Axis Tours & Travel",
     "short_name": "Axis Tours",
-    "description": "Premium Kenya coast tours, East Africa safaris, and beach holidays",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#1e40af",
-    "orientation": "portrait-primary",
+    "description": "Your ultimate guide to unforgettable adventures in Kenya and East Africa",
     "icons": [
         {
-            "src": "/favicon-16x16.png",
-            "sizes": "16x16",
-            "type": "image/png"
-        },
-        {
-            "src": "/favicon-32x32.png",
-            "sizes": "32x32",
-            "type": "image/png"
-        },
-        {
-            "src": "/apple-touch-icon.png",
-            "sizes": "180x180",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-192x192.png",
+            "src": "logo.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-512x512.png",
+            "src": "logo.png",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "categories": ["travel", "tourism", "lifestyle"],
-    "lang": "en",
-    "dir": "ltr"
+    "theme_color": "#D4AF37",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/"
 }
