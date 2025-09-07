@@ -290,7 +290,8 @@ class AuthSystem {
       const currentPage = window.location.pathname;
       
       if (currentPage.includes('login') || currentPage.includes('register')) {
-        window.location.href = 'index.html';
+        // Redirect to user dashboard instead of front page
+        window.location.href = 'my-bookings.html';
       }
     }
   }

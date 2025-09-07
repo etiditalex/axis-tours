@@ -442,8 +442,9 @@ class BookingSystem {
       if (!user) {
         this.showNotification('Please log in to make a booking', 'error');
         this.closeBookingModal();
-        // Redirect to login
-        window.location.href = 'login.html';
+        // Redirect to login with current page as redirect
+        const currentUrl = encodeURIComponent(window.location.href);
+        window.location.href = `login.html?redirect=${currentUrl}`;
         return;
       }
       
