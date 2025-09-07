@@ -79,6 +79,8 @@ class AuthSystem {
     const email = document.querySelector('#login-email')?.value;
     const password = document.querySelector('#login-password')?.value;
     
+    console.log('🔐 Login attempt:', { email, hasPassword: !!password });
+    
     if (!email || !password) {
       this.showNotification('Please fill in all fields', 'error');
       return;
@@ -87,12 +89,16 @@ class AuthSystem {
     this.showLoading(true);
     
     try {
+      console.log('🔄 Calling signIn function...');
       const result = await signIn(email, password);
+      console.log('📋 SignIn result:', result);
       
       if (result.success) {
+        console.log('✅ Login successful, redirecting...');
         this.showNotification('Login successful!', 'success');
         this.redirectAfterLogin();
       } else {
+        console.log('❌ Login failed:', result.error);
         // Handle specific Firebase errors
         let errorMessage = result.error;
         if (result.error.includes('user-not-found')) {
@@ -107,6 +113,7 @@ class AuthSystem {
         this.showNotification(errorMessage, 'error');
       }
     } catch (error) {
+      console.error('💥 Login error:', error);
       this.showNotification('Login failed. Please try again.', 'error');
     } finally {
       this.showLoading(false);

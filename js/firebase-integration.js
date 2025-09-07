@@ -112,10 +112,17 @@ export const signUp = async (email, password, userData) => {
 
 export const signIn = async (email, password) => {
   try {
+    console.log('🔥 Firebase signIn called with:', { email, hasPassword: !!password });
+    console.log('🔥 Auth object:', auth);
+    console.log('🔥 Auth app:', auth.app);
+    
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    console.log('🔥 Sign in successful:', userCredential.user);
     return { success: true, user: userCredential.user };
   } catch (error) {
-    console.error('Sign in error:', error);
+    console.error('🔥 Sign in error:', error);
+    console.error('🔥 Error code:', error.code);
+    console.error('🔥 Error message:', error.message);
     return { success: false, error: error.message };
   }
 };
