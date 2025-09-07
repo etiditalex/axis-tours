@@ -90,7 +90,14 @@ class AuthSystem {
     
     try {
       console.log('🔄 Calling signIn function...');
-      const result = await signIn(email, password);
+      
+      // Add timeout to prevent hanging
+      const signInPromise = signIn(email, password);
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Login timeout - please check Firebase Authentication is enabled')), 10000)
+      );
+      
+      const result = await Promise.race([signInPromise, timeoutPromise]);
       console.log('📋 SignIn result:', result);
       
       if (result.success) {
@@ -114,7 +121,15 @@ class AuthSystem {
       }
     } catch (error) {
       console.error('💥 Login error:', error);
-      this.showNotification('Login failed. Please try again.', 'error');
+      
+      let errorMessage = 'Login failed. Please try again.';
+      if (error.message.includes('timeout')) {
+        errorMessage = 'Login timeout. Please check that Firebase Authentication is enabled in the Firebase Console.';
+      } else if (error.message.includes('operation-not-allowed')) {
+        errorMessage = 'Authentication not enabled. Please enable Email/Password in Firebase Console.';
+      }
+      
+      this.showNotification(errorMessage, 'error');
     } finally {
       this.showLoading(false);
     }

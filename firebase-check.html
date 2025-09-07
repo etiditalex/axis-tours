@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Connection Check</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; }
+        .status { padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        button { background: #d4af37; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .log { background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 12px; max-height: 300px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Firebase Connection Check</h1>
+        
+        <div id="status" class="status warning">
+            Checking Firebase connection...
+        </div>
+        
+        <button onclick="testConnection()">Test Connection</button>
+        <button onclick="testAuth()">Test Authentication</button>
+        
+        <h3>Debug Log:</h3>
+        <div id="log" class="log"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmV9pP1SlU4_aImgXIfyry8MDfY9REOGQ",
+            authDomain: "axis-tours-backend.firebaseapp.com",
+            projectId: "axis-tours-backend",
+            storageBucket: "axis-tours-backend.firebasestorage.app",
+            messagingSenderId: "819434211204",
+            appId: "1:819434211204:web:1af38ca9ad66c285867fd1",
+            measurementId: "G-PFZRZ3DSYE"
+        };
+
+        let app, auth, db;
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logElement = document.getElementById('log');
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+            logEntry.style.color = type === 'error' ? 'red' : type === 'success' ? 'green' : 'black';
+            logElement.appendChild(logEntry);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        window.testConnection = async function() {
+            try {
+                log('🔄 Initializing Firebase...');
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                
+                log('✅ Firebase initialized successfully', 'success');
+                document.getElementById('status').innerHTML = '✅ Firebase connected successfully';
+                document.getElementById('status').className = 'status success';
+                
+            } catch (error) {
+                log(`❌ Firebase initialization failed: ${error.message}`, 'error');
+                document.getElementById('status').innerHTML = `❌ Firebase connection failed: ${error.message}`;
+                document.getElementById('status').className = 'status error';
+            }
+        };
+
+        window.testAuth = async function() {
+            if (!auth) {
+                log('❌ Please test connection first', 'error');
+                return;
+            }
+            
+            try {
+                log('🔄 Testing authentication...');
+                // Try to sign in with a test account
+                const result = await signInWithEmailAndPassword(auth, 'test@example.com', 'testpassword');
+                log('✅ Authentication test successful', 'success');
+            } catch (error) {
+                if (error.code === 'auth/operation-not-allowed') {
+                    log('❌ Authentication not enabled in Firebase Console', 'error');
+                    log('🔧 Please enable Email/Password authentication in Firebase Console', 'error');
+                } else if (error.code === 'auth/user-not-found') {
+                    log('✅ Authentication is enabled (user not found is expected)', 'success');
+                } else {
+                    log(`❌ Authentication error: ${error.code} - ${error.message}`, 'error');
+                }
+            }
+        };
+
+        // Auto-test on load
+        window.addEventListener('load', () => {
+            log('🚀 Firebase check page loaded');
+            testConnection();
+        });
+    </script>
+</body>
+</html>
