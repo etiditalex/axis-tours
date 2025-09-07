@@ -93,7 +93,18 @@ class AuthSystem {
         this.showNotification('Login successful!', 'success');
         this.redirectAfterLogin();
       } else {
-        this.showNotification(result.error, 'error');
+        // Handle specific Firebase errors
+        let errorMessage = result.error;
+        if (result.error.includes('user-not-found')) {
+          errorMessage = 'No account found with this email. Please register first.';
+        } else if (result.error.includes('wrong-password')) {
+          errorMessage = 'Incorrect password. Please try again.';
+        } else if (result.error.includes('invalid-email')) {
+          errorMessage = 'Please enter a valid email address.';
+        } else if (result.error.includes('too-many-requests')) {
+          errorMessage = 'Too many failed attempts. Please try again later.';
+        }
+        this.showNotification(errorMessage, 'error');
       }
     } catch (error) {
       this.showNotification('Login failed. Please try again.', 'error');
@@ -133,7 +144,16 @@ class AuthSystem {
         this.showNotification('Registration successful! Welcome to Axis Tours!', 'success');
         this.redirectAfterLogin();
       } else {
-        this.showNotification(result.error, 'error');
+        // Handle specific Firebase errors
+        let errorMessage = result.error;
+        if (result.error.includes('email-already-in-use')) {
+          errorMessage = 'This email is already registered. Please try signing in instead.';
+        } else if (result.error.includes('weak-password')) {
+          errorMessage = 'Password is too weak. Please choose a stronger password.';
+        } else if (result.error.includes('invalid-email')) {
+          errorMessage = 'Please enter a valid email address.';
+        }
+        this.showNotification(errorMessage, 'error');
       }
     } catch (error) {
       this.showNotification('Registration failed. Please try again.', 'error');
