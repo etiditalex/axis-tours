@@ -30,12 +30,13 @@ import {
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", // Replace with your actual config
+  apiKey: "AIzaSyDmV9pP1SlU4_aImgXIfyry8MDfY9REOGQ",
   authDomain: "axis-tours-backend.firebaseapp.com",
   projectId: "axis-tours-backend",
-  storageBucket: "axis-tours-backend.appspot.com",
-  messagingSenderId: "123456789012",
-  appId: "1:123456789012:web:abcdefghijklmnop"
+  storageBucket: "axis-tours-backend.firebasestorage.app",
+  messagingSenderId: "819434211204",
+  appId: "1:819434211204:web:1af38ca9ad66c285867fd1",
+  measurementId: "G-PFZRZ3DSYE"
 };
 
 // Initialize Firebase
