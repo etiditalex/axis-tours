@@ -8,9 +8,12 @@ class AlexaBot {
         this.knowledgeBase = this.initializeKnowledgeBase();
         this.currentContext = null;
         this.userPreferences = {};
+        this.hasShownNotification = false;
+        this.browsingStartTime = Date.now();
         
         this.initializeBot();
         this.setupEventListeners();
+        this.setupNotificationTimer();
     }
 
     initializeKnowledgeBase() {
@@ -303,6 +306,14 @@ class AlexaBot {
                                 <i class="fas fa-robot"></i>
                             </div>
                             <div class="message-content">
+                                <div class="welcome-message">
+                                    <div class="quote-mark">"</div>
+                                    <div class="welcome-text">
+                                        <div class="welcome-line-1">WE ARE HERE</div>
+                                        <div class="welcome-line-2">LET'S TALK</div>
+                                    </div>
+                                    <div class="curly-braces">{}</div>
+                                </div>
                                 <p>🌟 <strong>Hey there!</strong> I'm Alexa Bot, your vibrant travel companion! ✨</p>
                                 <p>I'm here to make your Kenya adventure absolutely amazing! I can help you with:</p>
                                 <ul>
@@ -666,6 +677,93 @@ class AlexaBot {
                 box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
             }
 
+            /* Welcome Message Styles */
+            .welcome-message {
+                background: white;
+                border-radius: 15px;
+                padding: 20px;
+                margin-bottom: 15px;
+                position: relative;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .quote-mark {
+                font-size: 60px;
+                font-weight: bold;
+                color: #333;
+                position: absolute;
+                left: -10px;
+                top: -10px;
+                line-height: 1;
+            }
+
+            .welcome-text {
+                margin-left: 40px;
+                margin-right: 40px;
+            }
+
+            .welcome-line-1 {
+                font-size: 16px;
+                font-weight: 400;
+                color: #333;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+            }
+
+            .welcome-line-2 {
+                font-size: 24px;
+                font-weight: 700;
+                color: #333;
+                text-transform: uppercase;
+            }
+
+            .curly-braces {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 40px;
+                font-weight: bold;
+                color: #333;
+                font-family: monospace;
+            }
+
+            /* Dotted line connecting quote to braces */
+            .welcome-message::before {
+                content: '';
+                position: absolute;
+                left: 25px;
+                top: 50px;
+                width: 2px;
+                height: 20px;
+                border-left: 2px dotted #333;
+            }
+
+            .welcome-message::after {
+                content: '';
+                position: absolute;
+                left: 25px;
+                top: 70px;
+                width: 200px;
+                height: 2px;
+                border-top: 2px dotted #333;
+            }
+
+            /* Notification Message Styles */
+            .notification-message {
+                background: white;
+                border-radius: 15px;
+                padding: 15px;
+                margin-bottom: 15px;
+                position: relative;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                font-size: 14px;
+                line-height: 1.4;
+                color: #333;
+            }
+
             @media (max-width: 768px) {
                 .alexa-bot-widget {
                     width: 300px;
@@ -676,11 +774,41 @@ class AlexaBot {
                     bottom: 10px;
                     right: 10px;
                 }
+
+                .quote-mark {
+                    font-size: 40px;
+                }
+
+                .welcome-line-2 {
+                    font-size: 20px;
+                }
+
+                .curly-braces {
+                    font-size: 30px;
+                }
             }
             </style>
         `;
 
         document.head.insertAdjacentHTML('beforeend', styles);
+    }
+
+    setupNotificationTimer() {
+        // Show notification after 30 seconds of browsing
+        setTimeout(() => {
+            if (!this.hasShownNotification && !this.isOpen) {
+                this.showNotification();
+            }
+        }, 30000);
+    }
+
+    showNotification() {
+        this.hasShownNotification = true;
+        const badge = document.querySelector('.alexa-bot-badge');
+        if (badge) {
+            badge.style.display = 'flex';
+            badge.textContent = '1';
+        }
     }
 
     setupEventListeners() {
@@ -718,10 +846,44 @@ class AlexaBot {
             widget.classList.add('open');
             toggle.style.display = 'none';
             badge.style.display = 'none';
+            
+            // Show notification message if user has been browsing for a while
+            if (this.hasShownNotification) {
+                this.showNotificationMessage();
+            }
         } else {
             widget.classList.remove('open');
             toggle.style.display = 'flex';
         }
+    }
+
+    showNotificationMessage() {
+        const messagesContainer = document.getElementById('alexa-bot-messages');
+        const notificationDiv = document.createElement('div');
+        notificationDiv.className = 'alexa-bot-message bot-message';
+        notificationDiv.style.marginTop = '10px';
+
+        const avatar = document.createElement('div');
+        avatar.className = 'message-avatar';
+        avatar.innerHTML = '<i class="fas fa-robot"></i>';
+
+        const content = document.createElement('div');
+        content.className = 'message-content';
+        content.innerHTML = `
+            <div class="notification-message">
+                Hi and welcome! I see you have been browsing for a while. Is there anything we can assist with today?
+            </div>
+        `;
+
+        notificationDiv.appendChild(avatar);
+        notificationDiv.appendChild(content);
+
+        // Insert after the welcome message
+        const welcomeMessage = messagesContainer.querySelector('.welcome-message').parentElement.parentElement;
+        welcomeMessage.insertAdjacentElement('afterend', notificationDiv);
+        
+        // Scroll to show the notification
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
     closeChatbot() {
