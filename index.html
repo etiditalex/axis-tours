@@ -546,6 +546,90 @@
             </div>
         </section>
 
+        <!-- Vacation Rentals CTA Section -->
+        <section class="vacation-rentals-cta">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <div class="cta-text-section">
+                            <div class="cta-background-shape">
+                                <h2 class="cta-title">Want to feel at home on your<br>next adventure?</h2>
+                                <button class="cta-button">Discover vacation rentals</button>
+                            </div>
+                        </div>
+                        <div class="cta-illustration">
+                            <div class="illustration-scene">
+                                <!-- Armchair -->
+                                <div class="armchair">
+                                    <div class="armchair-back"></div>
+                                    <div class="armchair-seat"></div>
+                                    <div class="armchair-legs">
+                                        <div class="leg"></div>
+                                        <div class="leg"></div>
+                                        <div class="leg"></div>
+                                        <div class="leg"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Cat -->
+                                <div class="cat">
+                                    <div class="cat-body"></div>
+                                    <div class="cat-head"></div>
+                                    <div class="cat-tail"></div>
+                                </div>
+                                
+                                <!-- Plant -->
+                                <div class="plant">
+                                    <div class="plant-pot"></div>
+                                    <div class="plant-leaves">
+                                        <div class="leaf"></div>
+                                        <div class="leaf"></div>
+                                        <div class="leaf"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Side Table -->
+                                <div class="side-table">
+                                    <div class="table-top"></div>
+                                    <div class="table-legs">
+                                        <div class="table-leg"></div>
+                                        <div class="table-leg"></div>
+                                        <div class="table-leg"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Mug -->
+                                <div class="mug">
+                                    <div class="mug-body"></div>
+                                    <div class="mug-handle"></div>
+                                </div>
+                                
+                                <!-- Background Elements -->
+                                <div class="bg-circle"></div>
+                                <div class="floor-lines">
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                </div>
+                                
+                                <!-- Abstract Window -->
+                                <div class="abstract-window">
+                                    <div class="window-frame"></div>
+                                    <div class="window-content">
+                                        <div class="wave-shape"></div>
+                                        <div class="window-dots">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Cities to Explore Section -->
         <section class="cities-section">
             <div class="container">
@@ -1690,6 +1774,58 @@
                     }, 1000);
                 });
             });
+        });
+
+        // Vacation Rentals CTA Button Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctaButton = document.querySelector('.cta-button');
+            
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Show notification
+                    const notification = document.createElement('div');
+                    notification.className = 'search-notification success';
+                    notification.textContent = 'Discovering vacation rentals...';
+                    
+                    Object.assign(notification.style, {
+                        position: 'fixed',
+                        top: '20px',
+                        right: '20px',
+                        padding: '15px 20px',
+                        borderRadius: '8px',
+                        color: 'white',
+                        fontWeight: '600',
+                        zIndex: '10001',
+                        transform: 'translateX(100%)',
+                        transition: 'transform 0.3s ease',
+                        maxWidth: '300px',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                        background: 'linear-gradient(135deg, #51cf66, #40c057)'
+                    });
+
+                    document.body.appendChild(notification);
+
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(0)';
+                    }, 100);
+
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(100%)';
+                        setTimeout(() => {
+                            if (document.body.contains(notification)) {
+                                document.body.removeChild(notification);
+                            }
+                        }, 300);
+                    }, 2000);
+
+                    // Redirect to vacation rentals page
+                    setTimeout(() => {
+                        window.location.href = 'hotels.html';
+                    }, 1000);
+                });
+            }
         });
     </script>
 </body>
