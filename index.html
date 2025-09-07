@@ -479,6 +479,73 @@
             </div>
         </section>
 
+        <!-- Offers Section -->
+        <section class="offers-section">
+            <div class="container">
+                <div class="offers-header">
+                    <h2>Offers</h2>
+                    <p>Promotions, deals, and special offers for you</p>
+                </div>
+                
+                <div class="offers-container">
+                    <div class="offers-slider">
+                        <div class="offer-card active">
+                            <div class="offer-image">
+                                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Vacation Rentals" loading="lazy">
+                                <div class="offer-overlay">
+                                    <div class="offer-content">
+                                        <div class="offer-category">Vacation Rentals</div>
+                                        <h3 class="offer-title">Live the dream in a vacation home</h3>
+                                        <p class="offer-description">Choose from houses, villas, cabins, and more</p>
+                                        <button class="offer-btn">Book yours</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-card">
+                            <div class="offer-image">
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Late Escape Deals" loading="lazy">
+                                <div class="offer-overlay">
+                                    <div class="offer-content">
+                                        <div class="offer-category">Late Escape Deals</div>
+                                        <h3 class="offer-title">Go for a good time, not a long time</h3>
+                                        <p class="offer-description">Squeeze out the last bit of sun with at least 15% off</p>
+                                        <button class="offer-btn">Find deals</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-card">
+                            <div class="offer-image">
+                                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Safari Adventures" loading="lazy">
+                                <div class="offer-overlay">
+                                    <div class="offer-content">
+                                        <div class="offer-category">Safari Adventures</div>
+                                        <h3 class="offer-title">Experience the wild side of Kenya</h3>
+                                        <p class="offer-description">Get up to 20% off on Maasai Mara and Amboseli safaris</p>
+                                        <button class="offer-btn">Explore now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="offers-navigation">
+                        <div class="offers-dots">
+                            <span class="dot active" data-slide="0"></span>
+                            <span class="dot" data-slide="1"></span>
+                            <span class="dot" data-slide="2"></span>
+                        </div>
+                        <button class="offers-arrow" id="offers-next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Cities to Explore Section -->
         <section class="cities-section">
             <div class="container">
@@ -1516,6 +1583,114 @@
                 }, 300);
             }, 2000);
         }
+
+        // Offers Slider Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const offerCards = document.querySelectorAll('.offer-card');
+            const dots = document.querySelectorAll('.dot');
+            const nextBtn = document.getElementById('offers-next');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                // Hide all cards
+                offerCards.forEach(card => {
+                    card.classList.remove('active');
+                    card.style.display = 'none';
+                });
+
+                // Show current card
+                if (offerCards[index]) {
+                    offerCards[index].classList.add('active');
+                    offerCards[index].style.display = 'block';
+                }
+
+                // Update dots
+                dots.forEach(dot => dot.classList.remove('active'));
+                if (dots[index]) {
+                    dots[index].classList.add('active');
+                }
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % offerCards.length;
+                showSlide(currentSlide);
+            }
+
+            // Initialize slider
+            showSlide(0);
+
+            // Next button click
+            if (nextBtn) {
+                nextBtn.addEventListener('click', nextSlide);
+            }
+
+            // Dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+
+            // Auto-advance slider every 5 seconds
+            setInterval(nextSlide, 5000);
+
+            // Offer button functionality
+            const offerBtns = document.querySelectorAll('.offer-btn');
+            offerBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const offerText = this.textContent;
+                    
+                    // Show notification
+                    const notification = document.createElement('div');
+                    notification.className = 'search-notification success';
+                    notification.textContent = `Redirecting to ${offerText.toLowerCase()}...`;
+                    
+                    Object.assign(notification.style, {
+                        position: 'fixed',
+                        top: '20px',
+                        right: '20px',
+                        padding: '15px 20px',
+                        borderRadius: '8px',
+                        color: 'white',
+                        fontWeight: '600',
+                        zIndex: '10001',
+                        transform: 'translateX(100%)',
+                        transition: 'transform 0.3s ease',
+                        maxWidth: '300px',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                        background: 'linear-gradient(135deg, #51cf66, #40c057)'
+                    });
+
+                    document.body.appendChild(notification);
+
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(0)';
+                    }, 100);
+
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(100%)';
+                        setTimeout(() => {
+                            if (document.body.contains(notification)) {
+                                document.body.removeChild(notification);
+                            }
+                        }, 300);
+                    }, 2000);
+
+                    // Redirect based on offer type
+                    setTimeout(() => {
+                        if (offerText.includes('Book yours')) {
+                            window.location.href = 'hotels.html';
+                        } else if (offerText.includes('Find deals')) {
+                            window.location.href = 'destinations.html';
+                        } else if (offerText.includes('Explore now')) {
+                            window.location.href = 'safaris.html';
+                        }
+                    }, 1000);
+                });
+            });
+        });
     </script>
 </body>
 </html>
