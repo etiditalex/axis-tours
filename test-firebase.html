@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Connection Test - Axis Tours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #ccc;
+        }
+        .test-success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+        .test-error {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+        .test-info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .config-display {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔥 Firebase Connection Test</h1>
+        <p>This page will test your Firebase configuration and connection.</p>
+        
+        <div id="test-results"></div>
+        
+        <div class="test-info">
+            <h3>Current Configuration:</h3>
+            <div class="config-display" id="config-display">Loading...</div>
+        </div>
+        
+        <button onclick="testFirebaseConnection()">Test Firebase Connection</button>
+        <button onclick="testAuthentication()">Test Authentication</button>
+        <button onclick="testFirestore()">Test Firestore</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        // Firebase configuration (replace with your actual config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", // Replace with your actual config
+            authDomain: "axis-tours-backend.firebaseapp.com",
+            projectId: "axis-tours-backend",
+            storageBucket: "axis-tours-backend.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdefghijklmnop"
+        };
+
+        let app, db, auth;
+
+        // Display current configuration
+        document.getElementById('config-display').textContent = JSON.stringify(firebaseConfig, null, 2);
+
+        function addTestResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('test-results');
+            const testItem = document.createElement('div');
+            testItem.className = `test-item test-${type}`;
+            testItem.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            resultsDiv.appendChild(testItem);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        function clearResults() {
+            document.getElementById('test-results').innerHTML = '';
+        }
+
+        window.testFirebaseConnection = async function() {
+            try {
+                addTestResult('Initializing Firebase...', 'info');
+                
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                addTestResult('✅ Firebase initialized successfully!', 'success');
+                addTestResult(`Project ID: ${firebaseConfig.projectId}`, 'info');
+                addTestResult(`Auth Domain: ${firebaseConfig.authDomain}`, 'info');
+                
+            } catch (error) {
+                addTestResult(`❌ Firebase initialization failed: ${error.message}`, 'error');
+                console.error('Firebase error:', error);
+            }
+        };
+
+        window.testAuthentication = async function() {
+            if (!auth) {
+                addTestResult('❌ Please test Firebase connection first', 'error');
+                return;
+            }
+
+            try {
+                addTestResult('Testing authentication...', 'info');
+                
+                // Try to create a test user
+                const testEmail = `test-${Date.now()}@example.com`;
+                const testPassword = 'testpassword123';
+                
+                const userCredential = await createUserWithEmailAndPassword(auth, testEmail, testPassword);
+                addTestResult(`✅ Test user created: ${userCredential.user.email}`, 'success');
+                
+                // Clean up - delete the test user (you might need to do this manually in Firebase Console)
+                addTestResult('ℹ️ Test user created. You may want to delete it from Firebase Console.', 'info');
+                
+            } catch (error) {
+                if (error.code === 'auth/email-already-in-use') {
+                    addTestResult('ℹ️ Authentication working (email already in use)', 'info');
+                } else {
+                    addTestResult(`❌ Authentication test failed: ${error.message}`, 'error');
+                }
+            }
+        };
+
+        window.testFirestore = async function() {
+            if (!db) {
+                addTestResult('❌ Please test Firebase connection first', 'error');
+                return;
+            }
+
+            try {
+                addTestResult('Testing Firestore connection...', 'info');
+                
+                // Try to read from a collection
+                const testCollection = collection(db, 'test');
+                const snapshot = await getDocs(testCollection);
+                
+                addTestResult(`✅ Firestore connection successful! Found ${snapshot.size} documents in test collection.`, 'success');
+                
+                // Try to write a test document
+                const testDoc = await addDoc(testCollection, {
+                    message: 'Firebase test document',
+                    timestamp: new Date(),
+                    testId: Date.now()
+                });
+                
+                addTestResult(`✅ Test document written with ID: ${testDoc.id}`, 'success');
+                
+            } catch (error) {
+                addTestResult(`❌ Firestore test failed: ${error.message}`, 'error');
+                console.error('Firestore error:', error);
+            }
+        };
+
+        // Auto-run basic connection test on page load
+        window.addEventListener('load', () => {
+            addTestResult('Page loaded. Click "Test Firebase Connection" to begin.', 'info');
+        });
+    </script>
+</body>
+</html>
