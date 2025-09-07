@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Axis Tours and Travel</title>
+    <meta name="description" content="Login to your Axis Tours and Travel account to manage your bookings and explore amazing destinations.">
+    <link rel="canonical" href="https://axistoursandtravel.co.ke/login.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axistoursandtravel.co.ke/login.html">
+    <meta property="og:title" content="Login - Axis Tours and Travel">
+    <meta property="og:description" content="Login to your Axis Tours and Travel account to manage your bookings and explore amazing destinations.">
+    <meta property="og:image" content="https://axistoursandtravel.co.ke/logo.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://axistoursandtravel.co.ke/login.html">
+    <meta property="twitter:title" content="Login - Axis Tours and Travel">
+    <meta property="twitter:description" content="Login to your Axis Tours and Travel account to manage your bookings and explore amazing destinations.">
+    <meta property="twitter:image" content="https://axistoursandtravel.co.ke/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=4.0">
+    
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            padding: 2rem 1rem;
+        }
+        
+        .auth-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .auth-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .auth-header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+        }
+        
+        .auth-header p {
+            margin: 0;
+            opacity: 0.8;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            background: #f8f9fa;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-tab.active {
+            background: var(--white);
+            color: var(--gold);
+        }
+        
+        .auth-content {
+            padding: 2rem;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+        
+        .auth-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .auth-links {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .auth-links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .back-to-home {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-home:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-page {
+                padding: 1rem;
+            }
+            
+            .auth-container {
+                max-width: 100%;
+            }
+            
+            .back-to-home {
+                position: static;
+                color: var(--black);
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-page">
+        <a href="index.html" class="back-to-home">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+        
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to your account</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="login-tab">Login</button>
+                <button class="auth-tab" id="register-tab">Register</button>
+            </div>
+            
+            <div class="auth-content">
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" data-original-text="Sign In">
+                        Sign In
+                    </button>
+                    
+                    <div class="loading"></div>
+                    
+                    <div class="auth-links">
+                        <a href="#" id="forgot-password">Forgot your password?</a>
+                    </div>
+                </form>
+                
+                <!-- Registration Form -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <input type="email" id="register-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-phone">Phone Number</label>
+                        <input type="tel" id="register-phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" required minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" name="confirmPassword" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" data-original-text="Create Account">
+                        Create Account
+                    </button>
+                    
+                    <div class="loading"></div>
+                </form>
+                
+                <!-- Password Reset Form -->
+                <form id="reset-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="reset-email">Email Address</label>
+                        <input type="email" id="reset-email" name="email" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" data-original-text="Send Reset Email">
+                        Send Reset Email
+                    </button>
+                    
+                    <div class="loading"></div>
+                    
+                    <div class="auth-links">
+                        <a href="#" id="back-to-login">Back to Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script type="module" src="js/firebase-integration.js"></script>
+    <script type="module" src="js/auth-system.js"></script>
+    
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginTab = document.getElementById('login-tab');
+            const registerTab = document.getElementById('register-tab');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const resetForm = document.getElementById('reset-form');
+            const forgotPasswordLink = document.getElementById('forgot-password');
+            const backToLoginLink = document.getElementById('back-to-login');
+            
+            // Tab switching
+            loginTab.addEventListener('click', function() {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                resetForm.classList.remove('active');
+            });
+            
+            registerTab.addEventListener('click', function() {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+                resetForm.classList.remove('active');
+            });
+            
+            // Password reset
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginForm.classList.remove('active');
+                registerForm.classList.remove('active');
+                resetForm.classList.add('active');
+            });
+            
+            backToLoginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetForm.classList.remove('active');
+                loginForm.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

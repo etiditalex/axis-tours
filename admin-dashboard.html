@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Axis Tours and Travel</title>
+    <meta name="description" content="Admin dashboard for managing Axis Tours and Travel bookings and services.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=4.0">
+    
+    <style>
+        .admin-dashboard {
+            min-height: 100vh;
+            background: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .admin-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        .admin-content {
+            padding: 0 1rem;
+        }
+        
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .admin-card h3 {
+            margin: 0 0 1rem 0;
+            color: var(--black);
+            font-size: 1.3rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .stat-value {
+            color: var(--black);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .admin-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+        
+        .admin-btn.secondary {
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--gold);
+        }
+        
+        .admin-btn.secondary:hover {
+            background: var(--gold);
+        }
+        
+        .bookings-table {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+        }
+        
+        .table-header h3 {
+            margin: 0;
+        }
+        
+        .table-content {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .action-btn {
+            padding: 0.25rem 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+        
+        .btn-confirm {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-cancel {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        @media (max-width: 768px) {
+            .admin-dashboard {
+                padding-top: 60px;
+            }
+            
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+            }
+            
+            .table-content {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <div class="globe"></div>
+                        <div class="airplane"></div>
+                        <div class="arc"></div>
+                    </div>
+                    <span class="logo-text">AXIS TOURS</span>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="index.html">Home</a>
+                    <a href="admin-dashboard.html" class="active">Admin</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="user-menu">
+                        <span class="user-name">Admin</span>
+                        <div class="user-dropdown">
+                            <a href="index.html">Back to Site</a>
+                            <a href="#" class="logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="admin-dashboard">
+        <div class="admin-header">
+            <div class="container">
+                <h1>Admin Dashboard</h1>
+            </div>
+        </div>
+        
+        <div class="admin-content">
+            <div class="container">
+                <!-- Admin Actions -->
+                <div class="admin-actions">
+                    <button class="admin-btn" onclick="populateSampleData()">Populate Sample Data</button>
+                    <button class="admin-btn secondary" onclick="refreshData()">Refresh Data</button>
+                    <button class="admin-btn secondary" onclick="exportBookings()">Export Bookings</button>
+                </div>
+                
+                <!-- Statistics Cards -->
+                <div class="admin-grid">
+                    <div class="admin-card">
+                        <h3>Booking Statistics</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Bookings</span>
+                            <span class="stat-value" id="total-bookings">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Pending</span>
+                            <span class="stat-value" id="pending-bookings">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Confirmed</span>
+                            <span class="stat-value" id="confirmed-bookings">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Cancelled</span>
+                            <span class="stat-value" id="cancelled-bookings">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card">
+                        <h3>Service Statistics</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Hotels</span>
+                            <span class="stat-value" id="total-hotels">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Tours</span>
+                            <span class="stat-value" id="total-tours">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Safaris</span>
+                            <span class="stat-value" id="total-safaris">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Experiences</span>
+                            <span class="stat-value" id="total-experiences">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card">
+                        <h3>Revenue Statistics</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Revenue</span>
+                            <span class="stat-value" id="total-revenue">$0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">This Month</span>
+                            <span class="stat-value" id="monthly-revenue">$0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Average Booking</span>
+                            <span class="stat-value" id="avg-booking">$0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Bookings Table -->
+                <div class="bookings-table">
+                    <div class="table-header">
+                        <h3>Recent Bookings</h3>
+                    </div>
+                    <div class="table-content">
+                        <div id="bookings-table-container">
+                            <div class="loading"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script type="module" src="js/firebase-integration.js"></script>
+    <script type="module" src="js/sample-data.js"></script>
+    
+    <script>
+        // Admin Dashboard Functionality
+        let allBookings = [];
+        let allServices = {};
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is admin (simplified check)
+            const user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Load dashboard data
+            await loadDashboardData();
+        });
+        
+        async function loadDashboardData() {
+            try {
+                // Import Firebase functions
+                const { 
+                    getFirestore, 
+                    collection, 
+                    getDocs, 
+                    query, 
+                    orderBy, 
+                    limit 
+                } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                
+                // Load bookings
+                const bookingsQuery = query(
+                    collection(getFirestore(), 'bookings'),
+                    orderBy('createdAt', 'desc'),
+                    limit(50)
+                );
+                
+                const bookingsSnapshot = await getDocs(bookingsQuery);
+                allBookings = [];
+                bookingsSnapshot.forEach(doc => {
+                    allBookings.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                // Load services
+                const serviceTypes = ['hotels', 'tours', 'safaris', 'experiences', 'transfers'];
+                allServices = {};
+                
+                for (const serviceType of serviceTypes) {
+                    const servicesSnapshot = await getDocs(collection(getFirestore(), serviceType));
+                    allServices[serviceType] = [];
+                    servicesSnapshot.forEach(doc => {
+                        allServices[serviceType].push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                }
+                
+                // Update dashboard
+                updateStatistics();
+                renderBookingsTable();
+                
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+                showNotification('Error loading dashboard data', 'error');
+            }
+        }
+        
+        function updateStatistics() {
+            // Booking statistics
+            const totalBookings = allBookings.length;
+            const pendingBookings = allBookings.filter(b => b.status === 'pending').length;
+            const confirmedBookings = allBookings.filter(b => b.status === 'confirmed').length;
+            const cancelledBookings = allBookings.filter(b => b.status === 'cancelled').length;
+            
+            document.getElementById('total-bookings').textContent = totalBookings;
+            document.getElementById('pending-bookings').textContent = pendingBookings;
+            document.getElementById('confirmed-bookings').textContent = confirmedBookings;
+            document.getElementById('cancelled-bookings').textContent = cancelledBookings;
+            
+            // Service statistics
+            document.getElementById('total-hotels').textContent = allServices.hotels?.length || 0;
+            document.getElementById('total-tours').textContent = allServices.tours?.length || 0;
+            document.getElementById('total-safaris').textContent = allServices.safaris?.length || 0;
+            document.getElementById('total-experiences').textContent = allServices.experiences?.length || 0;
+            
+            // Revenue statistics
+            const totalRevenue = allBookings.reduce((sum, booking) => sum + (booking.totalPrice || 0), 0);
+            const thisMonth = new Date();
+            thisMonth.setDate(1);
+            const monthlyBookings = allBookings.filter(booking => {
+                const bookingDate = booking.createdAt?.toDate ? booking.createdAt.toDate() : new Date(booking.createdAt);
+                return bookingDate >= thisMonth;
+            });
+            const monthlyRevenue = monthlyBookings.reduce((sum, booking) => sum + (booking.totalPrice || 0), 0);
+            const avgBooking = totalBookings > 0 ? totalRevenue / totalBookings : 0;
+            
+            document.getElementById('total-revenue').textContent = formatCurrency(totalRevenue);
+            document.getElementById('monthly-revenue').textContent = formatCurrency(monthlyRevenue);
+            document.getElementById('avg-booking').textContent = formatCurrency(avgBooking);
+        }
+        
+        function renderBookingsTable() {
+            const container = document.getElementById('bookings-table-container');
+            
+            if (allBookings.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-times"></i>
+                        <h3>No Bookings Yet</h3>
+                        <p>No bookings have been made yet.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const tableHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Service</th>
+                            <th>Customer</th>
+                            <th>Dates</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${allBookings.map(booking => `
+                            <tr>
+                                <td>#${booking.id.substring(0, 8)}</td>
+                                <td>${booking.serviceName}</td>
+                                <td>${booking.fullName}<br><small>${booking.email}</small></td>
+                                <td>${formatDate(booking.checkIn)}<br><small>to ${formatDate(booking.checkOut)}</small></td>
+                                <td>${formatCurrency(booking.totalPrice)}</td>
+                                <td>
+                                    <span class="status-badge status-${booking.status}">
+                                        ${booking.status}
+                                    </span>
+                                </td>
+                                <td>
+                                    ${booking.status === 'pending' ? `
+                                        <button class="action-btn btn-confirm" onclick="updateBookingStatus('${booking.id}', 'confirmed')">
+                                            Confirm
+                                        </button>
+                                        <button class="action-btn btn-cancel" onclick="updateBookingStatus('${booking.id}', 'cancelled')">
+                                            Cancel
+                                        </button>
+                                    ` : ''}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = tableHTML;
+        }
+        
+        async function updateBookingStatus(bookingId, status) {
+            try {
+                const { updateBookingStatus } = await import('./js/firebase-integration.js');
+                const result = await updateBookingStatus(bookingId, status);
+                
+                if (result.success) {
+                    showNotification(`Booking ${status} successfully`, 'success');
+                    await loadDashboardData();
+                } else {
+                    showNotification('Error updating booking status', 'error');
+                }
+            } catch (error) {
+                console.error('Error updating booking status:', error);
+                showNotification('Error updating booking status', 'error');
+            }
+        }
+        
+        async function populateSampleData() {
+            if (!confirm('This will populate the database with sample data. Continue?')) return;
+            
+            try {
+                const { populateFirestore } = await import('./js/sample-data.js');
+                const { getFirestore } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                
+                const db = getFirestore();
+                const result = await populateFirestore(db);
+                
+                if (result) {
+                    showNotification('Sample data populated successfully', 'success');
+                    await loadDashboardData();
+                } else {
+                    showNotification('Error populating sample data', 'error');
+                }
+            } catch (error) {
+                console.error('Error populating sample data:', error);
+                showNotification('Error populating sample data', 'error');
+            }
+        }
+        
+        function refreshData() {
+            loadDashboardData();
+            showNotification('Data refreshed', 'success');
+        }
+        
+        function exportBookings() {
+            if (allBookings.length === 0) {
+                showNotification('No bookings to export', 'info');
+                return;
+            }
+            
+            const csvContent = [
+                ['Booking ID', 'Service', 'Customer', 'Email', 'Check-in', 'Check-out', 'Guests', 'Total', 'Status'],
+                ...allBookings.map(booking => [
+                    booking.id,
+                    booking.serviceName,
+                    booking.fullName,
+                    booking.email,
+                    formatDate(booking.checkIn),
+                    formatDate(booking.checkOut),
+                    booking.guests,
+                    booking.totalPrice,
+                    booking.status
+                ])
+            ].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bookings-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Bookings exported successfully', 'success');
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(amount);
+        }
+        
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            return date.toLocaleDateString('en-US');
+        }
+        
+        function getCurrentUser() {
+            // This would normally get the current user from Firebase Auth
+            // For demo purposes, return a mock admin user
+            return { uid: 'admin', email: 'admin@axistours.com' };
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            Object.assign(notification.style, {
+                position: 'fixed',
+                top: '20px',
+                right: '20px',
+                padding: '15px 20px',
+                borderRadius: '8px',
+                color: 'white',
+                fontWeight: '600',
+                zIndex: '10001',
+                transform: 'translateX(100%)',
+                transition: 'transform 0.3s ease',
+                maxWidth: '300px',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+            });
+            
+            const colors = {
+                success: 'linear-gradient(135deg, #51cf66, #40c057)',
+                error: 'linear-gradient(135deg, #ff6b6b, #ee5a24)',
+                info: 'linear-gradient(135deg, #339af0, #228be6)'
+            };
+            
+            notification.style.background = colors[type] || colors.info;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

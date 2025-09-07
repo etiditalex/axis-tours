@@ -1,375 +1,400 @@
-// Firebase Integration for Partner Dashboard
-// This file replaces static data with real Firebase database calls
+// Firebase Integration for Axis Tours and Travel
+// This file handles all Firebase operations including Firestore and Authentication
 
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { 
-  auth,
-  signUp,
-  signIn,
-  signOutUser,
-  getCurrentUser,
-  createHotel,
-  getPartnerHotels,
-  updateHotel,
-  deleteHotel,
-  createRoom,
-  getRooms,
-  updateRoom,
-  deleteRoom,
-  createBooking,
-  getUserBookings,
-  uploadImage,
-  subscribeToHotels,
-  subscribeToRooms,
-  formatCurrency,
-  formatDate,
-  generateBookingId
-} from './firebase.js';
+  getFirestore, 
+  collection, 
+  doc, 
+  addDoc, 
+  getDocs, 
+  getDoc, 
+  updateDoc, 
+  deleteDoc, 
+  query, 
+  where, 
+  orderBy, 
+  limit,
+  onSnapshot,
+  serverTimestamp 
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  onAuthStateChanged,
+  updateProfile,
+  sendPasswordResetEmail
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
-// Initialize dashboard with real data
-async function initializeDashboard() {
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", // Replace with your actual config
+  authDomain: "axis-tours-backend.firebaseapp.com",
+  projectId: "axis-tours-backend",
+  storageBucket: "axis-tours-backend.appspot.com",
+  messagingSenderId: "123456789012",
+  appId: "1:123456789012:web:abcdefghijklmnop"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// Global state
+let currentUser = null;
+let userBookings = [];
+let allServices = {
+  hotels: [],
+  tours: [],
+  safaris: [],
+  experiences: [],
+  transfers: []
+};
+
+// Initialize Firebase services
+export const initializeFirebase = async () => {
   try {
-    // Check if user is authenticated
-    const user = await getCurrentUser();
-    if (!user) {
-      // Redirect to login if not authenticated
-      window.location.href = 'hotel-partner-portal.html';
-      return;
+    // Set up authentication state listener
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        console.log('User signed in:', user.email);
+        loadUserBookings();
+        updateUIForLoggedInUser();
+      } else {
+        console.log('User signed out');
+        updateUIForLoggedOutUser();
+      }
+    });
+
+    // Load initial data
+    await loadAllServices();
+    
+    console.log('Firebase initialized successfully');
+    return true;
+  } catch (error) {
+    console.error('Error initializing Firebase:', error);
+    return false;
+  }
+};
+
+// Authentication functions
+export const signUp = async (email, password, userData) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    
+    // Update user profile
+    await updateProfile(user, {
+      displayName: userData.name
+    });
+    
+    // Create user document in Firestore
+    await addDoc(collection(db, 'users'), {
+      uid: user.uid,
+      email: user.email,
+      name: userData.name,
+      phone: userData.phone,
+      createdAt: serverTimestamp(),
+      isAdmin: false
+    });
+    
+    return { success: true, user };
+  } catch (error) {
+    console.error('Sign up error:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const signIn = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return { success: true, user: userCredential.user };
+  } catch (error) {
+    console.error('Sign in error:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const signOutUser = async () => {
+  try {
+    await signOut(auth);
+    return { success: true };
+  } catch (error) {
+    console.error('Sign out error:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    return { success: true };
+  } catch (error) {
+    console.error('Password reset error:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Firestore functions
+export const createBooking = async (bookingData) => {
+  try {
+    if (!currentUser) {
+      throw new Error('User must be logged in to create a booking');
     }
-
-    console.log('User authenticated:', user.email);
     
-    // Load hotels for this partner
-    await loadPartnerHotels(user.uid);
+    const booking = {
+      ...bookingData,
+      userId: currentUser.uid,
+      userEmail: currentUser.email,
+      status: 'pending',
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    };
     
-    // Set up real-time updates
-    setupRealTimeUpdates(user.uid);
+    const docRef = await addDoc(collection(db, 'bookings'), booking);
+    console.log('Booking created with ID:', docRef.id);
     
-    // Update user info display
-    updateUserInfo(user);
+    // Reload user bookings
+    await loadUserBookings();
     
+    return { success: true, bookingId: docRef.id };
   } catch (error) {
-    console.error('Error initializing dashboard:', error);
-    showNotification('Error loading dashboard: ' + error.message, 'error');
+    console.error('Error creating booking:', error);
+    return { success: false, error: error.message };
   }
-}
+};
 
-// Load partner's hotels
-async function loadPartnerHotels(partnerId) {
+export const updateBookingStatus = async (bookingId, status) => {
   try {
-    const { data: hotels, error } = await getPartnerHotels(partnerId);
+    const bookingRef = doc(db, 'bookings', bookingId);
+    await updateDoc(bookingRef, {
+      status: status,
+      updatedAt: serverTimestamp()
+    });
     
-    if (error) throw new Error(error);
-    
-    console.log('Loaded hotels:', hotels);
-    
-    // Update dashboard stats
-    updateDashboardStats(hotels);
-    
-    // Render hotels list
-    renderHotelsList(hotels);
-    
+    return { success: true };
   } catch (error) {
-    console.error('Error loading hotels:', error);
-    showNotification('Error loading hotels: ' + error.message, 'error');
+    console.error('Error updating booking:', error);
+    return { success: false, error: error.message };
   }
-}
+};
 
-// Create new hotel
-async function createNewHotel(hotelData) {
+export const loadUserBookings = async () => {
   try {
-    const { id, error } = await createHotel(hotelData);
+    if (!currentUser) return;
     
-    if (error) throw new Error(error);
+    const q = query(
+      collection(db, 'bookings'),
+      where('userId', '==', currentUser.uid),
+      orderBy('createdAt', 'desc')
+    );
     
-    showNotification('Hotel created successfully!', 'success');
+    const querySnapshot = await getDocs(q);
+    userBookings = [];
     
-    // Refresh hotels list
-    const user = await getCurrentUser();
-    await loadPartnerHotels(user.uid);
+    querySnapshot.forEach((doc) => {
+      userBookings.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
     
-    return { id, error: null };
-    
+    console.log('User bookings loaded:', userBookings.length);
+    return userBookings;
   } catch (error) {
-    console.error('Error creating hotel:', error);
-    showNotification('Error creating hotel: ' + error.message, 'error');
-    return { id: null, error: error.message };
+    console.error('Error loading user bookings:', error);
+    return [];
   }
-}
+};
 
-// Update hotel
-async function updateExistingHotel(hotelId, updates) {
+export const loadAllServices = async () => {
   try {
-    const { error } = await updateHotel(hotelId, updates);
+    const services = ['hotels', 'tours', 'safaris', 'experiences', 'transfers'];
     
-    if (error) throw new Error(error);
-    
-    showNotification('Hotel updated successfully!', 'success');
-    
-    // Refresh hotels list
-    const user = await getCurrentUser();
-    await loadPartnerHotels(user.uid);
-    
-    return { error: null };
-    
-  } catch (error) {
-    console.error('Error updating hotel:', error);
-    showNotification('Error updating hotel: ' + error.message, 'error');
-    return { error: error.message };
-  }
-}
-
-// Delete hotel
-async function deleteExistingHotel(hotelId) {
-  try {
-    if (!confirm('Are you sure you want to delete this hotel? This action cannot be undone.')) {
-      return;
+    for (const service of services) {
+      const querySnapshot = await getDocs(collection(db, service));
+      allServices[service] = [];
+      
+      querySnapshot.forEach((doc) => {
+        allServices[service].push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
     }
-
-    const { error } = await deleteHotel(hotelId);
     
-    if (error) throw new Error(error);
-    
-    showNotification('Hotel deleted successfully!', 'success');
-    
-    // Refresh hotels list
-    const user = await getCurrentUser();
-    await loadPartnerHotels(user.uid);
-    
+    console.log('All services loaded:', allServices);
+    return allServices;
   } catch (error) {
-    console.error('Error deleting hotel:', error);
-    showNotification('Error deleting hotel: ' + error.message, 'error');
+    console.error('Error loading services:', error);
+    return allServices;
   }
-}
+};
 
-// Load rooms for a specific hotel
-async function loadHotelRooms(hotelId) {
-  try {
-    const { data: rooms, error } = await getRooms(hotelId);
-    
-    if (error) throw new Error(error);
-    
-    console.log('Loaded rooms:', rooms);
-    renderRoomsList(rooms, hotelId);
-    
-  } catch (error) {
-    console.error('Error loading rooms:', error);
-    showNotification('Error loading rooms: ' + error.message, 'error');
-  }
-}
-
-// Create new room
-async function createNewRoom(roomData) {
-  try {
-    const { id, error } = await createRoom(roomData);
-    
-    if (error) throw new Error(error);
-    
-    showNotification('Room created successfully!', 'success');
-    
-    // Refresh rooms list
-    await loadHotelRooms(roomData.hotel_id);
-    
-    return { id, error: null };
-    
-  } catch (error) {
-    console.error('Error creating room:', error);
-    showNotification('Error creating room: ' + error.message, 'error');
-    return { id: null, error: error.message };
-  }
-}
-
-// Update room
-async function updateExistingRoom(roomId, updates) {
-  try {
-    const { error } = await updateRoom(roomId, updates);
-    
-    if (error) throw new Error(error);
-    
-    showNotification('Room updated successfully!', 'success');
-    
-    // Refresh rooms list
-    await loadHotelRooms(updates.hotel_id);
-    
-    return { error: null };
-    
-  } catch (error) {
-    console.error('Error updating room:', error);
-    showNotification('Error updating room: ' + error.message, 'error');
-    return { error: error.message };
-  }
-}
-
-// Delete room
-async function deleteExistingRoom(roomId, hotelId) {
-  try {
-    if (!confirm('Are you sure you want to delete this room?')) {
-      return;
-    }
-
-    const { error } = await deleteRoom(roomId);
-    
-    if (error) throw new Error(error);
-    
-    showNotification('Room deleted successfully!', 'success');
-    
-    // Refresh rooms list
-    await loadHotelRooms(hotelId);
-    
-  } catch (error) {
-    console.error('Error deleting room:', error);
-    showNotification('Error deleting room: ' + error.message, 'error');
-  }
-}
-
-// Set up real-time updates
-function setupRealTimeUpdates(partnerId) {
-  // Subscribe to hotel changes
-  const unsubscribeHotels = subscribeToHotels((hotels) => {
-    // Filter hotels for this partner
-    const partnerHotels = hotels.filter(hotel => hotel.partner_id === partnerId);
-    updateDashboardStats(partnerHotels);
-    renderHotelsList(partnerHotels);
-  });
-
-  // Store unsubscribe function for cleanup
-  window.unsubscribeFirebase = unsubscribeHotels;
-}
-
-// Update dashboard statistics
-function updateDashboardStats(hotels) {
-  const totalHotels = hotels.length;
-  const totalRooms = hotels.reduce((sum, hotel) => sum + (hotel.room_count || 0), 0);
-  const totalBookings = hotels.reduce((sum, hotel) => sum + (hotel.booking_count || 0), 0);
-  const totalRevenue = hotels.reduce((sum, hotel) => sum + (hotel.total_revenue || 0), 0);
-
-  // Update stats display if elements exist
-  const totalHotelsEl = document.getElementById('totalHotels');
-  const totalRoomsEl = document.getElementById('totalRooms');
-  const totalBookingsEl = document.getElementById('totalBookings');
-  const totalRevenueEl = document.getElementById('totalRevenue');
-
-  if (totalHotelsEl) totalHotelsEl.textContent = totalHotels;
-  if (totalRoomsEl) totalRoomsEl.textContent = totalRooms;
-  if (totalBookingsEl) totalBookingsEl.textContent = totalBookings;
-  if (totalRevenueEl) totalRevenueEl.textContent = formatCurrency(totalRevenue);
-}
-
-// Render hotels list
-function renderHotelsList(hotels) {
-  const hotelsContainer = document.getElementById('hotelsList');
-  if (!hotelsContainer) return;
-
-  hotelsContainer.innerHTML = hotels.map(hotel => `
-    <div class="hotel-card" data-hotel-id="${hotel.id}">
-      <div class="hotel-image">
-        <img src="${hotel.images?.[0] || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'}" alt="${hotel.name}">
-      </div>
-      <div class="hotel-info">
-        <h3>${hotel.name}</h3>
-        <p>${hotel.location || 'Location not specified'}</p>
-        <div class="hotel-stats">
-          <span>${hotel.room_count || 0} Rooms</span>
-          <span>${hotel.rating || 'N/A'}★</span>
-        </div>
-      </div>
-      <div class="hotel-actions">
-        <button onclick="editHotel('${hotel.id}')" class="btn-edit">Edit</button>
-        <button onclick="deleteHotel('${hotel.id}')" class="btn-delete">Delete</button>
-        <button onclick="manageRooms('${hotel.id}')" class="btn-manage">Manage Rooms</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Render rooms list
-function renderRoomsList(rooms, hotelId) {
-  const roomsContainer = document.getElementById('roomsList');
-  if (!roomsContainer) return;
-
-  roomsContainer.innerHTML = rooms.map(room => `
-    <div class="room-card" data-room-id="${room.id}">
-      <div class="room-image">
-        <img src="${room.images?.[0] || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'}" alt="${room.name}">
-      </div>
-      <div class="room-info">
-        <h3>${room.name}</h3>
-        <p>${room.description || 'No description'}</p>
-        <div class="room-stats">
-          <span>KES ${room.price || 0}</span>
-          <span>${room.capacity || 1} Guests</span>
-        </div>
-      </div>
-      <div class="room-actions">
-        <button onclick="editRoom('${room.id}')" class="btn-edit">Edit</button>
-        <button onclick="deleteRoom('${room.id}', '${hotelId}')" class="btn-delete">Delete</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Update user info display
-function updateUserInfo(user) {
-  const userInfoElements = document.querySelectorAll('.user-email, .partner-email');
-  userInfoElements.forEach(el => {
-    el.textContent = user.email;
-  });
-}
-
-// Show notification
-function showNotification(message, type = 'info') {
-  // Create notification element
-  const notification = document.createElement('div');
-  notification.className = `notification notification-${type}`;
-  notification.textContent = message;
+export const searchServices = (searchTerm, serviceType = null) => {
+  const results = [];
+  const term = searchTerm.toLowerCase();
   
-  // Add to page
-  document.body.appendChild(notification);
+  const servicesToSearch = serviceType ? [serviceType] : Object.keys(allServices);
   
-  // Remove after 3 seconds
-  setTimeout(() => {
-    notification.remove();
-  }, 3000);
-}
+  servicesToSearch.forEach(service => {
+    allServices[service].forEach(item => {
+      if (
+        item.name?.toLowerCase().includes(term) ||
+        item.location?.toLowerCase().includes(term) ||
+        item.description?.toLowerCase().includes(term) ||
+        item.destination?.toLowerCase().includes(term)
+      ) {
+        results.push({
+          ...item,
+          serviceType: service
+        });
+      }
+    });
+  });
+  
+  return results;
+};
 
-// Handle sign out
-async function handleSignOut() {
+export const getServiceById = async (serviceType, serviceId) => {
   try {
-    await signOutUser();
-    window.location.href = 'hotel-partner-portal.html';
+    const docRef = doc(db, serviceType, serviceId);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      return {
+        id: docSnap.id,
+        ...docSnap.data()
+      };
+    } else {
+      return null;
+    }
   } catch (error) {
-    console.error('Error signing out:', error);
-    showNotification('Error signing out: ' + error.message, 'error');
+    console.error('Error getting service:', error);
+    return null;
   }
-}
+};
 
-// Export functions for use in HTML
-window.initializeDashboard = initializeDashboard;
-window.createNewHotel = createNewHotel;
-window.updateExistingHotel = updateExistingHotel;
-window.deleteExistingHotel = deleteExistingHotel;
-window.createNewRoom = createNewRoom;
-window.updateExistingRoom = updateExistingRoom;
-window.deleteExistingRoom = deleteExistingRoom;
-window.loadHotelRooms = loadHotelRooms;
-window.handleSignOut = handleSignOut;
-
-// Initialize dashboard when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  // Check if we're on a dashboard page
-  if (window.location.pathname.includes('partner-dashboard') || 
-      window.location.pathname.includes('room-management') ||
-      window.location.pathname.includes('photo-gallery-management') ||
-      window.location.pathname.includes('pricing-management') ||
-      window.location.pathname.includes('analytics-dashboard') ||
-      window.location.pathname.includes('availability-calendar') ||
-      window.location.pathname.includes('bulk-operations')) {
-    initializeDashboard();
+export const addReview = async (reviewData) => {
+  try {
+    if (!currentUser) {
+      throw new Error('User must be logged in to add a review');
+    }
+    
+    const review = {
+      ...reviewData,
+      userId: currentUser.uid,
+      userEmail: currentUser.email,
+      userName: currentUser.displayName || 'Anonymous',
+      createdAt: serverTimestamp()
+    };
+    
+    const docRef = await addDoc(collection(db, 'reviews'), review);
+    console.log('Review added with ID:', docRef.id);
+    
+    return { success: true, reviewId: docRef.id };
+  } catch (error) {
+    console.error('Error adding review:', error);
+    return { success: false, error: error.message };
   }
-});
+};
 
-// Cleanup on page unload
-window.addEventListener('beforeunload', function() {
-  if (window.unsubscribeFirebase) {
-    window.unsubscribeFirebase();
+export const getReviews = async (serviceId) => {
+  try {
+    const q = query(
+      collection(db, 'reviews'),
+      where('serviceId', '==', serviceId),
+      orderBy('createdAt', 'desc')
+    );
+    
+    const querySnapshot = await getDocs(q);
+    const reviews = [];
+    
+    querySnapshot.forEach((doc) => {
+      reviews.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    
+    return reviews;
+  } catch (error) {
+    console.error('Error getting reviews:', error);
+    return [];
   }
+};
+
+// UI Update functions
+const updateUIForLoggedInUser = () => {
+  // Update navigation
+  const loginBtn = document.querySelector('.login-btn');
+  const registerBtn = document.querySelector('.register-btn');
+  const userMenu = document.querySelector('.user-menu');
+  
+  if (loginBtn) loginBtn.style.display = 'none';
+  if (registerBtn) registerBtn.style.display = 'none';
+  
+  if (userMenu) {
+    userMenu.style.display = 'block';
+    const userName = userMenu.querySelector('.user-name');
+    if (userName) userName.textContent = currentUser.displayName || currentUser.email;
+  }
+  
+  // Show user-specific content
+  const userContent = document.querySelectorAll('.user-only');
+  userContent.forEach(element => {
+    element.style.display = 'block';
+  });
+};
+
+const updateUIForLoggedOutUser = () => {
+  // Update navigation
+  const loginBtn = document.querySelector('.login-btn');
+  const registerBtn = document.querySelector('.register-btn');
+  const userMenu = document.querySelector('.user-menu');
+  
+  if (loginBtn) loginBtn.style.display = 'block';
+  if (registerBtn) registerBtn.style.display = 'block';
+  
+  if (userMenu) {
+    userMenu.style.display = 'none';
+  }
+  
+  // Hide user-specific content
+  const userContent = document.querySelectorAll('.user-only');
+  userContent.forEach(element => {
+    element.style.display = 'none';
+  });
+};
+
+// Utility functions
+export const formatDate = (timestamp) => {
+  if (!timestamp) return 'N/A';
+  
+  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+export const formatCurrency = (amount, currency = 'USD') => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency
+  }).format(amount);
+};
+
+export const getCurrentUser = () => currentUser;
+export const getUserBookings = () => userBookings;
+export const getAllServices = () => allServices;
+
+// Initialize Firebase when the module loads
+document.addEventListener('DOMContentLoaded', () => {
+  initializeFirebase();
 });

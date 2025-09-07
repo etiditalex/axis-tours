@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - Axis Tours and Travel</title>
+    <meta name="description" content="Manage your bookings and travel history with Axis Tours and Travel.">
+    <link rel="canonical" href="https://axistoursandtravel.co.ke/my-bookings.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axistoursandtravel.co.ke/my-bookings.html">
+    <meta property="og:title" content="My Bookings - Axis Tours and Travel">
+    <meta property="og:description" content="Manage your bookings and travel history with Axis Tours and Travel.">
+    <meta property="og:image" content="https://axistoursandtravel.co.ke/logo.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://axistoursandtravel.co.ke/my-bookings.html">
+    <meta property="twitter:title" content="My Bookings - Axis Tours and Travel">
+    <meta property="twitter:description" content="Manage your bookings and travel history with Axis Tours and Travel.">
+    <meta property="twitter:image" content="https://axistoursandtravel.co.ke/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=4.0">
+    
+    <style>
+        .bookings-page {
+            min-height: 100vh;
+            background: #f8f9fa;
+            padding-top: 100px;
+        }
+        
+        .bookings-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .bookings-header h1 {
+            margin: 0 0 1rem 0;
+            font-size: 2.5rem;
+        }
+        
+        .bookings-header p {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+        
+        .bookings-content {
+            padding: 3rem 0;
+        }
+        
+        .bookings-filters {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .filter-group select {
+            padding: 0.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .bookings-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .booking-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .booking-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .booking-header {
+            background: var(--gold);
+            color: var(--black);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .booking-id {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .booking-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .booking-content {
+            padding: 1.5rem;
+        }
+        
+        .booking-service {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-details h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--black);
+        }
+        
+        .service-details p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .detail-value {
+            font-size: 0.9rem;
+            color: var(--black);
+            font-weight: 500;
+        }
+        
+        .booking-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        .empty-state h3 {
+            margin: 0 0 1rem 0;
+            color: var(--black);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .bookings-page {
+                padding-top: 80px;
+            }
+            
+            .bookings-header h1 {
+                font-size: 2rem;
+            }
+            
+            .bookings-filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                justify-content: space-between;
+            }
+            
+            .booking-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            .booking-service {
+                flex-direction: column;
+            }
+            
+            .service-image {
+                width: 100%;
+                height: 120px;
+            }
+            
+            .booking-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <div class="globe"></div>
+                        <div class="airplane"></div>
+                        <div class="arc"></div>
+                    </div>
+                    <span class="logo-text">AXIS TOURS</span>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="index.html">Home</a>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="hotels.html">Hotels</a>
+                            <a href="tours.html">Tours</a>
+                            <a href="safaris.html">Safaris</a>
+                            <a href="experiences.html">Experiences</a>
+                            <a href="transfers.html">Transfers</a>
+                        </div>
+                    </div>
+                    <a href="about.html">About</a>
+                    <a href="destinations.html">Destinations</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="login.html" class="register-btn">Register</a>
+                    <div class="user-menu" style="display: none;">
+                        <span class="user-name">User</span>
+                        <div class="user-dropdown">
+                            <a href="my-bookings.html">My Bookings</a>
+                            <a href="#" class="logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay"></div>
+    
+    <!-- Main Content -->
+    <main class="bookings-page">
+        <div class="bookings-header">
+            <div class="container">
+                <h1>My Bookings</h1>
+                <p>Manage your travel bookings and history</p>
+            </div>
+        </div>
+        
+        <div class="bookings-content">
+            <div class="container">
+                <!-- Filters -->
+                <div class="bookings-filters">
+                    <div class="filter-group">
+                        <label for="status-filter">Status:</label>
+                        <select id="status-filter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="service-filter">Service:</label>
+                        <select id="service-filter">
+                            <option value="">All Services</option>
+                            <option value="hotels">Hotels</option>
+                            <option value="tours">Tours</option>
+                            <option value="safaris">Safaris</option>
+                            <option value="experiences">Experiences</option>
+                            <option value="transfers">Transfers</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="date-filter">Date:</label>
+                        <select id="date-filter">
+                            <option value="">All Dates</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="past">Past</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Bookings Grid -->
+                <div id="bookings-container">
+                    <div class="loading"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Axis Tours and Travel</h3>
+                    <p>Your gateway to unforgettable experiences in Kenya and East Africa.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="safaris.html">Safaris</a></li>
+                        <li><a href="experiences.html">Experiences</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>Email: info@axistoursandtravel.co.ke</p>
+                    <p>Phone: +254 700 000 000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Axis Tours and Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script type="module" src="js/firebase-integration.js"></script>
+    <script type="module" src="js/auth-system.js"></script>
+    <script type="module" src="js/booking-system.js"></script>
+    
+    <script>
+        // My Bookings Page Functionality
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check authentication
+            if (!window.authSystem || !window.authSystem.isLoggedIn()) {
+                window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.href);
+                return;
+            }
+            
+            // Load user bookings
+            await loadUserBookings();
+            
+            // Setup filters
+            setupFilters();
+        });
+        
+        async function loadUserBookings() {
+            const container = document.getElementById('bookings-container');
+            
+            try {
+                // Show loading
+                container.innerHTML = '<div class="loading"></div>';
+                
+                // Import the function from firebase-integration
+                const { loadUserBookings, formatDate, formatCurrency } = await import('./js/firebase-integration.js');
+                
+                const bookings = await loadUserBookings();
+                
+                if (bookings.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-calendar-times"></i>
+                            <h3>No Bookings Yet</h3>
+                            <p>You haven't made any bookings yet. Start exploring our amazing destinations!</p>
+                            <a href="index.html" class="btn">Explore Now</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Render bookings
+                container.innerHTML = renderBookings(bookings);
+                
+            } catch (error) {
+                console.error('Error loading bookings:', error);
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Error Loading Bookings</h3>
+                        <p>There was an error loading your bookings. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderBookings(bookings) {
+            return bookings.map(booking => `
+                <div class="booking-card" data-status="${booking.status}" data-service="${booking.serviceType}">
+                    <div class="booking-header">
+                        <span class="booking-id">Booking #${booking.id.substring(0, 8)}</span>
+                        <span class="booking-status status-${booking.status}">${booking.status}</span>
+                    </div>
+                    
+                    <div class="booking-content">
+                        <div class="booking-service">
+                            <div class="service-image">
+                                <img src="${booking.serviceImage || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80'}" alt="${booking.serviceName}">
+                            </div>
+                            <div class="service-details">
+                                <h3>${booking.serviceName}</h3>
+                                <p>${booking.serviceType.charAt(0).toUpperCase() + booking.serviceType.slice(1)}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Check-in</span>
+                                <span class="detail-value">${formatDate(booking.checkIn)}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Check-out</span>
+                                <span class="detail-value">${formatDate(booking.checkOut)}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Guests</span>
+                                <span class="detail-value">${booking.guests}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Total Price</span>
+                                <span class="detail-value">${formatCurrency(booking.totalPrice)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-actions">
+                            ${booking.status === 'pending' ? `
+                                <button class="btn btn-outline btn-small" onclick="cancelBooking('${booking.id}')">
+                                    Cancel
+                                </button>
+                            ` : ''}
+                            <button class="btn btn-small" onclick="viewBookingDetails('${booking.id}')">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function setupFilters() {
+            const statusFilter = document.getElementById('status-filter');
+            const serviceFilter = document.getElementById('service-filter');
+            const dateFilter = document.getElementById('date-filter');
+            
+            [statusFilter, serviceFilter, dateFilter].forEach(filter => {
+                filter.addEventListener('change', filterBookings);
+            });
+        }
+        
+        function filterBookings() {
+            const statusFilter = document.getElementById('status-filter').value;
+            const serviceFilter = document.getElementById('service-filter').value;
+            const dateFilter = document.getElementById('date-filter').value;
+            
+            const bookingCards = document.querySelectorAll('.booking-card');
+            
+            bookingCards.forEach(card => {
+                const status = card.dataset.status;
+                const service = card.dataset.service;
+                const checkIn = new Date(card.querySelector('.detail-value').textContent);
+                const now = new Date();
+                
+                let show = true;
+                
+                if (statusFilter && status !== statusFilter) show = false;
+                if (serviceFilter && service !== serviceFilter) show = false;
+                if (dateFilter === 'upcoming' && checkIn < now) show = false;
+                if (dateFilter === 'past' && checkIn >= now) show = false;
+                
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
+        
+        async function cancelBooking(bookingId) {
+            if (!confirm('Are you sure you want to cancel this booking?')) return;
+            
+            try {
+                const { updateBookingStatus } = await import('./js/firebase-integration.js');
+                const result = await updateBookingStatus(bookingId, 'cancelled');
+                
+                if (result.success) {
+                    showNotification('Booking cancelled successfully', 'success');
+                    await loadUserBookings();
+                } else {
+                    showNotification('Error cancelling booking', 'error');
+                }
+            } catch (error) {
+                console.error('Error cancelling booking:', error);
+                showNotification('Error cancelling booking', 'error');
+            }
+        }
+        
+        function viewBookingDetails(bookingId) {
+            // This would open a modal with detailed booking information
+            showNotification('Booking details feature coming soon!', 'info');
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            Object.assign(notification.style, {
+                position: 'fixed',
+                top: '20px',
+                right: '20px',
+                padding: '15px 20px',
+                borderRadius: '8px',
+                color: 'white',
+                fontWeight: '600',
+                zIndex: '10001',
+                transform: 'translateX(100%)',
+                transition: 'transform 0.3s ease',
+                maxWidth: '300px',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+            });
+            
+            const colors = {
+                success: 'linear-gradient(135deg, #51cf66, #40c057)',
+                error: 'linear-gradient(135deg, #ff6b6b, #ee5a24)',
+                info: 'linear-gradient(135deg, #339af0, #228be6)'
+            };
+            
+            notification.style.background = colors[type] || colors.info;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

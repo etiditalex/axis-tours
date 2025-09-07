@@ -284,6 +284,17 @@
                 <li><a href="destinations.html">Destinations</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li class="auth-links">
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="login.html" class="register-btn">Register</a>
+                    <div class="user-menu" style="display: none;">
+                        <span class="user-name">User</span>
+                        <div class="user-dropdown">
+                            <a href="my-bookings.html">My Bookings</a>
+                            <a href="#" class="logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </li>
                 <li class="mobile-quote-btn"><a href="booking.html" class="btn-quote">Book Now</a></li>
                 <li class="mobile-quote-btn"><a href="contact.html" class="btn-quote">Request A Quote</a></li>
             </ul>
@@ -1828,5 +1839,12 @@
             }
         });
     </script>
+    
+    <!-- Firebase Integration Scripts -->
+    <script type="module" src="js/firebase-integration.js"></script>
+    <script type="module" src="js/auth-system.js"></script>
+    <script type="module" src="js/booking-system.js"></script>
+    <script src="js/alexa-bot.js"></script>
+    <script src="js/search-engine.js"></script>
 </body>
 </html>
