@@ -787,6 +787,100 @@ class AlexaBot {
                     font-size: 30px;
                 }
             }
+
+            /* External Notification Styles */
+            .alexa-external-notification {
+                position: fixed;
+                bottom: 100px;
+                right: 20px;
+                width: 320px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 10001;
+                animation: slideInUp 0.5s ease-out;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .alexa-external-notification:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            }
+
+            .notification-content {
+                display: flex;
+                align-items: center;
+                padding: 15px;
+                gap: 12px;
+            }
+
+            .notification-avatar {
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 18px;
+                flex-shrink: 0;
+            }
+
+            .notification-text {
+                flex: 1;
+                color: white;
+            }
+
+            .notification-title {
+                font-weight: 600;
+                font-size: 14px;
+                margin-bottom: 4px;
+                opacity: 0.9;
+            }
+
+            .notification-message {
+                font-size: 13px;
+                line-height: 1.4;
+                opacity: 0.8;
+            }
+
+            .notification-close {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 50%;
+                transition: background 0.2s ease;
+                opacity: 0.7;
+            }
+
+            .notification-close:hover {
+                background: rgba(255, 255, 255, 0.2);
+                opacity: 1;
+            }
+
+            @keyframes slideInUp {
+                from {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .alexa-external-notification {
+                    width: calc(100vw - 40px);
+                    right: 20px;
+                    left: 20px;
+                }
+            }
             </style>
         `;
 
@@ -804,11 +898,62 @@ class AlexaBot {
 
     showNotification() {
         this.hasShownNotification = true;
+        
+        // Create external notification popup
+        this.createExternalNotification();
+        
+        // Also show badge on chatbot
         const badge = document.querySelector('.alexa-bot-badge');
         if (badge) {
             badge.style.display = 'flex';
             badge.textContent = '1';
         }
+    }
+
+    createExternalNotification() {
+        // Remove any existing external notification
+        const existingNotification = document.getElementById('alexa-external-notification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+
+        // Create notification popup
+        const notification = document.createElement('div');
+        notification.id = 'alexa-external-notification';
+        notification.className = 'alexa-external-notification';
+        
+        notification.innerHTML = `
+            <div class="notification-content">
+                <div class="notification-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="notification-text">
+                    <div class="notification-title">Alexa Bot</div>
+                    <div class="notification-message">Hi and welcome! I see you have been browsing for a while. Is there anything we can assist with today?</div>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+
+        // Add click handler to open chatbot
+        notification.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('notification-close')) {
+                this.openChatbot();
+                notification.remove();
+            }
+        });
+
+        // Add to page
+        document.body.appendChild(notification);
+
+        // Auto-remove after 10 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 10000);
     }
 
     setupEventListeners() {
@@ -847,44 +992,13 @@ class AlexaBot {
             toggle.style.display = 'none';
             badge.style.display = 'none';
             
-            // Show notification message if user has been browsing for a while
-            if (this.hasShownNotification) {
-                this.showNotificationMessage();
-            }
+            // External notification is handled separately
         } else {
             widget.classList.remove('open');
             toggle.style.display = 'flex';
         }
     }
 
-    showNotificationMessage() {
-        const messagesContainer = document.getElementById('alexa-bot-messages');
-        const notificationDiv = document.createElement('div');
-        notificationDiv.className = 'alexa-bot-message bot-message';
-        notificationDiv.style.marginTop = '10px';
-
-        const avatar = document.createElement('div');
-        avatar.className = 'message-avatar';
-        avatar.innerHTML = '<i class="fas fa-robot"></i>';
-
-        const content = document.createElement('div');
-        content.className = 'message-content';
-        content.innerHTML = `
-            <div class="notification-message">
-                Hi and welcome! I see you have been browsing for a while. Is there anything we can assist with today?
-            </div>
-        `;
-
-        notificationDiv.appendChild(avatar);
-        notificationDiv.appendChild(content);
-
-        // Insert after the welcome message
-        const welcomeMessage = messagesContainer.querySelector('.welcome-message').parentElement.parentElement;
-        welcomeMessage.insertAdjacentElement('afterend', notificationDiv);
-        
-        // Scroll to show the notification
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
 
     closeChatbot() {
         const widget = document.getElementById('alexa-bot-widget');
