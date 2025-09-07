@@ -326,6 +326,19 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script type="module" src="js/firebase-integration.js"></script>
     <script type="module" src="js/auth-system.js"></script>
+    <script type="module">
+        // Debug script to check if modules are loading
+        console.log('🔍 Login page loaded');
+        
+        // Check if auth system is available
+        setTimeout(() => {
+            if (window.authSystem) {
+                console.log('✅ Auth system loaded');
+            } else {
+                console.log('❌ Auth system not loaded');
+            }
+        }, 1000);
+    </script>
     
     <script>
         // Tab switching functionality
