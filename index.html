@@ -67,11 +67,53 @@
         body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #333; }
         .main-header { background: #1a1a1a; color: white; padding: 1rem 0; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .hero { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 120px 0 80px; text-align: left !important; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; white-space: nowrap; text-align: left !important; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; text-align: left !important; }
-        .hero-content { text-align: left !important; }
-        .hero-content .container { text-align: left !important; }
+        .hero { 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); 
+            color: white; 
+            padding: 120px 0 80px; 
+            text-align: left !important; 
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 { 
+            font-size: 2.5rem !important; 
+            margin-bottom: 1rem !important; 
+            font-weight: 700 !important; 
+            white-space: nowrap !important; 
+            text-align: left !important; 
+            color: white !important;
+            display: block !important;
+            visibility: visible !important;
+        }
+        .hero p { 
+            font-size: 1.2rem !important; 
+            margin-bottom: 2rem !important; 
+            opacity: 0.9 !important; 
+            text-align: left !important; 
+            color: white !important;
+            display: block !important;
+            visibility: visible !important;
+        }
+        .hero-content { 
+            text-align: left !important; 
+            display: block !important;
+            visibility: visible !important;
+        }
+        .hero-content .container { 
+            text-align: left !important; 
+            display: block !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 0 20px !important;
+        }
+        .hero-content h1 {
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+        }
+        .hero-content p {
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+        }
         
         /* Booking.com Style Search Bar */
         .search-container {
@@ -206,8 +248,8 @@
     </style>
     
     <!-- Non-critical CSS (deferred) -->
-    <link rel="preload" href="style.css?v=4.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=4.0"></noscript>
+    <link rel="preload" href="style.css?v=5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css?v=5.0"></noscript>
     <style>
         .payment-option-card {
             background: white;
