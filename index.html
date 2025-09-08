@@ -68,7 +68,7 @@
         .main-header { background: #1a1a1a; color: white; padding: 1rem 0; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .hero { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 120px 0 80px; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; white-space: nowrap; }
         .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
         .search-container { background: white; border-radius: 10px; padding: 2rem; margin: 2rem auto; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .search-form { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: end; }
@@ -148,23 +148,27 @@
         }
         
         .search-btn {
-            background: #d4af37;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            min-width: 120px;
-            justify-content: center;
+            background: #d4af37 !important;
+            color: white !important;
+            border: none !important;
+            padding: 1rem 2rem !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+            transition: all 0.3s ease !important;
+            min-width: 120px !important;
+            justify-content: center !important;
+            border-radius: 0 !important;
+            height: 100% !important;
         }
         
         .search-btn:hover {
-            background: #b8941f;
+            background: #b8941f !important;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
         }
         
         .search-btn i {
@@ -172,7 +176,12 @@
         }
         
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { 
+                font-size: 1.8rem; 
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
             .search-bar { 
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -189,6 +198,10 @@
             .search-container { 
                 margin: 1rem; 
                 max-width: calc(100% - 2rem);
+            }
+            .search-btn {
+                width: 100% !important;
+                min-width: auto !important;
             }
         }
     </style>
