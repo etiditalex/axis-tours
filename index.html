@@ -78,93 +78,117 @@
         .search-btn { background: #d4af37; color: white; border: none; padding: 0.75rem 2rem; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; }
         .search-btn:hover { background: #b8941f; }
         
-        /* Simple Search Box Styles */
+        /* Booking.com Style Search Bar */
         .search-container {
             background: white;
             border-radius: 15px;
-            padding: 1.5rem;
+            padding: 0;
             margin: 2rem auto;
-            max-width: 600px;
+            max-width: 900px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             border: 2px solid #d4af37;
+            overflow: hidden;
         }
         
         .search-form {
             width: 100%;
         }
         
-        .search-box {
+        .search-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 0;
+            align-items: stretch;
+        }
+        
+        .search-field {
+            position: relative;
             display: flex;
             align-items: center;
             background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 0.75rem;
+            border-right: 1px solid #e0e0e0;
+            padding: 1rem;
             transition: all 0.3s ease;
-            gap: 0.75rem;
+            min-height: 60px;
         }
         
-        .search-box:focus-within {
-            border-color: #d4af37;
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        .search-field:last-of-type {
+            border-right: none;
         }
         
-        .search-box i {
-            color: #d4af37;
+        .search-field:focus-within {
+            background: #f8f9fa;
+        }
+        
+        .search-field i {
+            color: #666;
+            margin-right: 0.75rem;
             font-size: 1.1rem;
             flex-shrink: 0;
         }
         
-        .search-box input {
+        .search-field input {
             border: none;
             outline: none;
             background: transparent;
             font-size: 1rem;
             color: #333;
             flex: 1;
-            padding: 0.25rem 0;
+            padding: 0;
         }
         
-        .search-box input::placeholder {
+        .search-field input::placeholder {
             color: #666;
+        }
+        
+        .search-field .fa-chevron-down {
+            color: #666;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
         }
         
         .search-btn {
             background: #d4af37;
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 1rem 2rem;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             transition: all 0.3s ease;
-            flex-shrink: 0;
+            min-width: 120px;
+            justify-content: center;
         }
         
         .search-btn:hover {
             background: #b8941f;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        .search-btn i {
+            font-size: 1.1rem;
         }
         
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
+            .search-bar { 
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .search-field {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                min-height: 50px;
+                padding: 0.75rem;
+            }
+            .search-field:last-of-type {
+                border-bottom: none;
+            }
             .search-container { 
-                padding: 1rem; 
                 margin: 1rem; 
                 max-width: calc(100% - 2rem);
-            }
-            .search-box {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            .search-box input {
-                width: 100%;
-                text-align: center;
-            }
-            .search-btn {
-                width: 100%;
             }
         }
     </style>
@@ -497,14 +521,31 @@
             </div>
         </div>
 
-        <!-- Simple Search Box -->
+        <!-- Booking.com Style Search Bar -->
         <div class="search-container">
             <div class="container">
                 <form class="search-form" id="searchForm">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search destinations, hotels, tours..." id="searchInput">
-                        <button type="submit" class="search-btn">Search</button>
+                    <div class="search-bar">
+                        <div class="search-field destination-field">
+                            <i class="fas fa-bed"></i>
+                            <input type="text" placeholder="Where are you going?" id="destination">
+                        </div>
+                        
+                        <div class="search-field date-field">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="text" placeholder="Check-in date — Check-out date" id="dates" readonly>
+                        </div>
+                        
+                        <div class="search-field guests-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" value="2 adults · 0 children · 1 room" id="guests" readonly>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i>
+                            <span>Search</span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -1719,24 +1760,24 @@
     <script src="js/search-engine.js"></script>
     
     <script>
-        // Simple search functionality
+        // Booking.com style search functionality
         document.addEventListener('DOMContentLoaded', function() {
             const searchForm = document.getElementById('searchForm');
             if (searchForm) {
                 searchForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    const searchInput = document.getElementById('searchInput');
-                    const searchTerm = searchInput.value.trim();
+                    const destination = document.getElementById('destination').value.trim();
+                    const dates = document.getElementById('dates').value.trim();
+                    const guests = document.getElementById('guests').value.trim();
                     
-                    if (searchTerm) {
+                    if (destination) {
                         // You can implement search logic here
-                        console.log('Searching for:', searchTerm);
+                        console.log('Searching for:', { destination, dates, guests });
                         
                         // For now, show an alert
-                        alert(`Searching for: ${searchTerm}`);
-                        
-                        // Clear the input
-                        searchInput.value = '';
+                        alert(`Searching for: ${destination}${dates ? ' on ' + dates : ''}${guests ? ' for ' + guests : ''}`);
+                    } else {
+                        alert('Please enter a destination');
                     }
                 });
             }
@@ -1744,10 +1785,10 @@
         
         // City search functionality
         function searchCity(cityName) {
-            // Fill the search input
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.value = cityName;
+            // Fill the destination field
+            const destinationInput = document.getElementById('destination');
+            if (destinationInput) {
+                destinationInput.value = cityName;
             }
             
             // Scroll to search bar
