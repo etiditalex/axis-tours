@@ -78,26 +78,22 @@
         .search-btn { background: #d4af37; color: white; border: none; padding: 0.75rem 2rem; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; }
         .search-btn:hover { background: #b8941f; }
         
-        /* Search Bar Styles */
+        /* Simple Search Box Styles */
         .search-container {
             background: white;
             border-radius: 15px;
             padding: 1.5rem;
             margin: 2rem auto;
-            max-width: 800px;
+            max-width: 600px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             border: 2px solid #d4af37;
         }
         
-        .search-bar {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
+        .search-form {
+            width: 100%;
         }
         
-        .search-field {
-            position: relative;
+        .search-box {
             display: flex;
             align-items: center;
             background: white;
@@ -105,38 +101,32 @@
             border-radius: 10px;
             padding: 0.75rem;
             transition: all 0.3s ease;
-            flex: 1;
-            min-width: 200px;
+            gap: 0.75rem;
         }
         
-        .search-field:focus-within {
+        .search-box:focus-within {
             border-color: #d4af37;
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
         }
         
-        .search-field i {
+        .search-box i {
             color: #d4af37;
-            margin-right: 0.75rem;
             font-size: 1.1rem;
+            flex-shrink: 0;
         }
         
-        .search-field input {
+        .search-box input {
             border: none;
             outline: none;
             background: transparent;
             font-size: 1rem;
             color: #333;
             flex: 1;
+            padding: 0.25rem 0;
         }
         
-        .search-field input::placeholder {
+        .search-box input::placeholder {
             color: #666;
-        }
-        
-        .search-field .fa-chevron-down {
-            color: #666;
-            margin-left: 0.5rem;
-            font-size: 0.9rem;
         }
         
         .search-btn {
@@ -144,47 +134,37 @@
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             transition: all 0.3s ease;
-            min-width: 100px;
-            max-width: 120px;
-            justify-content: center;
             flex-shrink: 0;
         }
         
         .search-btn:hover {
             background: #b8941f;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-        
-        .search-btn i {
-            font-size: 1.1rem;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
         }
         
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .search-bar { 
-                flex-direction: column; 
-                gap: 0.75rem;
-            }
-            .search-field { 
-                min-width: 100%; 
-                width: 100%;
-            }
-            .search-btn { 
-                width: 100%; 
-                max-width: none;
-            }
             .search-container { 
-                padding: 1.5rem; 
+                padding: 1rem; 
                 margin: 1rem; 
+                max-width: calc(100% - 2rem);
+            }
+            .search-box {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .search-box input {
+                width: 100%;
+                text-align: center;
+            }
+            .search-btn {
+                width: 100%;
             }
         }
     </style>
@@ -517,34 +497,16 @@
             </div>
         </div>
 
-        <!-- Search Bar -->
+        <!-- Simple Search Box -->
         <div class="search-container">
             <div class="container">
-                <div class="search-bar">
-                    <div class="search-field destination-field">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="Where are you going?" id="destination">
-                        <div class="field-label">Destination</div>
-                    </div>
-                    
-                    <div class="search-field date-field">
-                        <i class="fas fa-calendar-alt"></i>
-                        <input type="text" placeholder="Check-in — Check-out" id="dates" readonly>
-                        <div class="field-label">Dates</div>
-                    </div>
-                    
-                    <div class="search-field guests-field">
-                        <i class="fas fa-users"></i>
-                        <input type="text" value="2 adults · 0 children · 1 room" id="guests" readonly>
-                        <i class="fas fa-chevron-down"></i>
-                        <div class="field-label">Guests & Rooms</div>
-                    </div>
-                    
-                    <button class="search-btn">
+                <form class="search-form" id="searchForm">
+                    <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <span>Search</span>
-                    </button>
-                </div>
+                        <input type="text" placeholder="Search destinations, hotels, tours..." id="searchInput">
+                        <button type="submit" class="search-btn">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -1757,12 +1719,35 @@
     <script src="js/search-engine.js"></script>
     
     <script>
+        // Simple search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const searchInput = document.getElementById('searchInput');
+                    const searchTerm = searchInput.value.trim();
+                    
+                    if (searchTerm) {
+                        // You can implement search logic here
+                        console.log('Searching for:', searchTerm);
+                        
+                        // For now, show an alert
+                        alert(`Searching for: ${searchTerm}`);
+                        
+                        // Clear the input
+                        searchInput.value = '';
+                    }
+                });
+            }
+        });
+        
         // City search functionality
         function searchCity(cityName) {
-            // Fill the destination field
-            const destinationInput = document.getElementById('destination');
-            if (destinationInput) {
-                destinationInput.value = cityName;
+            // Fill the search input
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.value = cityName;
             }
             
             // Scroll to search bar
