@@ -115,30 +115,68 @@
             padding-left: 0 !important;
         }
         
-        /* Booking.com Style Search Bar */
+        /* Booking.com Style Search Bar - Single Clean Bar */
         .search-container {
             background: white !important;
             border-radius: 15px !important;
             padding: 0 !important;
             margin: 2rem auto !important;
             max-width: 900px !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
             border: 2px solid #d4af37 !important;
             overflow: hidden !important;
             position: relative !important;
             z-index: 1 !important;
             isolation: isolate !important;
+            display: block !important;
+            visibility: visible !important;
+            transform: none !important;
+            filter: none !important;
+        }
+        
+        /* Override any external CSS that might be causing duplication */
+        .search-container * {
+            box-sizing: border-box !important;
+        }
+        
+        /* Ensure no duplicate search bars or visual artifacts */
+        .search-container:before,
+        .search-container:after,
+        .search-form:before,
+        .search-form:after,
+        .search-bar:before,
+        .search-bar:after,
+        .search-field:before,
+        .search-field:after {
+            display: none !important;
+            content: none !important;
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Remove any potential background duplication */
+        .search-container .container {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
         }
         
         .search-form {
-            width: 100%;
+            width: 100% !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         
         .search-bar {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
-            gap: 0;
-            align-items: stretch;
+            display: grid !important;
+            grid-template-columns: 1fr 1fr 1fr auto !important;
+            gap: 0 !important;
+            align-items: stretch !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         
         .search-field {
@@ -248,8 +286,8 @@
     </style>
     
     <!-- Non-critical CSS (deferred) -->
-    <link rel="preload" href="style.css?v=5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=5.0"></noscript>
+    <link rel="preload" href="style.css?v=7.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css?v=7.0"></noscript>
     <style>
         .payment-option-card {
             background: white;
