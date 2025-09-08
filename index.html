@@ -77,9 +77,97 @@
         .form-group input, .form-group select { padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 5px; font-size: 1rem; }
         .search-btn { background: #d4af37; color: white; border: none; padding: 0.75rem 2rem; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; }
         .search-btn:hover { background: #b8941f; }
+        
+        /* Search Bar Styles */
+        .search-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid #d4af37;
+        }
+        
+        .search-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .search-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-field:focus-within {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .search-field i {
+            color: #d4af37;
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .search-field input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 1rem;
+            color: #333;
+            flex: 1;
+        }
+        
+        .search-field input::placeholder {
+            color: #666;
+        }
+        
+        .search-field .fa-chevron-down {
+            color: #666;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .search-btn {
+            background: #d4af37;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            justify-content: center;
+        }
+        
+        .search-btn:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .search-btn i {
+            font-size: 1.1rem;
+        }
+        
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .search-form { grid-template-columns: 1fr; }
+            .search-bar { grid-template-columns: 1fr; }
+            .search-container { padding: 1.5rem; margin: 1rem; }
         }
     </style>
     
