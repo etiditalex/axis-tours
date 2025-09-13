@@ -38,5 +38,9 @@ export default defineConfig({
   // Add CI-specific settings
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+  },
+  // Fix CSS processing
+  css: {
+    postcss: './postcss.config.js'
   }
 })
