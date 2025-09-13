@@ -20,10 +20,23 @@ export default defineConfig({
         about: 'about.html',
         contact: 'contact.html'
       }
+    },
+    // Add memory and timeout settings for CI
+    chunkSizeWarningLimit: 1000,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: false,
+        drop_debugger: true
+      }
     }
   },
   server: {
     port: 3000,
     open: true
+  },
+  // Add CI-specific settings
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
   }
 })
