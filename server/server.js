@@ -1,4 +1,4 @@
-const express = require('express');
+ const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const cors = require('cors');
 const helmet = require('helmet');
@@ -250,7 +250,7 @@ app.use('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Payment server running on port ${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
-    console.log(`💳 Stripe endpoint: http://localhos /   t:${PORT}/api/payments/stripe`);
+    console.log(`💳 Stripe endpoint: http://localhost:${PORT}/api/payments/stripe`);
     console.log(`📱 M-Pesa endpoint: http://localhost:${PORT}/api/payments/mpesa`);
 });
 
