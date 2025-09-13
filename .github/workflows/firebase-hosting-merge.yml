@@ -26,6 +26,11 @@ jobs:
           ls -la dist/
           echo "Files in dist directory:"
           find dist -type f | head -10
+      - name: Check Firebase configuration
+        run: |
+          echo "Checking Firebase project configuration..."
+          echo "Project ID: axis-tours-backend"
+          echo "Secret exists: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AXIS_TOURS_BACKEND != '' }}"
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -33,4 +38,3 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AXIS_TOURS_BACKEND }}
           channelId: live
           projectId: axis-tours-backend
-        continue-on-error: true
