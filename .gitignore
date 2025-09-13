@@ -50,3 +50,4 @@ build/
 
 # Cache
 .cache/
+node_modules
